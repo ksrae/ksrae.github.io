@@ -1,5 +1,6 @@
-remote_theme: mmistakes/minimal-mistakes
+# remote_theme: mmistakes/minimal-mistakes
 # theme: jekyll-theme-cayman
+theme: minimal-mistakes-jekyll
 
 # Welcome to Jekyll!
 #
@@ -269,12 +270,14 @@ tag_archive:
 # https://github.com/jekyll/jekyll-archives
 jekyll-archives:
   enabled:
+    - year
     - categories
     - tags
   layouts:
     category: archive-taxonomy
     tag: archive-taxonomy
   permalinks:
+    year: /year
     category: /categories/:name/
     tag: /tags/:name/
 
