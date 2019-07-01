@@ -1,5 +1,5 @@
 ---
-layout: archive-taxonomy
+layout: categories
 title: "ErrorHandler"
 comments: true
 categories: [angular]
