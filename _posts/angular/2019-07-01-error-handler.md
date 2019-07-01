@@ -1,5 +1,5 @@
 ---
-layout: posts
+layout: archive
 title: "ErrorHandler"
 comments: true
 categories: [angular]
