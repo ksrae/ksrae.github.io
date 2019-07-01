@@ -1,5 +1,5 @@
 ---
-layout: categories
+layout: posts
 title: "ErrorHandler"
 comments: true
 categories: [angular]
