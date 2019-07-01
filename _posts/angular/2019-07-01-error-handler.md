@@ -1,5 +1,4 @@
 ---
-layout: default
 title: "ErrorHandler"
 comments: true
 categories: [angular]
