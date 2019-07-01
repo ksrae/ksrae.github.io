@@ -19,10 +19,10 @@ minimal_mistakes_skin    : "default" # "air", "aqua", "contrast", "dark", "dirt"
 
 # Site Settings
 locale                   : "en-US"
-title                    : "Site Title"
+title                    : "Sung-rae Kim"
 title_separator          : "-"
-name                     : "Your Name"
-description              : "An amazing website."
+name                     : "Sung-rae Kim"
+description              : "Front-end (mostly Angular 2~8) Developer."
 url                      : "https://ksrae.github.io/"
 baseurl                  : ""
 repository               : # GitHub username/repo-name e.g. "mmistakes/minimal-mistakes"
