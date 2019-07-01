@@ -1,4 +1,4 @@
 ---
 layout: category
-title: angular
+title: rust
 ---
