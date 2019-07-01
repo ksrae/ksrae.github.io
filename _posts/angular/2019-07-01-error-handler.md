@@ -1,8 +1,7 @@
 ---
-layout: default
 title: "ErrorHandler"
 comments: true
-categories: [angular]
+categories: angular
 date: 2019-07-01 17:37:00 +0900
 ---
 
