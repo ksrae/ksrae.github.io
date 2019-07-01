@@ -1,7 +1,7 @@
 ---
 title: "ErrorHandler"
 date: 2019-07-01 17:37:00 +0900
-categories: [angular]
+categories: angular
 ---
 
 
