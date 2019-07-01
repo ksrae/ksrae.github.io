@@ -247,6 +247,7 @@ whitelist:
   - jekyll-include-cache
 
 
+
 # Archives
 #  Type
 #  - GitHub Pages compatible archive pages built with Liquid ~> type: liquid (default)
@@ -258,10 +259,12 @@ whitelist:
 #  - <base_path/categories/my-awesome-category/index.html ~> path: /categories/
 #  - <base_path/my-awesome-category/index.html ~> path: /
 category_archive:
-  type: liquid
+  # type: liquid
+  type: jekyll-archives
   path: /categories/
 tag_archive:
-  type: liquid
+  # type: liquid
+  type: jekyll-archives
   path: /tags/
 # https://github.com/jekyll/jekyll-archives
 jekyll-archives:
