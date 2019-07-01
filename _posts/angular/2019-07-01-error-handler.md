@@ -1,7 +1,9 @@
 ---
+layout: post
 title: "ErrorHandler"
+comments: true
+categories: [angular]
 date: 2019-07-01 17:37:00 +0900
-categories: angular
 ---
 
 
