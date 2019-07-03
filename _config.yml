@@ -273,7 +273,9 @@ jekyll-archives:
     category: /categories/:name/
     tag: /tags/:name/
 
-
+#dir
+category_dir: categories/
+tag_dir: tags/
 # HTML Compression
 # - http://jch.penibelst.de/
 compress_html:
