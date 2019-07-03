@@ -26,8 +26,8 @@ tags: [routing]
 
 app.routing.ts의 loadChildren과 material.routing.ts의 routing 부분만 참고하면 된다.
 
-<app.module.ts>
 ```ts
+// <app.module.ts>
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app.routing';
 import { BrowserModule } from '@angular/platform-browser';
@@ -54,8 +54,9 @@ import { MaterialModule } from './common/ts/modules/material/material.module';
 export class AppModule { }
 ```
 
-<app.routing.ts>
 ```ts
+// <app.routing.ts>
+
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
@@ -75,8 +76,9 @@ const routes : Routes = [
 export class AppRoutingModule { }
 ```
 
-<material.module.ts>
 ```ts
+// <material.module.ts>
+
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -103,8 +105,9 @@ import { MaterialMainComponent } from './components/material/material.main.compo
 export class MaterialModule { }
 ```
 
-<material.routing.ts>
 ```ts
+// <material.routing.ts>
+
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
@@ -126,12 +129,14 @@ const materialRoutes: Routes = [
 ngIf가 false 인 경우 브라우저가 해당 dom을 로드하지 않으므로 dom을 구성하는데 필요한 관련 데이터도 로드하지 않는다. ngIf가 true가 되었을 때 비로소 해당 dom의 모든 데이터를 로드하므로, 이 또한 Lazy Loading의 또 다른 기법이라 할 수 있다. module의 그것과 동일한 효과를 볼 수 있다.
 component와 dom의 하나하나까지 세분화하여 관리할 수 있는 장점이 있으나 dom의 enable을 직접 컨트롤 해야하는 점이 있다.
 
-<main.html>
-```html
+```html 
+<!-- <main.html> -->
 <material *ngIf="isEnabled"></material>
 ```
-<material.component.ts>
+
 ```ts
+// <material.component.ts>
+
 import { Component, OnInit, OnDestroy, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
