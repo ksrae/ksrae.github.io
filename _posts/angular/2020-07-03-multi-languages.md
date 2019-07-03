@@ -1,5 +1,5 @@
 ---
-title: "MultiLanguages"
+title: "다국어 적용 (Multi Languages)"
 comments: true
 categories: angular
 date: 2019-07-01 17:37:00 +0900
