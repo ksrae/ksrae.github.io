@@ -1,3 +1,4 @@
+			<!-- <a href="{{ category[0] | slugify }}" </a>-->
 
 <div>
 	<div class="sidebar-nav-item">Category</div>
@@ -5,7 +6,6 @@
 		{% for category in site.categories %}
 		
 		<a href="{{ root_url }}/{{ site.category_dir }}/{{ category | first }}"
-			<!-- <a href="{{ category[0] | slugify }}" -->
 			class="sidebar-nav-item pl-3rem">
 							<span class="name">
 								{{ category | first }}
