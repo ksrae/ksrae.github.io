@@ -115,7 +115,7 @@ export class LanguageService {
 
 ## 3. template에서의 활용
 
-```xml
+```
 <div>{{ 'login' | translate }}</div>
 ```
 
