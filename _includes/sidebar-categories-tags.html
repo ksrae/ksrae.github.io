@@ -1,7 +1,7 @@
 			<!-- <a href="{{ category[0] | slugify }}" </a>-->
 
 <div>
-	<div class="sidebar-nav-item" onclick="location.href='/category-list'">Categories</a></div>
+	<div class="sidebar-nav-item" onclick="location.href='/category-list'" style="cursor:pointer">Categories</a></div>
 	<nav class="content-ul">
 		{% for category in site.categories %}
 		
@@ -18,7 +18,7 @@
 </div>
 	
 <div>
-	<div class="sidebar-nav-item">Tags</div>
+	<div class="sidebar-nav-item" onclick="location.href='/tag-list'" style="cursor:pointer">Tags</div>
 	<div class="tags-cloud">
 	<div>
 		{% assign first = site.tags.first %}
