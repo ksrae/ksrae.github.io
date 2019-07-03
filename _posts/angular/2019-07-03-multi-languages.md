@@ -11,6 +11,9 @@ date: 2019-07-03 12:20:00 +0900
 
     목적: 사이트의 다국어를 페이지 전환없이 즉시 적용되도록 하는 구조 설정.
     적용방법: 반드시 angular2의 ngx-translate를 install 하여야 한다.
+    참고사이트: https://github.com/ngx-translate/core
+
+
 
 ## 1. 기본
 #### app.module.ts
@@ -111,11 +114,13 @@ export class LanguageService {
 ```
 
 ## 3. template에서의 활용
-```html
+
+```xml
 <div>{{ 'login' | translate }}</div>
 ```
 
 - 언어값 내에 tag가 있는 경우 innerHTML을 사용한다.
-```html
+
+```xml
 <div [innerHTML]="'login' | translate"></div>
 ```
