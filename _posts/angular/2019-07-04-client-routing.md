@@ -2,7 +2,7 @@
 title: "Client Routing의 주의점"
 date: 2019-07-04 12:22:00 +0900
 comments: true
-categories: angular
+categories: Angular
 tags: [routing]
 ---
 

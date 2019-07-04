@@ -1,4 +1,4 @@
 ---
 layout: tag
-title: angular
+title: install
 ---

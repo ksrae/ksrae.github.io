@@ -2,7 +2,7 @@
 title: "Typescript 버전 안맞을 때"
 date: 2019-07-01 12:22:00 +0900
 comments: true
-categories: angular
+categories: Angular
 tags: [typescript]
 ---
 

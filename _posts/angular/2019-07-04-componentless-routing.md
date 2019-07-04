@@ -2,7 +2,7 @@
 title: "컴포넌트 없는 라우팅 (Componentless Routing)"
 date: 2019-07-04 11:59:00 +0900
 comments: true
-categories: angular
+categories: Angular
 tags: [routing]
 ---
 
