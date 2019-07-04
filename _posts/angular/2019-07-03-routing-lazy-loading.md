@@ -2,7 +2,7 @@
 title: "Lazy Loading"
 date: 2019-07-01 15:00:00 +0900
 comments: true
-categories: Angular
+categories: angular
 tags: [routing]
 ---
 
