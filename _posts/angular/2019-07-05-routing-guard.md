@@ -72,13 +72,13 @@ export class MainGuard implements CanLoad, CanActivate, CanActivateChild, Resolv
 	private userService: UserService
   ) { }
 
-  canLoad(route: Route) {
+  canLoad(route: Route): Observable<boolean>|Promise<boolean>|boolean {
     // this.logHelper.set();
     this.itemService.onInit();
     return true;
   }
 
-  async canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+  async canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean|UrlTree>|Promise<boolean|UrlTree>|boolean|UrlTree {
     if (!this.userService.userInfo || this.userService.userInfo.isGuest) {
       this.router.navigate([`/login`], { relativeTo: this.route.root });
         return false;
@@ -90,7 +90,7 @@ export class MainGuard implements CanLoad, CanActivate, CanActivateChild, Resolv
     return true;
   }
 
-  async resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+  async resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): : Observable<any>|Promise<any>|any {
 		return await this.itemService.get();
   }
 
