@@ -36,7 +36,7 @@ routing이 포함된 모듈에 resolve를 추가하되 {리턴값 받을 변수�
 import { MainGuard } from '../../guards/main.guard';
 
 const routes: Routes = [
-  { path: '', children: [
+  { path: '', canActivateChild: [MainGuard], children: [
     { path: '', redirectTo: 'main', pathMatch: 'full' },
     { path: 'main', component: MainComponent, canActivate: [MainGuard], resolve: {itemList: MainGuard}, canDeactivate: [MainGuard] },
 	{ path: 'login', loadChildren: '../login/login.module#LoginModule', canLoad: [MainGuard], data: {preload: true}}
@@ -52,7 +52,7 @@ const routes: Routes = [
 
 ```ts
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, RouterStateSnapshot, CanLoad, CanActivate, Resolve, CanDeactivate } from '@angular/router';
+import { ActivatedRouteSnapshot, RouterStateSnapshot, CanLoad, CanActivate, CanActivateChild, Resolve, CanDeactivate } from '@angular/router';
 // service
 import { ItemService } from '../services/item.service';
 import { UserService } from '../services/user.service';
@@ -60,7 +60,7 @@ import { UserService } from '../services/user.service';
 @Injectable({
   providedIn: 'root'
 })
-export class MainGuard implements CanLoad, CanActivate, Resolve<Item[]>, CanDeactivate<boolean> {
+export class MainGuard implements CanLoad, CanActivate, CanActivateChild, Resolve<Item[]>, CanDeactivate<boolean> {
 
   /**
    * @param {ActivatedRoute} route
@@ -83,6 +83,10 @@ export class MainGuard implements CanLoad, CanActivate, Resolve<Item[]>, CanDeac
       this.router.navigate([`/login`], { relativeTo: this.route.root });
         return false;
     }
+    return true;
+  }
+
+  canActivateChild( route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean|UrlTree>|Promise<boolean|UrlTree>|boolean|UrlTree {
     return true;
   }
 
