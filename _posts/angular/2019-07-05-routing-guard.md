@@ -7,12 +7,12 @@ tags: [routing, guard]
 ---
 
 
-> route에서 canActivate와 canDeactivate, canActivateChild, canLoad 옵션처리 방식을 알아본다.
+route에서 canActivate와 canDeactivate, canActivateChild, canLoad 옵션처리 방식을 알아본다.
 
-> - canLoad: 모듈 사용을 방지. LazyLoad 된 모듈에서만 사용한다. canLoad는 모듈이 최초 로드되는 한 번만 실행된다.
-> - canActivate: 인증되지 않은 사용자를 방지한다. 모듈이 호출될 때마다 실행된다.
-> - resolve: 모듈이 로드 되기 전 함수를 미리 실행하여 결과를 리턴한다.
-> - canDeactivate: 모듈이 종료되기 전 함수를 실행한다.
+- canLoad: 모듈 사용을 방지. LazyLoad 된 모듈에서만 사용한다. canLoad는 모듈이 최초 로드되는 한 번만 실행된다.
+- canActivate: 인증되지 않은 사용자를 방지한다. 모듈이 호출될 때마다 실행된다.
+- resolve: 모듈이 로드 되기 전 함수를 미리 실행하여 결과를 리턴한다.
+- canDeactivate: 모듈이 종료되기 전 함수를 실행한다.
 
 
 -- router에서 로그인 인증하고 로그인 유저가 아니면 페이지 강제 이동하는 방법
