@@ -12,8 +12,8 @@ component가 onInit 에서 service에서 가져온 값을 template에 적용할 
 따라서 아래와 같이 ? 를 넣어주어 해결하는 방법을 사용한다.
 
 ```html
-<div> \{{item?.key}} </div>
-<div> ]{{item?value}} </div>
+<div> "{ {item?.key}}" </div>
+<div> "{ {item?value}}" </div>
 ```
 
 만일 routing을 통해 해당 페이지에 접근하는 경우 이를 보다 효율적으로 처리할 수 있는데 Resolve를 활용할 수 있다.
@@ -67,7 +67,7 @@ import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-page',
-  template: `<div> \{{ page }} </div>`
+  template: `<div> { { page } } </div>`
 })
 
 export class PageComponent implements OnInit {
