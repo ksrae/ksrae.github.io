@@ -25,7 +25,7 @@ interface NavigationExtras {
 }
 ```
 
-1) relativeTo?: ActivatedRoute | null	
+### 1. relativeTo?: ActivatedRoute | null	
 링크가 어디에 기초하는지 정의
 
 ```ts
@@ -34,7 +34,7 @@ this.router.navigate(['../list'], { relativeTo: this.route });
 ```
 
 
-2) queryParams?: Params | null	
+### 2. queryParams?: Params | null	
 URL에 파라미터 붙이는 방법
 
 ```ts
@@ -43,7 +43,7 @@ this.router.navigate(['/results'], { queryParams: { page: 1 } });
 ```
 
 
-3) fragment?: string	
+### 3. fragment?: string	
  frament를 붙이는 방법
 
 ```ts
@@ -52,7 +52,7 @@ this.router.navigate(['/results'], { fragment: 'top' });
 ```   
         
 
-4) preserveQueryParams?: boolean	
+### 4. preserveQueryParams?: boolean	
  다른 주소로 이동할 때 현재 가진 파라미터를 전달.
  7버전부터 폐기되므로 대신 queryParamsHandling 를 사용.
 
@@ -62,7 +62,7 @@ this.router.navigate(['/view'], { preserveQueryParams: true });
 ```
         
         
-5) queryParamsHandling?: QueryParamsHandling | null	
+### 5. queryParamsHandling?: QueryParamsHandling | null	
 쿼리 파라미터 관리 확장버전.
 
 ```ts
@@ -75,7 +75,7 @@ this.router.navigate(['/view'], { queryParams: { page: 2 },  queryParamsHandling
 - default: 기본형. 일반적인 방법으로 파라미터를 사용
 
  
-6) preserveFragment?: boolean	
+### 6. preserveFragment?: boolean	
 현재 fragment를 전달할지 여부
 
 ```ts
@@ -84,7 +84,7 @@ this.router.navigate(['/view'], { preserveFragment: true });
 ```
 
 
-7) skipLocationChange?: boolean	
+### 7. skipLocationChange?: boolean	
  history에 포함하지 않고 이동. back할 때 이동하지 않음.
 
 ```ts
@@ -93,7 +93,7 @@ this.router.navigate(['/view'], { skipLocationChange: true });
 ```   
         
         
-8) replaceUrl?: boolean	
+### 8. replaceUrl?: boolean	
 Navigates while replacing the current state in history.
 url을 현재 주소로 교체할 것인지 여부. 
 
