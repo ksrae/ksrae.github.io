@@ -70,7 +70,7 @@ import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-page',
   {% raw %}
-  template: `<div>  {{page }} </div>`
+  template: `<div>  {{ page }} </div>`
   {% endraw %}
 })
 
