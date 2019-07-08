@@ -126,3 +126,15 @@ export function getConfig(config: AppService) {
       ...
     }
 ```
+
+
+7. 응용
+
+이제 점검 중일 때는 maintenance.json의 "maintenance" 값을 true로 수정한 뒤 이 파일만 배포하면 되며, 
+offline일 시 오프라인임을 알려주거나 네트워크 점검이 필요하다는 안내문구를 넣을 수 있다.
+
+"maintenance"에 시간 값을 추가하여 client에서 해당 시간 범위만큼일 때만 maintenance의 값을 처리하게 할 수도 있을 것이다.
+
+
+
+
