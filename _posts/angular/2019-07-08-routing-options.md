@@ -8,8 +8,6 @@ tags: [routing]
 
 
 
-Angular Routing Options
-
 
 [Angular Docs](https://angular.io/api/router/NavigationExtras)
 

@@ -1,6 +1,6 @@
 ---
 title: "PWA와 점검(Maintenance) 및 offline 알림"
-date: 2019-07-08 11:00:00 +0900
+date: 2019-07-08 16:50:00 +0900
 comments: true
 categories: angular
 tags: [pwa, maintenance, offline]
