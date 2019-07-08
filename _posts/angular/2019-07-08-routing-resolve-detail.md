@@ -11,7 +11,7 @@ tags: [routing, resolve]
 component가 onInit 에서 service에서 가져온 값을 template에 적용할 때 template에서 에러가 발생한다.
 따라서 아래와 같이 ? 를 넣어주어 해결하는 방법을 사용한다.
 
-```html
+```
 <div>{{item?.key}}</div>
 <div>{{item?value}}</div>
 ```
@@ -67,7 +67,7 @@ import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-page',
-  template: `<div>{{page}}</div>`
+  template: `<div>{{ page }}</div>`
 })
 
 export class PageComponent implements OnInit {
@@ -82,4 +82,5 @@ export class PageComponent implements OnInit {
   }
 }
 ```
+
 끝.
