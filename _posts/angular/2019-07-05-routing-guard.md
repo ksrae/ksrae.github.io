@@ -90,7 +90,7 @@ export class MainGuard implements CanLoad, CanActivate, CanActivateChild, Resolv
     return true;
   }
 
-  async resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): : Observable<any>|Promise<any>|any {
+  async resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any>|Promise<any>|any {
 		return await this.itemService.get();
   }
 

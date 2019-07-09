@@ -14,29 +14,29 @@ tags: [pwa, maintenance, offline]
 
 
 ### 2. 점검하기
-가장 빠른 점검 메시지를 적용하기 위해 .json 에 기록 후 읽어가는 방식을 활용한다.
+가장 빠른 점검 메시지를 적용하기 위해 .json 에 기록 후 읽어가는 방식을 활용합니다.
 
 
 ### 3. 문제
-PWA로 개발 시 .json 파일이 cache에 물려있게 되며 이 때, 두 가지 문제가 발생한다.
+PWA로 개발 시 .json 파일이 cache에 물려있게 되며 이 때, 두 가지 문제가 발생합니다.
 
-- 접속 시 .json의 업데이트 적용에 간격이 있고, 그 동안 사용자를 대기 시킬 수 없다.
-- offline 시에도 캐싱된 .json을 읽어버리기 때문에 별도의 메시지를 표시하기 어렵다.
+- 접속 시 .json의 업데이트 적용에 간격이 있고, 그 동안 사용자를 대기 시킬 수 없습니다.
+- offline 시에도 캐싱된 .json을 읽어버리기 때문에 별도의 메시지를 표시하기 어렵습니다.
 
 
 ### 4. 해결
-ngsw.json 에서 .json 파일 내역을 지운다. 즉, 캐싱되지 않도록 한다.
+ngsw.json 에서 .json 파일 내역을 지웁니다. 즉, 캐싱되지 않도록 합니다.
 
-- 최초로 load되는 module에서 json 파일을 읽는다.
-  - 성공: 결과를 변수 또는 subject에 저장한다.
-  - 실패: catch 이벤트에서 변수에 값을 저장하거나 별도의 처리를 한다.
+- 최초로 load되는 module에서 json 파일을 읽기.
+  - 성공: 결과를 변수 또는 subject에 저장.
+  - 실패: catch 이벤트에서 처리.
 
-- component는 onInit 시 해당 변수나 또는 subject를 subscribe하여 결과를 반영한다.
+- component는 onInit 시 해당 변수 또는 해당 subject를 subscribe하여 결과를 반영합니다.
 
 ### 5. 결과
 
-- maintenance가 업데이트와 관계없이 즉시 적용된다.
-- offline 안내가 가능하다. (재접속 또는 네트워크 확인 안내 등)
+- maintenance가 업데이트와 관계없이 즉시 적용됩니다.
+- offline 안내 및 재접속 또는 네트워크 확인 안내 등이 가능합니다.
 
 
 ### 6. 소스 코드
@@ -134,9 +134,9 @@ export function getConfig(config: AppService) {
 ### 7. 응용
 
 이제 점검 중일 때는 maintenance.json의 "maintenance" 값을 true로 수정한 뒤 이 파일만 배포하면 되며, 
-offline일 시 오프라인임을 알려주거나 네트워크 점검이 필요하다는 안내문구를 넣을 수 있다.
+offline일 시 오프라인임을 알려주거나 네트워크 점검이 필요하다는 안내문구를 넣을 수 있습니다.
 
-"maintenance"에 시간 값을 추가하여 client에서 해당 시간 범위만큼일 때만 maintenance의 값을 처리하게 할 수도 있을 것이다.
+"maintenance"에 시간 값을 추가하여 client에서 해당 시간 범위만큼일 때만 maintenance의 값을 처리하게 할 수도 있을 것 입니다.
 
 
 

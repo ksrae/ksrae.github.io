@@ -8,8 +8,8 @@ tags: [routing, resolve]
 
 
 
-component가 onInit 에서 service에서 가져온 값을 template에 적용할 때 template에서 에러가 발생한다.
-따라서 아래와 같이 ? 를 넣어주어 해결하는 방법을 사용한다.
+component가 onInit 에서 service에서 가져온 값을 template에 적용할 때 template에서 에러가 발생합니다.
+이는 변수에 값이 할당되기 전에 template에서 변수를 읽으려고 시도하기 때문인데 이를 해결하려면 nullable을 허용하는 ? 를 넣어 해결하는 방법을 사용할 수 있습니다.
 
 ```
 {% raw %}
@@ -18,9 +18,8 @@ component가 onInit 에서 service에서 가져온 값을 template에 적용할 
 {% endraw %}
 ```
 
-만일 routing을 통해 해당 페이지에 접근하는 경우 이를 보다 효율적으로 처리할 수 있는데 Resolve를 활용할 수 있다.
+보다 더 확실하게 처리하려면 해당 component가 로딩되기 전에 값을 할당하면 되는데 이는 routing의 resolve를 활용하여 처리할 수 있습니다.
 
-Resolve는 Guard와 유사하게 사용하는데 기본적으로는 아래와 같이 사용한다.
 
 ```ts
 // resolve.service.ts
@@ -36,9 +35,9 @@ export PageResolve implments Resolve<Observable<any>> {
 }
 ```
 
-위에서 보다시피 resolve는 반드시 Observable<T> 를 리턴해야 한다.
+위에서 보다시피 resolve는 Observable<any>|Promise<any>|any 세 가지 중 하나를 리턴해야 합니다.
+이 리턴 값을 route에 json 형태로 설정하며, 설정된 key값을 사용해서 component가 값을 가져가게 됩니다.
 
-이를 route에 적용한다. 이 때 json 형태로 key를 설정해야 하며, 이 key값을 사용해서 component가 값을 가져가게 된다.
 
 ```ts
 // resolve.route.ts
