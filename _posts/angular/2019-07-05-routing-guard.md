@@ -7,12 +7,12 @@ tags: [routing, guard]
 ---
 
 
-route에서 canActivate와 canDeactivate, canActivateChild, canLoad 옵션처리 방식을 알아본다.
+route에서 canActivate와 canDeactivate, canActivateChild, canLoad 옵션처리 방식을 알아보겠습니다.
 
-- canLoad: 모듈 사용을 방지. LazyLoad 된 모듈에서만 사용한다. canLoad는 모듈이 최초 로드되는 한 번만 실행된다.
-- canActivate: 인증되지 않은 사용자를 방지한다. 모듈이 호출될 때마다 실행된다.
-- resolve: 모듈이 로드 되기 전 함수를 미리 실행하여 결과를 리턴한다.
-- canDeactivate: 모듈이 종료되기 전 함수를 실행한다.
+- canLoad: 모듈 사용을 방지. LazyLoad 된 모듈에서만 사용한다. canLoad는 모듈이 최초 로드되는 한 번만 실행.
+- canActivate: 인증되지 않은 사용자를 방지한다. 모듈이 호출될 때마다 실행.
+- resolve: 모듈이 로드 되기 전 함수를 미리 실행하여 결과를 리턴.
+- canDeactivate: 모듈이 종료되기 전 함수를 실행.
 
 
 -- router에서 로그인 인증하고 로그인 유저가 아니면 페이지 강제 이동하는 방법
@@ -25,12 +25,12 @@ canActivate와 canActivateChild
 
 ## 사용예
 
-여러 기능을 모아서 하나의 guard에 구성해도 관계없으나 필요한 기능마다 별도의 guard를 만들어 두는게 가드의 목적을 명확히 할 수 있다.
-예시에서는 칸을 줄이기 위해 하나의 guard에 모두 구성해본다.
+여러 기능을 모아서 하나의 guard에 구성해도 관계없으나 필요한 기능마다 별도의 guard를 만들어 두는게 가드의 목적을 명확히 할 수 있습니다.
+예시에서는 칸을 줄이기 위해 하나의 guard에 모두 구성해 보겠습니다.
 
 1. routing module
 
-routing이 포함된 모듈에 resolve를 추가하되 {리턴값 받을 변수명: 가드명} 을 기입한다.
+routing이 포함된 모듈에 resolve를 추가하되 {리턴값 받을 변수명: 가드명} 을 기입합니다.
 
 ```ts
 import { MainGuard } from '../../guards/main.guard';
@@ -48,7 +48,7 @@ const routes: Routes = [
 
 2. guard
 
-받아줄 guard를 작성한다.
+받아줄 guard를 작성합니다.
 
 ```ts
 import { Injectable } from '@angular/core';
@@ -104,7 +104,7 @@ export class MainGuard implements CanLoad, CanActivate, CanActivateChild, Resolv
 
 3. component 
 
-이제 resolve의 결과를 받을 MainComponent를 작성한다.
+이제 resolve의 결과를 받을 MainComponent를 작성합니다.
 
 ```ts
 
