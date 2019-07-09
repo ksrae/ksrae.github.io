@@ -1,5 +1,5 @@
 ---
-title: "Lazy Loading"
+title: "Module과 Component Lazy Loading"
 date: 2019-07-01 15:00:00 +0900
 comments: true
 categories: angular
@@ -7,24 +7,27 @@ tags: [routing]
 ---
 
 ## 1. 목적
-- Module 또는 Component 단위로 Lazy Loading 하는 방법과 장단점을 정리한다.
+- Module 또는 Component 단위로 Lazy Loading 하는 방법을 정리합니다.
 
 ## 2. Lazy Loading
-- Lazy Loading은 흔히 용량이 파일을 로딩하는 경우 페이지의 다른 부분을 호출하고 나중에 파일 로딩이 끝나면 페이지에 적용하는 방식으로 많이 이용하는데 Angular는 Module 단위로 Lazy Loading할 수 있다.
+SPA의 특성상 모든 파일이 로드 되어야 서버의 호출 없이 다음 페이지로의 전환이 이루어 지는데 이를 Lazy Loading으로 처리하여 초기 로딩을 분산하는 방법입니다.
+기존 로딩 방식과 다른 점은 모듈 로드 시 해당 모듈의 경로만 지정하는 점이 다르며, 부모가 자식 모듈을 호출하지 않는다는 점입니다.
+
 
 ## 3. 장단점
 ### 3.1. 장점
-- 필요한 부분만 로딩하므로 초기 로딩의 부하를 분산할 수 있다.
+- 필요한 부분만 로딩하므로 초기 로딩의 부하를 분산할 수 있습니다.
+- 더 이상 부모 모듈이 자식 모듈을 호출하지 않아도 됩니다. 즉, 느슨한 연결로 구성하므로 서로 독립적으로 구성할 수 있으며 쉽게 붙이거나 뗄 수 있도록 구성됩니다.
+
 
 ### 3.2. 단점
-- 페이지보다 늦게 로딩 되므로 로딩이 완료되기 전까지 사용자에게 
-- Loading 되기 전의 Observable 데이터는 접근할 수 없고 다음 데이터부터 받을 수 있다.
-(이는 Behavior Subject 방식이나 Replay Subject 방식을 활용하면 해결할 수 있다.)
+- 첫 로딩 시 한꺼번에 저장해두는 방식 보다 늦게 로딩 되므로 즉시 전환보다는 약간의 딜레이가 생깁니다. 
+- 사용자는 Loading 되기 전의 Observable 데이터에 접근할 수 없고 Loading이 완료된 다음 데이터부터 받을 수 있습니다.
 
 ## 4. Lazy Loading 구현
 ### 4.1. Module Routing으로 구현
 
-app.routing.ts의 loadChildren과 material.routing.ts의 routing 부분만 참고하면 된다.
+app.routing.ts의 loadChildren과 material.routing.ts의 routing 부분만 참고하시면 됩니다.
 
 ```ts
 // <app.module.ts>
@@ -45,7 +48,6 @@ import { MaterialModule } from './common/ts/modules/material/material.module';
   imports: [
     BrowserModule,
     AppRoutingModule,
-
     MaterialModule
   ],
   providers: [],
@@ -64,7 +66,7 @@ import { MainComponent } from './common/ts/components/main.component';
 
 const routes : Routes = [
   { path : '', component : MainComponent  },
-  { path: 'material', loadChildren: './modules/material/material.module#MaterialModule' }
+  { path: 'material', loadChildren: './modules/material/material.module#MaterialModule' } // 모듈을 lazy Loading 한다.
 
 ];
 
@@ -126,8 +128,10 @@ const materialRoutes: Routes = [
 ```
 
 ### 4.2. component를 ngIf로 호출하여 Lazy Loading 구현
-ngIf가 false 인 경우 브라우저가 해당 dom을 로드하지 않으므로 dom을 구성하는데 필요한 관련 데이터도 로드하지 않는다. ngIf가 true가 되었을 때 비로소 해당 dom의 모든 데이터를 로드하므로, 이 또한 Lazy Loading의 또 다른 기법이라 할 수 있다. module의 그것과 동일한 효과를 볼 수 있다.
-component와 dom의 하나하나까지 세분화하여 관리할 수 있는 장점이 있으나 dom의 enable을 직접 컨트롤 해야하는 점이 있다.
+
+ngIf가 false 인 경우 브라우저가 해당 dom을 로드하지 않으므로 dom을 구성하는데 필요한 관련 데이터도 로드하지 않는 방법을 이용하는 것입니다.
+ngIf가 true가 되었을 때 비로소 해당 dom의 모든 데이터를 로드하므로, module의 Lazy Loading 방식과 동일한 효과를 볼 수 있습니다.
+component와 dom의 하나하나까지 세분화하여 관리할 수 있는 장점이 있으나 dom의 enable을 직접 컨트롤 해야하는 유의점이 생깁니다.
 
 ```html 
 <!-- <main.html> -->
@@ -162,4 +166,4 @@ export class MaterialComponent implements OnInit {
 ```
 
 ## 5. 주의사항
-Lazy Loading을 Routing으로 구현하는 경우 BrowserModule은 최상위 Module만 사용해야 하며 하위 Module에서는 같은 기능을 사용하기 위해 CommonModule을 import 해야 한다.
+Lazy Loading을 Routing으로 구현하는 경우 BrowserModule은 최상위 Module만 사용해야 하며 하위 Module에서는 같은 기능을 사용하기 위해 CommonModule을 import 해야 합니다.
