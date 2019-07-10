@@ -11,11 +11,19 @@ tags: [enum]
 #### 1. 정의
 
 Enum은 상수 값의 의미있는 정의라고 볼 수 있습니다.
-즉, Yes, No를 처리하기 쉽게 0과 1로 사용하는 것보다는 
+즉, Yes, No를 처리하기 쉽게 
 
 ```ts
-const yes = 1;
-const no = 0;
+let response = 1;
+let fail = 0;
+```
+
+```ts
+const YES = 1;
+const NO = 0;
+
+let response = YES;
+let fail = NO;
 ```
 
 으로 선언하여 사용하는 것이 더 코드를 이해하기 쉽게 만들 수 있다는 것입니다.
@@ -27,6 +35,9 @@ enum Response {
   No,
   Yes
 }
+
+let response = Response.YES;
+let fail = Response.No;
 ```
 
 위의 예시에서 const yes와 const no는 각각 독립적이어서 연관성이 없으나 enum으로 묶으면 Response라는 하나의 그룹에 속하여 연관성을 갖게 됩니다.
