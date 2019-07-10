@@ -161,4 +161,8 @@ enum Active {
 위와 같이 OR를 사용한 값 설정도 가능합니다.
 
 
+끝.
+
+
+
 참고: https://www.typescriptlang.org/docs/handbook/enums.html
