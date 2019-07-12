@@ -3,7 +3,7 @@ title: "Form Group"
 date: 2019-07-12 13:20:00 +0900
 comments: true
 categories: angular
-tags: [form, formgroup]
+tags: [form, formgroup, module, template, component]
 ---
 
 

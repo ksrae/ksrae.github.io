@@ -3,7 +3,7 @@ title: "Routing Resolve More Detail"
 date: 2019-07-08 11:00:00 +0900
 comments: true
 categories: angular
-tags: [routing, resolve]
+tags: [routing, resolve, component, module]
 ---
 
 

@@ -3,7 +3,7 @@ title: "Enum 총정리"
 date: 2019-07-09 15:40:00 +0900
 comments: true
 categories: angular
-tags: [enum]
+tags: [interface, enum]
 ---
 
 
