@@ -101,24 +101,24 @@ export class AppComponent {
 먼저 FormGroup, Validators, FormBuilder를 import 합니다.
 Validators는 사용하지 않거나 template에서 validation을 처리한다면 호출하지 않아도 됩니다.
 
-            import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+      import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 
 template에서 작성한 FormGroup명을 변수로 선언합니다.
 
-            searchForm: FormGroup;
+      searchForm: FormGroup;
 
 FormBuilder를 DI로 가져옵니다. 
 
-            constructor(
-                  private fb: FormBuilder
-            )
+      constructor(
+            private fb: FormBuilder
+      )
 
 
 onInit이나 constructor에 formgroup을 정의합니다.
 
-          this.searchForm = this.fb.group({
-                item: ['', [Validators.required]]
-          })
+      this.searchForm = this.fb.group({
+            item: ['', [Validators.required]]
+      })
 
 이 때, 사용되는 모든 form의 formControlName을 입력합니다. 
 '' 부분은 초기값으로 초기값이 있으면 입력하고, 없으면 비워둡니다.
@@ -148,15 +148,15 @@ class Validators {
 
 valueChanges 이 부분은 form 값을 subscribe 하여 값의 변화를 실시간으로 체크하는 부분입니다.
 
-          this.searchForm.valueChanges.subscribe(observer => {
-                console.log(this.searchForm.valid);
-          });   
+      this.searchForm.valueChanges.subscribe(observer => {
+            console.log(this.searchForm.valid);
+      });   
 
 끝으로 submit 함수에는 form 입력 이후 validation 체크나 데이터를 가공하는 등의 처리를 합니다.
 
-          submit(e) {
-                const { item } = this.searchForm.controls; 
-                console.log(item.value);
-          }
+      submit(e) {
+            const { item } = this.searchForm.controls; 
+            console.log(item.value);
+      }
 
 끝.
