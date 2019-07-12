@@ -1,6 +1,6 @@
 ---
 title: "Form Group"
-date: 2019-07-11 12:55:00 +0900
+date: 2019-07-12 13:20:00 +0900
 comments: true
 categories: angular
 tags: [form, formgroup]
