@@ -3,7 +3,7 @@ title: "최초 component 보다 빠르게 함수 실행하기 (App Initializer �
 date: 2019-07-12 15:01:00 +0900
 comments: true
 categories: angular
-tags: [initializer, factory, module]
+tags: [initializer, factory]
 ---
 
 

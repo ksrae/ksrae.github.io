@@ -3,7 +3,7 @@ title: "Angular Material Animation 멈추기"
 date: 2019-07-04 15:45:00 +0900
 comments: true
 categories: angular
-tags: [material, animation, template]
+tags: [material, animation]
 ---
 
 

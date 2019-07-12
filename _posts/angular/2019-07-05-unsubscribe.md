@@ -3,7 +3,7 @@ title: " subscribe 중인 Subject를 unsubscribe 하기"
 date: 2019-07-05 16:30:00 +0900
 comments: true
 categories: angular
-tags: [rxjs, subscription, unsubscribe, component]
+tags: [rxjs, subscription, unsubscribe]
 ---
 
 

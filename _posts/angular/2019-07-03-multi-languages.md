@@ -2,7 +2,7 @@
 title: "다국어 적용 (Multi Languages)"
 comments: true
 categories: angular
-tags: [language, module, component, template]
+tags: [language]
 date: 2019-07-03 12:20:00 +0900
 ---
 

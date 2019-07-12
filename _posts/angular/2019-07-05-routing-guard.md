@@ -3,7 +3,7 @@ title: "Routing Guard"
 date: 2019-07-05 11:28:00 +0900
 comments: true
 categories: angular
-tags: [routing, guard, component]
+tags: [routing, guard]
 ---
 
 
