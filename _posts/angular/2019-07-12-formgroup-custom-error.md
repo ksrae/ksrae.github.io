@@ -3,7 +3,7 @@ title: "Form Group Custom Error 처리"
 date: 2019-07-12 17:31:00 +0900
 comments: true
 categories: angular
-tags: [form, formcontrol, formgroup, error]
+tags: [form, formcontrol, formgroup, error, custom]
 ---
 
 
