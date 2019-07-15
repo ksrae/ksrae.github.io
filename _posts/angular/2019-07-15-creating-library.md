@@ -205,10 +205,10 @@ my-lib-0.0.1.tgz
 public 으로 생성한 경우 기존 npm 라이브러리와 마찬가지로 진행하고, 
 private 인 경우 먼저 tgz 파일을 해당 프로젝트로 옮겨야 합니다.
 
-파일을 이동하였으면 public package와 마찬가지로 install 합니다.
+파일을 이동하였으면 tgz 파일을 public package와 마찬가지로 install 합니다.
 
 ```command
-npm install /my-lib
+npm install ./my-lib
 ```
 
 이 때, 해당 모듈이 node_modules 폴더에 설치되었는지 확인합니다.
