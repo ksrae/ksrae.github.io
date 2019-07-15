@@ -251,5 +251,6 @@ angular-cli v6.0.3 기준으로 아래의 문제가 있습니다. 버전에 따�
 
 
 참고: 
-[Creating a Library in Angular 6 – Angular In Depth](https://blog.angularindepth.com/creating-a-library-in-angular-6-87799552e7e5)
-[Creating Libraries](https://angular.io/guide/creating-libraries)
+> [Creating a Library in Angular 6 – Angular In Depth](https://blog.angularindepth.com/creating-a-library-in-angular-6-87799552e7e5)
+
+> [Creating Libraries](https://angular.io/guide/creating-libraries)
