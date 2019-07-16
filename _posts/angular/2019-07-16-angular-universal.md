@@ -1,6 +1,6 @@
 ---
 title: "Angular Universal"
-date: 2019-07-16 16:37:00 +0900
+date: 2019-07-16 17:14:00 +0900
 comments: true
 categories: angular
 tags: [ssr, seo, universal]
