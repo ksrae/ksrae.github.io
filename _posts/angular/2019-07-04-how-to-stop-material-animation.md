@@ -7,7 +7,6 @@ tags: [material, animation]
 ---
 
 
-### 개요
 Angular Material을 쓰다보니 애니메이션이 기본으로 적용되어 있는데 이를 멈추기 위해 css를 강제로 지정해도 제대로 되지 않는 경우가 있습니다.
 또한 모든 Material이 아닌 특정 Material의 애니메이션만 중지하고 싶은데 이 경우에도 css 컨트롤이 쉽지 않습니다.
 
