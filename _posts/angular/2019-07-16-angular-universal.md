@@ -244,15 +244,16 @@ export class AppServerModule {}
 
 ### 유의점
 
-1. 랜더링 시점이 클라이언트가 아닌 서버로 변경되었으므로, 브라우저 명령을 더 이상 사용할 수 없습니다.
-즉, window, document, navigator, location은 더 이상 사용할 수 없습니다.
-
-이를 해결하기 위해 Angular에서는 Injectable한 Location, DOCUMENT와 같은 몇 가지 API를 제공합니다.
-
-2. 마찬가지로 클릭이나 유저의 이벤트 또한 서버 사이드에서는 처리할 수 없으므로 이를 처리할 랜더링 대상을 결정해야 하며, 반드시 Routing 기능을 구현하여야 합니다.
+> 랜더링 시점이 클라이언트가 아닌 서버로 변경되었으므로, 브라우저 명령을 더 이상 사용할 수 없습니다.
+> 즉, window, document, navigator, location은 더 이상 사용할 수 없습니다.
+> 이를 해결하기 위해 Angular에서는 Injectable한 Location, DOCUMENT와 같은 몇 가지 API를 제공합니다.
 
 
-3. 링크는 반드시 절대 링크 값을 사용해야 합니다. Angular 공식 사이트에서는 아래의 코드를 가이드로 제시하고 있습니다.
+
+> 마찬가지로 클릭이나 유저의 이벤트 또한 서버 사이드에서는 처리할 수 없으므로 이를 처리할 랜더링 대상을 결정해야 하며, 반드시 Routing 기능을 구현하여야 합니다.
+
+
+> 링크는 반드시 절대 링크 값을 사용해야 합니다. Angular 공식 사이트에서는 아래의 코드를 가이드로 제시하고 있습니다.
 
 
 universal-interceptor.ts 를 생성합니다.
