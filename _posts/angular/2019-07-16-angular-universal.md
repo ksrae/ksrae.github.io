@@ -8,9 +8,6 @@ tags: [ssr, seo, universal]
 
 
 
-
-# Angular Universal
-
 Angular에서 SSR을 사용하는 방법입니다. 우수한 Framework 답게 쉽고 빠르게 적용할 수 있도록 잘 구성되어 있기 때문에, 아래의 예제만 따라해도 충분히 실전에 사용할 수 있을 것 입니다.
 
 
