@@ -1,5 +1,5 @@
 ---
-title: "Shared Module의 활용법"
+title: "Shared Module"
 date: 2019-07-04 15:44:00 +0900
 comments: true
 categories: angular

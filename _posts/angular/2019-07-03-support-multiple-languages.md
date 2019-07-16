@@ -1,5 +1,5 @@
 ---
-title: "다국어 적용 (Multi Languages)"
+title: "Support Multiple Languages"
 comments: true
 categories: angular
 tags: [language]
@@ -8,8 +8,6 @@ date: 2019-07-03 12:20:00 +0900
 
 
 
-
-### 0. 개요
 다국어 적용 시 서버 요청 및 리로딩 없이 즉시 적용합니다.
 
 

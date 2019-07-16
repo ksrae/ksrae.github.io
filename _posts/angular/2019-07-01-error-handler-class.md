@@ -1,5 +1,5 @@
 ---
-title: "ErrorHandler"
+title: "Error Handler Class"
 comments: true
 categories: angular
 tags: [error, module]
@@ -7,8 +7,7 @@ date: 2019-07-01 17:37:00 +0900
 ---
 
 
-### 0. 개요
-Angular 에러 발생 이벤트를 모두 캐치합니다.
+Angular 에러 발생 이벤트를 모두 캐치하는 클래스를 만들어보겠습니다.
 
 
 ### 1. 사용방법
@@ -29,3 +28,5 @@ class MyErrorHandler implements ErrorHandler {
 })
 class AppModule {}
 ```
+
+끝.

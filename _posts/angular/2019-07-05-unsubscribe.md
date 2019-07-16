@@ -1,5 +1,5 @@
 ---
-title: " subscribe 중인 Subject를 unsubscribe 하기"
+title: " How to Unsubscribe Subject"
 date: 2019-07-05 16:30:00 +0900
 comments: true
 categories: angular
@@ -8,7 +8,6 @@ tags: [rxjs, subscription, unsubscribe]
 
 
 
-### 명시적 선언
 Subject를 Subscribe를 할 때 Subscription으로 받아둔 뒤 해당 Subscription을 unsubscribe 하는 방법입니다.
 
 

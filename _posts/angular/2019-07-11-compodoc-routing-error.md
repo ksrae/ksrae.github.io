@@ -1,5 +1,5 @@
 ---
-title: "compodoc - 새 routing 구조 인식 오류"
+title: "compodoc - Fail to Understand New Routing Structure"
 date: 2019-07-11 13:44:00 +0900
 comments: true
 categories: angular

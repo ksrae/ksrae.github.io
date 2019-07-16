@@ -1,12 +1,11 @@
 ---
-title: "업데이트 에러 목록 정리"
+title: "Errors while Update"
 date: 2019-07-10 12:00:00 +0900
 comments: true
 categories: angular
 tags: [update, error]
 ---
 
-### 0. 개요
 
 ng update를 진행 한 뒤 발생하는 다양한 에러를 나열하고 해결 방법을 정리합니다.
 

@@ -1,5 +1,5 @@
 ---
-title: "Angular 8 Routing Lazy Loading 변경"
+title: "Angular 8 New Lazy Loading Routing"
 date: 2019-07-11 12:55:00 +0900
 comments: true
 categories: angular

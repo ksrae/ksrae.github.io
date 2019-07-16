@@ -1,5 +1,5 @@
 ---
-title: " @Input의 유의점"
+title: "@Input Not Passing Data"
 date: 2019-07-05 12:08:00 +0900
 comments: true
 categories: angular

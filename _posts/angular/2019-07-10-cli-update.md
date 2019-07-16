@@ -1,5 +1,5 @@
 ---
-title: "버전 업데이트"
+title: "Angular-Cli Update"
 date: 2019-07-10 11:00:00 +0900
 comments: true
 categories: angular
@@ -8,7 +8,6 @@ tags: [update]
 
 
 
-### 0. 목적
 버전 업데이트 과정을 설명합니다. 여기에서는 7버전에서 8버전 업데이트를 설명합니다. 모든 버전 업데이트의 방식이 동일하므로 다른 버전도 아래와 같이 진행하면 됩니다.
 
 ### 1. 업데이트 확인
@@ -93,3 +92,6 @@ found 1 low severity vulnerability
 
 
 업데이트가 완료되었습니다.
+
+
+업데이트 중 에러가 발생한 경우 [errors while update](https://ksrae.github.io/angular/errors-while-update) 에서 찾아보시기 바랍니다.

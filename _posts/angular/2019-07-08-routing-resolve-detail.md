@@ -11,7 +11,7 @@ tags: [routing, resolve, component]
 component가 onInit 에서 service에서 가져온 값을 template에 적용할 때 template에서 에러가 발생합니다.
 이는 변수에 값이 할당되기 전에 template에서 변수를 읽으려고 시도하기 때문인데 이를 해결하려면 nullable을 허용하는 ? 를 넣어 해결하는 방법을 사용할 수 있습니다.
 
-```
+```html
 {% raw %}
 <div> {{item?.key}} </div>
 <div> {{item?value}} </div>

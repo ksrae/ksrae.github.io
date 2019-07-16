@@ -1,5 +1,5 @@
 ---
-title: "컴포넌트 없는 라우팅 (Componentless Routing)"
+title: "Componentless Routing"
 date: 2019-07-04 11:59:00 +0900
 comments: true
 categories: angular
@@ -8,7 +8,7 @@ tags: [routing]
 
 ### 분석
 
-- Routing을 설정하면 Component를 일반적으로 아래와 같이 설정한다.
+- Routing을 설정하면 Component를 일반적으로 아래와 같이 설정합니다.
     ```js
      {path: '', component: AppComponent, children: [
       { path: '', redirectTo: 'main', pathMatch: 'full' },
