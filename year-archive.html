@@ -20,7 +20,7 @@ title: archive
 
 {%comment%} +++++++++++++++ build the table +++++++++++++++ {%endcomment%}
 
-{% assign tableContent = "<tr><th></th><th>1월</th><th>2월</th><th>3월</th><th>4월</th><th>5월</th><th>6월</th><th>7월</th><th>8월</th><th>9월</th><th>10월</th><th>11월</th><th>12월</th></tr>" %}
+{% assign tableContent = "<tr><th></th><th>Jan</th><th>Feb</th><th>Mar</th><th>Apr</th><th>May</th><th>Jun</th><th>Jul</th><th>Aug</th><th>Sep</th><th>Oct</th><th>Nov</th><th>Dec</th></tr>" %}
 
 {%comment%} +++++
   currentPostIndex is used to loop over post in an efficient way
@@ -78,7 +78,7 @@ title: archive
   {% endfor %}
 
   {% assign yearCells = yearCellsArray | join: "" %}
-  {% assign yearRow = yearRow | append: yearCells | append: " 년</tr>" %}
+  {% assign yearRow = yearRow | append: yearCells | append: "</tr>" %}
   {% assign tableContent = tableContent | append: yearRow %}
 
 {% endfor %}
@@ -86,7 +86,7 @@ title: archive
 <h2>All Posts By Date</h2>
 <table class="table table-striped blogcalendar">
   <tbody>
-    {{ tableContent }} 개
+    {{ tableContent }}
   </tbody>
 </table>
 
