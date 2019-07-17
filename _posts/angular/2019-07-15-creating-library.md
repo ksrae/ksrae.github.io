@@ -66,18 +66,19 @@ package.json에서 ng-packagr이 있는지 확인합니다.
 ```
 
 #### 각 파일의 목적
-- <package.json>
 
-    >npm package처럼 배포할 수 있도록 함.
+ > {% raw %}<package.json> {% endraw %}
 
-- <public_api.ts>
+   > - npm package처럼 배포할 수 있도록 함.
 
-    > entry file. 여기에 export할 모든 파일을 포함하여야 한다.
-    > module에 export를 선언하였어도 여기에 함께 선언해야 한다.
+> {% raw %}<public_api.ts> {% endraw %}
 
-- <ng-package.json>
+  > - entry file. 여기에 export할 모든 파일을 포함하여야 한다.
+  > - module에 export를 선언하였어도 여기에 함께 선언해야 한다.
 
-    > ng-packagr 설정 파일. angular cli가 자동생성한다.
+> {% raw %}<ng-package.json> {% endraw %}
+
+  > - ng-packagr 설정 파일. angular cli가 자동생성한다.
 
 
 ### library 작성
@@ -251,6 +252,6 @@ angular-cli v6.0.3 기준으로 아래의 문제가 있습니다. 버전에 따�
 
 
 참고: 
-1. [Creating a Library in Angular 6 – Angular In Depth](https://blog.angularindepth.com/creating-a-library-in-angular-6-87799552e7e5)
+> [Creating a Library in Angular 6 – Angular In Depth](https://blog.angularindepth.com/creating-a-library-in-angular-6-87799552e7e5)
 
-2. [Creating Libraries](https://angular.io/guide/creating-libraries)
+> [Creating Libraries](https://angular.io/guide/creating-libraries)

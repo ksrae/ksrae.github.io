@@ -44,7 +44,7 @@ export class LocationComponent implements OnInit {
 
 만일 이대로 작성한 상태에서 실행하면 다음과 비슷한 에러가 발생합니다.
 
-		error TS2339: Property 'location' does not exist on type 'LocationComponent'.
+  error TS2339: Property 'location' does not exist on type 'LocationComponent'.
 
 
 이는 Location과 LocationStrategy and/or PathLocationStrategy를 providers에 추가해야 하는데 component에 직접 추가해도 되나 module에 넣으면 여러 component에서 활용할 수 있으므로 module에 넣는 것이 좋습니다.
@@ -87,7 +87,7 @@ export class LocationModule { }
 
 다음과 같은 에러가 발생하는 경우도 있는데
 
-		error TS2740: Type 'Location' is missing the following properties from type 'Location': path, getState, isCurrentPathEqualTo, normalize, and 7 more.
+  error TS2740: Type 'Location' is missing the following properties from type 'Location': path, getState, isCurrentPathEqualTo, normalize, and 7 more.
 
 
 이는 component의 constructor에서 Location을 DI 하였을 때, private을 넣지 않아 발생하는 케이스입니다.
