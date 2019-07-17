@@ -107,4 +107,7 @@ export class LocationModule { }
 ```
 
 
-참고: [Angular](https://angular.io/api/common/Location)
+참고: 
+> [Angular](https://angular.io/api/common/Location)
+
+> [Using Angular's Location Service ← Alligator.io](https://alligator.io/angular/location-service/)
