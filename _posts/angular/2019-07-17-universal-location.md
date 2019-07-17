@@ -1,5 +1,5 @@
 ---
-title: "Angular Universal window operations"
+title: "Angular Universal Location"
 date: 2019-07-17 14:37:00 +0900
 comments: true
 categories: angular
