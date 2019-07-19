@@ -83,7 +83,7 @@ ViewChild 호출 시 static을 설정할 수 있게 되었습니다. 이로서 �
 @ViewChild(selector: directive type / querying name, {read: boolean, static: boolean})
 ```
 
-selector에는 세가지 값이 들어갈 수 있습니다.
+selector에는 아래의 값이 들어갈 수 있습니다.
 > template의 reference 변수값 (<my-component #cmp></my-component> 을 @ViewChild('cmp')으로 호출)
 
 > child component가 가진 provider (@ViewChild(SomeService) someService: SomeService)
