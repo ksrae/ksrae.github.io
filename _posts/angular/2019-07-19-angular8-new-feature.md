@@ -84,10 +84,12 @@ ViewChild 호출 시 static을 설정할 수 있게 되었습니다. 이로서 �
 ```
 
 selector에는 세가지 값이 들어갈 수 있습니다.
-> <strong>클래스명 
 > template의 reference 변수값 (<my-component #cmp></my-component> 을 @ViewChild('cmp')으로 호출)
+
 > child component가 가진 provider (@ViewChild(SomeService) someService: SomeService)
+
 > string 토큰으로 정의된 provider ( @ViewChild('someToken') someTokenVal: any)
+
 > TemplateRef (e.g. query <ng-template></ng-template> with @ViewChild(TemplateRef) template;)
 
 
