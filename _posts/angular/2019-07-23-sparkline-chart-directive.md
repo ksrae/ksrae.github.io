@@ -2,7 +2,7 @@
 title: "Creating Sparkline Chart Directive with ng2-nvd3"
 date: 2019-07-22 14:42:00 +0900
 comments: true
-categories: javascript
+categories: angular
 tags: [sparkline, chart, directive, nvd3, ng2-nvd3]
 ---
 
