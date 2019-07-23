@@ -256,5 +256,5 @@ export class SparkLineThresholdDirective implements AfterViewInit {
 }
 ```
 
-이상입니다.
+끝.
 
