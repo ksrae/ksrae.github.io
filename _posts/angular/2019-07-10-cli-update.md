@@ -94,4 +94,5 @@ found 1 low severity vulnerability
 업데이트가 완료되었습니다.
 
 
-업데이트 중 에러가 발생한 경우 [error fix](https://ksrae.github.io/angular/error-fix) 에서 찾아보시기 바랍니다.
+### 3. Warning / Error fix
+업데이트 중 WARN 또는 Error가 발생한 경우 [Error-Fix 페이지에서 확인하실 수 있습니다.](https://ksrae.github.io/angular/error-fix)
