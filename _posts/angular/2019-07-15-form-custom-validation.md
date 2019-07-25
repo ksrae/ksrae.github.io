@@ -35,7 +35,7 @@ material을 적용하면 에러 메시지를 쉽게 표현할 수 있으므로 �
 {% endraw %}
 ```
 
-### component
+## component
 
 ```ts
 import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, NgZone } from '@angular/core';
@@ -82,7 +82,7 @@ export class AppComponent implements OnInit {
 
 이제 service를 작성하겠습니다.
 
-### service
+## service
 
 ```ts
 import { Injectable } from '@angular/core';
@@ -119,7 +119,7 @@ equalTo 함수를 보면 field_name을 받고, ValdatorFn 형식을 리턴합니
 
 
 
-### 테스트
+## 테스트
 
 아래의 조건이 올바로 적용되는지 테스트 해보겠습니다.
 - 모든 필드에 Validators.required가 적용되어 있으므로 반드시 모든 필드를 채워야 합니다. 만일 그렇지 않으면 각 필드에 에러메시지가 표시되어야 합니다.
@@ -128,7 +128,7 @@ equalTo 함수를 보면 field_name을 받고, ValdatorFn 형식을 리턴합니
 
 
 
-### 결과
+## 결과
 
 모든 테스트가 올바르게 동작한다면 제대로 적용된 것입니다.
 

@@ -12,7 +12,7 @@ Angular8에서는 기대하던 Ivy Rendering이 추가되고, 그 외에 많은 
 이해하지 못해 빠진 부분도 있으므로 댓글로 알려주시면 감사하겠습니다.
 
 
-### SVG를 template으로
+## SVG를 template으로
 
 이제 component의 template을 설정할 때 html 외에도 svg 파일을 설정할 수 있습니다.
 
@@ -24,16 +24,16 @@ Angular8에서는 기대하던 Ivy Rendering이 추가되고, 그 외에 많은 
 ```
 
 
-### Lazy Loading 의 변경
+## Lazy Loading 의 변경
 
 Routing 시 Lazy Loading 방식이 변경되었습니다.
 
-#### 기존
+### 기존
 ```ts
 loadChildren: './app.module#AppModule';
 ```
 
-#### 변경
+### 변경
 ```ts
 loadChildren: () => import('./app.module').then(m => m.AppModule)
 ```
@@ -43,7 +43,7 @@ loadChildren: () => import('./app.module').then(m => m.AppModule)
 
 
 
-### WebWorker 생성
+## WebWorker 생성
 
 기존에는 angular 영역에서 벗어나 별도의 파일로 생성해야 했는데 이제 cli 환경에서 직접 webworker를 만들 수 있습니다.
 
@@ -52,9 +52,9 @@ ng g webWorker [worker-name]
 ```
 
 
-### FormGroup 기능 추가
+## FormGroup 기능 추가
 
-#### markAllAsTouched
+### markAllAsTouched
 
 formGroup에 속한 모든 input 태그를 touch 상태로 만들어 주는 기능입니다.
 
@@ -64,7 +64,7 @@ formGroup.markAllAsTouched()
 
 기존에는 formControl마다 markAsTouched 함수는 있었으나 모두 적용 함수도 추가되었습니다. 이로서 모두 적용 시에는 for문을 돌려가며 작성할 필요 없이 한줄의 코드로 해결할 수 있게 되었습니다.
 
-#### clear
+### clear
 
 FormArray는 FormControl을 배열로 담아 관리하는 배열인데 기존에는 removeAt 함수로 배열에 담긴 FormControl의 전체/개별 삭제를 진행하였다면 이제 모두 제거 함수가 추가되어 한번에 삭제가 가능해졌습니다.
 
@@ -73,7 +73,7 @@ formArray.clear()
 ```
 
 
-### ViewChild 변경
+## ViewChild 변경
 
 ViewChild 호출 시 static을 설정할 수 있게 되었습니다. 이로서 기존에 애매했던 호출 시점을 명확히 잡을 수 있게 되었습니다.
 단, 호출되는 Directive나 Component에 ngIf 등의 동적 랜더링 조건이 들어간다면 static은 동작하지 않습니다.

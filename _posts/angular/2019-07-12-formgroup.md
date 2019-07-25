@@ -14,7 +14,7 @@ Html에서 Form은 자주 사용되는데 Angular에서는 이 사용법이 은�
 앞으로도 자주 찾아볼거 같아 한 번 정리해두려고 합니다.
 
 
-### 1. Module 등록
+## Module 등록
 
 form을 사용할 component를 포함하고 있는 module이나 공통으로 사용하는 shared module에 ReactiveFormsModule을 import 합니다.
 
@@ -45,7 +45,7 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 })
 ```
 
-### 2. template 작성
+## template 작성
 
 사용할 form을 작성합니다.
 
@@ -65,7 +65,7 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 - formControlName 에는 해당 input의 값을 처리할 변수명을 입력합니다.
 
 
-### 3. component 작성
+## component 작성
 
 이제 component 작성만 하면 됩니다.
 

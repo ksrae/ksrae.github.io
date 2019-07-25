@@ -11,13 +11,13 @@ tags: [ssr, seo, universal]
 Angular에서 SSR을 사용하는 방법입니다. 우수한 Framework 답게 쉽고 빠르게 적용할 수 있도록 잘 구성되어 있기 때문에, 아래의 예제만 따라해도 충분히 실전에 사용할 수 있을 것 입니다.
 
 
-### 동작 원리 
+## 동작 원리 
 
 Universal 웹 서버는 static HTML 페이지를 template 엔진에 랜더링 하며, 브라우저의 도움 없이 DOM, XMLHttpRequest 또는 low-level 을 서버에서 처리할 수 있습니다.
 서버는 클라이언트의 요청을 ngExpressEngine에 전달하고 renderModuleFactory() 함수를 통해 template 태그의 내용을 랜더링하여 client에 전달합니다.
 
 
-### 지원 여부
+## 지원 여부
 Angular Universal은 대표적으로 4가지 방식의 엔진을 지원하고 있습니다. 
 
     @nguniversal/express-engine
@@ -29,7 +29,7 @@ Angular Universal은 대표적으로 4가지 방식의 엔진을 지원하고 �
 이 외에도 모질라의 dom.js 기반  및  공통으로 처리할 common 등이 개발되어 있으며 계속 업데이트 중에 있습니다.
 
 
-### 프로젝트 생성
+## 프로젝트 생성
 
 angular 프로젝트를 생성합니다. 기존 angular 프로젝트 생성과 방식은 동일합니다.
 
@@ -40,7 +40,7 @@ ng new ssr_project
 ssr_project라는 이름의 프로젝트를 생성하였습니다.
 
 
-### universal 엔진 추가
+## universal 엔진 추가
 
 프로젝트가 생성된 폴더로 이동 후 서버 엔진을 추가합니다. 여기에서는 Node.js의 express 엔진을 사용하겠습니다. 따라서 Node가 반드시 설치 되어 있어야 합니다.
 
@@ -53,9 +53,9 @@ ng add @nguniversal/express-engine --clientProject ssr_project
 이는 서버에서의 설정 및 Angular boostrap 등에 필요한 파일입니다.
 하나씩 알아보겠습니다.
 
-### 분석
+## 분석
 
-#### server.ts
+### server.ts
 
 노드 서버를 가동하는 코드 이며, express 엔진을 호출하고 있습니다.
 
@@ -121,7 +121,7 @@ app.get('*.*', express.static(join(DIST_FOLDER, 'browser')));
 
 
 
-#### tsconfig.server.json
+### tsconfig.server.json
 
 기존 tsconfig.app.json 파일은 클라이언트의 설정이라면 tsconfig.server.json은 서버의 설정입니다.
 구성은 크게 다르지 않으나 "angularCompilerOptions"에서 entryModule을 정의하고 있는 점이 특징입니다.
@@ -140,7 +140,7 @@ app.get('*.*', express.static(join(DIST_FOLDER, 'browser')));
 ```
 
 
-#### webpack.server.config.js
+### webpack.server.config.js
 
 webpack의 서버 설정 입니다.
 
@@ -191,7 +191,7 @@ module.exports = {
 
 ```
 
-#### src/main.server.ts
+### src/main.server.ts
 
 서버에서 boostrap 하기 위한 코드 입니다.
 
@@ -213,7 +213,7 @@ export { provideModuleMap } from "@nguniversal/module-map-ngfactory-loader";
 
 
 
-#### src/app/app.server.module.ts
+### src/app/app.server.module.ts
 
 서버에서 호출하는 서버사이드용 module 입니다.
 
@@ -242,7 +242,7 @@ export class AppServerModule {}
 
 
 
-### 유의점
+## 유의점
 
 > 랜더링 시점이 클라이언트가 아닌 서버로 변경되었으므로, 브라우저 명령을 더 이상 사용할 수 없습니다.
 > 즉, window, document, navigator, location은 더 이상 사용할 수 없습니다.
@@ -308,7 +308,7 @@ export class AppServerModule {}
 
 
 
-### 실행
+## 실행
 
 package.json을 열어 scripts에 정의되어 있는대로 실행하면 됩니다.
 
@@ -327,7 +327,7 @@ package.json을 열어 scripts에 정의되어 있는대로 실행하면 됩니�
   },
 ```
 
-#### 빌드
+### 빌드
 
 build:ssr 명령을 실행합니다.
 
@@ -336,7 +336,7 @@ npm run build:ssr
 ```
 
 
-#### 서버 기동
+### 서버 기동
 
 package.json의 serve:ssr 명령을 수행하거나 dist 폴더로 이동하여 node server 명령을 수행해도 됩니다.
 
@@ -350,7 +350,7 @@ npm run serve:ssr
 dist> node server
 ```
 
-#### 브라우저에서 확인
+### 브라우저에서 확인
 
 서버 가동 후 server.ts 에 설정된 포트 (여기에서는 4000) 를 확인합니다.
 로컬로 실행할 경우 localhost:4000을 확인합니다.

@@ -23,12 +23,12 @@ canActivate와 canActivateChild
 [Routing Angular Applications: CanActivate and CanActivateChild ― Scotch](https://scotch.io/courses/routing-angular-2-applications/canactivate-and-canactivatechild)
 
 
-## 사용예
+
 
 여러 기능을 모아서 하나의 guard에 구성해도 관계없으나 필요한 기능마다 별도의 guard를 만들어 두는게 가드의 목적을 명확히 할 수 있습니다.
 예시에서는 칸을 줄이기 위해 하나의 guard에 모두 구성해 보겠습니다.
 
-1. routing module
+## routing module
 
 routing이 포함된 모듈에 resolve를 추가하되 {리턴값 받을 변수명: 가드명} 을 기입합니다.
 
@@ -46,7 +46,7 @@ const routes: Routes = [
 ```
 
 
-2. guard
+## guard
 
 받아줄 guard를 작성합니다.
 
@@ -102,7 +102,7 @@ export class MainGuard implements CanLoad, CanActivate, CanActivateChild, Resolv
 
 ```
 
-3. component 
+## component 
 
 이제 resolve의 결과를 받을 MainComponent를 작성합니다.
 

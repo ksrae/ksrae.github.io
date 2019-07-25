@@ -16,7 +16,7 @@ Angular의 FormControl 이나 FormGroup을 Material과 연동해서 사용하다
 
 
 
-### 1. FormControl에서 에러처리
+## FormControl에서 에러처리
 
  FormControl 에러 발생 방법은 해당 control에 setError를 주고 mat-error에 해당 필드의 hasError를 체크하면 됩니다.
 
@@ -36,7 +36,7 @@ this.testControl.setError({testError: true});
 ```
 
 
-### 2. FormGroup에서 에러처리
+## FormGroup에서 에러처리
 
 
 ```html
@@ -66,7 +66,7 @@ customError() {
 ```
 
 
-### 3. 유의점
+## 유의점
 > - 에러는 touch된 상황에서만 발생하므로 반드시 markAsToucked()를 우선 실행해야 합니다. 그렇지 않으면 setErrors 적용이 무시됩니다.
 > - 에러를 취소하려면 setError(null) 또는 setError({incorrect: false}) 로 만들면 됩니다.
 > - formGroup가 정상처리 되려면 모든 에러가 null 상태이어야 합니다.

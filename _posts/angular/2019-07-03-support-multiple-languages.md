@@ -11,15 +11,15 @@ date: 2019-07-03 12:20:00 +0900
 다국어 적용 시 서버 요청 및 리로딩 없이 즉시 적용합니다.
 
 
-### 1. 적용
+## 1. 적용
 ngx-translate를 활용하는 방법 입니다.
     
 
-### 2. 코드
+## 2. 코드
 
-#### 2-1. 기본 호출 방법
+### 2-1. 기본 호출 방법
 
-###### app.module.ts
+##### app.module.ts
 
 최상위 모듈에 TranslateModue.forRoot()를 import 합니다.
 하위 모듈에는 .forChild()를 import 합니다.
@@ -40,13 +40,13 @@ export class AppModule { }
 ```
 
 
-#### 2-2. json으로 언어값 관리 및 AoT 기법 활용
+### 2-2. json으로 언어값 관리 및 AoT 기법 활용
 
 aot기법으로 언어값을 호출할 수 있습니다. 
 위의 app.module.ts 를 확장하여 재작성하면 아래와 같습니다.
 기본적으로는 유사하나 forRoot의 옵션 일부와 HttpLoader를 통한 파일 로드 과정이 추가됩니다.
 
-###### app.module.ts
+##### app.module.ts
 
 ```ts
 import {BrowserModule} from '@angular/platform-browser';
@@ -76,7 +76,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
 export class AppModule { }
 ```
 
-#### lang.interface.ts
+### lang.interface.ts
 
 interface가 제각각이므로 언어 코드를 미리 interface화 해두는 것이 좋습니다.
 'ko', 'en'과 같이 두단어로 구성하거나 'kor', 'eng'와 같이 세단어로 구성해도 되나 
@@ -92,7 +92,7 @@ export enum LanguageCode {
 ```
 
 
-##### language.service.ts
+#### language.service.ts
 
 translateService를 그대로 사용할 수도 있으나 초기 설정 및 interface와 transService를 맞추기 위한 별도의 서비스를 추가합니다.
 
@@ -138,7 +138,7 @@ export class LanguageService {
 }
 ```
 
-#### 2-2. json 파일 관리
+### 2-2. json 파일 관리
 
 interface에서 정의한 값대로 json 파일을 생성합니다.
 > 예) ko.json, en.json 또는 ko-kr.json, en-us.json
@@ -154,7 +154,7 @@ interface에서 정의한 값대로 json 파일을 생성합니다.
 }
 ```
 
-#### 2-3. template에서의 활용
+### 2-3. template에서의 활용
 
 두가지 방법으로 사용할 수 있습니다.
 Text가 들어가는 부분에 translate 파이프를 호출하거나 innerHTML 프로퍼티를 이용할 수 있습니다.
@@ -173,7 +173,7 @@ Text가 들어가는 부분에 translate 파이프를 호출하거나 innerHTML 
 {% endraw %}
 ```
 
-#### 2-4. 공용 번역값 적용하기
+### 2-4. 공용 번역값 적용하기
 
 만일 값을 유동적으로 적용하고 싶은 값이 있다면 아래와 같이 중괄호 안에 키 값을 넣습니다.
 
@@ -197,7 +197,7 @@ changeItem에서 동적으로 적용하고자 하는 키 값인 item에 번역�
 길어지긴 했지만 위와 같은 방법으로 적용할 수 있습니다.
 
 
-### 3. 유의점
+## 3. 유의점
 
 translate을 사용할 경우 하위 태그가 만들어지지 않는다는 점을 유의하여야 합니다.
 

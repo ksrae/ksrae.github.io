@@ -12,7 +12,7 @@ angular universal 프로젝트가 server platform에서 실행 중일 때 window
 @angular/common에서 지원하는 Location Service를 활용하는 방법이므로 별도의 라이브러리를 가져올 필요는 없습니다.
 
 
-### component
+## component
 
 ```ts
 import { OnInit, Component } from '@angular/core';
@@ -49,7 +49,7 @@ export class LocationComponent implements OnInit {
 
 이는 Location과 LocationStrategy and/or PathLocationStrategy를 providers에 추가해야 하는데 component에 직접 추가해도 되나 module에 넣으면 여러 component에서 활용할 수 있으므로 module에 넣는 것이 좋습니다.
 
-### module
+## module
 
 ```ts
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
@@ -83,7 +83,7 @@ export class LocationModule { }
 
 
 
-### 유의점
+## 유의점
 
 다음과 같은 에러가 발생하는 경우도 있는데
 

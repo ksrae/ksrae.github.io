@@ -15,12 +15,12 @@ Angular가 실행 중인 플랫폼이 브라우저인지 서버인지 확인하�
 이 글은 angular universal이 적용된 프로젝트가 있다는 가정하에 작성하므로, angular universal 적용 방법은 [Angular Universal](https://ksrae.github.io/angular/angular-universal)을 참고하시기 바랍니다.
 
 
-### 원리
+## 원리
 
 프로젝트가 실행되면 PLATFORM_ID가 생성 되는데 이를 @angular/common에서 지원하는 isPlatformBrowser와 isPlatformServer 함수에 파라미터로 던져 그 결과로 판단할 수 있습니다.
 
 
-### component
+## component
 
 ```ts
 import { OnInit, Component, Inject, PLATFORM_ID } from '@angular/core';
@@ -48,7 +48,7 @@ export class AppComponent implements OnInit {
 }
 ```
 
-### template
+## template
 
 ```html
 {% raw %}

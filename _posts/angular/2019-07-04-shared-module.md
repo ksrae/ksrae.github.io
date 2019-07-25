@@ -39,7 +39,7 @@ tags: [module]
   - module 중 최상위 module은 SharedModule.forRoot() 로 참조하고, 하위 module은 SharedModule 만 참조한다. 반드시 최상위에서만 .forRoot()를 참조해야 하며 그렇지 않으면 에러가 발생합니다.
     
 
-## 2-1. Angular 6+ 에서의 service
+### 2-1. Angular 6+ 에서의 service
 
 Angular 6이후로 service가 module에 선언하지 않고 service에 직접 선언하므로 공통 service는 module에서 선언하지 않습니다.
 service의 provideIn 설정을 root로 하거나 sharedModule을 설정하면 됩니다.

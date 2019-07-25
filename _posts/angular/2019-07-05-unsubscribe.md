@@ -11,7 +11,7 @@ tags: [rxjs, subscription, unsubscribe]
 Subject를 Subscribe를 할 때 Subscription으로 받아둔 뒤 해당 Subscription을 unsubscribe 하는 방법입니다.
 
 
-### 예시
+## 예시
 아래 코드에서는 onInit 일 때 mountSubject를 subscribe 하고, onDestroy 일 때 unsubscribe 하는 코드입니다. 생각보다 간단하므로 쉽게 적용할 수 있습니다.
 
 

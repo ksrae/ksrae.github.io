@@ -6,7 +6,7 @@ categories: angular
 tags: [routing]
 ---
 
-### 분석
+## 분석
 
 - Routing을 설정하면 Component를 일반적으로 아래와 같이 설정합니다.
     ```js
@@ -23,7 +23,7 @@ tags: [routing]
 또한, AppComponent가 별다른  기능없이 routing만 관여하는 \<router-outlet>\</router-outlet> 만 있는 parentComponent인 경우라면 Componentless Routing을 활용하여 아예 무의미한 component 생성을 피할 수 있는 장점도 있습니다.
 
 
-### 해결 방법
+## 해결 방법
 
 해결 방법은 바로 Componentless Routing 을 사용하는 것입니다.
 대단한 방법은 아니고 단순히 부모의 component를 제거하면 됩니다.

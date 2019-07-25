@@ -12,7 +12,7 @@ tags: [library, package]
 Angular6 부터 ng-packagr가 정식 지원 되어 쉽게 만을 수 있으니 
 자주 사용하는 기능은 라이브러리로 만들어두고 package화 해서 편리하게 재활용 하시기 바랍니다.
 
-### 생성
+## 생성
 
 cli를 활용하여 library를 생성합니다.
 유의할 점은 angular 프로젝트 내에서 진행해야 한다는 점입니다.
@@ -25,11 +25,11 @@ ng generate library [library-name]
 그러면 angular root 폴더에 projects 폴더 안에 library-name으로 폴더가 생성되어 있습니다.
 
 
-### 분석
+## 분석
 
 각 파일을 열어 생성된 라이브러리가 올바른지 확인합니다.
 
-#### angular.json
+### angular.json
 생성한 프로젝트 명으로 검색해보면 설정이 생성되어 있습니다.
 여기에서 projectType이 "library" 인지 확인하여야 합니다.
 
@@ -49,12 +49,12 @@ ng generate library [library-name]
     },
 ```
 
-#### package.json
+### package.json
 
 package.json에서 ng-packagr이 있는지 확인합니다.
 
 
-#### tsconfig.json
+### tsconfig.json
 
 폴더가 어디에 생성되는지 확인합니다.
 
@@ -65,7 +65,7 @@ package.json에서 ng-packagr이 있는지 확인합니다.
   ],
 ```
 
-#### 각 파일의 목적
+### 각 파일의 목적
 
  > {% raw %}<package.json> {% endraw %}
 
@@ -81,11 +81,11 @@ package.json에서 ng-packagr이 있는지 확인합니다.
   > - ng-packagr 설정 파일. angular cli가 자동생성한다.
 
 
-### library 작성
+## library 작성
 
 모든 component 등의 파일을 선언하고 export 합니다.
 
-#### module
+### module
 ```ts
 import { NgModule } from '@angular/core';
 import { MyLibComponent } from './my-lib.component';
@@ -107,7 +107,7 @@ export class MyLibModule { }
 ```
 
 
-#### public_api.ts
+### public_api.ts
 
 module과 module에서 선언한 export 파일명을 작성합니다.
 ```ts
@@ -119,7 +119,7 @@ export * from './lib/my-lib.module';
 
 
 
-### 빌드
+## 빌드
 
 빌드는 기존 프로젝트와 마찬가지로 ng build를 사용합니다.
 
@@ -130,7 +130,7 @@ ng build my-lib
 실행이 성공하면 dist>my-lib 폴더가 생성됩니다.
 
 
-### package 생성 
+## package 생성 
 
 dist에 생성된 폴더로 이동해서 package 명령을 내려야 하므로 폴더를 이동합니다.
 
@@ -138,7 +138,7 @@ dist에 생성된 폴더로 이동해서 package 명령을 내려야 하므로 �
 cd dist/my-lib
 ```
 
-#### public package
+### public package
 
 npm publish 로 public package를 만들 수 있습니다. 
 
@@ -151,7 +151,7 @@ npm publish
 npm link 명령을 사용하면 빌드시 매번 라이브러리를 재설치 하는 과정을 피할 수 있습니다.
 
 
-##### public 에러
+#### public 에러
 ```
 npm ERR! code E401
 npm ERR! 401 Unauthorized - PUT https://registry.npmjs.org/my-lib - You must be logged in to publish packages.
@@ -160,7 +160,7 @@ npm ERR! A complete log of this run can be found in:
 ```
 
 
-#### private package
+### private package
 
 만일 public package로 만들기 원하지 않으시면 npm pack 명령을 사용하면 됩니다.
 실행하면 npm publish와 같이 동작하나 로그인 과정을 거치지 않고 완료하며 tgz 파일을 생성합니다.
@@ -185,7 +185,7 @@ npm notice
 my-lib-0.0.1.tgz
 ```
 
-#### package.json 에 자동화 코드 설정
+### package.json 에 자동화 코드 설정
 
 쉬운 빌드 -> package화를 위해 package.json에서 스크립트로 만들어두면 쉽습니다.
 
@@ -200,7 +200,7 @@ my-lib-0.0.1.tgz
 이제 npm package 명령을 내리면 한번에 빌드부터 package까지 진행되어 tgz 파일을 생성합니다.
 
 
-### 적용
+## 적용
 
 생성한 라이브러리를 사용하기 위해 적용하고자 하는 프로젝트에서 package를 install 해야 합니다.
 public 으로 생성한 경우 기존 npm 라이브러리와 마찬가지로 진행하고, 
@@ -217,7 +217,7 @@ npm install ./my-lib
 
 
 
-### 사용
+## 사용
 
 이제 프로젝트에서 라이브러리를 사용할 수 있습니다.
 
@@ -240,7 +240,7 @@ export class AppModule { }
 ```
 
 
-### 유의점
+## 유의점
 
 기존 앱 프로젝트에 함께 라이브러리 프로젝트를 생성할 수 없습니다. 반드시 별도의 프로젝트로 생성하여야 합니다.
 
