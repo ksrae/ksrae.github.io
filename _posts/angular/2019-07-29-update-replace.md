@@ -53,6 +53,7 @@ db.collection.updateMany(
    }
 )
 ```
+
 update는 Update, One, Many 세 가지 함수가 있습니다.<br/>
 모두 데이터를 갱신하는 역할을 하며 update에만 multi 여부를 묻고 다른 함수는 multi 여부가 없습니다.<br/>
 즉, update는 multi의 true/false 여부에 따라 updateOne이나 updateMany 모두 구현 가능합니다.
@@ -64,6 +65,7 @@ update는 우리가 일반적으로 아는 DB의 update와 같습니다. <br/>
 
 
 예를 들어 봅시다.
+
 ```json
 {
 id: 12345,
@@ -114,6 +116,7 @@ replace는 replaceOne 밖에 없습니다. 즉, 여러 데이터를 한번에 re
 <br/>
 
 예를 들어 설명해보면,<br/>
+
 ```json
 {
 id: 12345,
