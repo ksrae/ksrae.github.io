@@ -58,14 +58,12 @@ update는 Update, One, Many 세 가지 함수가 있습니다.<br/>
 모두 데이터를 갱신하는 역할을 하며 update에만 multi 여부를 묻고 다른 함수는 multi 여부가 없습니다.<br/>
 즉, update는 multi의 true/false 여부에 따라 updateOne이나 updateMany 모두 구현 가능합니다.
 
-<p>
 update는 우리가 일반적으로 아는 DB의 update와 같습니다. <br/>
 존재하는 데이터의 항목의 값을 변경하는 것입니다.<br/>
-여기에 만일 존재하지 않으면 추가하는 항목인 upsert 와 filter 등의 옵션도 제공하고 있습니다.
+여기에 만일 존재하지 않으면 추가하는 항목인 upsert 와 filter 등의 옵션도 제공하고 있습니다.<br/>
 
 
 예를 들어 봅시다.
-
 
 ```json
 {
@@ -76,16 +74,14 @@ age: 1
 ```
 
 
+ 
 위의 데이터에서 age를 10살로 갱신(update)하려면, {$set}을 사용해야 합니다.
-
 
 ```
 db.collection.update( {id: 12345}, {$set: {age: 10}}, {multi: false})
 ```
 
-
 id:12345의 age를 10으로 set 하게 됩니다.
-
 
 ```json
 {
@@ -118,7 +114,7 @@ db.collection.replaceOne(
 replace는 replaceOne 밖에 없습니다. 즉, 여러 데이터를 한번에 replace 할 수는 없다는 점이 update하고 다른 점입니다.
 <br/>
 또 하나의 다른 점은 데이터를 완전히 변경한다는 점입니다. 즉, update는 해당 필드만 수정하는데에 반해 replaceOne은 해당 필드로 데이터를 완전히 바꾸어 버립니다. 
-
+<br/>
 
 예를 들어 설명해보면,
 
