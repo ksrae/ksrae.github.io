@@ -13,6 +13,12 @@ date: 2019-07-03 12:20:00 +0900
 
 ## 1. 적용
 ngx-translate를 활용하는 방법 입니다.
+
+우선 ngx-translate/core를 설치합니다.
+```
+npm install @ngx-translate/core --save
+
+```
     
 
 ## 2. 코드
@@ -45,6 +51,12 @@ export class AppModule { }
 aot기법으로 언어값을 호출할 수 있습니다. 
 위의 app.module.ts 를 확장하여 재작성하면 아래와 같습니다.
 기본적으로는 유사하나 forRoot의 옵션 일부와 HttpLoader를 통한 파일 로드 과정이 추가됩니다.
+
+이 때는 http-loader를 설치해야 합니다.
+
+```
+npm install @ngx-translate/http-loader --save
+```
 
 ##### app.module.ts
 
