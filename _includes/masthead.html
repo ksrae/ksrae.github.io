@@ -13,27 +13,27 @@
         {% endunless %}
         <a class="site-title" href="{{ '/' | relative_url }}">{{ site.masthead_title | default: site.title }}</a>
         <ul class="visible-links">
-            {% for category in site.categories %}
-            <li>
-            <a href="{{ root_url }}/{{ site.category_dir }}/{{ category | first }}"
-              class="sidebar-nav-item pl-3rem">
-                      <span class="name">
-                        {{ category | first }}
-                      </span>
-            <span class="badge">{{ category | last | size }}</span>
-            </a>
-          </li>
-            {% endfor %}
-
           {%- for link in site.data.navigation.main -%}
             {%- if link.url contains '://' -%}
               {%- assign url = link.url -%}
             {%- else -%}
               {%- assign url = link.url | relative_url -%}
             {%- endif -%}
+
+            {%- if !link.isMenu -%}
             <li class="masthead__menu-item">
               <a href="{{ url }}" {% if link.description %}title="{{ link.description }}"{% endif %}>{{ link.title }}</a>
             </li>
+            {%- endif -%}
+            {%- if link.isMenu -%}
+            <li class="masthead__menu-item">
+              <ul>
+                <li>
+                    <a href="{{ url }}" {% if link.description %}title="{{ link.description }}"{% endif %}>{{ link.title }}</a>
+                </li>
+              </ul>              
+            </li>
+            {%- endif -%}
           {%- endfor -%}
         </ul>
         {% if site.search == true %}
