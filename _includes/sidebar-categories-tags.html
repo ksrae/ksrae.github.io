@@ -18,10 +18,7 @@
 </div>
 	
 <div>
-	<div class="sidebar-nav-item" style="cursor:pointer">
-		<span class="name">Tags</span>
-		<span class="more" onclick="location.href='/tag-list'">more</span>
-	</div>
+	<div class="sidebar-nav-item" onclick="location.href='/tag-list'" style="cursor:pointer">Tags</div>
 	<div class="tags-cloud">
 	<div>
 		{% assign first = site.tags.first %}
@@ -59,6 +56,7 @@
 		{% endif %}
 		<a href="{{ root_url }}/{{ site.tag_dir }}/{{ tag[0] }}" style="font-size: {{ size }}pt; color: #{{ 9 | minus: color }}{{ 9 | minus: color }}{{ 9 | minus: color }};">{{ tag[0] }}</a>
 		{% endfor %}
+		<span>...</span>
 	</div>
 	</div>
 </div>

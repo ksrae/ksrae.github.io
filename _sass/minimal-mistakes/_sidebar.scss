@@ -316,14 +316,9 @@
   }
 }
 
-.sidebar-nav-item {
-  &.name {
-    float:left;
-  }
-  &.more {
-    float:right;
-  }
-}
 .tags-cloud {
-  height:500px;
+  > div {
+    height:250px;
+    overflow-y:auto;
+  }
 }
