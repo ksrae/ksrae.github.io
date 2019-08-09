@@ -18,7 +18,10 @@
 </div>
 	
 <div>
-	<div class="sidebar-nav-item" onclick="location.href='/tag-list'" style="cursor:pointer">Tags</div>
+	<div class="sidebar-nav-item" style="cursor:pointer">
+		<span class="name">Tags</span>
+		<span class="more" onclick="location.href='/tag-list'">more</span>
+	</div>
 	<div class="tags-cloud">
 	<div>
 		{% assign first = site.tags.first %}
