@@ -87,6 +87,25 @@
   }
 }
 
+.masthead__menu-item{
+   &.menu-list{
+      > a{
+         &:hover{
+            ~ ul{
+               max-height:200px;
+               opacity:1;
+            }
+         }
+      }
+      > ul{
+         height:0;
+         opacity:0;
+         transition:height 0.3s ease-out, opacity 0.3s ease-out;
+      }
+   }
+}
+
+/*
 .masthead__menu-item.menu-list:hover div {
   z-index:1000;
   display:flex;
@@ -96,3 +115,4 @@
   min-height:64px;
   outline:0;
 }
+*/
