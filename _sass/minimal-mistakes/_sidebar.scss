@@ -319,12 +319,14 @@
 .tags-cloud {
   > div {
     height:250px;
-    overflow-y:auto;
+    overflow-y:hidden;
 
   }
   > .tags-more {
     cursor:pointer;
     font-size:14px;
     font-weight:400;
+    display:block;
+    text-align:right;
   }
 }
