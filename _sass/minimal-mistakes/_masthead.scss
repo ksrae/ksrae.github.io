@@ -114,10 +114,19 @@
             font-size:18px;
             font-weight:400;
             padding:5px;
+
+            span {
+              &.name {
+                float:left;
+                text-align:left;
+              }
+              &.badge {
+                float:right;
+                text-align:right;
+              }
+            }
          }
-         span {
-           text-align: justify;
-         }
+
       }
 
    }
