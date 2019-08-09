@@ -20,12 +20,12 @@
               {%- assign url = link.url | relative_url -%}
             {%- endif -%}
 
-            {%- if !link.isMenu -%}
+            {%- if link.isMenu == false -%}
             <li class="masthead__menu-item">
               <a href="{{ url }}" {% if link.description %}title="{{ link.description }}"{% endif %}>{{ link.title }}</a>
             </li>
             {%- endif -%}
-            {%- if link.isMenu -%}
+            {%- if link.isMenu == true -%}
             <li class="masthead__menu-item">
               <ul>
                 <li>
