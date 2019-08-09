@@ -86,3 +86,13 @@
     font-weight: 700;
   }
 }
+
+.masthead__menu-item.menu-list:hover div {
+  z-index:1000;
+  display:flex;
+  max-width: 112px;
+  max-height: 280px;
+  overflow:auto;
+  min-height:64px;
+  outline:0;
+}

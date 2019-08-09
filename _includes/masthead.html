@@ -26,12 +26,10 @@
             </li>
             {%- endif -%}
             {%- if link.isMenu == true -%}
-            <li class="masthead__menu-item">
-              <ul>
-                <li>
-                    <a href="{{ url }}" {% if link.description %}title="{{ link.description }}"{% endif %}>{{ link.title }}</a>
-                </li>
-              </ul>              
+            <li class="masthead__menu-item menu-list">
+              <div>
+                <a href="{{ url }}" {% if link.description %}title="{{ link.description }}"{% endif %}>{{ link.title }}</a>
+              </div>
             </li>
             {%- endif -%}
           {%- endfor -%}
