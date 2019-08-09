@@ -56,7 +56,7 @@
 		{% endif %}
 		<a href="{{ root_url }}/{{ site.tag_dir }}/{{ tag[0] }}" style="font-size: {{ size }}pt; color: #{{ 9 | minus: color }}{{ 9 | minus: color }}{{ 9 | minus: color }};">{{ tag[0] }}</a>
 		{% endfor %}
-		<span>...</span>
 	</div>
+	<span onclick="location.href='/tag-list'">more...</span>
 	</div>
 </div>
