@@ -89,18 +89,20 @@
 
 .masthead__menu-item{
    &.menu-list{
-      > a{
-         &:hover{
-            ~ ul{
-               max-height:200px;
-               opacity:1;
-            }
-         }
-      }
+     position:relative;
+     &:hover{
+        > ul{
+           max-height:200px;
+           visibility: visible;
+           opacity: 1;
+        }
+     }
       > ul{
-         height:0;
+         position:absolute;
+         max-height:0;
          opacity:0;
-         transition:height 0.3s ease-out, opacity 0.3s ease-out;
+         visibility: hidden;
+         transition:all 0.3s ease-out;
       }
    }
 }
