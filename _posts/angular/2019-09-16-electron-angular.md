@@ -7,7 +7,7 @@ tags: [electron, error]
 ---
 
 
-- electron 설치
+## electron 설치
 electron을 npm에서 간단히 받아 설치할 수 있습니다.
 
 ```
@@ -15,14 +15,14 @@ npm i electron@latest
 ```
 
 
-- angular 프로젝트 빌드
+## angular 프로젝트 빌드
 angular project를 electron에서 실행하려면 우선 프로젝트를 빌드하여 dist 폴더를 생성합니다.
 
 ```
 ng build
 ```
 
-- main.js 생성
+## main.js 생성
 electron은 js 파일을 수행하여 html을 load하는 방식이므로 js 파일을 생성하여야 합니다.
 아래와 같이 main.js 파일을 생성합니다.
 
@@ -62,7 +62,7 @@ app.on('activate', function () {
 
 ```
 
-- 프로젝트 load
+## 프로젝트 load
 
 angular 프로젝트를 local이나 서버에 올린 뒤 주소를 electron에서 로드하거나 파일을 직접 로드할 수 있습니다.
 loadURL에서 이를 설정할 수 있습니다. 만일 파일인 경우 정확한 경로와 실행할 html 파일을 설정하여야 합니다.
@@ -84,7 +84,7 @@ loadURL에서 이를 설정할 수 있습니다. 만일 파일인 경우 정확�
 ```
 
 
-- package.json 수정
+## package.json 수정
 
 package.json을 설정을 수정하여 쉬운 실행을 설정합니다.
 
@@ -102,7 +102,7 @@ angular 빌드와 electron을 한번에 실행하기 위한 start:electron과 el
 이제 스크립트를 실행하면 앱으로 실행되는 것을 확인할 수 있습니다.
 
 
-- 에러 해결
+## 에러 해결
 
 > 위의 설정대로 진행하였어도 실행 안되면 빌드 후 생성된 index.html에서 두 가지를 확인하시기 바랍니다.
 > 1) base href 가 "./" 으로 되어 있는가? 
@@ -113,6 +113,7 @@ angular 빌드와 electron을 한번에 실행하기 위한 start:electron과 el
 
 
 
-- 참고 사이트
+## 참고 사이트
+
 https://www.sitepoint.com/build-a-desktop-application-with-electron-and-angular/
 [Build Angular Desktop Apps With Electron \| AngularFirebase](https://angularfirebase.com/lessons/desktop-apps-with-electron-and-angular/)
