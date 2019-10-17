@@ -19,71 +19,72 @@ Angular에서 기본으로 제공하는 구조는 하나의 폴더에 한 페이
 
 ## 의문
 
-이대로 구성하여 실제 업무에 적용해보면 불편한 점들이 많습니다.
-특히, 세분화된 팀의 경우 더욱 그렇습니다.
-예를 들어, 퍼블리셔/프론트 또는 그 이상으로 세분화된 경우는 더욱 그렇습니다.
-하나의 폴더에 여러명이 접근하다보니 불필요한 파일을 봐야 하는 불편함이 있습니다.
+이대로 구성하여 실제 업무에 적용해보면 불편한 점들이 많습니다.<br>
+특히, 세분화된 팀의 경우 더욱 그렇습니다.<br>
+예를 들어, 퍼블리셔/프론트 또는 그 이상으로 세분화된 경우는 더욱 그렇습니다.<br>
+하나의 폴더에 여러명이 접근하다보니 불필요한 파일을 봐야 하는 불편함이 있습니다.<br>
 
-다시 말해서 퍼블리셔의 경우 css 파일과 html 파일을 주로 접근하지만 component, module은 접근하지 않습니다.
-프론트 개발자의 경우는 그 반대로 component, module, 그리고 종종 html 파일에 접근하지만 css 파일은 접근하지 않습니다.
-
-service의 경우 여러 component에서 접근할 수 있는데 이 때는 어느 폴더에 넣어야 할지 난감합니다.
-
-따라서 실제 업무에 유용한 폴더 구조를 구성할 방법을 구상하였고, 그 결과 현재는 다음과 같은 구조를 기본으로 협업에 활용하고 있습니다.
+다시 말해서 퍼블리셔의 경우 css 파일과 html 파일을 주로 접근하지만 component, module은 접근하지 않습니다.<br>
+프론트 개발자의 경우는 그 반대로 component, module, 그리고 종종 html 파일에 접근하지만 css 파일은 접근하지 않습니다.<br>
+<br>
+service의 경우 여러 component에서 접근할 수 있는데 이 때는 어느 폴더에 넣어야 할지 난감합니다.<br>
+<br>
+따라서 실제 업무에 유용한 폴더 구조를 구성할 방법을 구상하였고, 그 결과 현재는 다음과 같은 구조를 기본으로 협업에 활용하고 있습니다.<br>
 
 
 
 ## 변경
 
-폴더 구조를 변경할 때 아래와 같은 사항을 고려하였습니다.
-> 필요없는 파일에 접근할 필요 없게 하자
-> 가능한 depth를 줄이자
-> 각 파일의 특징과 기능별로 묶자
+폴더 구조를 변경할 때 아래와 같은 사항을 고려하였습니다.<br>
 
-
-구성한 폴더 구조는 아래 그림과 같습니다.
+> 필요없는 파일에 접근할 필요 없게 하자<br>
+> 가능한 depth를 줄이자<br>
+> 각 파일의 특징과 기능별로 묶자<br>
+<br>
+<br>
+구성한 폴더 구조는 아래 그림과 같습니다.<br>
 
 ![folder structure modification-2.PNG](/assets/img/angular/folder structure modification-2.PNG)
 
 
 > component
->> component 파일만 모읍니다. 확장자를 .component.ts로 구성합니다.
+> - component 파일만 모읍니다. 확장자를 .component.ts로 구성합니다.
 
 > declarations
->> d.ts 파일 모음입니다.
+> - d.ts 파일 모음입니다.
 
 > directives
->> directive 파일 모음 입니다.
+> - directive 파일 모음 입니다.
 
 > guards
->> guard 파일 모음입니다.
+> - guard 파일 모음입니다.
 
 > helpers
->> service에서 inject하는 service를 helper라고 명명하고 여기에 담습니다.
+> - service에서 inject하는 service를 helper라고 명명하고 여기에 담습니다.
 
 > interfaces
->> interface 파일 모음 입니다.
+> - interface 파일 모음 입니다.
 
 > modules
->> module 파일 모음입니다.
+> - module 파일 모음입니다.
 
 > pipes
->> pipe 파일 모음입니다.
+> - pipe 파일 모음입니다.
 
 > services
->> component에서 inject하는 service 파일 모음입니다.
+> - component에서 inject하는 service 파일 모음입니다.
 
 > styles
->> css 파일 모음입니다.
+> - css 파일 모음입니다.
 
 > templates
->> html 파일 모음입니다.
+> - html 파일 모음입니다.
 
 
 #### 주의할 점
 
-component / module / style / template 은 접근하기 쉬워야 하고 개발자들 간의 쉬운 소통을 위해 같은 폴더 구조를 갖습니다.
-그러기 위해 같은 페이지에 들어갈 파일은 모두 같은 폴더 구조 내에 넣어야 합니다.
+component / module / style / template 은 접근하기 쉬워야 하고 개발자들 간의 쉬운 소통을 위해 같은 폴더 구조를 갖습니다.<br>
+그러기 위해 같은 페이지에 들어갈 파일은 모두 같은 폴더 구조 내에 넣어야 합니다.<br>
 
 ![folder structure modification-3.PNG](/assets/img/angular/folder structure modification-3.PNG)
 
@@ -92,18 +93,21 @@ component / module / style / template 은 접근하기 쉬워야 하고 개발�
 
 ## 결론
 
-위와 같이 구성하는 경우 아래와 같은 장점이 있습니다.
+위와 같이 구성하는 경우 아래와 같은 장점이 있습니다.<br>
+<br>
 
-- 참고할 필요 없는 파일은 접근할 필요가 없어서 집중도가 높습니다.
-- 기능별로 구분하였기 때문에 유사한 파일의 참고가 쉽습니다.
-- 폴더 depth가 얕으므로 파일 접근이 쉽습니다.
+- 참고할 필요 없는 파일은 접근할 필요가 없어서 집중도가 높습니다.<br>
+- 기능별로 구분하였기 때문에 유사한 파일의 참고가 쉽습니다.<br>
+- 폴더 depth가 얕으므로 파일 접근이 쉽습니다.<br>
 
-물론 단점도 있습니다.
+<br>
+물론 단점도 있습니다.<br>
+<br>
 
-- 유사한 폴더를 여기저기 만들어야 하므로 전체적인 폴더 숫자가 많습니다.
-- component / module / style / template 같은 폴더 구조를 유지하여야 하므로 폴더 관리자가 필요합니다.
-
-
-단점이 있지만 협업에 큰 장점이 있으므로 위와 같은 구조를 추천 드립니다.
-
+- 유사한 폴더를 여기저기 만들어야 하므로 전체적인 폴더 숫자가 많습니다.<br>
+- component / module / style / template 같은 폴더 구조를 유지하여야 하므로 폴더 관리자가 필요합니다.<br>
+<br>
+<br>
+단점이 있지만 협업에 큰 장점이 있으므로 위와 같은 구조를 추천 드립니다.<br>
+<br>
 끝.
