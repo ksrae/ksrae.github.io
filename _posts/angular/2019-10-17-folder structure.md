@@ -1,6 +1,6 @@
 ---
 title: "folder structure modification"
-date: 2019-10-17 12:19:00 +0900
+date: 2019-10-17 12:23:00 +0900
 comments: true
 categories: angular
 tags: []

@@ -1,6 +1,6 @@
 ---
 title: "transfer data js to angular"
-date: 2019-09-16 10:19:00 +0900
+date: 2019-09-27 12:01:00 +0900
 comments: true
 categories: angular
 tags: [storage, window]
