@@ -9,6 +9,7 @@ tags: [input, ngonchange, subject, observable]
 @Input이 데이터를 전달하지 못하는 원인을 분석합니다.<br>
 
 
+
 ## 상황
 
 페이지를 유지한 상태(route 하지 않은 상태)에서 데이터를 업데이트할 때 @Input으로 전달한 child나 directive가 동작하지 않는 상태.<br>

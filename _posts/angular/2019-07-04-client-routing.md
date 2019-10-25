@@ -8,6 +8,8 @@ tags: [routing]
 
 서버와 클라이언트에서 구성하는 라우팅의 비교 입니다.
 
+
+
 ## 차이점
 - Server-side: Server에서 Routing하기 때문에 해당 페이지에 직접 접근 하는 방식.
 - Client-side: Client 내부에서 Routing 하기 때문에 해당 페이지를 호출 시 root 부터 해당 페이지까지 차례로 로딩.

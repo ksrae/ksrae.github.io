@@ -8,6 +8,9 @@ tags: [module]
 
 중복 사용되는 모듈을 Shared Module로 공유하는 방법 입니다.<br>
 
+
+
+
 ## 1. component를 여러 module에서 사용할 때
 
   - 다른 module에서 선언한 component를 또 다른 module에서 중복 선언하면 에러가 발생합니다.

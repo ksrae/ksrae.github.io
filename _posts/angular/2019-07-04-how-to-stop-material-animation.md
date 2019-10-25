@@ -10,6 +10,7 @@ tags: [material, animation]
 Angular Material에 기본적으로 적용된 모든 애니메이션이나 <br>특정 Material의 애니메이션만 중지하고 싶을 때, 컨트롤 하는 방법입니다.<br>
 
 
+
 ## 해결
 
 여러 사이트를 많이 참고하였는데 해결 방법은 의외로 쉬웠습니다.<br>

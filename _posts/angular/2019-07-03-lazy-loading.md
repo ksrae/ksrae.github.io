@@ -8,6 +8,8 @@ tags: [routing]
 
 Module 또는 Component 단위로 Lazy Loading 하는 방법을 정리합니다. <br>
 
+
+
 ## 1. Lazy Loading
 
 SPA의 특성상 모든 파일이 로드 되어야 서버의 호출 없이 다음 페이지로의 전환이 이루어 지는데<br>이를 Lazy Loading으로 처리하여 초기 로딩을 분산하는 방법입니다.<br><br>
