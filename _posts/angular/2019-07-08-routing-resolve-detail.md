@@ -8,8 +8,8 @@ tags: [routing, resolve, component]
 
 
 
-component가 onInit 에서 service에서 가져온 값을 template에 적용할 때 template에서 에러가 발생합니다.
-이는 변수에 값이 할당되기 전에 template에서 변수를 읽으려고 시도하기 때문인데 이를 해결하려면 nullable을 허용하는 ? 를 넣어 해결하는 방법을 사용할 수 있습니다.
+component가 onInit 에서 service에서 가져온 값을 template에 적용할 때 template에서 에러가 발생합니다. <br>
+이는 변수에 값이 할당되기 전에 template에서 변수를 읽으려고 시도하기 때문인데 <br>이를 해결하려면 nullable을 허용하는 ? 를 넣어 해결하는 방법을 사용할 수 있습니다.<br>
 
 ```html
 {% raw %}
@@ -35,8 +35,8 @@ export PageResolve implments Resolve<Observable<any>> {
 }
 ```
 
-위에서 보다시피 resolve는 Observable<any>|Promise<any>|any 세 가지 중 하나를 리턴해야 합니다.
-이 리턴 값을 route에 json 형태로 설정하며, 설정된 key값을 사용해서 component가 값을 가져가게 됩니다.
+위에서 보다시피 resolve는 Observable<any>|Promise<any>|any 세 가지 중 하나를 리턴해야 합니다.<br>
+이 리턴 값을 route에 json 형태로 설정하며, 설정된 key값을 사용해서 component가 값을 가져가게 됩니다.<br>
 
 
 ```ts

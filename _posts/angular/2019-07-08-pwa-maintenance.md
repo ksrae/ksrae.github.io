@@ -8,6 +8,11 @@ tags: [pwa, maintenance, offline]
 
 
 
+PWA를 활용하여 점검 또는 오프라인 공지를 만드는 방법입니다.
+
+
+
+
 ## 목적
   - 쉽게 점검 표시를 하기 위한 방법을 PWA에 적용하기
   - offline일 때 앱은 살아 있되 사용자가 offline임을 인지할 수 있도록 함
@@ -133,10 +138,10 @@ export function getConfig(config: AppService) {
 
 ## 응용
 
-이제 점검 중일 때는 maintenance.json의 "maintenance" 값을 true로 수정한 뒤 이 파일만 배포하면 되며, 
-offline일 시 오프라인임을 알려주거나 네트워크 점검이 필요하다는 안내문구를 넣을 수 있습니다.
+이제 점검 중일 때는 maintenance.json의 "maintenance" 값을 true로 수정한 뒤 이 파일만 배포하면 되며, <br>
+offline일 시 오프라인임을 알려주거나 네트워크 점검이 필요하다는 안내문구를 넣을 수 있습니다.<br><br>
 
-"maintenance"에 시간 값을 추가하여 client에서 해당 시간 범위만큼일 때만 maintenance의 값을 처리하게 할 수도 있을 것 입니다.
+"maintenance"에 시간 값을 추가하여 client에서 해당 시간 범위만큼일 때만 maintenance의 값을 처리하게 할 수도 있을 것 입니다.<br>
 
 
 

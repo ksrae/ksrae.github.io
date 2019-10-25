@@ -7,6 +7,12 @@ tags: [rxjs, subscribe]
 ---
 
 
+
+rxjs에서 subscribe에서 사용하는 명령들을 정리하였습니다.
+
+
+
+
 ## take(n)
 > n번 subscribe 후 해제
 
