@@ -8,15 +8,15 @@ tags: [routing, lazyloading]
 
 
 
-Angular의 Routing Lazy Loading 방법이 변경되었습니다.
+Angular의 Routing Lazy Loading 방법이 변경되었습니다.<br><br>
 
-이는 Ivy가 적용 및 동적 import 방식을 적용하기 위함이며, 기존 방식도 여전히 유효하나 앞으로 새로운 방식을 유지할 것으로 보입니다.
+이는 Ivy에 동적 import 방식을 적용하기 위함이며, 기존 방식도 여전히 유효하나 앞으로 새로운 방식을 유지할 것으로 보입니다.<br>
 
 
 ## 변경 사항
 
-기존 lazy loading 방식은 텍스트로 해당 모듈까지의 경로 및 모듈명까지 입력하는 방식이므로 사실 보기 좋은 방식은 아니었습니다. 
-새로 바뀐 방식에서는 모듈의 링크를 import에 기입하고 promise로 해당 모듈을 호출하는 방식입니다.
+기존 lazy loading 방식은 텍스트로 해당 모듈까지의 경로 및 모듈명까지 입력하는 방식이므로 사실 보기 좋은 방식은 아니었습니다. <br><br>
+새로 바뀐 방식에서는 모듈의 링크를 import에 기입하고 promise로 해당 모듈을 호출하는 방식입니다.<br>
 
 
 ```ts
@@ -27,7 +27,7 @@ Angular의 Routing Lazy Loading 방법이 변경되었습니다.
 { path: 'about', loadChildren: () => import('../about/about.module').then(m => m.AboutModule), data: {preload: true} },
 ```
 
-Lazy Loading이 아닌 기존 Routing 은 그대로 유지 되며, Ivy를 적용하지 않는 경우 어느 방식을 사용하여도 관계 없습니다.
+Lazy Loading이 아닌 기존 Routing 은 그대로 유지 되며, Ivy를 적용하지 않는 경우 어느 방식을 사용하여도 관계 없습니다.<br><br>
 
 참고로 8.1 버전에서는 변경된 방식을 사용하여도 빌드시 Ivy에서 에러가 발생합니다.
 

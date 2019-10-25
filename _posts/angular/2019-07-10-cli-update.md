@@ -8,15 +8,17 @@ tags: [update]
 
 
 
-버전 업데이트 과정을 설명합니다. 여기에서는 7버전에서 8버전 업데이트를 설명합니다. 모든 버전 업데이트의 방식이 동일하므로 다른 버전도 아래와 같이 진행하면 됩니다.
+버전 업데이트 과정을 설명합니다. 여기에서는 7버전에서 8버전 업데이트를 설명합니다. <br>모든 버전 업데이트의 방식이 동일하므로 다른 버전도 아래와 같이 진행하면 됩니다.<br><br>
 
-업데이트 중 WARN 또는 Error가 발생하여 찾아오신 경우 [Error-Fix 페이지에서 확인하시기 바랍니다.](https://ksrae.github.io/angular/error-fix)
+업데이트 중 WARN 또는 Error가 발생하여 찾아오신 경우 [Error-Fix 페이지에서 확인하시기 바랍니다.](https://ksrae.github.io/angular/error-fix) <br>
+
+
 
 
 ## 업데이트 확인
 > ng update
 
-업데이트가 필요한지 확인할 수 있습니다. 만일 업데이트가 필요하면 아래와 같이 업데이트 목록이 표시됩니다.
+업데이트가 필요한지 확인할 수 있습니다. 만일 업데이트가 필요하면 아래와 같이 업데이트 목록이 표시됩니다.<br>
 
 ```
     We analyzed your package.json, there are some packages to update:
@@ -98,4 +100,5 @@ found 1 low severity vulnerability
 
 
 ## Warning / Error fix
+
 업데이트 중 WARN 또는 Error가 발생한 경우 [Error-Fix 페이지에서 확인하실 수 있습니다.](https://ksrae.github.io/angular/error-fix)
