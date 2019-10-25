@@ -17,7 +17,9 @@ route에서 canActivate와 canDeactivate, canActivateChild, canLoad 옵션처리
 
 <br>
 
--- router에서 로그인 인증하고 로그인 유저가 아니면 페이지 강제 이동하는 방법
+### 참고 사이트
+
+router에서 로그인 인증하고 로그인 유저가 아니면 페이지 강제 이동하는 방법
 [angular - Redirect to a different component inside @CanActivate in Angular2 - Stack Overflow](https://stackoverflow.com/questions/34711889/redirect-to-a-different-component-inside-canactivate-in-angular2)
 
 <br>
@@ -25,7 +27,6 @@ route에서 canActivate와 canDeactivate, canActivateChild, canLoad 옵션처리
 canActivate와 canActivateChild
 [Routing Angular Applications: CanActivate and CanActivateChild ― Scotch](https://scotch.io/courses/routing-angular-2-applications/canactivate-and-canactivatechild)
 
-<br>
 <br>
 <br>
 여러 기능을 모아서 하나의 guard에 구성해도 관계없으나 필요한 기능마다 별도의 guard를 만들어 두는게 가드의 목적을 명확히 할 수 있습니다.<br><br>
