@@ -10,8 +10,8 @@ Module 또는 Component 단위로 Lazy Loading 하는 방법을 정리합니다.
 
 ## 1. Lazy Loading
 
-SPA의 특성상 모든 파일이 로드 되어야 서버의 호출 없이 다음 페이지로의 전환이 이루어 지는데 이를 Lazy Loading으로 처리하여 초기 로딩을 분산하는 방법입니다.<br><br>
-기존 로딩 방식과 다른 점은 모듈 로드 시 해당 모듈의 경로만 지정하는 점이 다르며, 부모가 자식 모듈을 호출하지 않는다는 점입니다.<br>
+SPA의 특성상 모든 파일이 로드 되어야 서버의 호출 없이 다음 페이지로의 전환이 이루어 지는데<br>이를 Lazy Loading으로 처리하여 초기 로딩을 분산하는 방법입니다.<br><br>
+기존 로딩 방식과 다른 점은 모듈 로드 시 해당 모듈의 경로만 지정하는 점이 다르며,<br>부모가 자식 모듈을 호출하지 않는다는 점입니다.<br>
 <br>
 
 ## 2. 장단점
@@ -135,9 +135,9 @@ const materialRoutes: Routes = [
 
 ### 3.2. component를 ngIf로 호출하여 Lazy Loading 구현
 
-ngIf가 false 인 경우 브라우저가 해당 dom을 로드하지 않으므로 dom을 구성하는데 필요한 관련 데이터도 로드하지 않는 방법을 이용하는 것입니다.<br><br>
-ngIf가 true가 되었을 때 비로소 해당 dom의 모든 데이터를 로드하므로, module의 Lazy Loading 방식과 동일한 효과를 볼 수 있습니다.<br><br>
-component와 dom의 하나하나까지 세분화하여 관리할 수 있는 장점이 있으나 dom의 enable을 직접 컨트롤 해야하는 유의점이 생깁니다.<br><br>
+ngIf가 false 인 경우 브라우저가 해당 dom을 로드하지 않으므로 <br>dom을 구성하는데 필요한 관련 데이터도 로드하지 않는 방법을 이용하는 것입니다.<br><br>
+ngIf가 true가 되었을 때 비로소 해당 dom의 모든 데이터를 로드하므로, <br>module의 Lazy Loading 방식과 동일한 효과를 볼 수 있습니다.<br><br>
+component와 dom의 하나하나까지 세분화하여 관리할 수 있는 장점이 있으나 <br>dom의 enable을 직접 컨트롤 해야하는 유의점이 생깁니다.<br><br>
 
 ```html 
 <!-- <main.html> -->
@@ -174,4 +174,4 @@ export class MaterialComponent implements OnInit {
 
 ## 4. 주의사항
 
-Lazy Loading을 Routing으로 구현하는 경우 BrowserModule은 최상위 Module만 사용해야 하며 하위 Module에서는 같은 기능을 사용하기 위해 CommonModule을 import 해야 합니다.<br>
+Lazy Loading을 Routing으로 구현하는 경우 BrowserModule은 최상위 Module만 사용해야 하며 <br>하위 Module에서는 같은 기능을 사용하기 위해 CommonModule을 import 해야 합니다.<br>
