@@ -1,6 +1,5 @@
 ---
-title: "folder structure modification"
-subtitle: "폴더 구조 변경"
+title: "폴더 구조 변경 (Folder Structure Modification)"
 date: 2019-10-17 12:23:00 +0900
 comments: true
 categories: angular
