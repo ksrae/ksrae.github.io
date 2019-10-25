@@ -12,13 +12,12 @@ date: 2019-07-03 12:20:00 +0900
 
 ## 1. 적용
 
-ngx-translate를 활용하는 방법 입니다.<br><br>
+ngx-translate를 활용하는 방법 입니다.<br>
 
 우선 ngx-translate/core를 설치합니다.<br>
 
 ```
 npm install @ngx-translate/core --save
-
 ```
     
 
@@ -28,7 +27,7 @@ npm install @ngx-translate/core --save
 
 ##### app.module.ts
 
-최상위 모듈에 TranslateModue.forRoot()를 import 합니다.<br><br>
+최상위 모듈에 TranslateModue.forRoot()를 import 합니다.<br>
 하위 모듈에는 .forChild()를 import 합니다.<br>
 
 ```ts
@@ -51,7 +50,7 @@ export class AppModule { }
 
 aot기법으로 언어값을 호출할 수 있습니다. <br>
 위의 app.module.ts 를 확장하여 재작성하면 아래와 같습니다.<br>
-기본적으로는 유사하나 forRoot의 옵션 일부와 HttpLoader를 통한 파일 로드 과정이 추가됩니다.<br><br>
+기본적으로는 유사하나 forRoot의 옵션 일부와 HttpLoader를 통한 파일 로드 과정이 추가됩니다.<br>
 
 이 때는 http-loader를 설치해야 합니다.<br>
 
@@ -156,7 +155,6 @@ export class LanguageService {
 interface에서 정의한 값대로 json 파일을 생성합니다.<br>
 > 예) ko.json, en.json 또는 ko-kr.json, en-us.json
 
-<br>
 생성한 파일에 "key": "해당 언어값" 과 같이 json을 구성합니다.<br>
 만일 ko-kr.json 파일을 생성한다면 아래와 같이 만들어 줍니다.<br>
 
@@ -220,7 +218,7 @@ translate을 사용할 경우 하위 태그가 만들어지지 않는다는 점�
 {% endraw %}
 ```
 
-위의 예시의 경우 span 태그가 무시되어 버립니다.<br><br>
+위의 예시의 경우 span 태그가 무시되어 버립니다.<br>
 
 해결 방법은 하위 태그가 필요한 경우 같은 레벨로 만들어주는 것입니다.<br>
 
@@ -232,6 +230,6 @@ translate을 사용할 경우 하위 태그가 만들어지지 않는다는 점�
 
 
 
-이 외에도 TranslateService에는 다양한 함수가 존재하니 다음 시간에 보다 자세히 다루어 보도록 하겠습니다.<br><br>
+이 외에도 TranslateService에는 다양한 함수가 존재하니 다음 시간에 보다 자세히 다루어 보도록 하겠습니다.<br>
 
-참고: https://github.com/ngx-translate/core
+참고: [ngx-translate 사이트](https://github.com/ngx-translate/core)
