@@ -49,17 +49,17 @@ service의 경우 여러 component에서 접근할 수 있는데 이 때는 어�
 ![folder structure modification-2.PNG](/assets/img/angular/folder structure modification-2.PNG)
 
 
-> component: <i>component 파일만 모읍니다. 확장자를 .component.ts로 구성합니다.</i><br>
-> declarations: <i> d.ts 파일 모음입니다.</i><br>
-> directives: <i> directive 파일 모음 입니다.</i><br>
-> guards: <i>guard 파일 모음입니다.</i><br>
-> helpers: <i>service에서 inject하는 service를 helper라고 명명하고 여기에 담습니다.</i><br>
-> interfaces: <i>interface 파일 모음 입니다.</i><br>
-> modules: <i>module 파일 모음입니다.</i><br>
-> pipes: <i>pipe 파일 모음입니다.</i><br>
-> services: <i>component에서 inject하는 service 파일 모음입니다.</i><br>
-> styles: <i>css 파일 모음입니다.</i><br>
-> templates: <i>html 파일 모음입니다.</i><br>
+- component: <i>component 파일만 모읍니다. 확장자를 .component.ts로 구성합니다.</i><br>
+- declarations: <i> d.ts 파일 모음입니다.</i><br>
+- directives: <i> directive 파일 모음 입니다.</i><br>
+- guards: <i>guard 파일 모음입니다.</i><br>
+- helpers: <i>service에서 inject하는 service를 helper라고 명명하고 여기에 담습니다.</i><br>
+- interfaces: <i>interface 파일 모음 입니다.</i><br>
+- modules: <i>module 파일 모음입니다.</i><br>
+- pipes: <i>pipe 파일 모음입니다.</i><br>
+- services: <i>component에서 inject하는 service 파일 모음입니다.</i><br>
+- styles: <i>css 파일 모음입니다.</i><br>
+- templates: <i>html 파일 모음입니다.</i><br>
 
 
 #### 주의할 점
