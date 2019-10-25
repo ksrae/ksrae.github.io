@@ -90,11 +90,13 @@
     margin-bottom: 2em;
 
     @include breakpoint($large) {
-      width: 75%;
+      width: 80%;
+      /* width: 75%; */
     }
 
     @include breakpoint($x-large) {
-      width: 50%;
+      width: 80%;
+      /* width: 50%; */
     }
   }
 
