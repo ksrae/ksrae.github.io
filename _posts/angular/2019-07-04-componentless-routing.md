@@ -1,5 +1,5 @@
 ---
-title: "Componentless Routing"
+title: "컴포넌트 없이 라우팅 구성 (Componentless Routing)"
 date: 2019-07-04 11:59:00 +0900
 comments: true
 categories: angular

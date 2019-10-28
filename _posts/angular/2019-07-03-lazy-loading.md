@@ -1,5 +1,5 @@
 ---
-title: "Lazy Loading Lazy Loading Module and Component"
+title: "Lazy Loading Module and Component"
 date: 2019-07-01 15:00:00 +0900
 comments: true
 categories: angular

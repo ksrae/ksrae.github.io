@@ -7,16 +7,16 @@ tags: [library, package]
 ---
 
 
-자체 개발한 라이브러리를 마치 외부 라이브러리를 사용하는 것처럼 만들 수 있습니다.
+자체 개발한 라이브러리를 마치 외부 라이브러리를 사용하는 것처럼 만들 수 있습니다.<br><br>
 
-Angular6 부터 ng-packagr가 정식 지원 되어 쉽게 만을 수 있으니 
-자주 사용하는 기능은 라이브러리로 만들어두고 package화 해서 편리하게 재활용 하시기 바랍니다.
+Angular6 부터 ng-packagr가 정식 지원 되어 쉽게 만을 수 있으니 <br>
+자주 사용하는 기능은 라이브러리로 만들어두고 package화 해서 편리하게 재활용 하시기 바랍니다.<br>
 
 ## 생성
 
-cli를 활용하여 library를 생성합니다.
-유의할 점은 angular 프로젝트 내에서 진행해야 한다는 점입니다.
-즉, ng new 로 프로젝트를 생성한 뒤 아래의 command를 입력하여 library를 생성해야 함을 유의 하시기 바랍니다.
+cli를 활용하여 library를 생성합니다.<br>
+유의할 점은 angular 프로젝트 내에서 진행해야 한다는 점입니다.<br>
+즉, ng new 로 프로젝트를 생성한 뒤 아래의 command를 입력하여 library를 생성해야 함을 유의 하시기 바랍니다.<br>
 
 ```command
 ng generate library [library-name]
@@ -30,8 +30,8 @@ ng generate library [library-name]
 각 파일을 열어 생성된 라이브러리가 올바른지 확인합니다.
 
 ### angular.json
-생성한 프로젝트 명으로 검색해보면 설정이 생성되어 있습니다.
-여기에서 projectType이 "library" 인지 확인하여야 합니다.
+생성한 프로젝트 명으로 검색해보면 설정이 생성되어 있습니다.<br>
+여기에서 projectType이 "library" 인지 확인하여야 합니다.<br>
 
 ```json
 "my-lib": {
@@ -146,7 +146,7 @@ npm publish 로 public package를 만들 수 있습니다.
 npm publish
 ```
 
-이 때, npm에 로그인 되어있지 않으면 401 에러가 발생합니다.
+이 때, npm에 로그인 되어있지 않으면 401 에러가 발생합니다.<br><br>
 
 npm link 명령을 사용하면 빌드시 매번 라이브러리를 재설치 하는 과정을 피할 수 있습니다.
 
@@ -162,7 +162,7 @@ npm ERR! A complete log of this run can be found in:
 
 ### private package
 
-만일 public package로 만들기 원하지 않으시면 npm pack 명령을 사용하면 됩니다.
+만일 public package로 만들기 원하지 않으시면 npm pack 명령을 사용하면 됩니다.<br>
 실행하면 npm publish와 같이 동작하나 로그인 과정을 거치지 않고 완료하며 tgz 파일을 생성합니다.
 
 ```
@@ -202,9 +202,9 @@ my-lib-0.0.1.tgz
 
 ## 적용
 
-생성한 라이브러리를 사용하기 위해 적용하고자 하는 프로젝트에서 package를 install 해야 합니다.
-public 으로 생성한 경우 기존 npm 라이브러리와 마찬가지로 진행하고, 
-private 인 경우 먼저 tgz 파일을 해당 프로젝트로 옮겨야 합니다.
+생성한 라이브러리를 사용하기 위해 적용하고자 하는 프로젝트에서 package를 install 해야 합니다.<br>
+public 으로 생성한 경우 기존 npm 라이브러리와 마찬가지로 진행하고, <br>
+private 인 경우 먼저 tgz 파일을 해당 프로젝트로 옮겨야 합니다.<br><br>
 
 파일을 이동하였으면 tgz 파일을 public package와 마찬가지로 install 합니다.
 
@@ -242,7 +242,7 @@ export class AppModule { }
 
 ## 유의점
 
-기존 앱 프로젝트에 함께 라이브러리 프로젝트를 생성할 수 없습니다. 반드시 별도의 프로젝트로 생성하여야 합니다.
+기존 앱 프로젝트에 함께 라이브러리 프로젝트를 생성할 수 없습니다. 반드시 별도의 프로젝트로 생성하여야 합니다.<br><br>
 
 angular-cli v6.0.3 기준으로 아래의 문제가 있습니다. 버전에 따라 개선되거나 변경될 수 있으니 참고 하시기 바랍니다.
 - library 빌드 시 assets이 포함되지 않는 문제가 있습니다. assset 폴더를 직접 복사하도록 하고 있습니다.

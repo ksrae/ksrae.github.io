@@ -9,7 +9,7 @@ tags: [heroku, deploy]
 
 
  
- github에 업로드 된 Angular Universal 프로젝트를 Heroku에 업로드 하는 방법을 알아보겠습니다.
+ github에 업로드 된 Angular Universal 프로젝트를 Heroku에 업로드 하는 방법을 알아보겠습니다.<br><br>
 
 사실 업로드 방법이 어렵지 않으나 헤맨 부분의 설명이 명확히 없어서 정리해보려고 합니다.
 
@@ -51,7 +51,7 @@ web npm start ON
 ## package.json 수정
 
 
-무료 버전에서는 Dyno 수정이 어려우므로 기본 package.json의 scripts를 수정합니다.<br/>
+무료 버전에서는 Dyno 수정이 어려우므로 기본 package.json의 scripts를 수정합니다.<br>
 Dyno 수정이 가능하면 실행 명령을 직접 Dyno에 기입하시면 되므로 이 과정이 필요 없습니다.
 
 기본 package.json

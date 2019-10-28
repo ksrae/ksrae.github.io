@@ -7,11 +7,11 @@ tags: [form, formgroup]
 ---
 
 
-Html에서 Form은 자주 사용되는데 Angular에서는 이 사용법이 은근 쉽지 않습니다.
+Html에서 Form은 자주 사용되는데 Angular에서는 이 사용법이 은근 쉽지 않습니다.<br><br>
 
-몇 가지 설정과 세팅을 해주어야 비로소 유용하고 편리하게 사용할 수 있는데 이 과정이 매번 프로젝트 생성할 때마다 맞는지 꼼꼼히 확인하지 않으면 에러가 발생합니다.
+몇 가지 설정과 세팅을 해주어야 비로소 유용하고 편리하게 사용할 수 있는데 이 과정이 매번 프로젝트 생성할 때마다 맞는지 꼼꼼히 확인하지 않으면 에러가 발생합니다.<br><br>
 
-앞으로도 자주 찾아볼거 같아 한 번 정리해두려고 합니다.
+앞으로도 자주 찾아볼거 같아 한 번 정리해두려고 합니다.<br>
 
 
 ## Module 등록
@@ -98,8 +98,8 @@ export class AppComponent {
 ```
 
 
-먼저 FormGroup, Validators, FormBuilder를 import 합니다.
-Validators는 사용하지 않거나 template에서 validation을 처리한다면 호출하지 않아도 됩니다.
+먼저 FormGroup, Validators, FormBuilder를 import 합니다.<br>
+Validators는 사용하지 않거나 template에서 validation을 처리한다면 호출하지 않아도 됩니다.<br>
 
       import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 
@@ -120,9 +120,9 @@ onInit이나 constructor에 formgroup을 정의합니다.
             item: ['', [Validators.required]]
       })
 
-이 때, 사용되는 모든 form의 formControlName을 입력합니다. 
-'' 부분은 초기값으로 초기값이 있으면 입력하고, 없으면 비워둡니다.
-Validation은 배열 형태로 구성하되 없으면 빈 배열로 두어도 됩니다.
+이 때, 사용되는 모든 form의 formControlName을 입력합니다. <br>
+'' 부분은 초기값으로 초기값이 있으면 입력하고, 없으면 비워둡니다.<br>
+Validation은 배열 형태로 구성하되 없으면 빈 배열로 두어도 됩니다.<br>
 
 
 기본 제공하는 Validators의 종류는 아래와 같습니다.

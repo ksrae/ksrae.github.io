@@ -8,7 +8,7 @@ tags: [update, replace]
 
 
 
-mongoDB에서 update와 replace의 차이를 비교해보겠습니다.
+mongoDB에서 update와 replace의 차이를 비교해보겠습니다.<br>
 한국어로는 관련 내용이 없어서 stackoverflow를 참고하여 정리하였습니다.
 
 
@@ -56,7 +56,7 @@ db.collection.updateMany(
 
 update는 Update, One, Many 세 가지 함수가 있습니다.<br/>
 모두 데이터를 갱신하는 역할을 하며 update에만 multi 여부를 묻고 다른 함수는 multi 여부가 없습니다.<br/>
-즉, update는 multi의 true/false 여부에 따라 updateOne이나 updateMany 모두 구현 가능합니다.
+즉, update는 multi의 true/false 여부에 따라 updateOne이나 updateMany 모두 구현 가능합니다.<br><br>
 
 update는 우리가 일반적으로 아는 DB의 update와 같습니다. <br/>
 존재하는 데이터의 항목의 값을 변경하는 것입니다.<br/>
@@ -111,9 +111,9 @@ db.collection.replaceOne(
 )
 ```
 
-replace는 replaceOne 밖에 없습니다. 즉, 여러 데이터를 한번에 replace 할 수는 없다는 점이 update하고 다른 점입니다.
+replace는 replaceOne 밖에 없습니다. 즉, 여러 데이터를 한번에 replace 할 수는 없다는 점이 update하고 다른 점입니다.<br>
 <br/>
-또 하나의 다른 점은 데이터를 완전히 변경한다는 점입니다. 즉, update는 해당 필드만 수정하는데에 반해 replaceOne은 해당 필드로 데이터를 완전히 바꾸어 버립니다. 
+또 하나의 다른 점은 데이터를 완전히 변경한다는 점입니다. 즉, update는 해당 필드만 수정하는데에 반해 replaceOne은 해당 필드로 데이터를 완전히 바꾸어 버립니다. <br>
 <br/>
 
 예를 들어 설명해보면,
@@ -141,7 +141,7 @@ age: 10
 }
 ```
 
-기존 버전에서는 애매했던 update와 replace간의 역할이 3.2 버전부터는 보다 명확해졌습니다. 따라서,
-목적에 맞게 데이터를 갱신하려면 update를, 데이터를 변경하려면 replace를 사용하여야 합니다. 
+기존 버전에서는 애매했던 update와 replace간의 역할이 3.2 버전부터는 보다 명확해졌습니다. <br>
+따라서, 목적에 맞게 데이터를 갱신하려면 update를, 데이터를 변경하려면 replace를 사용하여야 합니다. 
 
 끝.

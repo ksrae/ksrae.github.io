@@ -1,5 +1,5 @@
 ---
-title: "Make Matenenance or Offline Notice using PWA"
+title: "PWA로 오프라인 공지하기 (Make Matenenance or Offline Notice using PWA)"
 date: 2019-07-08 16:50:00 +0900
 comments: true
 categories: angular

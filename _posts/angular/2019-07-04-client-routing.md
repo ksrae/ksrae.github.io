@@ -1,5 +1,5 @@
 ---
-title: "Difference between Server-side Routing and Client-side Routing"
+title: "서버와 클라이언트에서 구성하는 라우팅의 비교 (Difference between Server-side Routing and Client-side Routing)"
 date: 2019-07-04 12:22:00 +0900
 comments: true
 categories: angular

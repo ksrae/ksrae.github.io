@@ -1,5 +1,5 @@
 ---
-title: "Support Multiple Languages"
+title: "다국어 적용 (Support Multiple Languages on Real Time)"
 comments: true
 categories: angular
 tags: [language, translate]

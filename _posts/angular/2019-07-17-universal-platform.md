@@ -8,9 +8,9 @@ tags: [universal, platform]
 
 
 
-Angular가 실행 중인 플랫폼이 브라우저인지 서버인지 확인하는 코드 입니다.
+Angular가 실행 중인 플랫폼이 브라우저인지 서버인지 확인하는 코드 입니다.<br><br>
 
-확인하는 이유는 Angular가 서버 플랫폼에서 실행 중인 경우 브라우저에서만 사용 가능한 명령인 window, location, document 등을 사용할 수 없기 때문입니다.
+확인하는 이유는 Angular가 서버 플랫폼에서 실행 중인 경우 브라우저에서만 사용 가능한 명령인 window, location, document 등을 사용할 수 없기 때문입니다.<br><br>
 
 이 글은 angular universal이 적용된 프로젝트가 있다는 가정하에 작성하므로, angular universal 적용 방법은 [Angular Universal](https://ksrae.github.io/angular/angular-universal)을 참고하시기 바랍니다.
 

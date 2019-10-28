@@ -6,7 +6,7 @@ categories: angular
 tags: [universal]
 ---
 
-@ng-toolkit/universal ERROR: Cannot read property 'unshift' of undefined 에러에 대해 알아보겠습니다.
+@ng-toolkit/universal ERROR: Cannot read property 'unshift' of undefined 에러에 대해 알아보겠습니다.<br><br>
 
 Angular universal에서 window를 사용하기 위해 @ng-toolkit/universal 을 설치해야 합니다.
 
@@ -20,9 +20,9 @@ ng add @ng-toolkit/universal
 @ng-toolkit/universal ERROR: Cannot read property 'unshift' of undefined
 ```
 
-검색해보니 버전의 문제인 것으로 파악되었습니다.
+검색해보니 버전의 문제인 것으로 파악되었습니다.<br><br>
 
-ng add로 설치해보면 @ng-toolkit/universal 버전이 1.1.21 이 설치 되는데 이는 너무 낮은 버전으로
+ng add로 설치해보면 @ng-toolkit/universal 버전이 1.1.21 이 설치 되는데 <br>이는 너무 낮은 버전으로
 최신 버전인 7.1.2를 설치해야 위의 에러가 해결 됩니다.
 
 
