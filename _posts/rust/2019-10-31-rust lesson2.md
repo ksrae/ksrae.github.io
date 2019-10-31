@@ -176,9 +176,9 @@ fn main() {
  }
  
  //결과
-   |
+  |
 4 | let a3 = a1 + a2;
-   |               ^^^^^^^^^^^^^^^^^ `+` can't be used to concatenate two `&str` strings
+  |               ^^^^^^^^^^^^^^^^^ `+` can't be used to concatenate two `&str` strings
 ```
 
 한쪽 변수를 to_string() 형태로 변경하면 가능합니다.
@@ -216,9 +216,9 @@ fn main() {
 }
 
 //결과
-   |
+  |
 4 |  mutable_num = num; // error !
-   |                ^^^ expected u32, found i32
+  |                ^^^ expected u32, found i32
 ```
 
 as를 활용하면 유사한 형 (int, float 등)은 서로 인식이 가능합니다.<br>
@@ -237,10 +237,10 @@ fn main() {
 }
 
 // 결과
-   |
+  |
 3 |  let mut mutable_num: u32 = 0;
-   |          ^^^^^^^^^^^
-   |
+  |          ^^^^^^^^^^^
+  |
   = note: #[warn(unused_assignments)] on by default
   = help: maybe it is overwritten before being read?
   
@@ -262,10 +262,10 @@ fn main() {
 }
 
 //결과
-   |
+  |
 5 |  mutable_num = num as &str;
-   |                ^^^^^^^^^^^
-   |
+  |                ^^^^^^^^^^^
+  |
   = note: an `as` expression can only be used to convert between primitive types. Consider using the `From` trait
 ```
 
