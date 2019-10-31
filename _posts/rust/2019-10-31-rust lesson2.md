@@ -153,13 +153,17 @@ let f: bool = false; // with explicit type annotation
 
 - 변수의 복사
 
-변수를 다른 변수에 복사하려면 복사될 변수는 변수명 앞에 언더스코어(_)를 붙여야 합니다.
+문자열의 경우 javascript와 같이 변수명을 직접 적용해도 되나,
+숫자형이나 기타 다른 형의 경우 &로 가져와야 합니다.
 
 ```rust
 fn main() {
   let a = "A";
   let b = a;
-  println!("{}", b);
+
+  let c = 10;
+  let d = &c;
+  println!("{} {}", b, d);
 }
 ```
 
