@@ -119,5 +119,4 @@ fn main() {
  c처럼 포인터 *를 사용하지 않아도 출력 옵션에 따라 값과 주소를 모두 표현할 수 있습니다.
  
  
-참고: <br>
-[Rust Book](https://doc.rust-lang.org/book/title-page.html)
+참고: [Rust Book](https://doc.rust-lang.org/book/title-page.html)

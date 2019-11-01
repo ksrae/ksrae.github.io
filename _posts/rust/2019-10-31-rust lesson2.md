@@ -289,5 +289,4 @@ fn main() {
 ```
 
 
-참고: <br>
-[Rust Book](https://doc.rust-lang.org/book/title-page.html)
+참고: [Rust Book](https://doc.rust-lang.org/book/title-page.html)
