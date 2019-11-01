@@ -1,5 +1,5 @@
 ---
-title: "3. 변수"
+title: "(3) 변수"
 date: 2019-11-01 11:00:00 +0900
 comments: true
 categories: rust
