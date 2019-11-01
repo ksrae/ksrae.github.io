@@ -1,5 +1,5 @@
 ---
-title: "Rust 주석과 변수 타입"
+title: "주석과 변수 타입"
 date: 2019-10-31 18:38:00 +0900
 comments: true
 categories: rust
