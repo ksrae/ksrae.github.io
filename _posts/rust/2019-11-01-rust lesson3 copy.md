@@ -35,6 +35,20 @@ tags: [lesson-rust]
 ```
 
 
+그러나, 다른 형으로 바꾸것은 불가능합니다.<br><br>
+즉, mut는 단순히 readonly를 해제하는 것이지 변수의 형까지 변경하는 것을 허용하지는 않습니다.
+
+```rust
+  // 가능
+  let spaces = "   ";
+  let spaces = spaces.len();
+
+  //불가능
+  let mut spaces = "   ";
+  spaces = spaces.len();
+```
+
+
 #### 예외
  
 예외 적으로 mut 없이도 값을 변경할 수 있는 케이스가 있는데 <br>같은 형을 가진 상태로 재선언 하는 것 입니다. (같은 주소에 값이 재설정 됩니다.)
@@ -46,19 +60,6 @@ tags: [lesson-rust]
   let y = x+2;
 ```
 
-
-같은 변수명이라도 다른 형을 가지면 mut로 선언해도 변경이 불가능합니다.<br>
-즉, mut는 단순히 readonly를 해제하는 것이지 변수의 형까지 변경하지는 않습니다.
-
-```rust
-  // 가능
-  let spaces = "   ";
-  let spaces = spaces.len();
-
-  //불가능
-  let mut spaces = "   ";
-  spaces = spaces.len();
-```
 
 
     
