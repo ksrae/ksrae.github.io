@@ -1,5 +1,5 @@
 ---
-title: "(2) 주석과 변수 타입"
+title: "강좌02-주석과 변수 타입"
 date: 2019-10-31 18:38:00 +0900
 comments: true
 categories: rust
@@ -287,3 +287,7 @@ fn main() {
  let run: Custom = 100;
 }
 ```
+
+
+참고: <br>
+[Rust Book](https://doc.rust-lang.org/book/title-page.html)
