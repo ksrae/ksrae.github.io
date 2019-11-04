@@ -38,6 +38,9 @@ fn main() {
   
   println!("this is {0} {1} {1}", pi, txt);
 }
+
+//결과
+3.14 Test Test
 ```
 
 - 직접 변수 선언
@@ -59,9 +62,9 @@ fn main() {
 }
 
 /*
-   |
+  |
 4 |   println!("this is {}", pi);
-   |                             ^^ not found in this scope
+  |                             ^^ not found in this scope
   
 */
 ```
@@ -73,7 +76,7 @@ fn main() {
 
 변수를 진수, 바이너리 등으로 출력하려면 : 뒤에 정의된 값을 입력합니다.
 
-|  | 값 | 
+| 표기 | 값 | 
 |:--|:--|
 | :o	| 8진수 |
 | :x	| 16진수 (소문자로 표기) |
@@ -84,5 +87,5 @@ fn main() {
 | :E	| 지수 (대문자로 표기) |
 | :?	| 디버깅 목적 |
 
-format! 명령도 println! 과 같은 형식을 취하나 format!은 출력 대신 값을 리턴하는 용도로 사용합니다.
+format! 명령도 println! 과 같은 형식을 취하나 format!은 출력이 아닌 값을 리턴하는 용도로 사용합니다.
 
