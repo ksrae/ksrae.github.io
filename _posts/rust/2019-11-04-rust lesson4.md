@@ -9,7 +9,7 @@ tags: [lesson-rust]
 
 
 
-#### Println!
+### Println!
 
 화면에 출력하는 함수 입니다.
 
