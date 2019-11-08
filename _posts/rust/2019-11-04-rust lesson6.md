@@ -19,7 +19,7 @@ for문은 for..in..을 사용한다는 것입니다.<br><br>
 
 
 
-### 1. if
+### if
 
 ```rust
   if number < 5 {
@@ -31,7 +31,7 @@ for문은 for..in..을 사용한다는 것입니다.<br><br>
 
 
 
-- number형을 bool 형으로 쓸 수 없습니다.
+- int형을 bool 형으로 쓸 수 없습니다.
 
 ```rust
   let number = 1;
@@ -67,7 +67,7 @@ for문은 for..in..을 사용한다는 것입니다.<br><br>
 ```
 
         
-- 이 때, if와 else에 담기는 값은 반드시 같은 형이어야 한다.
+- 이 때, if와 else if, else에서 리턴하는 값은 반드시 같은 형이어야 합니다.
   
 ```rust
   let condition = if number < 0 {
@@ -82,7 +82,7 @@ for문은 for..in..을 사용한다는 것입니다.<br><br>
 ```
         
 
-2. loop: 조건없이 무제한 반복
+### loop: 조건없이 무제한 반복
   
 ```rust
   loop {
@@ -90,7 +90,7 @@ for문은 for..in..을 사용한다는 것입니다.<br><br>
 ```
 
         
-3. break
+#### break
 
  - break에 수식을 넣어 리턴값으로 활용할 수 있습니다.
  
@@ -106,7 +106,7 @@ for문은 for..in..을 사용한다는 것입니다.<br><br>
 ```
    
    
-4. while: 조건이 있는 loop
+### while: 조건이 있는 loop
 
 ```rust
   while index < 5 {
@@ -116,7 +116,7 @@ for문은 for..in..을 사용한다는 것입니다.<br><br>
   }
   ```
 
-5. for
+### for
 
 javascript의 for in만 가능합니다. <br>in 뒤에 범위를 지정하면 in 앞에 선언된 변수에 담겨 for문에서 활용할 수 있습니다.
 
@@ -141,7 +141,7 @@ fn five() -> i32에서 i32가 리턴형을 의미합니다.<br>
 
  
   
-### 3. Attribute
+### Attribute
 
 - 조건부 실행
 
@@ -169,7 +169,7 @@ This OS is windows.
 ```
 
 
-- Testing
+#### Testing
 #[test] 로 사용하며 함수가 수행 가능한지 테스트합니다.<br>
 rustc나 cargo로 다음과 같이 테스트할 수 있습니다.
 
