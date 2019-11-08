@@ -19,7 +19,7 @@ locale                   : "ko-KR"
 title                    : "Angular 개발자의 개발 기록"
 title_separator          : "-"
 name                     : ""
-description              : "An amazing website."
+description              : "An amazing website." # ksrae78
 url                      : "https://ksrae.github.io/" # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 baseurl                  : # the subpath of your site, e.g. "/blog"
 repository               : # GitHub username/repo-name e.g. "mmistakes/minimal-mistakes"
