@@ -155,14 +155,14 @@ fn ownership(s: String) {
 }
 
 //결과
-   |
+  |
 4 |     let s = String::from("hello");
-   |         - move occurs because `s` has type `std::string::String`, which does not implement the `Copy` trait
+  |         - move occurs because `s` has type `std::string::String`, which does not implement the `Copy` trait
 5 |     ownership(s);
-   |               - value moved here
+  |               - value moved here
 6 | 
 7 |     println!("s {}", s);
-   |                      ^ value borrowed here after move
+  |                      ^ value borrowed here after move
 ```
 
 반면에 copy가 가능한 케이스는 ownership이 넘어가지 않고 copy되므로 Drop되지 않아 계속 사용 가능합니다.
