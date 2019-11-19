@@ -109,10 +109,10 @@ fn byreference(s_mut: &mut String) -> (&String) {
 
 - Ownership: 변수가 더이상 메모리에 존재하지 않는 상태.<br>
 - Borrow: mutable reference. 변수는 존재하나 Ownership이 다른 변수/함수에 넘어간 상태. Scope가 넘어간 상태에서 가능. &mut<br>
-- Reference: immutable reference. Ownership에 관계 없이 변수를 참조한 상태. &
+- Reference: immutable reference. Ownership에 관계 없이 변수를 참조한 상태.
 
 
-//////////////////////////////////////////////////////////////
+
 
 다중 immutable reference는 가능
 
