@@ -39,7 +39,26 @@ Slice Type은 아래와 같이 사용하며, 다양한 방법으로 활용할 �
 2. 전체 -> [..] 로 표현할 수도 있으며 배열에서도 가능합니다.
 ```
 
-아래의 예제는 문자열을 받으면 첫번째 문자부터 스페이스를 만날 때까지를 리턴하는 함수입니다.
+
+다음은 문자를 받아 앞 5글자만 리턴하는 함수 입니다.<br>
+이 예제에서 주목할 부분은,<br>
+ 함수와 <strong>&변수[..]</strong> 로 String 형을 &str로 전달하는 방법 입니다.
+
+```rust
+fn main() {
+    let s1: &str = "hello world";
+    let word = first_word(s1);
+    
+    let s2 = String::from("hello world");
+    let word2 = first_word(&s2[..])
+}
+
+fn first_word(s: &str) -> &str {
+    &s[0..5]
+}
+```
+
+아래의 예제는 위의 함수를 확장하여 문자열을 받으면 첫번째 문자부터 스페이스를 만날 때까지를 리턴하는 함수입니다.
 
 
 ```rust
@@ -61,27 +80,5 @@ fn first_word(s: &String) -> &str {
 }
 ```
 
-위의 예제에서 한가지 주의 할 점은 string 변수가 mut일 때 함수 호출 뒤에 변수를 사용하려면 <br>
-borrow 현상 때문에 여전히 에러가 발생한다는 문제가 존재합니다.<br><br>
-
-이를 해결하려면 string을 &str 형으로 변경하거나 함수에 &str 형으로 변경하여 전달하는 방법을 사용해야 합니다.
-
-
-```rust
-fn main() {
-    let s1: &str = "hello world";
-    let word = first_word(s1);
-    
-    let s2 = String::from("hello world");
-    let word2 = first_word(&s2[..])
-}
-
-fn first_word(s: &str) -> &str {
-    &s[0..5]
-}
-```
-
-위의 예제에서 s1, s2 케이스 모두 가능합니다.<br>
-mut 에 대한 문제도 위와 같은 방법으로 해결할 수 있습니다.
 
 
