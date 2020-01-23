@@ -1,5 +1,5 @@
 ---
-title: "Form Group Custom Error"
+title: "폼 그룹 에러처리 커스터마이징 (Customizing Form Group Error)"
 date: 2019-07-12 17:31:00 +0900
 comments: true
 categories: angular

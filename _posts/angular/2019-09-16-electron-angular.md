@@ -1,5 +1,5 @@
 ---
-title: "angular project on electron"
+title: "Electron에서 쉽게 Angular 프로젝트 로드 (angular project on electron)"
 date: 2019-09-16 10:19:00 +0900
 comments: true
 categories: angular

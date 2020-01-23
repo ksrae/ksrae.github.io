@@ -1,5 +1,5 @@
 ---
-title: "Differenct between update and replace"
+title: "MongoDB의 update와 replace의 차이 (Differenct between update and replace)"
 date: 2019-07-29 12:26:00 +0900
 comments: true
 categories: mongodb

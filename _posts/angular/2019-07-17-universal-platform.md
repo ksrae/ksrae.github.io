@@ -1,5 +1,5 @@
 ---
-title: "Angular Universal Platform Check"
+title: "Angular Universal에서 플랫폼(브라우저 여부) 체크 (Angular Universal Platform Check)"
 date: 2019-07-17 14:07:00 +0900
 comments: true
 categories: angular

@@ -1,5 +1,5 @@
 ---
-title: "Creating Library"
+title: "자체 라이브러리 만들기 (Creating Library)"
 date: 2019-07-15 18:05:00 +0900
 comments: true
 categories: angular

@@ -1,5 +1,5 @@
 ---
-title: "entire search and range search query for 2-byte-letters"
+title: "2바이트 글자로 검색 (entire search and range search query for 2-byte-letters)"
 date: 2019-07-26 16:53:00 +0900
 comments: true
 categories: mongodb

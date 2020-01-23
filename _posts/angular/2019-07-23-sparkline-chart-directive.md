@@ -1,5 +1,5 @@
 ---
-title: "Creating Sparkline Chart Directive with ng2-nvd3"
+title: "ng2-nvd3를 활용하여 스파크라인 차트 만들기 (Creating Sparkline Chart Directive with ng2-nvd3)"
 date: 2019-07-23 16:11:00 +0900
 comments: true
 categories: angular

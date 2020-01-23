@@ -1,5 +1,5 @@
 ---
-title: "Execute Function on Init (App Initializer)"
+title: "앱 실행 시점에 함수 호출 Execute Function on Init (App Initializer)"
 date: 2019-07-12 15:01:00 +0900
 comments: true
 categories: angular

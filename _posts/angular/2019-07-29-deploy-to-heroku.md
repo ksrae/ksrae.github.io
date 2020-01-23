@@ -1,5 +1,5 @@
 ---
-title: "Deploy Angular Universal Project from GitHub to Heroku"
+title: "Angular Universal 프로젝트를 Github에서 Heroku로 배포 (Deploy Angular Universal Project from GitHub to Heroku)"
 date: 2019-07-29 12:26:00 +0900
 comments: true
 categories: angular

@@ -1,5 +1,5 @@
 ---
-title: "Angular Universal Location"
+title: "Angular Universal에서 window.location 명령 사용 (Angular Universal Location)"
 date: 2019-07-17 14:37:00 +0900
 comments: true
 categories: angular

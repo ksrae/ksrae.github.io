@@ -1,5 +1,5 @@
 ---
-title: "How to Stop Angular Material Animation"
+title: "특정 Material 애니메이션 중지 (How to Stop Angular Material Animation)"
 date: 2019-07-04 15:45:00 +0900
 comments: true
 categories: angular
