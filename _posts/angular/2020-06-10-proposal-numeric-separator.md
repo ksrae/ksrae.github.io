@@ -24,6 +24,7 @@ available-plugins.js 파일에 정의되어 있지 않은 플러그인인 경우
 ```
 
 3) npm 설치와 빌드를 실행합니다.
+
 ```
 npm inatall
 npm run build
@@ -31,7 +32,8 @@ npm run build
 
 * 해당코드는 Angular8에서 작성하였습니다.
 
-참고: 
-[stackoverflow/could-not-find-plugin-proposal-numeric-separator]
-(https://stackoverflow.com/questions/60780664/could-not-find-plugin-proposal-numeric-separator)
-```
+### 참고
+
+[stackoverflow/could-not-find-plugin-proposal-numeric-separator](https://stackoverflow.com/questions/60780664/could-not-find-plugin-proposal-numeric-separator)
+
+
