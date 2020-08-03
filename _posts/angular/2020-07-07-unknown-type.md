@@ -17,7 +17,7 @@ any형과 비슷하게 모든 형태의 값에 선언할 수 있으며, any처�
 
 1. any외의 형 선언된 변수는 unknown 타입의 값을 가져올 수 없습니다.
 2. unknown 변수는 어떠한 변수 타입의 값이든 상관 없이 가져올 수 있습니다.
-3. unknown 변수가 Object | Array | Function 등의 타입이라면 내부의 값에 접근할 수 없습니다. 즉, 아래는 모두 에러가 됩니다.
+3. unknown 변수가 Object / Array / Function 등의 타입이라면 내부의 값에 접근할 수 없습니다. 즉, 아래는 모두 에러가 됩니다.
 
 ```tsx
 let user: unknown = {
@@ -86,6 +86,6 @@ mapping<T>(list: T[]) {
 
 ## 참고
 
-[Announcing TypeScript 3.0 RC | TypeScript](https://devblogs.microsoft.com/typescript/announcing-typescript-3-0-rc-2/#the-unknown-type)
+[Announcing TypeScript 3.0 RC TypeScript](https://devblogs.microsoft.com/typescript/announcing-typescript-3-0-rc-2/#the-unknown-type)
 
 ['unknown' vs. 'any'](https://stackoverflow.com/questions/51439843/unknown-vs-any)
