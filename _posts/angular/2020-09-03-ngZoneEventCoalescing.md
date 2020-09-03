@@ -1,5 +1,5 @@
 ---
-title: "ngZoneEventCoalescing for Preventing Event Bubbling"
+title: "ngZoneEventCoalescing으로 이벤트 버블링 해결(ngZoneEventCoalescing for Preventing Event Bubbling)"
 date: 2020-09-03 17:04:00 +0900
 comments: true
 categories: angular
