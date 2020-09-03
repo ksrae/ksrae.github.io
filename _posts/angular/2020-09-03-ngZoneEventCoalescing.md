@@ -3,7 +3,7 @@ title: "ngZoneEventCoalescing으로 이벤트 버블링 해결(ngZoneEventCoales
 date: 2020-09-03 17:04:00 +0900
 comments: true
 categories: angular
-tags: [bubbling]
+tags: [bubbling, changedetection, ngzone]
 ---
 
 
