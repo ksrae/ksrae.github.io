@@ -69,9 +69,7 @@ QuicklinkStrategy는 대규모의 프로젝트에서 더 나은 대안일 수 �
 QuicklinkStrategy는 quicklink와 3가지 면에서 다른 점이 있습니다.
 
 > 1. quicklink는 가능한 경우 link[rel="prefetch"] 를 통해 리소스를 미리 가져오고, 그 뒤에 XMLHttpRequest로 대체하지만, ngx-quicklink는 Angular 라우터의 현재 모듈을 preloading 하는 원리(mechanism) 때문에 XMLHttpRequest만 사용합니다. 비록 Guess.js에서 사용하는 것과 같은 link[rel="prefetch"]를 사용하는 것이 더 나은 대안일 수 있으나 대부분의 경우에 유저들은 이 점을 발견하지 못할 것입니다.
-
 > 2. ngx-quicklink는 단지 관련 스크립트 번들만 다운로드하는 것이 아니라 컨텐츠를 파싱하고 평가합니다. 이 방법은 유저가 페이지를 변경할 때 성능의 큰 향상을 가져옵니다.
-
 > 3. ngx-quicklink는 모든 요청된 모듈을 사전 로드하기 위해 모든 부모 모듈을 다운로드 합니다. 
 
 ### 사용법
