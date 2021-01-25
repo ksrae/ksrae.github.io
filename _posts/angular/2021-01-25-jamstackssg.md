@@ -1,9 +1,9 @@
 ---
-title: "빠른 Lazy Loading 방법  (How To Make Lazy Loading Faster)"
-date: 2020-10-27 10:00:00 +0900
+title: JAMStack과 SSG (Definition of JAMStack and SSG)"
+date: 2021-01-25 14:06:00 +0900
 comments: true
 categories: angular
-tags: [lazyloading]
+tags: [ssg]
 ---
 
 
