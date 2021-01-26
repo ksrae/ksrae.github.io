@@ -2,7 +2,7 @@
 title: "JAMStack과 SSG (Definition of JAMStack and SSG)"
 date: 2021-01-25 14:06:00 +0900
 comments: true
-categories: angular
+categories: javascript
 tags: [ssg]
 ---
 
