@@ -67,14 +67,75 @@ SSG는 쉽게 이해하면 SSR과 CSR의 중간쯤으로 보이나 엄밀히 따
 
 React 쪽에서는 다양한 라이브러리가 있는데 그중 Gatsby와 next.js가 있으며, Vue.js에서는 next.js를 개조한 nuxt.js가 주로 쓰이고 있습니다.
 
-Angular 진영에서는 이렇다 할 라이브러리가 없다가 2019년 말 개발된 Scully가 각광받고 있습니다. Universal이 SSR을 표방한다면, Scully는 next.js와 같이 SSG의 방식을 따르고 있어 Universal과 대조되고 있습니다.
+Angular 진영에서는 이렇다 할 라이브러리가 없다가 2019년 말 개발된 Scully가 각광받고 있습니다. Universal이 SSR을 표방한다면, Scully는 SSG의 방식을 따르고 있어 Universal과 대조되고 있습니다.
 
 
 
-## 4. Scully 동작 방식
-Angular 코드 빌드 시 Scully의 머신 러닝을 통해 라우팅을 모두 검색하여 라우팅의 첫 페이지들을 모두 정적 html로 pre-rendering합니다. 
+## 4. Angular의 SSG
+<br/>
+Angular 9부터 Universal도 SSG와 같이 Static HTML을 빌드 타임에 생성할 수 있는 prerender 옵션을 제공합니다.<br/>
+따라서 이미 Version9 이상의 Universal로 제작된 프로젝트의 경우 걷어낼 필요 없이 빌드 명령의 교체만으로 적용할 수 있습니다.<br/>
+<br/>
 
-이 때, Scully는 크롬 브라우저의 Puppeteer를 사용하여 Angular 앱을 실행하여 모든 페이지를 연 뒤 IdleMonitorService를 통해 zone.js를 기반으로 스냅샷이 완료되었는지 여부를 결정합니다.
+### 4.1. Angular Universal Prerender
 
-이를 통해 pre-rendering된 결과를 확인하고, 디버깅이 가능하도록 지원 합니다.
+<br/>
+angular.json의 prerender option과 package.json의 빌드 옵션을 확인하여 지원 여부를 확인할수 있습니다.
 
+```ts
+// angular.json
+"serve-ssr": {
+    "builder": "@nguniversal/builders:ssr-dev-server",
+    "options": {
+    "browserTarget": "prerender-demo:build",
+    "serverTarget": "prerender-demo:server"
+    },
+    "configurations": {
+    "production": {
+        "browserTarget": "prerender-demo:build:production",
+        "serverTarget": "prerender-demo:server:production"
+    }
+    }
+},
+"prerender": {
+    "builder": "@nguniversal/builders:prerender",
+    "options": {
+    "browserTarget": "prerender-demo:build:production",
+    "serverTarget": "prerender-demo:server:production",
+    "routes": [
+        "/"
+    ]
+    },
+    "configurations": {
+    "production": {}
+    }
+```
+
+아래 package.json의 prerender 실행 명령을 확인하여 빌드를 수행합니다.
+
+```ts
+// package.json
+"prerender": "ng run prerender-demo:prerender"
+```
+
+
+```command
+> npm run prerender
+```
+
+
+
+
+### 4.2. Scully
+Angular Universal Prerender의 단점은 여전히 Server Side 여부를 확인해야 하며, window 등의 browser 명령을 즉시 사용할 수 없다는 점입니다.<br/>
+Scully는 Client에서만 동작하므로 SSG를 도입할 때 더욱 편하게 코딩할 수 있는 장점이 있습니다.<br/>
+<br/>
+Scully의 동작 방식은 다음과 같습니다.<br/>
+<br/>
+```
+- Angular 코드 빌드 시 Scully의 머신 러닝을 통해 라우팅을 모두 검색하여 라우팅의 첫 페이지들을 모두 정적 html로 pre-rendering합니다. 
+
+- 이 때, Scully는 크롬 브라우저의 Puppeteer를 사용하여 Angular 앱을 실행하여 모든 페이지를 연 뒤 IdleMonitorService를 통해 zone.js를 기반으로 스냅샷이 완료되었는지 여부를 결정합니다.
+
+- 이를 통해 pre-rendering된 결과를 확인하고, 디버깅이 가능하도록 지원 합니다.
+```
