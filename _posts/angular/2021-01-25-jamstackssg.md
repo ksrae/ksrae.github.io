@@ -132,10 +132,8 @@ Scully는 Client에서만 동작하므로 SSG를 도입할 때 더욱 편하게 
 <br/>
 Scully의 동작 방식은 다음과 같습니다.<br/>
 <br/>
-```
-- Angular 코드 빌드 시 Scully의 머신 러닝을 통해 라우팅을 모두 검색하여 라우팅의 첫 페이지들을 모두 정적 html로 pre-rendering합니다. 
 
-- 이 때, Scully는 크롬 브라우저의 Puppeteer를 사용하여 Angular 앱을 실행하여 모든 페이지를 연 뒤 IdleMonitorService를 통해 zone.js를 기반으로 스냅샷이 완료되었는지 여부를 결정합니다.
+> - Angular 코드 빌드 시 Scully의 머신 러닝을 통해 라우팅을 모두 검색하여 라우팅의 첫 페이지들을 모두 정적 html로 pre-rendering합니다. 
+> - 이 때, Scully는 크롬 브라우저의 Puppeteer를 사용하여 Angular 앱을 실행하여 모든 페이지를 연 뒤 IdleMonitorService를 통해 zone.js를 기반으로 스냅샷이 완료되었는지 여부를 결정합니다.
+> - 이를 통해 pre-rendering된 결과를 확인하고, 디버깅이 가능하도록 지원 합니다.
 
-- 이를 통해 pre-rendering된 결과를 확인하고, 디버깅이 가능하도록 지원 합니다.
-```
