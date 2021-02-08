@@ -22,7 +22,7 @@ tags: [ngx-translate, rehydrate, scully]
 
 
 ## DEMO 작성
-#### 다국어 적용 (ngx-translate 적용)
+### 다국어 적용 (ngx-translate 적용)
 기존 코드에 ngx-translate을 설치합니다. 다국어 파일을 httploader를 통해 불러오므로 함께 설치합니다.<br/>
 
 ```
@@ -86,7 +86,7 @@ change(type: string) {
 
 
 
-#### ngx-translate-router 적용
+### ngx-translate-router 적용
 위의 목적을 달성해줄 라이브러리를 설치합니다.
 
 ```
