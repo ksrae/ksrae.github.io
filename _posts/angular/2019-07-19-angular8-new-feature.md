@@ -47,7 +47,7 @@ loadChildren: () => import('./app.module').then(m => m.AppModule)
 
 기존에는 angular 영역에서 벗어나 별도의 파일로 생성해야 했는데 이제 cli 환경에서 직접 webworker를 만들 수 있습니다.
 
-```command
+```bash
 ng g webWorker [worker-name]
 ```
 

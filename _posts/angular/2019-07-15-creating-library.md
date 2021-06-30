@@ -18,7 +18,7 @@ cli를 활용하여 library를 생성합니다.<br>
 유의할 점은 angular 프로젝트 내에서 진행해야 한다는 점입니다.<br>
 즉, ng new 로 프로젝트를 생성한 뒤 아래의 command를 입력하여 library를 생성해야 함을 유의 하시기 바랍니다.<br>
 
-```command
+```bash
 ng generate library [library-name]
 ```
 
@@ -123,7 +123,7 @@ export * from './lib/my-lib.module';
 
 빌드는 기존 프로젝트와 마찬가지로 ng build를 사용합니다.
 
-```command
+```bash
 ng build my-lib
 ```
 
@@ -134,7 +134,7 @@ ng build my-lib
 
 dist에 생성된 폴더로 이동해서 package 명령을 내려야 하므로 폴더를 이동합니다.
 
-```command
+```bash
 cd dist/my-lib
 ```
 
@@ -142,7 +142,7 @@ cd dist/my-lib
 
 npm publish 로 public package를 만들 수 있습니다. 
 
-```command
+```bash
 npm publish
 ```
 
@@ -208,7 +208,7 @@ private 인 경우 먼저 tgz 파일을 해당 프로젝트로 옮겨야 합니�
 
 파일을 이동하였으면 tgz 파일을 public package와 마찬가지로 install 합니다.
 
-```command
+```bash
 npm install ./my-lib
 ```
 

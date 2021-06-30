@@ -33,7 +33,7 @@ Angular Universal은 대표적으로 4가지 방식의 엔진을 지원하고 �
 
 angular 프로젝트를 생성합니다. 기존 angular 프로젝트 생성과 방식은 동일합니다.
 
-```command
+```bash
 ng new ssr_project
 ```
 
@@ -44,7 +44,7 @@ ssr_project라는 이름의 프로젝트를 생성하였습니다.
 
 프로젝트가 생성된 폴더로 이동 후 서버 엔진을 추가합니다. 여기에서는 Node.js의 express 엔진을 사용하겠습니다. 따라서 Node가 반드시 설치 되어 있어야 합니다.
 
-```command
+```bash
 ng add @nguniversal/express-engine --clientProject ssr_project
 ```
 
@@ -330,7 +330,7 @@ package.json을 열어 scripts에 정의되어 있는대로 실행하면 됩니�
 
 build:ssr 명령을 실행합니다.
 
-```command
+```bash
 npm run build:ssr
 ```
 
@@ -339,13 +339,13 @@ npm run build:ssr
 
 package.json의 serve:ssr 명령을 수행하거나 dist 폴더로 이동하여 node server 명령을 수행해도 됩니다.
 
-```command
+```bash
 npm run serve:ssr
 ```
 
 또는 
 
-```command
+```bash
 dist> node server
 ```
 

@@ -122,7 +122,7 @@ angular.json의 prerender option과 package.json의 빌드 옵션을 확인하�
 ```
 
 
-```command
+```bash
 > npm run prerender
 ```
 

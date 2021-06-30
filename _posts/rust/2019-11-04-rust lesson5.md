@@ -89,13 +89,13 @@ This OS is windows.
 #[test] 로 사용하며 함수가 수행 가능한지 테스트합니다.<br>
 rustc나 cargo로 다음과 같이 테스트할 수 있습니다.
 
-```command
+```bash
 rustc --test [파일명]
 ```
 
 또는
 
-```command
+```bash
 cargo test
 ```
 
