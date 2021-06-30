@@ -63,7 +63,8 @@
 
 .page__lead {
   font-family: $global-font-family;
-  font-size: $type-size-4;
+  /*font-size: $type-size-4;*/
+  font-size: $type-size-5;
 }
 
 .page__content {
@@ -75,7 +76,7 @@
   p,
   li,
   dl {
-    font-size: 0.9em;
+    font-size: 0.75em;
   }
 
   /* paragraph indents */
@@ -110,11 +111,13 @@
   dd {
     margin-left: 1em;
     font-family: $sans-serif;
-    font-size: $type-size-6;
+    /*font-size: $type-size-6;*/
+    font-size: $type-size-7;
   }
 
   .small {
-    font-size: $type-size-6;
+    /*font-size: $type-size-6;*/
+    font-size: $type-size-7;
   }
 
   /* blockquote citations */
@@ -172,10 +175,12 @@
     }
 
     .page__title {
-      font-size: $type-size-2;
+      /*font-size: $type-size-2;*/
+      font-size: $type-size-3;
 
       @include breakpoint($small) {
-        font-size: $type-size-1;
+        /*font-size: $type-size-1;*/
+        font-size: $type-size-2;
       }
     }
   }
@@ -195,7 +200,8 @@
   padding: 2px 5px;
   color: #fff;
   font-family: $caption-font-family;
-  font-size: $type-size-7;
+  /*font-size: $type-size-7;*/
+  font-size: $type-size-8;
   background: #000;
   text-align: right;
   z-index: 5;
@@ -237,7 +243,8 @@
 
 .page__share-title {
   margin-bottom: 10px;
-  font-size: $type-size-6;
+  /*font-size: $type-size-6;*/
+  font-size: $type-size-7;
   text-transform: uppercase;
 }
 
@@ -249,7 +256,8 @@
   margin-top: 2em;
   color: $muted-text-color;
   font-family: $sans-serif;
-  font-size: $type-size-6;
+  /*font-size: $type-size-6;*/
+  font-size: $type-size-7;
 
   p {
     margin: 0;
@@ -262,7 +270,8 @@
 
 .page__meta-title {
   margin-bottom: 10px;
-  font-size: $type-size-6;
+  /*font-size: $type-size-6;*/
+  font-size: $type-size-7;
   text-transform: uppercase;
 }
 
@@ -332,7 +341,8 @@
   grid-template-columns: repeat(2, 1fr);
   margin: 1.414em 0;
   padding: 0;
-  font-size: 0.75em;
+  /*font-size: $type-size-6;*/
+  font-size: $type-size-7;
   list-style: none;
 
   @include breakpoint($large) {
@@ -379,7 +389,8 @@
   margin-top: 2rem;
   margin-bottom: 10px;
   padding-top: 2rem;
-  font-size: $type-size-6;
+  /*font-size: $type-size-6;*/
+  font-size: $type-size-7;
   border-top: 1px solid $border-color;
   text-transform: uppercase;
 }
@@ -489,7 +500,8 @@
 
 .page__related-title {
   margin-bottom: 10px;
-  font-size: $type-size-6;
+  /*font-size: $type-size-6;*/
+  font-size: $type-size-7;
   text-transform: uppercase;
 }
 

@@ -52,7 +52,8 @@ body:hover .visually-hidden button {
   height: auto !important;
   width: auto !important;
   display: block;
-  font-size: 0.8em;
+  /*font-size: 0.8em;*/
+  font-size: 0.6875em;
   font-weight: bold;
   padding: 15px 23px 14px;
   background: #fff;
@@ -492,7 +493,8 @@ body:hover .visually-hidden button {
   li,
   p {
     margin-bottom: 0;
-    font-size: $type-size-6;
+    /*font-size: $type-size-6;*/
+    font-size: $type-size-7;
   }
 }
 

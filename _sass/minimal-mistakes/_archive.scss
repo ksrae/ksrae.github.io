@@ -25,7 +25,8 @@
 .archive__subtitle {
   margin: 1.414em 0 0;
   padding-bottom: 0.5em;
-  font-size: $type-size-5;
+  /*font-size: $type-size-5;*/
+  font-size: $type-size-6;
   color: $muted-text-color;
   border-bottom: 1px solid $border-color;
 
@@ -65,7 +66,8 @@
 
 .archive__item-excerpt {
   margin-top: 0;
-  font-size: $type-size-6;
+  /*font-size: $type-size-6;*/
+  font-size: $type-size-7;
 
   & + p {
     text-indent: 0;
@@ -194,7 +196,8 @@
 
   .archive__item-title {
     margin-top: 0.5em;
-    font-size: $type-size-5;
+    /*font-size: $type-size-5;*/
+    font-size: $type-size-6;
   }
 
   .archive__item-excerpt {
@@ -202,7 +205,8 @@
 
     @include breakpoint($medium) {
       display: block;
-      font-size: $type-size-6;
+      /*font-size: $type-size-6;*/
+      font-size: $type-size-7;
     }
   }
 
@@ -234,7 +238,8 @@
 .feature__item {
   position: relative;
   margin-bottom: 2em;
-  font-size: 1.125em;
+  /*font-size: 1.125em;*/
+  font-size: 1.0em;
 
   @include breakpoint($small) {
     float: left;
@@ -283,7 +288,8 @@
     margin-right: 0;
     width: 100%;
     clear: both;
-    font-size: 1.125em;
+    /*font-siez: 1.125em;*/
+    font-size: 1.0em;
 
     .archive__item {
       float: left;
@@ -325,6 +331,7 @@
     width: 100%;
     clear: both;
     font-size: 1.125em;
+    /*font-size: 1.125em;*/
 
     .archive__item {
       float: left;
@@ -367,7 +374,8 @@
     margin-right: 0;
     width: 100%;
     clear: both;
-    font-size: 1.125em;
+    /*font-size: 1.125em;*/
+    font-size: 1.0em;
 
     .archive__item {
       float: left;
@@ -409,7 +417,8 @@
   .feature__wrapper {
     .archive__item-title {
       margin-top: 0.25em;
-      font-size: 1em;
+      /*font-size:1em;*/
+      font-size: 0.85em;
     }
   }
 
@@ -417,7 +426,8 @@
   .feature__item--left,
   .feature__item--center,
   .feature__item--right {
-    font-size: 1em;
+    /*font-size: 1em;*/
+    font-size: 0.85em;
   }
 }
 
