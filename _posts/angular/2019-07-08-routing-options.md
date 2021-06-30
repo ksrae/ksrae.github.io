@@ -8,7 +8,7 @@ tags: [routing]
 
 
 
-Component에서 라우팅 적용 시 사용할 수 있는 옵션을 정리하였습니다.
+Component에서 라우팅 적용 시 사용할 수 있는 옵션 목록 입니다.
 
 
 

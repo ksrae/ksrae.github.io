@@ -60,7 +60,7 @@ const routes: Routes = [
   export class PageRouting { }
 ```
 
-이제 PageComponent의 OnInit에서 resolve값을 가져온다.
+이제 PageComponent의 OnInit에서 resolve값을 가져옵니다.
 
 ```ts
 import { Component, OnInit } from '@angular/core';

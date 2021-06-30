@@ -16,8 +16,8 @@ tags: [ngx-translate, rehydrate, scully]
 
 
 ## 계획
-1. LocalStorage를 활용하여 변경된 언어를 저장한다.<br/>
-2. 리로드 시 페이지 로딩 첫 시점부터 변경된 언어가 적용된 html 이 보여야 한다.<br/>
+1. LocalStorage를 활용하여 변경된 언어를 저장합니다.<br/>
+2. 리로드 시 페이지 로딩 첫 시점부터 변경된 언어가 적용된 html 이 보여야 합니다.<br/>
 
 
 

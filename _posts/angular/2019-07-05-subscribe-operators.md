@@ -1,5 +1,5 @@
 ---
-title: "Subscribe 주요 명령어 (Rxjs Subscribe Operators)"
+title: "Rxjs의 pipe 주요 명령어 (Rxjs Pipe Operators)"
 date: 2019-07-05 15:00:00 +0900
 comments: true
 categories: angular
@@ -8,7 +8,7 @@ tags: [rxjs, subscribe]
 
 
 
-rxjs에서 subscribe에서 사용하는 명령들을 정리하였습니다.
+rxjs에서 pipe에서 주로 사용하는 명령들을 정리하였습니다.
 
 
 

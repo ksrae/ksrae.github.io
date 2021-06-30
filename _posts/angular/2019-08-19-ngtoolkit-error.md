@@ -14,7 +14,7 @@ Angular universal에서 window를 사용하기 위해 @ng-toolkit/universal 을 
 ng add @ng-toolkit/universal
 ```
 
-그런데 Angular 8 에서는 설치하려고 시도하면 unshift 에러가 발생한다.
+그런데 Angular 8 에서는 설치하려고 시도하면 unshift 에러가 발생합니다.
 
 ```
 @ng-toolkit/universal ERROR: Cannot read property 'unshift' of undefined

@@ -16,7 +16,7 @@ tags: [module]
   - 다른 module에서 선언한 component를 또 다른 module에서 중복 선언하면 에러가 발생합니다.
   - 에러를 분석해보면 이러한 경우 상위 또는 다른 module에 선언하고 그 module을 참조하라고 되어 있습니다.
   - 매번 다른 module을 선언하면 복잡해지므로 공통적으로 사용할 shared module을 만들고 여기에 component를 선언한 뒤 중복 component를 사용하는 module에서 shared module을 참조하면 해결됩니다.
-  (* 모든 module에서 shared module을 참조하도록 설정해도 된다.)
+  (* 모든 module에서 shared module을 참조하도록 설정해도 됩니다.)
 
 
 ## 2. service가 여러 module에서 선언될 때 문제
@@ -42,7 +42,7 @@ tags: [module]
     }
     ```
 
-  - module 중 최상위 module은 SharedModule.forRoot() 로 참조하고, 하위 module은 SharedModule 만 참조한다. 반드시 최상위에서만 .forRoot()를 참조해야 하며 그렇지 않으면 에러가 발생합니다.
+  - module 중 최상위 module은 반드시 SharedModule.forRoot() 로 참조하고, 하위 module은 SharedModule 만 참조하도록 해야 합니다.
     
 
 ### 2-1. Angular 6+ 에서의 service

@@ -30,7 +30,7 @@ canActivate와 canActivateChild
 <br>
 <br>
 여러 기능을 모아서 하나의 guard에 구성해도 관계없으나 필요한 기능마다 별도의 guard를 만들어 두는게 가드의 목적을 명확히 할 수 있습니다.<br><br>
-예시에서는 칸을 줄이기 위해 하나의 guard에 모두 구성해 보겠습니다.<br>
+예시에서는 하나의 guard에 모두 구성해 보겠습니다.<br>
 <br>
 
 ## routing module

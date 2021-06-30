@@ -38,3 +38,72 @@ mountSubscription: Subscription;
 }
 
 ```
+
+## 다중 처리
+
+만일 여러 개의 Subscription이 같은 방식으로 동작한다면, <br>
+하나의 Subscription으로 여러 subscribe들을 모아 처리할 수 있습니다.<br>
+이 경우 add() 함수를 활용합니다. 
+
+```ts
+
+export class SubscribeClass implements OnInit, OnDestroy {
+mountSubject: Subject;
+anotherMountSubject: Subject;
+mountSubscription: Subscription = new Subscription();
+
+  constructor() {
+    this.mountSubject = new Subject();
+    this.anotherMountSubject = new Subject();
+  }
+
+  ngOnInit() {
+    this.mountSubscription.add(
+      this.mountSubject.subscribe(),
+      this.anotherMountSubject.subscribe()
+    );
+  }
+
+  ngOnDestroy() {
+    this.mountSubscription?.unsubscribe();
+  }
+}
+```
+
+각 Subject/Observable의 subscribe 내의 내용이 길어질 경우 함수로 빼서 처리하면, 깔끔하게 정리할 수 있습니다.
+
+```ts
+export class SubscribeClass implements OnInit, OnDestroy {
+mountSubject: Subject;
+anotherMountSubject: Subject;
+mountSubscription: Subscription = new Subscription();
+
+  constructor() {
+    this.mountSubject = new Subject();
+    this.anotherMountSubject = new Subject();
+  }
+
+  ngOnInit() {
+    this.mountSubscription.add(
+      this.mount(),
+      this.anotherMount()
+    );
+  }
+
+  mount = () => {
+    return this.mountSubject.subscribe(() => {
+      ...
+    });
+  }
+
+  anotherMount = () => {
+    return this.anotherMountSubject.subscribe(() => {
+      ...
+    });
+  }
+
+  ngOnDestroy() {
+    this.mountSubscription?.unsubscribe();
+  }
+}
+```

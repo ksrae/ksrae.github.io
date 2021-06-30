@@ -69,5 +69,5 @@ customError() {
 ## 유의점
 > - 에러는 touch된 상황에서만 발생하므로 반드시 markAsToucked()를 우선 실행해야 합니다. 그렇지 않으면 setErrors 적용이 무시됩니다.
 > - 에러를 취소하려면 setError(null) 또는 setError({incorrect: false}) 로 만들면 됩니다.
-> - formGroup가 정상처리 되려면 모든 에러가 null 상태이어야 합니다.
+> - formGroup이 정상처리 되려면 모든 에러가 null 상태이어야 합니다.
 > - 다른 예시 중에서 this.testForm.get('checkControl').updateValueAndValidity({onlySelf: true, emitEvent: false}); 도 있었으나 적용하면 동작하지 않았습니다. 혹시 되시면 댓글 부탁 드립니다.

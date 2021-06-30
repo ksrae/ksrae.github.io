@@ -1,5 +1,5 @@
 ---
-title: "다국어 적용 (Support Multiple Languages on Real Time)"
+title: "ngx-translate을 활용한 다국어 적용 (Support Multiple Languages with ngx-translate)"
 comments: true
 categories: angular
 tags: [language, translate]
@@ -7,13 +7,13 @@ date: 2019-07-03 12:20:00 +0900
 ---
 
 
-다국어 적용 시 서버 요청 및 리로딩 없이 즉시 적용합니다.
 
+ngx-translate를 활용하여, 서버 요청 및 리로딩 없이 즉시 다국어를 적용합니다.<br>
 
 
 ## 1. 적용
 
-ngx-translate를 활용하는 방법 입니다.<br>
+
 
 우선 ngx-translate/core를 설치합니다.<br>
 
@@ -168,8 +168,7 @@ interface에서 정의한 값대로 json 파일을 생성합니다.<br>
 
 ### 2-3. template에서의 활용
 
-두가지 방법으로 사용할 수 있습니다.<br>
-Text가 들어가는 부분에 translate 파이프를 호출하거나 innerHTML 프로퍼티를 이용할 수 있습니다.<br>
+직접 {{ }} 에서 적용할 수 있으나 번역 내용에 tag가 들어간 경우 innerHTML에서 사용할 수도 있습니다.<br>
 
 ```html
 {% raw %}
@@ -177,11 +176,19 @@ Text가 들어가는 부분에 translate 파이프를 호출하거나 innerHTML 
 {% endraw %}
 ```
 
-- 언어값 내에 tag가 있는 경우 innerHTML을 사용한다.
+- 언어값 내에 tag가 있는 경우 innerHTML을 사용합니다.
 
 ```html
 {% raw %}
 <div [innerHTML]="'login' | translate"></div>
+{% endraw %}
+```
+
+> 추천드리는 방법은 innerHTML에 적용하고, text 영역에는 기본 값을 적어놓는 것입니다. 이렇게 하면 번역 키를 따라 번역 값을 일일이 확인하지 않아도 어떤 값이 적용되었는지 코드상에서 바로 파악할 수 있으며, 실제는 innerHTML의 내용이 반영되므로 코드에 영향도 없어 효율적입니다.
+
+```html
+{% raw %}
+<div [innerHTML]="'login' | translate">로그인</div>
 {% endraw %}
 ```
 
@@ -197,8 +204,8 @@ Text가 들어가는 부분에 translate 파이프를 호출하거나 innerHTML 
 }
 ```
 
-만일 template 에서 "비밀번호 변경"을 적용하고 싶다면 먼저 changeItem의 번역 값을 사용한 뒤,<br>
-changeItem에서 동적으로 적용하고자 하는 키 값인 item에 번역한 "password"를 정의합니다. <br>
+만일 template 에서 "비밀번호 변경"을 적용하고 싶다면, <br>
+먼저 changeItem의 translate 파라미터에 적용하고자 하는 키 값인 item에 번역한 "password"를 정의합니다. <br>
 
 ```html
 {% raw %}
@@ -221,7 +228,7 @@ translate을 사용할 경우 하위 태그가 만들어지지 않는다는 점�
 
 위의 예시의 경우 span 태그가 무시되어 버립니다.<br>
 
-해결 방법은 하위 태그가 필요한 경우 같은 레벨로 만들어주는 것입니다.<br>
+> 해결 방법은 하위 태그가 필요한 경우 같은 레벨로 만들어주거나,<br>
 
 ```html
 {% raw %}
@@ -229,6 +236,18 @@ translate을 사용할 경우 하위 태그가 만들어지지 않는다는 점�
 {% endraw %}
 ```
 
+> 번역에 하위 태그를 포함할 수 있습니다.
+```html
+{% raw %}
+<div>{{ 'login' | translate }} <span>사용자 이름을 입력하세요</span></div>
+{% endraw %}
+```
+
+```json
+{
+    "login": "로그인 <span>사용자 이름을 입력하세요</span>"
+}
+```
 
 
 이 외에도 TranslateService에는 다양한 함수가 존재하니 다음 시간에 보다 자세히 다루어 보도록 하겠습니다.<br>

@@ -7,7 +7,7 @@ tags: [ngfor]
 ---
 
 
-ngFor는 DOM을 반복해서 출력해주는 기능을 합니다. 여기에 몇가지 추가 요소를 붙일 수 있는데 대표적인 것으로는index가 있습니다.
+ngFor는 DOM을 반복해서 출력해주는 기능을 합니다. 여기에 몇가지 추가 요소를 붙일 수 있는데 대표적인 것으로는 index가 있습니다.
 
 ```html
 <div *ngFor="let item of items;let idx=index;"></div>
