@@ -345,7 +345,7 @@ $base0c: #8abeb7;
 $base0d: #81a2be;
 $base0e: #b294bb;
 $base0f: #a3685a;
-```  
+```
 
 ### Breakpoints and grid stuff
 
