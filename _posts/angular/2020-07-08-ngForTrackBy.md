@@ -3,7 +3,7 @@ title: "ngFor with TrackBy"
 date: 2020-07-08 14:25:00 +0900
 comments: true
 categories: angular
-tags: [ngfor]
+tags: [ngfor, trackby]
 ---
 
 
@@ -39,6 +39,19 @@ trackByItem = (item): number => item.id;
 ```
 
 이제 for문 내의 데이터는 오직 이벤트에 해당하는 DOM만 refresh 됩니다.
+
+## 추가
+Angular 버전에 따라 아래의 함수를 작성할 경우 에러가 발생할 수 있습니다.
+
+```
+trackByItem = (item): number => item.id;
+```
+
+이는 파라미터로 index를 받도록 변경되었기 때문이므로 파라미터를 item 외에 index를 함께 받아주어 해결할 수 있습니다.
+
+```
+trackByItem = (index: number, item: any): number => item.id;
+```
 
 ## 참고
 
