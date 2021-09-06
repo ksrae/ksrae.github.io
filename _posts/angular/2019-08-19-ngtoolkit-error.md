@@ -26,5 +26,5 @@ ng add로 설치해보면 @ng-toolkit/universal 버전이 1.1.21 이 설치 되�
 최신 버전인 7.1.2를 설치해야 위의 에러가 해결 됩니다.
 
 
-참고: 
-[ERROR: Cannot read property 'unshift' of undefined i'm getting this error when adding SSR to exist angular 6 project · Issue #578 · maciejtreder/ng-toolkit · GitHub](https://github.com/maciejtreder/ng-toolkit/issues/578)
+## 참고 사이트
+- [ERROR: Cannot read property 'unshift' of undefined i'm getting this error when adding SSR to exist angular 6 project · Issue #578 · maciejtreder/ng-toolkit · GitHub](https://github.com/maciejtreder/ng-toolkit/issues/578)

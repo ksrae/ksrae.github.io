@@ -252,4 +252,5 @@ translate을 사용할 경우 하위 태그가 만들어지지 않는다는 점�
 
 이 외에도 TranslateService에는 다양한 함수가 존재하니 다음 시간에 보다 자세히 다루어 보도록 하겠습니다.<br>
 
-참고: [ngx-translate 사이트](https://github.com/ngx-translate/core)
+## 참고 사이트
+- [ngx-translate 사이트](https://github.com/ngx-translate/core)

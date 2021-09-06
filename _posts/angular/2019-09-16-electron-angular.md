@@ -114,6 +114,5 @@ angular 빌드와 electron을 한번에 실행하기 위한 start:electron과 el
 
 
 ## 참고 사이트
-
-https://www.sitepoint.com/build-a-desktop-application-with-electron-and-angular/
-[Build Angular Desktop Apps With Electron \| AngularFirebase](https://angularfirebase.com/lessons/desktop-apps-with-electron-and-angular/)
+- [https://www.sitepoint.com/build-a-desktop-application-with-electron-and-angular/] (https://www.sitepoint.com/build-a-desktop-application-with-electron-and-angular/)
+- [Build Angular Desktop Apps With Electron \| AngularFirebase](https://angularfirebase.com/lessons/desktop-apps-with-electron-and-angular/)

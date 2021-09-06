@@ -48,4 +48,4 @@ Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 
 
 ## 참고 사이트
-[why-powershell-does-not-run-angular-commands](https://stackoverflow.com/questions/58032631/why-powershell-does-not-run-angular-commands)
+- [why-powershell-does-not-run-angular-commands](https://stackoverflow.com/questions/58032631/why-powershell-does-not-run-angular-commands)

@@ -51,6 +51,5 @@ npm install -g @angular/cli
 
 
 ## 참고 사이트
-[the-term-ng-is-not-recognized-as-the-name-of-a-cmdlet](https://stackoverflow.com/questions/44958847/the-term-ng-is-not-recognized-as-the-name-of-a-cmdlet/44958882)
-
-[the-term-ng-is-not-recognized-as-the-name-of-a-cmdlet-in-angular](https://stackoverflow.com/questions/59545882/the-term-ng-is-not-recognized-as-the-name-of-a-cmdlet-in-angular)
+- [the-term-ng-is-not-recognized-as-the-name-of-a-cmdlet](https://stackoverflow.com/questions/44958847/the-term-ng-is-not-recognized-as-the-name-of-a-cmdlet/44958882)
+- [the-term-ng-is-not-recognized-as-the-name-of-a-cmdlet-in-angular](https://stackoverflow.com/questions/59545882/the-term-ng-is-not-recognized-as-the-name-of-a-cmdlet-in-angular)

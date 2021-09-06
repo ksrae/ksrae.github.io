@@ -42,6 +42,5 @@ Provide this token to control if form directives buffer IME input until the "com
 
 
 ## 참고 사이트
-[input 한글 입력시 짤림 현상](https://gogomalibu.tistory.com/151?category=851911)
-
-[COMPOSITION_BUFFER_MODE](https://angular.io/api/forms/COMPOSITION_BUFFER_MODE)
+- [input 한글 입력시 짤림 현상](https://gogomalibu.tistory.com/151?category=851911)
+- [COMPOSITION_BUFFER_MODE](https://angular.io/api/forms/COMPOSITION_BUFFER_MODE)

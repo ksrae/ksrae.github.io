@@ -110,8 +110,8 @@ export class NgForTrackByFieldDirective<T> {
 
 
 ## 참고 사이트
-[Host](https://angular.io/api/core/Host) <br/><br/>
-[Host Decorator in Angular](https://www.tektutorialshub.com/angular/host-decorator-in-angular/) <br/><br/>
-[How you can use trackBy with a property name](https://medium.com/@ingobrk/here-is-how-you-can-use-trackby-with-a-property-name-ec3bbba8fa75) <br/><br/>
+- [Host](https://angular.io/api/core/Host)
+- [Host Decorator in Angular](https://www.tektutorialshub.com/angular/host-decorator-in-angular/)
+- [How you can use trackBy with a property name](https://medium.com/@ingobrk/here-is-how-you-can-use-trackby-with-a-property-name-ec3bbba8fa75)
 
 

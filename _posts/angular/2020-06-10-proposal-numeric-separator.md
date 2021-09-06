@@ -32,8 +32,7 @@ npm run build
 
 * 해당코드는 Angular8에서 작성하였습니다.
 
-### 참고
-
-[stackoverflow/could-not-find-plugin-proposal-numeric-separator](https://stackoverflow.com/questions/60780664/could-not-find-plugin-proposal-numeric-separator)
+### 참고 사이트
+- [stackoverflow/could-not-find-plugin-proposal-numeric-separator](https://stackoverflow.com/questions/60780664/could-not-find-plugin-proposal-numeric-separator)
 
 

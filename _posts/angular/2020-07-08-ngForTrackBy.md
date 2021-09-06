@@ -53,8 +53,6 @@ trackByItem = (item): number => item.id;
 trackByItem = (index: number, item: any): number => item.id;
 ```
 
-## 참고
-
-[https://angular.io/guide/template-syntax#ngfor-with-trackby](https://angular.io/guide/template-syntax#ngfor-with-trackby)
-
-[https://stackoverflow.com/questions/42108217/how-to-use-trackby-with-ngfor](https://stackoverflow.com/questions/42108217/how-to-use-trackby-with-ngfor)
+## 참고 사이트
+- [https://angular.io/guide/template-syntax#ngfor-with-trackby](https://angular.io/guide/template-syntax#ngfor-with-trackby)
+- [https://stackoverflow.com/questions/42108217/how-to-use-trackby-with-ngfor](https://stackoverflow.com/questions/42108217/how-to-use-trackby-with-ngfor)

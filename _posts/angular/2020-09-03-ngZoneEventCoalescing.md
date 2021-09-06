@@ -47,6 +47,5 @@ main.ts에서 Angular Module boostrap 설정 시 옵션을 추가합니다.
 
 
 ## 참고 사이트
-[how-to-prevent-event-bubbling-in-angular-9-with-setinterval](https://stackoverflow.com/questions/60854223/how-to-prevent-event-bubbling-in-angular-9-with-setinterval)
-
-[change-detection-strategy-in-angular](https://dev.to/gaurangdhorda/change-detection-strategy-in-angular-25mc)
+- [how-to-prevent-event-bubbling-in-angular-9-with-setinterval](https://stackoverflow.com/questions/60854223/how-to-prevent-event-bubbling-in-angular-9-with-setinterval)
+- [change-detection-strategy-in-angular](https://dev.to/gaurangdhorda/change-detection-strategy-in-angular-25mc)

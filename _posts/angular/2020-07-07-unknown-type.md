@@ -84,8 +84,6 @@ mapping<T>(list: T[]) {
 }
 ```
 
-## 참고
-
-[Announcing TypeScript 3.0 RC TypeScript](https://devblogs.microsoft.com/typescript/announcing-typescript-3-0-rc-2/#the-unknown-type)
-
-['unknown' vs. 'any'](https://stackoverflow.com/questions/51439843/unknown-vs-any)
+## 참고 사이트
+- [Announcing TypeScript 3.0 RC TypeScript](https://devblogs.microsoft.com/typescript/announcing-typescript-3-0-rc-2/#the-unknown-type)
+- ['unknown' vs. 'any'](https://stackoverflow.com/questions/51439843/unknown-vs-any)

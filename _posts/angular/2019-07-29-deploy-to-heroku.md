@@ -139,5 +139,5 @@ Manual 인 경우 Deploy 버튼을 클릭 할 때, <br/>
 
 
 
-참고:
-[How to Deploy Angular Application to Heroku - Olutunmbi Banto - Medium](https://medium.com/@hellotunmbi/how-to-deploy-angular-application-to-heroku-1d56e09c5147)
+## 참고 사이트
+- [How to Deploy Angular Application to Heroku - Olutunmbi Banto - Medium](https://medium.com/@hellotunmbi/how-to-deploy-angular-application-to-heroku-1d56e09c5147)

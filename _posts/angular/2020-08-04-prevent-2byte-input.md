@@ -21,6 +21,6 @@ tags: [input, form]
 
 기존에 한 글자 정도 보이는 것을 이 코드를 적용하면 아예 2-바이트도 보이지 않는 상태를 만들어 주며, 아주 심플하면서도 유용하여 적극 추천합니다.<br><br>
 
-(코드가 간단하게 구성되었고 원문을 꼭 방문하시라고 별도의 설명을 생략하였습니다.)
+(코드가 간단하게 구성되었고 원문을 꼭 방문하시라고 별도의 설명을 생략하였습니다.) <br/><br/>
 
 [angular-numbers-only-directive - StackBlitz](https://stackblitz.com/edit/angular-numbers-only-directive?file=app%2Fnumbers-only.directive.ts)

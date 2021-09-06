@@ -288,5 +288,3 @@ fn main() {
 }
 ```
 
-
-참고: [Rust Book](https://doc.rust-lang.org/book/title-page.html)

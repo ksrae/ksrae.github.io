@@ -81,6 +81,5 @@ export class HttpConfigInterceptor implements HttpInterceptor {
 
 
 ## 참고 사이트
-[XSRF protection](https://angular.io/guide/http#security-xsrf-protection)
-
-[HttpRequest](https://angular.io/api/common/http/HttpRequest)
+- [XSRF protection](https://angular.io/guide/http#security-xsrf-protection)
+- [HttpRequest](https://angular.io/api/common/http/HttpRequest)

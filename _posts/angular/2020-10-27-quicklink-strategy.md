@@ -92,6 +92,5 @@ export class AppRoutingModule {}
 
 
 ## 참고 사이트
-[quicklink-angular-prefetching-preloading-strategy](https://blog.mgechev.com/2018/12/24/quicklink-angular-prefetching-preloading-strategy/)
-
-[route-preloading-in-angular](https://web.dev/route-preloading-in-angular/)
+- [quicklink-angular-prefetching-preloading-strategy](https://blog.mgechev.com/2018/12/24/quicklink-angular-prefetching-preloading-strategy/)
+- [route-preloading-in-angular](https://web.dev/route-preloading-in-angular/)

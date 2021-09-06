@@ -22,7 +22,8 @@ compodoc에서 문서화를 시도할 때 Angular 8 에서 변경된 routing 방
       npx compodoc -p src/tsconfig.app.json --disableRoutesGraph 
 
 
-[업데이트 2021.07.12]
-- compodoc이 업데이트 되어 위의 문제는 해결 되었습니다.
+## 업데이트 2021.07.12
+compodoc이 업데이트 되어 위의 문제는 해결 되었습니다.
 
-참고: [Compodoc Guides](https://compodoc.app/guides/getting-started.html)
+## 참고 사이트
+ [Compodoc Guides](https://compodoc.app/guides/getting-started.html)

@@ -38,6 +38,6 @@ constructor(
 ```
 
 
-참고: 
-[Unable to inject window into component · Issue #515 · maciejtreder/ng-toolkit · GitHub](https://github.com/maciejtreder/ng-toolkit/issues/515)
+## 참고 사이트
+- [Unable to inject window into component · Issue #515 · maciejtreder/ng-toolkit · GitHub](https://github.com/maciejtreder/ng-toolkit/issues/515)
  

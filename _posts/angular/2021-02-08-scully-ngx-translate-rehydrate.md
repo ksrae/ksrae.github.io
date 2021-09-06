@@ -139,5 +139,5 @@ this.translate.use();
 
 
 ## 참고 사이트
-[ngx-translate-router](https://github.com/gilsdav/ngx-translate-router)
+- [ngx-translate-router](https://github.com/gilsdav/ngx-translate-router)
 

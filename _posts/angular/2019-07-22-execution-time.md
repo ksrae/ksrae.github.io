@@ -35,7 +35,6 @@ console.timeEnd(str);
 ```
 
 
-참고:
-[자바스크립트 수행시간 측정 - 제타위키](https://zetawiki.com/wiki/%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8_%EC%88%98%ED%96%89%EC%8B%9C%EA%B0%84_%EC%B8%A1%EC%A0%95)
-
-[NodeJS 프로그램 수행시간 측정 : 네이버 블로그](http://blog.naver.com/PostView.nhn?blogId=deepplin&logNo=60203067634)
+## 참고 사이트
+- [자바스크립트 수행시간 측정 - 제타위키](https://zetawiki.com/wiki/%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8_%EC%88%98%ED%96%89%EC%8B%9C%EA%B0%84_%EC%B8%A1%EC%A0%95)
+- [NodeJS 프로그램 수행시간 측정 : 네이버 블로그](http://blog.naver.com/PostView.nhn?blogId=deepplin&logNo=60203067634)

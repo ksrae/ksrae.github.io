@@ -50,5 +50,5 @@ async를 적용하려면 변수명 뒤에 async pipe를 추가하고 as로 사�
 
 
 ## 참고 사이트
-[ngx-translate-router](https://github.com/gilsdav/ngx-translate-router)
+- [ngx-translate-router](https://github.com/gilsdav/ngx-translate-router)
 
