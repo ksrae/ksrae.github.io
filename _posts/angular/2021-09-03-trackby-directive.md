@@ -11,8 +11,7 @@ ngFor에 연결된 배열의 값이 변경될 때 refresh가 발생하여 render
 즉, trackBy를 사용하면 값이 변경되어도 rendering이 되지 않으므로 성능을 향상 시킬 수 있습니다.<br/>
 
 
-
-## trackBy 사용 방법과 불편함
+## trackBy 사용 방법
 trackBy는 다음과 같이 사용합니다. 
 
 ```html
@@ -28,11 +27,14 @@ trackBy는 다음과 같이 사용합니다.
 trackByFn = (item): number => item.id
 ```
 
-trackBy의 단점은 위의 코드에서 보듯 ngFor문이 사용될 때마다 component에서 매번 유사한 함수를 만들어주어야 한다는 것입니다. <br/>
-이 불편함 때문에 개발자들이 종종 trackBy를 고의로 누락하거나 실수로 작성하지 않습니다.<br/>
+### trackBy의 단점
+trackBy의 단점은 위의 코드에서 보듯 ngFor문이 사용될 때마다 component에 매번 trackByFn 함수를 만들어주어야 한다는 것입니다. <br/>
+이 불편함 때문에 개발자들이 종종 trackBy를 고의 또는 실수로 누락하는 경우가 있으며 이는 제품의 성능에 영향을 미칩니다.<br/>
 
 ## trackBy 동작방식
-먼저 trackBy가 어떻게 동작하는지 원리를 알아보아야 합니다. 아래의 두 코드는 동일한 결과를 갖습니다.
+목표인 trackBy Directive를 만들기 위해 먼저 trackBy가 어떻게 동작하는지 원리를 알아봅시다. <br/>
+trackBy를 좀 더 자세히 파악하기 위해 ng-template 으로 변경해보겠습니다.<br/>
+아래의 두 코드는 동일한 결과를 갖습니다.
 
 ```html
 {% raw %}
@@ -65,17 +67,20 @@ ng-template에서 보면 알 수 있듯이 trackBy의 원래 이름은 ngForTrac
 {% endraw %}
 ```
 
-즉, ngFor 내부가 아닌 별도의 directive로 인식되므로 ngFor에 관여할 수 없게 됩니다. <br/>
+즉, 일반적인 방법으로 directive로 만들경우 ngFor directive의 전달인자가 아닌 별도의 directive로 인식되므로 ngFor에 관여할 수 없게 되므로 우리가 원하는 기능을 구현할 수 없습니다. <br/>
 
 그러면 어떻게 ngFor에 접근할 수 있을까요?<br/>
 
 
 ## Host를 활용한 ngForTrackBy Directive 만들기
-@Host는 Angular의 내장된 기능으로 @Self와 유사하게 연관된 DI를 가져올 수 있습니다. <br/>
+이를 구현하기 위해 @Host 함수를 소개합니다.<br/>
+@Host는 Angular의 내장된 기능으로 @Self와 유사하게 연관된 DI를 가져올 수 있습니다. <br/><br/>
 
-차이가 있다면, @Self는 component와 연관된 DI를 가져오는 반면 component의 template과 viewProviders에 연관된 DI 를 가져옵니다. <br/><br/>
+차이가 있다면, @Self는 component와 연관된 DI를 가져오는 반면 component의 template과 viewProviders에 연관된 DI 를 가져옵니다. <br/>
 
-즉, 우리는 @Host를 사용하여 ngFor를 가져오고 ngFor에 속한 ngForTrackBy 함수에 우리가 원하는 필드 값을 주입해야 합니다. 코드는 아래와 같습니다.<br/>
+즉, 우리는 @Host를 사용하여 ngFor를 가져오고 ngFor에 속한 ngForTrackBy 함수에 우리가 원하는 필드 값을 주입해야 합니다.<br/>
+이 때, @Host에 NgForOf를 지정하여 ngFor에 접근할 수 있도록 할 예정이며,<br/>
+코드는 아래와 같습니다.<br/>
 
 ```tsx
 import { NgForOf } from "@angular/common";

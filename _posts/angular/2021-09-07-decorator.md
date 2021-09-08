@@ -23,7 +23,7 @@ class Decorator 함수는 생성자를 인수로 호출하며, 해당 클래스�
 즉, Decorator를 대신 받아주는 factory를 작성하고, 이 factory가 실제 Class Decorator 함수를 호출하는 방법 입니다.<br/>
 
 ```tsx
-@test01Factory(false)
+@testFactory(false)
 export class Car {
   name: string;
 	price: number;
@@ -39,12 +39,12 @@ export class Car {
 function setDeaultValue(constructorFn: any) {
 	return <any>class extends constructorFn{
 		name = 'SM6';
-    price = 10000;
+    	price = 10000;
 		color = 'black';
 	}
 }
 
-function test01Factory(setDefault: boolean) {
+function testFactory(setDefault: boolean) {
 	return setDefault ? setDeaultValue : null;
 }
 ```
