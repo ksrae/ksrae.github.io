@@ -94,7 +94,7 @@ export class AppComponent {
 
 ## throttle의 정의
 throttle의 정의는 일정 시간 동안 요청이 한번만 수행되는 것 입니다.<br/>
-즉, throttleTime이 1000ms이라고 하면, 그동안 어떠한 요청이 와도 무시되며, 첫번째 요청이 1000ms후에 실행됩니다.
+즉, throttleTime이 1000ms이라고 하면, 첫번째 요청이 실행되고 1000ms 동안은 어떠한 요청이 와도 무시되며, throttleTime이 종료된 이후에 요청을 새로 받아 수행합니다.
 
 
 ### throttle의 directive 만들기
