@@ -6,8 +6,7 @@ categories: javascript
 tags: [decorator, directive, debounce, throttle, rxjs, typescript]
 ---
 
-Debounce 또는 Throttle Decorator를 만들기 위해 여러 사이트를 검색하였으나, <br/>
-Angular나 Typescript에 적합한 예제를 찾을 수 없어서 직접 만들었습니다.<br/><br/>
+Debounce 또는 Throttle Decorator를 만들기 위해 여러 사이트를 검색하였으나, Angular나 Typescript에 적합한 예제를 찾을 수 없어서 직접 만들었습니다.<br/><br/>
 저와 같이 검색하시는 분들께 도움이 되었으면 좋겠다는 생각을 하며 글을 시작합니다.<br/><br/>
 
 [decorator에 대해서는 이전 글에 자세히 기록하였으니 참고](https://ksrae.github.io/javascript/decorator/)하여 주시고,<br/>
@@ -165,10 +164,11 @@ export class AppComponent {
 ```
 
 ## debounce / throttle directive와 decorator의 차이
-directive로 작성할 경우 코드를 간결하게 작성해지고, Angular 코드로 작성하므로 관리가 쉬운 반면, Template에서 클릭 이벤트를 작성 시에 불편하다는 단점이 있습니다.<br/>
-반면에 decorator로 작성할 경우 ts코드로 작성하므로 관리가 어려운 면이 있으나, Template이 기존과 같이 간결해지고, click 이벤트를 처리하는 component 함수에서 time을 조절할 수 있으므로 직관적입니다. <br/><br/>
+directive로 작성할 경우 코드를 간결하게 작성할 수 있고, Angular 코드로 이므로 관리가 쉬운 반면, Template에서 클릭 이벤트를 작성 시에 일반적인 클릭 이벤트가 아닌 directive 호출 및 directive에 설정된 Emit 이벤트를 매번 입력해야 하므로 불편하다는 단점이 있습니다.<br/>
+반면에 decorator로 작성할 경우 ts코드로 작성하므로 코드가 길어지고 Angular 코드가 아니므로 관리가 어려운 면이 있으나, Template에서 기존 명령을 사용하므로 간결해지고, click 이벤트를 처리하는 component 함수에서 직접 time을 조절할 수 있으므로 직관적입니다. <br/><br/>
 
 두 케이스 중 어느 것이 좋다고 하기 보다는 개발자의 취향에 따라 선택하는 것이 좋다고 생각합니다.
+
 
 
 
