@@ -2,7 +2,7 @@
 title: "Dynamic Component with ngComponentOutlet"
 date: 2021-11-21 23:31:00 +0900
 comments: true
-categories: component
+categories: angular
 tags: [dynamic, component, ngcomponentoutlet]
 ---
 
