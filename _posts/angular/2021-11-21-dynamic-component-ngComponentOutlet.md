@@ -39,7 +39,7 @@ export class AppComponent {
   component = AComponent;
 }
 ```
-위의 코드에서 {% raw %} <ng-container> {% endraw %} 에 AComponent가 적용되어 표시됨을 쉽게 확인할 수 있습니다.
+위의 코드에서 ng-container 에 AComponent가 적용되어 표시됨을 쉽게 확인할 수 있습니다.
 
 
 ### 여러 component 중 선택하기
@@ -220,7 +220,7 @@ export class CompleteComponent {
 위의 코드를 분석해보면 myContent라는 변수를 이차원 변수로 작성하고, textCode 2개를 각각 배열의 형태로 담고 있습니다.<br/>
 content는 반드시 이차원 배열의 형태여야 하며, 각각의 값은 배열의 형태를 유지해야 함을 주의하여야 합니다.<br/><br/>
 
-실행해보면 parent에서 주입한 content는 child의  {% raw %} <ng-content> {% endraw %} 에 각각 적용 주입됨을 확인할 수 있습니다.
+실행해보면 parent에서 주입한 content는 child의 ng-content 에 각각 적용 주입됨을 확인할 수 있습니다.
 
 
 #### dom
