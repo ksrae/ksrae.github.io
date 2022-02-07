@@ -6,7 +6,7 @@ categories: angular
 tags: [dynamic, component, ngcomponentoutlet]
 ---
 
-## ngIf를 활용하여 조건에 맞는 component만 노출하기
+# ngIf를 활용하여 조건에 맞는 component만 노출하기
 
 일반적으로 component를 조건에 따라 교체하는 것은 불가능합니다.<br/>
 따라서 여러 component를 template에 나열하고, 이를 ngIf로 원하는 component만 노출하고, 나머지는 감추는 방법을 사용했습니다.<br/>
@@ -22,7 +22,7 @@ tags: [dynamic, component, ngcomponentoutlet]
 
 이러한 방식은 html에서 직관적으로 조건에 맞는 component를 코드상으로 확인할 수 있는 장점이 있으나 랜더링에 부하를 줄 수 있을 뿐 아니라 html 코드가 지저분해진다는 단점이 있습니다.
 
-## ngComponentOutlet
+# ngComponentOutlet
 
 ngComponentOutlet은 component코드 상에서 template에 원하는 component만 골라 랜더링 할 수 있도록 해줍니다.<br/>
 
@@ -42,7 +42,7 @@ export class AppComponent {
 위의 코드에서 ng-container 에 AComponent가 적용되어 표시됨을 쉽게 확인할 수 있습니다.
 
 
-### 여러 component 중 선택하기
+## 여러 component 중 선택하기
 
 ngIf와는 다르게 ngComponentOutlet은 component 코드 내에서 원하는 component를 선택할 수 있습니다.
 
@@ -85,15 +85,15 @@ export class BComponent implements OnInit {
 
 예제를 실행하면 버튼을 클릭하여 AComponent, BComponent를 스위치하여 화면에 표시합니다.
 
-## 값을 주입하는 방법
+# 값을 주입하는 방법
 
 ngComponentOutlet가 ngIf와 다른 큰 특징은 바로 하위 component가 어떤 것이든 관계 없이 같은 값을 주입할 수 있다는 것입니다.<br/>
 값을 주입하는 방법은 Injector를 통하는 방법과 content를 활용하는 방법 두가지가 있습니다. 둘 다 동시에 적용할 수도 있습니다.
 
-### Injector 활용
+## Injector 활용
 
 
-#### useValue
+### useValue
 
 ```tsx
 export const TITLE = new InjectionToken<string>('app.title');
@@ -137,7 +137,7 @@ template 코드에서는 간단하게 injector 값에 component에서 선언했�
 그러나 이 방법의 장점은 provider를 통하기 때문에 Class나 Factory를 전달 할 수 있다는 점입니다.
 
 
-#### Class
+### Class
 
 ```tsx
 export class Greeter {
@@ -176,7 +176,7 @@ export class CompleteComponent {
 
 
 
-### Content 활용
+## Content 활용
 
 이제 다른 방법으로 주입할 수 있는 방법을 알아 보겠습니다.<br/>
 바로 content라는 옵션을 활용하는 방법인데 이 방식은 특이하게도 document의 node를 주입할 수 있습니다.<br/>
@@ -185,7 +185,7 @@ export class CompleteComponent {
 
 먼저 간단하게 text node를 주입하는 방법을 알아보고, 그 다음 dom을 주입하는 방법을 알아보겠습니다.
 
-#### textNode
+### textNode
 ```tsx
 
 // parent
@@ -223,7 +223,7 @@ content는 반드시 이차원 배열의 형태여야 하며, 각각의 값은 �
 실행해보면 parent에서 주입한 content는 child의 ng-content 에 각각 적용 주입됨을 확인할 수 있습니다.
 
 
-#### dom
+### dom
 ```tsx
 
 // parent
@@ -261,7 +261,7 @@ button의 attribute 및 이벤트를 모두 설정하여 전달할 수 있습니
 기본적인 방식은 textNode와 같으므로 생략합니다.
 
 
-### Injector와 content 모두 활용하기
+## Injector와 content 모두 활용하기
 ```tsx
 export class Greeter {
   suffix = '!';
@@ -302,7 +302,7 @@ export class CompleteComponent {
 설명은 위의 예제들을 참고하시기 바랍니다.
 
 
-## 연결된 component 제거하기
+# 연결된 component 제거하기
 ngComponentOutlet에 연결되어 있는 component를 변경하는 것 외에 제거도 가능합니다.<br/>
 쉽게 component 값에 null을 대신 전달하면 되며 예제는 다음과 같습니다.
 
@@ -334,5 +334,5 @@ export class AComponent implements OnInit {
 }
 ```
 
-## 참고 사이트
-- [Angular 공식 사이트 dynamic-component-loader](https://angular.io/guide/dynamic-component-loader)
+# 참고 사이트
+- [Angular 공식 사이트](https://angular.io/api/common/NgComponentOutlet)
