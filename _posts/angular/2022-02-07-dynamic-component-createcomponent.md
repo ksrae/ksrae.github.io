@@ -42,7 +42,7 @@ export class ContainerComponent {
   callAComponent() {
     const resolve = this.resolver.resolveComponentFactory(AComponent);
     this.viewContainerRef.crateComponent(resolve);
-  }
+  } 
   callBComponent() {
     const resolve = this.resolver.resolveComponentFactory(BComponent);
     this.viewContainerRef.crateComponent(resolve);
