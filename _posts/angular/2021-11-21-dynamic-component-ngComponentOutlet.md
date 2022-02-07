@@ -17,7 +17,6 @@ tags: [dynamic, component, ngcomponentoutlet]
 <component-b *ngIf="type==TYPEB"></component-b>
 <component-c *ngIf="type==TYPEC"></component-c>
 <component-d *ngIf="type==TYPED"></component-d>
-
 ```
 
 이러한 방식은 html에서 직관적으로 조건에 맞는 component를 코드상으로 확인할 수 있는 장점이 있으나 랜더링에 부하를 줄 수 있을 뿐 아니라 html 코드가 지저분해진다는 단점이 있습니다.
