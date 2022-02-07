@@ -29,9 +29,9 @@ dynamic component를 호출하는 container에 해당하는 component를 작성�
 @Component({
   selector: 'app-container',
   template: `
-		<button (click)="callAComponent()">Show A-Component</button>
-    <button (click)="callBComponent()">Show B-Component</button>
-    `
+  <button (click)="callAComponent()">Show A-Component</button>
+  <button (click)="callBComponent()">Show B-Component</button>
+  `
 })
 export class ContainerComponent {
   constructor(
@@ -97,9 +97,9 @@ dynamic component를 호출하는 container에 해당하는 component를 작성�
 @Component({
   selector: 'app-container',
   template: `
-		<button (click)="callAComponent()">Show A-Component</button>
-    <button (click)="callBComponent()">Show B-Component</button>
-    `
+  <button (click)="callAComponent()">Show A-Component</button>
+  <button (click)="callBComponent()">Show B-Component</button>
+  `
 })
 export class ContainerComponent {
   constructor(
@@ -177,9 +177,9 @@ changeDetection 사용이 꺼려진다면 Subject를 활용하는 것도 좋은 
 @Component({
   selector: 'app-container',
   template: `
-		<button (click)="callAComponent()">Show A-Component</button>
-    <button (click)="callBComponent()">Show B-Component</button>
-    `
+  <button (click)="callAComponent()">Show A-Component</button>
+  <button (click)="callBComponent()">Show B-Component</button>
+  `
 })
 export class ContainerComponent {
   constructor(
@@ -233,10 +233,10 @@ export class BComponent {
 @Component({
   selector: 'app-container',
   template: `
-		<button (click)="callAComponent()">Show A-Component</button>
-    <button (click)="callBComponent()">Show B-Component</button>
-    <button (click)="removeAll()">RemoveAll</button>
-    `
+  <button (click)="callAComponent()">Show A-Component</button>
+  <button (click)="callBComponent()">Show B-Component</button>
+  <button (click)="removeAll()">RemoveAll</button>
+  `
 })
 export class ContainerComponent {
   constructor(
@@ -275,9 +275,9 @@ v13부터는 기존의 createComponent 함수가 deprecated 되고, 새로 작�
 @Component({
   selector: 'app-container',
   template: `
-		<button (click)="callAComponent()">Show A-Component</button>
-    <button (click)="callBComponent()">Show B-Component</button>
-    `
+  <button (click)="callAComponent()">Show A-Component</button>
+  <button (click)="callBComponent()">Show B-Component</button>
+  `
 })
 export class ContainerComponent {
   constructor(
