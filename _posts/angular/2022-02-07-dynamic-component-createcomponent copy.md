@@ -1,12 +1,10 @@
 ---
-title: "Dynamic Component with createComponent"
+title: "createComponent으로 동적 컴포넌트 만들기 (Dynamic Component with createComponent)"
 date: 2022-02-07 17:46:00 +0900
 comments: true
 categories: angular
 tags: [dynamic, component, createcomponent]
 ---
-
-# 목표
 
 보다 범용적인 버전에서 활용할 수 있는 createComponent를 사용하여 dynamic component를 구현합니다.<br>
 
