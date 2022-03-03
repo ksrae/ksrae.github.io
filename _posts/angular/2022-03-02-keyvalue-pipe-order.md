@@ -27,13 +27,13 @@ let data = {
   gender: 'unknown'
   ...
 };
-
 ...
 ```
 
 의 데이터가 있을 때 이를 keyvalue를 활용하면 다음과 같이 나타낼 수 있습니다.
 
 ```html
+{% raw %}
 <ng-container *ngFor="let item of data | keyvalue">
   <p>{{item.key}} => {{item.value}}</p>
 </ng-container>
@@ -44,6 +44,7 @@ let data = {
   id => 1,
   name => 'test'
 -->
+{% endraw %}
 ```
 
 변수로 선언했던 data의 값이 key와 value로 나뉘어 화면에 표시됨을 볼 수 있습니다.<br/>
@@ -110,10 +111,10 @@ descending = (a: KeyValue<K, V>, b: KeyValue<K, V>) => {
   return b - a;
 }
 ...
-
 ```
 
 ```html
+{% raw %}
 <ng-container *ngFor="let item of data | keyvalue: original"> <!-- ascending, original, descending 중 원하는 방식을 입력합니다. -->
   <p>{{item.key}} => {{item.value}}</p>
 </ng-container>
@@ -124,6 +125,7 @@ descending = (a: KeyValue<K, V>, b: KeyValue<K, V>) => {
   age => 100,
   gender => 'unknown'
 -->
+{% endraw %}
 ```
 
 
