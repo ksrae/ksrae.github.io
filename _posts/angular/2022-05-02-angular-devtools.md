@@ -11,7 +11,7 @@ tags: [chrome, tool]
 
 ## Chrome DevTools에 Angular 탭 추가하기
 아래의 단계를 통해 Chrome DevTools에서 Angular 탭을 추가해 봅시다.<br/>
-- Chrome Web Store에 접속하여 Angular DevTools를 검색하거나, 또는 [Angular DevTools](https://chrome.google.com/webstore/detail/angular-devtools/ienfalfjdbdpebioblfackkekamfmbnh) 링크를 클릭합니다. <br/>
+- [Chrome Web Store](https://chrome.google.com/webstore/category/extensions) 에 접속하여 Angular DevTools를 검색하거나, 또는 [Angular DevTools](https://chrome.google.com/webstore/detail/angular-devtools/ienfalfjdbdpebioblfackkekamfmbnh) 링크를 클릭합니다. <br/>
 - 설치하기를 눌러 설치를 마칩니다. 설치가 되면 해당 버튼은 "Chrome에서 삭제" 라는 문구로 변경됩니다. <br/>
 - 새 창을 열거나 Chrome을 재시작하면, Chrome DevTools에서 Angular 탭이 추가된 것을 확인할 수 있습니다. <br/>
 
