@@ -1,5 +1,5 @@
 ---
-title: "null 값을 처리하는 명령의 비교(Double Question Marks: ?? or Nullish coalescing operator: \|\|)"
+title: "null 값을 처리하는 명령의 비교(How To Use Double Question Marks: ??)"
 date: 2022-06-20 11:06:00 +0900
 comments: true
 categories: angular
