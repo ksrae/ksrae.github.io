@@ -1,5 +1,5 @@
 ---
-title: "Dynamic Component with ngComponentOutlet"
+title: "ngComponentOutlet으로 동적 컴포넌트 만들기 (Dynamic Component with ngComponentOutlet)"
 date: 2021-11-21 23:31:00 +0900
 comments: true
 categories: angular
