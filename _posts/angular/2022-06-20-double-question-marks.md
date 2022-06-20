@@ -41,6 +41,8 @@ falsy의 조건은 다음과 같습니다.<br/>
 ## 새로운 명령어 '??'
 Typescript는 3.7부터 새로운 명령어 '??'를 제공합니다.<br/>
 '??'는 nullish 상태인 undefined와 null을 체크하는 명령어로 개발자의 정확한 의도대로 동작합니다.<br/>
+다시 말해서 '??'는 undefined와 null외에는 false로 판단하지 않습니다. <br/>
+예를 들어  '', false, 0은 falsy에서는 nullish 아니므로 '??'에서는 true값을 반환합니다.<br/>
 
 ```tsx
 value = value ?? '';
