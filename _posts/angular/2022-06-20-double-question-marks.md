@@ -35,19 +35,24 @@ falsy의 조건은 다음과 같습니다.<br/>
 - false
 - 0
 - ''
+
 <br/><br/>
+
 즉, undefined, null뿐 아니라 다른 값도 false로 판단하므로 종종 개발자의 의도와 다른 결과를 내기도 합니다.<br/>
 이를 보완하고자 Typescript에 새로운 명령어가 추가되었습니다.
 
 ## 새로운 명령어 '??'
 Typescript는 3.7부터 새로운 명령어 '??'를 제공합니다.<br/>
-'??'는 nullish 상태인 undefined와 null을 체크하는 명령어로 개발자의 정확한 의도대로 동작합니다.<br/>
-다시 말해서 '??'는 undefined와 null외에는 false로 판단하지 않습니다. <br/>
-예를 들어  '', false, 0은 falsy에서는 nullish 아니므로 '??'에서는 true값을 반환합니다.<br/>
 
 ```tsx
 value = value ?? '';
 ```
+
+
+'??'는 nullish 상태인 undefined와 null을 체크하는 명령어로 개발자의 정확한 의도대로 동작합니다.<br/>
+다시 말해서 '??'는 undefined와 null외에는 false로 판단하지 않습니다. <br/>
+예를 들어  '', false, 0은 falsy에서는 nullish 아니므로 '??'에서는 true값을 반환합니다.<br/>
+
 
 ## '\|\|' 와 '??' 의 비교
 코드를 통해 두 명령어의 차이를 비교해봅시다.<br/>
@@ -110,8 +115,8 @@ let nullishBook = {
 ```
 
 ## Template에서의 문제
-typescript 3.9까지는 아직 template에서 '??'를 지원하지 않습니다. <br/>
-따라서 template에서는 아직 '\|\|'를 사용해야 합니다.<br/>
+typescript 3.9 버전까지는 아직 template에서 '??'를 지원하지 않습니다. <br/>
+따라서 template에서는 '\|\|'를 사용해야 합니다.<br/> 
 
 
 ## 결과
