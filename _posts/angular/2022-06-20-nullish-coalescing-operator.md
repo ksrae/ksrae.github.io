@@ -1,6 +1,6 @@
 ---
 title: "null 값을 처리하는 명령의 비교(Double Question Marks: ?? or Nullish coalescing operator: ||)"
-date: 2022-06-30 11:06:00 +0900
+date: 2022-06-20 11:06:00 +0900
 comments: true
 categories: angular
 tags: [nullish, coalescing, operator]
