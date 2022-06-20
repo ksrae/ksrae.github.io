@@ -17,13 +17,14 @@ return '';
 value = value !== undefined || value !== null ? value : '';
 ```
 
-Typescript에서는 매번 변수를 비교할 때 undefined와 null을 체크해야 하는 불편함을 줄이기 위해 단축명령어인 '\|\|' 를 제공합니다.
+## Nullish coalescing Operator
+Typescript는 매번 변수를 비교할 때 undefined와 null을 체크해야 하는 불편함을 줄이기 위해 단축명령어인 '\|\|' 를 제공하며, 이를 Nullish coalescing Operator라고 합니다.
 
 ```tsx
 value = value || '';
 ```
 
-그러나 '\|\|' 는 때때로 개발자의 의도와 다른 결과를 내기도 합니다.
+그러나 '\|\|' 는 때때로 개발자의 의도와 다른 결과를 내는 경우가 있어서 문제가 됩니다. 어떠한 문제점이 있는지 살펴보도록 합시다.
 
 ## '\|\|' 의 문제점
 일반적으로 개발자가 '\|\|'를 사용하는 의도는 변수의 값이 undefined이거나 null이 아닌 경우를 체크하는 것입니다. <br/>
@@ -34,6 +35,7 @@ falsy의 조건은 다음과 같습니다.<br/>
 - false
 - 0
 - ''
+<br/><br/>
 즉, undefined, null뿐 아니라 다른 값도 비교하므로 개발자의 의도와 다른 결과를 내기도 합니다.
 
 ## 새로운 명령어 '??'
