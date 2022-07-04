@@ -2,7 +2,7 @@
 title: "interface에서 getter, setter 생성하기(How to create getter and setter in interface?)"
 date: 2022-04-29 13:13:00 +0900
 comments: true
-categories: typescript
+categories: angular
 tags: [class, interface, getter, setter]
 ---
 
