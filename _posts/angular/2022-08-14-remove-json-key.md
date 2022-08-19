@@ -35,19 +35,20 @@ let filtered = {
 
 ## delete 제거
 
-가장 흔항 방법으로는 delete를 활용하는 방법입니다.
+가장 흔한 방법으로는 delete를 활용하는 방법입니다.
 
 ```tsx
-const test = {
-  test1: 'test1',
-  test2: 'test2',
+let origin = {
+  name: 'kim',
+  birth: '990101',
+  email: 'kim@test.com'
 };
 
-delete test[test1];
+delete origin['birth'];
 ```
 
 그러나 특정 항목에 직접 접근하여 제거하는 방식은 좋은 방법이 아니며, JSON 변수를 배열처럼 접근하는 방식도 추천할 수 없는 방식입니다.<br/>
-특히 eslint의 같은 코드 규칙을 정할 때 이를 예외적으로 허용해야하는 점도 고려해야합니다.<br/>
+특히 delete의 경우 메모리에 할당된 object값을 실제로 제거하는 것이므로 메모리 접근 시간으로 인해 처리 속도가 느립니다. <br/>
 <br/>
 
 ## const를 활용한 제거
@@ -55,40 +56,44 @@ delete test[test1];
 우리는 JSON객체의 각 항목을 const 변수에 포함할 수 있습니다. 이를 활용하여 특정 항목을 분리하여 추출한 후 포함시키지 않는 방법입니다.
 
 ```tsx
-const test = {
-  test1: 'test1',
-  test2: 'test2',
+let origin = {
+  name: 'kim',
+  birth: '990101',
+  email: 'kim@test.com'
 };
 
-const {test1, ...obj} = test;
-test = obj;
+const {birth, ...obj} = origin;
+origin = obj;
 ```
 
-const 변수에 특정항목 (여기서는 test1)을 별도로 정의한 후 기존 JSON 변수에 해당 항목을 제외한 범위의 값 (여기서는 obj) 만 재주입 하는 방법입니다.<br/>
-delete를 사용하지 않아 eslint 규칙에 어긋나지 않으면서도 간결하게 해결할 수 있는 장점이 있습니다.<br/>
+const 변수에 특정항목 (여기서는 birth)을 별도로 정의한 후 기존 JSON 변수에 해당 항목을 제외한 범위의 값 (여기서는 obj) 만 재주입 하는 방법입니다.<br/>
+delete를 사용하지 않으므로 더 빠르고 간결하게 해결할 수 있는 장점이 있습니다.<br/>
 <br/>
 
 ## const를 활용한 가변적인 값 제거
 
+위에서는 고정된 값을 제거하는 방법에 대해 알아보았으니,
 이번에는 const를 활용하여 filter 함수를 제작해보겠습니다.<br/>
 <br/>
-그 전에 우리는 interface를 정의할 때 키가 가변적인 경우 다음과 같이 정의합니다.<br/>
+그 전에 우리는 interface를 정의할 때 키가 가변적인 경우에 대해 알아봅시다.
+아래의 interface 정의와 같이 key를 대괄호에 묶어서 정의할 수 있습니다.<br/>
 
 ```tsx
-export interface ITest {
+export interface IData {
   [key: string]: string
 }
 ```
 
-이와 유사한 방법을 활용하면 쉽게 filter함수를 만들 수 있습니다.<br/>
+가변적인 object값의 제거도 위의 interface와 유사한 방법을 활용하면 쉽게 구현할 수 있습니다.<br/>
 
 ```tsx
-let test = {
-  test1: 'test1',
-  test2: 'test2',
+let origin = {
+  name: 'kim',
+  birth: '990101',
+  email: 'kim@test.com'
 };
 
-test = filter('test1');
+origin = filter('birth');
 
 function filter(key: string): unknown {
   const { [key]: keyval, ...obj} = test;
@@ -97,7 +102,7 @@ function filter(key: string): unknown {
 
 ```
 
-위의 예제에서 filter함수를 보면 key값을 받아 test 변수로부터 이 값을 빼내는 것을 볼 수 있습니다.<br/>
+위의 예제에서 filter함수를 보면 key값을 받아 origin 변수로부터 해당 값만을 제거하고 리턴하는 것을 볼 수 있습니다.<br/>
 <br/>
 
 
