@@ -137,6 +137,18 @@ HC_exporting(Highcharts);
 ssr에서는 highchart가 로드되기 전에 호출되는 것을 방지하기 위해 chart 변수에 값이 정의되기 전에 화면에 노출되지 않도록 ngIf를 추가해야 합니다. <br/>
 그렇지 않으면 아직 값이 적용되지 않은 변수를 highcharts-angular에 주입을 시도하므로 에러가 발생합니다.
 
+```html
+<highcharts-chart 
+  *ngIf="Highcharts"
+  [Highcharts]="Highcharts"
+  [constructorType]="chartConstructor"
+  [options]="chartOptions"
+  [callbackFunction]="chartCallback"
+  [(update)]="updateFlag"
+  [oneToOne]="oneToOneFlag"
+  [runOutsideAngular]="runOutsideAngularFlag">
+</highcharts-chart>
+```
 
 ## Reference
 [Highcharts-Angular](https://github.com/highcharts/highcharts-angular)
