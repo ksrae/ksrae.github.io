@@ -85,7 +85,7 @@ highcharts-angular에서 제공하는 기본 옵션은 다음과 같습니다.<b
 
 ```
 
-하나하나 살펴 보자면,<br/>
+Attribute를 살펴 보면 다음과 같습니다.<br/>
 - highcharts: typeof Highcharts // required, highcharts 변수를 전달해야 합니다.<br/>
 - chartConstructor: string = 'chart'; // optional, chart의 종류를 정의 합니다. 가능한 옵션은 'chart', 'stockChart', 'mapChart', 'ganttChart' 입니다.<br/>
 - chartOptions: Highcharts.Options = { ... }; // required, 차트를 구성하는 값을 전달해야 합니다.<br/>
