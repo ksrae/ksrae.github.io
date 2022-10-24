@@ -33,7 +33,7 @@ typescript나 angular에서는 이를 어떻게 적용할 수 있을까요?<br/>
 이 파라미터 값이 바로 위의 this를 대응하는 값이므로 위의 코드는 아래와 같이 수정하여 적용할 수 있습니다.<br/>
 
 ```tsx
-  formatter: (e: any) {
+  formatter: (e: any) => {
     return '<b>'+ (e.point ? e.point.name : e.series.name)  +'</b><br/>';
   }
 ```
@@ -42,7 +42,7 @@ typescript나 angular에서는 이를 어떻게 적용할 수 있을까요?<br/>
 예를 들어 위의 formatter에서의 this의 type은 ([링크 참조](https://api.highcharts.com/class-reference/Highcharts#.TooltipFormatterCallbackFunction))Highcharts.TooltipFormatterContextObject 이므로 다음과 같이 수정할 수 있습니다.
 
 ```tsx
-  formatter: (e: Highcharts.TooltipFormatterContextObject) {
+  formatter: (e: Highcharts.TooltipFormatterContextObject) => {
     return '<b>'+ (e.point ? e.point.name : e.series.name)  +'</b><br/>';
   }
 ```
