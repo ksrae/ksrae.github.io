@@ -5,7 +5,6 @@ comments: true
 categories: angular
 tags: [svg, domaanitizer]
 ---
-
 이미지 파일을 업로드하기 위해서는 `<input type="file">`을 사용해야하며, 이 결과를 base64 string으로 변환하면 `<img>`에 표시할 수 있습니다.
 
 
@@ -17,7 +16,6 @@ tags: [svg, domaanitizer]
 <img [src]="imageSrc">
 ```
 
-
 ```
 addImage(file: FileList) {
    const reader = new FileReader();
@@ -27,8 +25,6 @@ addImage(file: FileList) {
    }
 }
 ```
-
-
 
 그런데 만일 svg 파일을 추가하면 다음과 같은 에러가 발생하며, 깨진 이미지를 볼 수 있습니다.
 
@@ -50,7 +46,6 @@ unsafe를 개발자가 보장하면 이를 해결할 수 있습니다. angular�
 
 DomSanitizer는 다양한 함수를 제공하는데 svg의 unsafe를 해결하기 위해서는 `bypassSecurityTrustUrl()` 를 활용해야 합니다.
 
-
 ```
 constructor(
    private domSanitizer: DomSanitizer
@@ -63,7 +58,6 @@ addImage(file: FileList) {
    }
 }
 ```
-
 
 
 
