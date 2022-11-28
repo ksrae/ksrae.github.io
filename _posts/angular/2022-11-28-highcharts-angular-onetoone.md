@@ -1,6 +1,6 @@
 ---
 title: "Highcharts-angular easy update with oneToOne Option"
-date: 2022-10-21 13:49:00 +0900
+date: 2022-11-28 18:11:00 +0900
 comments: true
 categories: angular
 tags: [highcharts-angular]

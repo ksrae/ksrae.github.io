@@ -1,6 +1,6 @@
 ---
 title: "How to solve svg unsafe"
-date: 2022-11-17 14:17:00 +0900
+date: 2022-11-23 14:17:00 +0900
 comments: true
 categories: angular
 tags: [svg, domaanitizer]
