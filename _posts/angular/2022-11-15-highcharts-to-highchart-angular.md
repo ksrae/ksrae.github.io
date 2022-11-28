@@ -77,7 +77,7 @@ export class HighchartsComponent {
 ```
 
 주의:
-이 방식의 가장 큰 문제점이 발견되었습니다. 바로 chart 명령어를 통해 print 기능이나 또는 export image 기능을 활용할 경우 중복 실행이 불가능하다는 것입니다. 중복 실행할 경우 chart값이 undefined 라며 오류를 일으킵니다.
+이 방식의 가장 큰 문제점은 chart 명령어를 통해 print 기능이나 또는 export image 기능을 활용할 경우 1회만 실행이 가능하다는 것입니다. 여러번 이상 실행할 경우 chart값이 undefined 라는 오류를 일으키며, 동작하지 않습니다.
 
 
 ## 해결 방안 3 - chartInstance
