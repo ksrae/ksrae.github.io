@@ -9,7 +9,7 @@ tags: [unload, beforeunload]
 
 .
 
-## Beforeunload Unload Event
+# Beforeunload & Unload Event
 
 browser를 닫을 경우 beforeunload와 unload 두 가지 이벤트가 발생합니다.
 
@@ -17,7 +17,7 @@ browser를 닫을 경우 beforeunload와 unload 두 가지 이벤트가 발생�
 
 .
 
-### beforeunload
+## beforeunload
 
 document unload를 진행하기 전에 이벤트가 발생합니다. document는 여전히 visible 상태이며 이 이벤트는 취소 가능합니다.
 
@@ -27,8 +27,7 @@ document unload를 진행하기 전에 이벤트가 발생합니다. document는
 
 .
 
-
-#### Alert, Confirm not fired.
+Alert, Confirm not fired.
 
 HTML 규약에 따르면 window.alert, window.confirm, window.prompt 이벤트는 무시됩니다.
 
@@ -36,7 +35,7 @@ HTML 규약에 따르면 window.alert, window.confirm, window.prompt 이벤트�
 
 .
 
-### unload
+## unload
 
 beforeunload 이후에 발생하는 이벤트 입니다. 일반적으로 document가 unload 될 때 발생하는 이벤트로,
 
@@ -47,20 +46,55 @@ beforeunload 이후에 발생하는 이벤트 입니다. 일반적으로 documen
 
 .
 
-### Avoid unload Event
+# Angular Example
 
-unload 이벤트는 더이상 사용하지 않을 것을 권장합니다. 이유는 다음과 같습니다.
-
-- 모바일에서는 여러가지 시나리오에서 unload 이벤트가 동작하지 않습니다.
-  - 모바일 유저가 접속한 뒤 다른 앱으로 전환한 뒤 app manager를 통해 browser를 닫을 경우
-- back/forward cache(bfcache)가 유효하지 않습니다.
-  - unload event 이후에는 bfcache는 발생하지 않습니다.
-  - 일부 페이지에서는 unload 이벤트가 있는 페이지의 경우 bfcache를 적용하지 않으며 이는 매우 좋지 않은 performance를 유발합니다.
-  - 일부 브라우저는 bfcache 이슈로 unload 이벤트를 금지합니다.
+angular에서는 @Hostlistener를 통해 이벤트를 받아 처리합니다.
 
 .
 
-### Why Not Fire Such Events?
+## beforeunload
+
+### 별도의 함수에서 처리하는 방법
+
+```
+  @HostListener(`window:beforeunload`, [ `$event` ])
+  beforeunload(e: any) {
+    return false;
+  }
+```
+
+### OnDestroy에서 처리하는 방법
+
+```
+  @HostListener('window:beforeunload')
+  ngOnDestroy() {
+    console.log('destroy');
+    return false;
+  }
+```
+
+.
+
+# Avoid unload Event
+
+unload 이벤트는 더이상 사용하지 않을 것을 권장합니다. 이유는 다음과 같습니다.
+
+- 모바일 유저가 접속한 뒤 다른 앱으로 전환한 뒤 app manager를 통해 browser를 닫을 경우 unload 이벤트가 동작하지 않습니다.
+- unload event 이후에는 bfcache는 발생하지 않습니다.
+- 일부 페이지에서는 unload 이벤트가 있는 페이지의 경우 bfcache를 적용하지 않으며 이는 매우 좋지 않은 performance를 유발합니다.
+- 일부 브라우저는 bfcache 이슈로 unload 이벤트를 금지합니다.
+
+.
+
+# Why Alert, Confirm not working?
+
+HTML 규약에 따르면 window.alert, window.confirm, window.prompt 이벤트는 무시됩니다.
+
+또한 최신 브라우저의 대부분은 더 강화된 보안에 따라 browser의 confirm message를 더이상 customize할 수 없습니다.
+
+.
+
+# Why Not Fire Such Events?
 
 beforeunload 또는 unload event는 다음의 현상에 동작합니다.
 
@@ -73,44 +107,15 @@ beforeunload 또는 unload event는 다음의 현상에 동작합니다.
 
 최신 브라우저들은 페이지 내에서 유저의 동작이 없는 경우 탭 또는 브라우저를 닫을 때 beforeunload 또는 unload 이벤트를 발생시키지 않고 즉시 닫아버리기 때문입니다.
 
-따라서 해당 이벤트를 적용하려면 닫기 전에 반드시 페이지 내에서 활동을 (최소한 화면 drag라도) 해야 적용됩니다. 
+따라서 해당 이벤트를 적용하려면 닫기 전에 반드시 페이지 내에서 활동을 (최소한 화면 drag라도) 해야 적용됩니다.
 
 .
 
-## Angular Example
+# 대안 Event
 
-angular에서는 @Hostlistener를 통해 이벤트를 받아 처리합니다.
+## visibilitychange
 
-.
-
-### beforeunload
-
-#### 별도의 함수에서 처리하는 방법
-
-```
-  @HostListener(`window:beforeunload`, [ `$event` ])
-  beforeunload(e: any) {
-    return false;
-  }
-```
-
-#### OnDestroy에서 처리하는 방법
-
-```
-  @HostListener('window:beforeunload')
-  ngOnDestroy() {
-    console.log('destroy');
-    return false;
-  }
-```
-
-.
-
-## 대안 Event
-
-### visibilitychange
-
-browser의 모든 변화를 감지하고 이를 알려줍니다. 
+browser의 모든 변화를 감지하고 이를 알려줍니다.
 
 다만, 최소화 여부 일 때만 감지가 가능하며, (최소화 = hidden, 최소화가 아닐 때 = visible) close는 감지할 수 없으므로, 이 Event는 unload에는 적합하지 않습니다.
 
@@ -124,7 +129,7 @@ browser의 모든 변화를 감지하고 이를 알려줍니다.
 
 .
 
-### pagehide
+## pagehide
 
 unload 이벤트의 대안으로 추천하는 방법입니다.
 
@@ -143,7 +148,7 @@ unload 이벤트의 대안으로 추천하는 방법입니다.
 
 .
 
-### beforeunload 와 pagehide 함께 사용하기
+# beforeunload 와 pagehide 함께 사용하기
 
 일반적으로 beforeunload 이벤트가 동작하면 pagehide는 동작하지 않습니다.
 
@@ -166,7 +171,7 @@ unload 이벤트의 대안으로 추천하는 방법입니다.
 
 .
 
-## Reference
+# Reference
 
 [unload event](https://developer.mozilla.org/en-US/docs/Web/API/Window/unload_event)
 
