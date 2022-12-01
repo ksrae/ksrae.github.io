@@ -27,14 +27,6 @@ document unload를 진행하기 전에 이벤트가 발생합니다. document는
 
 .
 
-Alert, Confirm not fired.
-
-HTML 규약에 따르면 window.alert, window.confirm, window.prompt 이벤트는 무시됩니다.
-
-또한 최신 브라우저의 대부분은 더 강화된 보안에 따라 browser의 confirm message를 더이상 customize할 수 없습니다.
-
-.
-
 ## unload
 
 beforeunload 이후에 발생하는 이벤트 입니다. 일반적으로 document가 unload 될 때 발생하는 이벤트로,
