@@ -68,9 +68,11 @@ assets/i18n에 다국어를 위해 ko.json과 en.json을 만들고 값을 넣습
 template에 언어 변경 버튼 및 텍스트를 배치합니다.
 
 ```html
+<% raw %>
 <button (click)="change('ko')">KO</button>
 <button (click)="change('en')">EN</button>
 <p>{{'a' | translate}}</p>
+<% endraw %>
 ```
 
 component에는 change 함수를 추가합니다. 이 때, constructor에 translateService를 선언해야 합니다.

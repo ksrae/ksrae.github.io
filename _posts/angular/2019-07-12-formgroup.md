@@ -32,7 +32,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 ```
 
 
-그리고 일반 html 태그가 아닌 angular전용 태그를 사용할 것이므로 CUSTOM_ELEMENTS_SCHEMA도 해당 module에 추가해주어야 합니다.
+그리고 일반 html 태그가 아닌 angular전용 태그를 사용할 것이므로 `CUSTOM_ELEMENTS_SCHEMA`도 해당 module에 추가해주어야 합니다.
 
 ```ts
 
@@ -61,8 +61,8 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 위의 코드를 정리하면 다음과 같습니다.
 - {% raw %} [formGroup] {% endraw %}에는 component에서 사용할 변수명을 입력합니다.
-- (ngSubmit) 에는 submit을 수행할 함수명을 입력합니다.
-- formControlName 에는 해당 input의 값을 처리할 변수명을 입력합니다.
+- `(ngSubmit)` 에는 submit을 수행할 함수명을 입력합니다.
+- `formControlName` 에는 해당 input의 값을 처리할 변수명을 입력합니다.
 
 
 ## component 작성
@@ -120,7 +120,7 @@ onInit이나 constructor에 formgroup을 정의합니다.
             item: ['', [Validators.required]]
       })
 
-이 때, 사용되는 모든 form의 formControlName을 입력합니다. <br>
+이 때, 사용되는 모든 form의 `formControlName`을 입력합니다. <br>
 '' 부분은 초기값으로 초기값이 있으면 입력하고, 없으면 비워둡니다.<br>
 Validation은 배열 형태로 구성하되 없으면 빈 배열로 두어도 됩니다.<br>
 

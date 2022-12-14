@@ -124,7 +124,7 @@ export class ContainerComponent {
 @Component({
   selector: 'a-component',
   template: `
-    <p>{{data}}</p>`
+    <p><% raw %>{{data}}<% endraw %></p>`
 })
 export class AComponent {
   data!: string;
@@ -133,7 +133,7 @@ export class AComponent {
 @Component({
   selector: 'b-component',
   template: `
-    <p>{{data}}</p>`
+    <p><% raw %>{{data}}<% endraw %></p>`
 })
 export class BComponent {
   @Input() data!: string;
@@ -204,7 +204,7 @@ export class ContainerComponent {
 @Component({
   selector: 'a-component',
   template: `
-    <p>{{data$ | async}}</p>`
+    <p><% raw %>{{data$ | async}}<% endraw %></p>`
 })
 export class AComponent {
   data$ = new BehaviorSubject<any>('');
@@ -213,7 +213,7 @@ export class AComponent {
 @Component({
   selector: 'b-component',
   template: `
-    <p>{{data$ | async}}</p>`
+    <p><% raw %>{{data$ | async}}<% endraw %></p>`
 })
 export class BComponent {
   data$ = new BehaviorSubject<any>('');

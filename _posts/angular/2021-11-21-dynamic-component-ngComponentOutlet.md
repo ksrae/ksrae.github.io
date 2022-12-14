@@ -117,7 +117,7 @@ export class AppComponent {
 // child component
 @Component({
   selector: 'complete-component',
-  template: `Complete: {{titleInjected}}`
+  template: `Complete: <% raw %>{{titleInjected}}<% endraw %>`
 })
 export class CompleteComponent {
   constructor(@Inject(TITLE) public titleInjected: string) {}
@@ -163,7 +163,7 @@ export class AppComponent {
 // child
 @Component({
   selector: 'complete-component',
-  template: `Complete: {{ greeter.suffix }}`
+  template: `Complete: <% raw %>{{ greeter.suffix }}<% endraw %>`
 })
 export class CompleteComponent {
   constructor(public greeter: Greeter) {}
@@ -291,7 +291,7 @@ export class AppComponent {
 // child
 @Component({
   selector: 'complete-component',
-  template: `Complete: <ng-content></ng-content> <ng-content></ng-content>{{ titleInjected }}`
+  template: `Complete: <ng-content></ng-content> <ng-content></ng-content><% raw %>{{ titleInjected }}<% endraw %>`
 })
 export class CompleteComponent {
   constructor(@Inject(TITLE) public titleInjected: string) {}

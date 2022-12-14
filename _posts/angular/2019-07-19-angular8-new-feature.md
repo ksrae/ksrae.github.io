@@ -84,13 +84,13 @@ formArray.clear()
 ```
 
 selector에는 아래의 값이 들어갈 수 있습니다.
-> template의 reference 변수값 ({% raw %}<my-component #cmp></my-component> {% end raw %}을 `@ViewChild('cmp')`으로 호출)
+> template의 reference 변수값 ({% raw %}<my-component #cmp></my-component> {% endraw %}을 `@ViewChild('cmp')`으로 호출)
 
 > child component가 가진 provider (`@ViewChild(SomeService) someService: SomeService`)
 
 > string 토큰으로 정의된 provider ( `@ViewChild('someToken') someTokenVal: any`)
 
-> TemplateRef (e.g. query {% raw %}<ng-template></ng-template> {% end raw %} with `@ViewChild(TemplateRef) template`;)
+> TemplateRef (e.g. query {% raw %}<ng-template></ng-template> {% endraw %} with `@ViewChild(TemplateRef) template`;)
 
 
 

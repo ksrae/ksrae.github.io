@@ -79,7 +79,7 @@ keyvalue는 기본 parameter로 sorting을 추가할 수 있는 기능을 제공
 ```
 {% raw %}{{ input_expression | keyvalue [ : compareFn ] }}{% endraw %}
 
-compareFn:	(a: KeyValue<K, V>, b: KeyValue<K, V>)
+compareFn: (a: KeyValue<K, V>, b: KeyValue<K, V>)
 ```
 
 keyvalue는 parameter가 없는 경우 ascend 정렬을 기본값으로 가지고 있으며, 그래서 keyvalue를 사용하는 경우 자동으로 정렬되게 되는 것입니다.<br/>

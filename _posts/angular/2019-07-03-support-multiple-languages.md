@@ -168,7 +168,7 @@ interface에서 정의한 값대로 json 파일을 생성합니다.<br>
 
 ### 2-3. template에서의 활용
 
-직접 {{ }} 에서 적용할 수 있으나 번역 내용에 tag가 들어간 경우 innerHTML에서 사용할 수도 있습니다.<br>
+직접 <% raw %>{{ }}<% endraw %> 에서 적용할 수 있으나 번역 내용에 tag가 들어간 경우 innerHTML에서 사용할 수도 있습니다.<br>
 
 ```html
 {% raw %}
@@ -198,7 +198,7 @@ interface에서 정의한 값대로 json 파일을 생성합니다.<br>
 
 ```json
 {
-    "changeItem": "{{item}} 변경",
+    "changeItem": "<% raw %>{{item}}<% endraw %> 변경",
     "password": "비밀번호",
     "username": "유저명",
 }

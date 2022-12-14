@@ -113,7 +113,7 @@ button 2개를 만들고 모달을 호출하는 형태로 구성합니다.
   template: `
     <button (click)="openModal(1)">Show Modal 1</button>
     <button (click)="openModal(2)">Show Modal 2</button>
-    <p>{{modalResult$ | async}}</p>
+    <p><% raw %>{{modalResult$ | async}}<% endraw %></p>
   `
 })
 export class ContainerComponent {

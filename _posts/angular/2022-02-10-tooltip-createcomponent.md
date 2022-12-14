@@ -23,7 +23,7 @@ div 2개와 tooltip 2개를 만들어 각각을 `mouseenter`, `mouseleave` 했�
 
 ## container component
 
-{% raw %}<div>{% end raw %} 2개를 만들고 `directive`를 호출하는 형태로 구성합니다.
+{% raw %}<div>{% endraw %} 2개를 만들고 `directive`를 호출하는 형태로 구성합니다.
 
 ```tsx
 @Component({
