@@ -9,8 +9,7 @@ tags: [class, interface, getter, setter]
 class의 getter와 setter에 대해 알아보고, 이를 interface에서 구현합니다. <br/>
 
 ## getter와 setter의 정의
-일반적으로 class는 변수를 private으로 지정하고, 함수를 통해 변수의 값을 설정하거나 가져오는데,<br/>
-이 때, 해당 함수의 앞에 get과 set을 선언하며 이를 getter와 setter라고 합니다.<br/>
+일반적으로 class는 변수를 private으로 지정하고, 함수를 통해 변수의 값을 설정하거나 가져오는데, 이 때, 해당 함수의 앞에 get과 set을 선언하며 이를 getter와 setter라고 합니다.<br/>
 <br/>
 코드로 보면 다음과 같습니다.<br/>
 
@@ -112,7 +111,6 @@ class Person {
 getter와 setter는 반드시 규칙을 따라야 하며, 이를 지키지 않을 경우 에러를 발생시킵니다. <br/>
 즉, 휴먼 에러를 방지하며 목적에 맞는 정확한 구현을 요구합니다.<br/>
 규칙은 다음과 같습니다.<br/>
-<br/>
 - getter는 함수의 인자를 받을 수 없고, 반드시 리턴 값을 가져야 합니다.
 - setter는 반드시 함수의 인자를 받아야 하며, 리턴 값을 가질 수 없습니다.
 

@@ -10,24 +10,24 @@ websocket을 angular 사용하는 방법에 대해 알아봅시다.<br/>
 모든 내용을 다루기에는 양이 많으므로 이번에는 js에서 제공하는 일반 websocket을 활용하는 방법만 정리하고, <br/>
 다음 시간에 rxjs의 websocket을 활용하는 방법에 대해 정리하도록 하겠습니다.<br/><br/>
 
-websocket은 주의할 점이 만일 해당 사이트가 https인 경우에는 wss를, http인 경우에는 ws를 사용해야 합니다.<br/>
+websocket은 주의할 점이 만일 해당 사이트가 <b>https인 경우에는 wss를, http인 경우에는 ws를 사용</b>해야 합니다.<br/>
 
 
 ## Backend 설정
-테스트를 위한 백엔드가 필요합니다. 간단하게 작성할 예정이므로 nodejs를 활용하겠습니다.<br/>
+테스트를 위한 백엔드가 필요한대, 간단하게 작성할 예정이므로 nodejs로 작성하겠습니다.<br/>
 
 
 ### nodejs 프로젝트 설치
 
 먼저 node 프로젝트 시작을 위해 다음의 명령어를 실행합니다.<br/>
 
-```
+```bash
 npm init 
 ```
 
 이제 websocket을 사용하려면 ws를 install 해야 하므로 ws도 install 해 줍니다.<br/>
 
-```
+```bash
 npm i ws
 ```
 
@@ -130,7 +130,7 @@ wss.on('connection', ws => {
 ```
 
 ## frontend 
-이번 시간에는 component 코드는 생략하고, 직접 websocket을 연결하는 service만 다루도록 하겠습니다.<br/><br/>
+이번 시간에는 직접 websocket을 연결하는 service만 다루도록 하겠습니다.<br/><br/>
 
 
 ### connection
@@ -142,7 +142,9 @@ WebSocket에서는 기본적인 값을 제공하는데 다음과 같습니다.<b
 - 1: OPEN
 - 2: CLOSING
 - 3: CLOSED
+
 <br/>
+
 서버와의 통신은 1번 OPEN 이후에만 발생하므로 이를 확인하여 작성해야 합니다.<br/>
 
 ```tsx

@@ -77,7 +77,7 @@ arr.sort((a, b) => b - a);
 keyvalue는 기본 parameter로 sorting을 추가할 수 있는 기능을 제공합니다.
 
 ```
-{{ input_expression | keyvalue [ : compareFn ] }}
+{% raw %}{{ input_expression | keyvalue [ : compareFn ] }}{% endraw %}
 
 compareFn:	(a: KeyValue<K, V>, b: KeyValue<K, V>)
 ```

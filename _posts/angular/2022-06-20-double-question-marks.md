@@ -49,9 +49,9 @@ value = value ?? '';
 ```
 
 
-'??'는 nullish 상태인 undefined와 null을 체크하는 명령어로 개발자의 정확한 의도대로 동작합니다.<br/>
-다시 말해서 '??'는 undefined와 null외에는 false로 판단하지 않습니다. <br/>
-예를 들어  '', false, 0은 falsy에서는 nullish 아니므로 '??'에서는 true값을 반환합니다.<br/>
+'??'는 nullish 상태인 `undefined`와 `null`을 체크하는 명령어로 개발자의 정확한 의도대로 동작합니다.<br/>
+다시 말해서 '??'는 `undefined`와 `null`외에는 false로 판단하지 않습니다. <br/>
+예를 들어 ` '', false, 0`은 falsy에서는 nullish 아니므로 '??'에서는 true값을 반환합니다.<br/>
 
 
 ## '\|\|' 와 '??' 의 비교
