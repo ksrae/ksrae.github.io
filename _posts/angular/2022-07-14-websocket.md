@@ -10,7 +10,7 @@ websocket을 angular 사용하는 방법에 대해 알아봅시다.<br/>
 모든 내용을 다루기에는 양이 많으므로 이번에는 js에서 제공하는 일반 websocket을 활용하는 방법만 정리하고, <br/>
 다음 시간에 rxjs의 websocket을 활용하는 방법에 대해 정리하도록 하겠습니다.<br/><br/>
 
-websocket은 주의할 점이 만일 해당 사이트가 <b>https인 경우에는 wss를, http인 경우에는 ws를 사용</b>해야 합니다.<br/>
+websocket은 주의할 점이 만일 해당 사이트가 **https인 경우에는 wss를, http인 경우에는 ws를 사용**해야 합니다.<br/>
 
 
 ## Backend 설정

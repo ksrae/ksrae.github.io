@@ -24,13 +24,15 @@ tooltip과는 다르게 modal은 고려해야할 사항이 여러가지가 있�
 버튼 2개를 눌러 2개의 모달을 띄우는 코드를 작성합니다.<br/>
 
 1. component를 호출할 controller를 생성합니다.
-  - 호출할 modal component을 create하고 return 값을 처리할 result$를 주입합니다.
-  - result$를 통해 전달 받은 값을 호출한 container component에 return 합니다.
+> 호출할 modal component을 create하고 return 값을 처리할 result$를 주입합니다.
+> result$를 통해 전달 받은 값을 호출한 container component에 return 합니다.
+
 2. modal component를 2개 생성합니다.
-  - 버튼 이벤트에 따라 주입된 result$에 값을 입력합니다.
+> 버튼 이벤트에 따라 주입된 result$에 값을 입력합니다.
+
 3. modal component를 호출할 container component를 생성하고 버튼 2개를 만듭니다.
-  - controller를 통해 modal을 생성하고, controller의 open 함수를 통해 모달을 호출합니다.
-  - 결과를 Observable 변수에 연결하고, template에 직접 결과를 표시하도록 합니다.
+> controller를 통해 modal을 생성하고, controller의 open 함수를 통해 모달을 호출합니다.
+> 결과를 Observable 변수에 연결하고, template에 직접 결과를 표시하도록 합니다.
 
 
 
