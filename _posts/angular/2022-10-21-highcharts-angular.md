@@ -40,7 +40,7 @@ export class HighchartsComponent implements OnInit {
 }
 ```
 
-#### 그러면 왜 highcharts-angular를 활용하는 것이 좋을까요?
+### 그러면 왜 highcharts-angular를 활용하는 것이 좋을까요?
 - zone.js의 이벤트를 handling할 수 있습니다. zone의 도움 없이 강제로 이벤트를 fire 하거나 또는 로직을 수행하고 angular outside에 태워 이벤트를 강제로 태우지 않을 수도 있습니다.<br/>
 - option만 주입하는 간단한 형태로 코드를 구성할 수 있습니다. 즉, 이전에는 Highcharts.chart를 통해 인스턴스를 생성하고, 이를 컨트롤했다면 highcharts-angular는 옵션만 해당 component에 주입하면 적용되는 형태로 간단해졌습니다. 만일 기존 코드를 동일하게 구성하려면 observable 패턴을 구성해야 하는 번거로움이 있습니다.<br/>
 - 원한다면 highcharts-angular에서 chart 인스턴스를 output하여 활용할 수도 있습니다. 차트를 작성하는 코드 구성은 간단해지면서도 모든 기능을 다룰 수 있는 형태를 갖추고 있습니다.<br/>
@@ -86,13 +86,13 @@ highcharts-angular에서 제공하는 기본 옵션은 다음과 같습니다.<b
 ```
 
 Attribute를 살펴 보면 다음과 같습니다.<br/>
-- highcharts: typeof Highcharts // required, highcharts 변수를 전달해야 합니다.<br/>
-- chartConstructor: string = 'chart'; // optional, chart의 종류를 정의 합니다. 가능한 옵션은 'chart', 'stockChart', 'mapChart', 'ganttChart' 입니다.<br/>
-- chartOptions: Highcharts.Options = { ... }; // required, 차트를 구성하는 값을 전달해야 합니다.<br/>
-- chartCallback: Highcharts.ChartCallbackFunction = function (chart) { ... } // optional, 생성된 차트의 callback 함수입니다.<br/>
-- updateFlag: boolean = false; // optional, chart 생성 후 조작할 때 update를 true로 주면 강제로 trigger 할 수 있습니다. true 값은 trigger가 적용되면 false로 변경됩니다.<br/>
-- oneToOneFlag: boolean = true; // optional, seires, xAxis, yAxis를 추가 또는 제거할 때 사용합니다. update와는 다르게 기존 값을 입력된 값으로 교체하지 않고, 주입된 값을 기존 값에 추가 또는 제거하는 방식으로 적용합니다.<br/>
-- runOutsideAngular: boolean = false; // optional, 강제로 not trigger 됩니다. 이후 updateFlag를 통해 한꺼번에 trigger를 시도하면 좋은 효율을 가질 수 있습니다. <br/>
+- `highcharts: typeof Highcharts // required`, highcharts 변수를 전달해야 합니다.<br/>
+- `chartConstructor: string = 'chart'; // optional`, chart의 종류를 정의 합니다. 가능한 옵션은 'chart', 'stockChart', 'mapChart', 'ganttChart' 입니다.<br/>
+- `chartOptions: Highcharts.Options = { ... }; // required`, 차트를 구성하는 값을 전달해야 합니다.<br/>
+- `chartCallback: Highcharts.ChartCallbackFunction = function (chart) { ... } // optional`, 생성된 차트의 callback 함수입니다.<br/>
+- `updateFlag: boolean = false; // optional`, chart 생성 후 조작할 때 update를 true로 주면 강제로 trigger 할 수 있습니다. true 값은 trigger가 적용되면 false로 변경됩니다.<br/>
+- `oneToOneFlag: boolean = true; // optional`, seires, xAxis, yAxis를 추가 또는 제거할 때 사용합니다. update와는 다르게 기존 값을 입력된 값으로 교체하지 않고, 주입된 값을 기존 값에 추가 또는 제거하는 방식으로 적용합니다.<br/>
+- `runOutsideAngular: boolean = false; // optional`, 강제로 not trigger 됩니다. 이후 updateFlag를 통해 한꺼번에 trigger를 시도하면 좋은 효율을 가질 수 있습니다. <br/>
 
 
 ### Component
