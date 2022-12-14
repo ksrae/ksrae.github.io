@@ -57,9 +57,9 @@ n초 뒤에 js에서 값이 변경되면 이를 감지하여 angular에 랜더�
 component에서 window에 pipe라는 객체를 만듭니다. 이를 통해 js -> angular로 값을 전달할 것입니다.
 ```ts
   // app.component.ts
-    window['pipe'] = (value) => { 
-      this.render = value;
-    }    
+  window['pipe'] = (value) => { 
+    this.render = value;
+  }    
 ```
 
 이제 js에서 setTimeout을 통해 n초 뒤에 pipe에 값을 전달합니다.

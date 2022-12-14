@@ -9,10 +9,10 @@ tags: [error]
 
 
 ## 환경
-windows,<br/>
-vscode,<br/>
-powershell,<br/>
-Angular 10.0.8<br/>
+- windows
+- vscode
+- powershell
+- Angular 10.0.8
 
 
 ## 원인
@@ -27,10 +27,10 @@ ng : 이 시스템에서 스크립트를 실행할 수 없으므로 C:\Users\< u
 ...
 ```
 ## 실패 케이스
-1. C:\Users\< username >\AppData\Roaming\npm\ng.ps1 읽기 모드 해제<br/>
+1. `C:\Users\< username >\AppData\Roaming\npm\ng.ps1` 읽기 모드 해제<br/>
 -> 이미 해제 되어 있으며, 상위 폴더의 읽기 모드를 해제 하여도 동작하지 않습니다.<br/>
 <br/>
-2. C:\Users\< username >\AppData\Roaming\npm\ng.ps1 삭제<br/>
+2. `C:\Users\< username >\AppData\Roaming\npm\ng.ps1` 삭제<br/>
 -> npm install -g @angular/cli 실행하면 다시 설치되며 같은 에러가 발생합니다.<br/>
 
 

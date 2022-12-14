@@ -75,13 +75,13 @@ age: 1
 
 
  
-위의 데이터에서 age를 10살로 갱신(update)하려면, {$set}을 사용해야 합니다.
+위의 데이터에서 `age`를 `10`살로 갱신(update)하려면, `{$set}`을 사용해야 합니다.
 
 ```
 db.collection.update( {id: 12345}, {$set: {age: 10}}, {multi: false})
 ```
 
-id:12345의 age를 10으로 set 하게 됩니다.
+`id:12345`의 `age`를 `10`으로 set 하게 됩니다.
 
 ```json
 {
@@ -92,7 +92,7 @@ age: 10
 ```
 
 
-filter에는 검색 때와 같이 $gte $lte 도 사용할 수 있으며 (이때는 {}multi: true}로 설정), $unset은 항목을 제거하는 것입니다.
+filter에는 검색 때와 같이 `$gte` `$lte` 도 사용할 수 있으며 (이때는 `{multi: true}`로 설정), `$unset`은 항목을 제거하는 것입니다.
 
 
 ### replace
@@ -126,13 +126,13 @@ age: 1
 }
 ```
  
-위의 데이터에서 age를 10살로 변경(replace) 해보겠습니다. $set을 사용할 필요가 없습니다.
+위의 데이터에서 age를 10살로 변경(replace) 해보겠습니다. `$set`을 사용할 필요가 없습니다.
 
 ```
 db.collection.replaceOne( {id: 12345}, {age: 10}};
 ```
 
-id:12345의 데이터는 age: 10으로 변경되었습니다.
+`id:12345`의 데이터는 `age: 10`으로 변경되었습니다.
 
 ```json
 {

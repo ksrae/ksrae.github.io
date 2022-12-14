@@ -13,8 +13,7 @@ Angular 10
   
 ## 원인
 (서버에서 xsrf 또는 csrf를 허용한 경우)<br/>
-Angular 6 이하에서는 http 전송 시 csrf 쿠키값을 헤더에 넣기 위해 HttpInterceptor를 사용하였는데, <br/>
-여기에 csrf의 값이 담긴 쿠키값을 가져와 헤더를 생성하여야 하는 불편함이 있었습니다.<br/>
+Angular 6 이하에서는 http 전송 시 csrf 쿠키값을 헤더에 넣기 위해 HttpInterceptor를 사용하였는데, 여기에 csrf의 값이 담긴 쿠키값을 가져와 헤더를 생성하여야 하는 불편함이 있었습니다.<br/>
 
 ```tsx
 @Injectable({ providedIn: 'root' })

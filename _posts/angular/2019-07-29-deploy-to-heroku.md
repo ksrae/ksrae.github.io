@@ -24,7 +24,7 @@ tags: [heroku, deploy]
 
 ## Dyno formation 확인
  
-- Overview 탭에서 Dyno formation을 확인합니다. 무료 버전에서는 npm start가 고정되어 있습니다.
+- Overview 탭에서 Dyno formation을 확인합니다. 무료 버전에서는 `npm start`가 고정되어 있습니다.
 
 
 ```
@@ -137,6 +137,9 @@ Manual 인 경우 Deploy 버튼을 클릭 할 때, <br/>
 
 
 
+## Heroku 무료 서비스 종료
+무료 서비스가 2022년 8월 이후로 단계적으로 종료됩니다.<br/>
+따라서 글에서 무료 버전 관련 내용은 더이상 의미가 없으므로 참고하시기 바랍니다.
 
 
 ## 참고 사이트

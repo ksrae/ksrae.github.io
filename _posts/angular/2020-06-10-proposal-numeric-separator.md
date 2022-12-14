@@ -8,9 +8,9 @@ tags: [error]
 
 
 ## 원인
-@babel/compat-data에 새로운 플러그인이 추가될 때 기존 @babel/preset-env의 버전과 충돌합니다.
+`@babel/compat-data`에 새로운 플러그인이 추가될 때 기존 `@babel/preset-env`의 버전과 충돌합니다.
 <br>
-available-plugins.js 파일에 정의되어 있지 않은 플러그인인 경우 에러를 던집니다.
+`available-plugins.js` 파일에 정의되어 있지 않은 플러그인인 경우 에러를 던집니다.
 
 ## 해결
 1) package-lock.json과 node_modules를 제거합니다.

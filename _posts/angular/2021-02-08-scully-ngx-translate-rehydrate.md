@@ -113,8 +113,8 @@ AppRoutingModule,
 
 
 ## 결론
-@ gilsdav / ngx-translate-router는 localized 방식으로 동작합니다. 즉, 모든 언어의 라우터를 생성한 뒤 해당 라우터만 사용하는 방식입니다.<br/>
-접근하는 시점에서 라우터를 가로 채고 localized된 route를 redirectTo 경로로 변환합니다.  예를 들어 /home은 /ko/home, /en/home 중 ngx-translate이 선택한 경로로 변환합니다. <br/>
+`@ gilsdav/ngx-translate-router`는 localized 방식으로 동작합니다. 즉, 모든 언어의 라우터를 생성한 뒤 해당 라우터만 사용하는 방식입니다.<br/>
+접근하는 시점에서 라우터를 가로 채고 localized된 route를 redirectTo 경로로 변환합니다.  예를 들어 `/home`은 `/ko/home`, `/en/home` 중 ngx-translate이 선택한 경로로 변환합니다. <br/>
 라우터 변환을 일반 애플리케이션 변환과 분리하기 위해 접두사를 사용합니다. escapePrefix를 사용하여 접두사가 제거되고 세그먼트가 번역되지 않도록 할 수 있습니다. <br/>
 
 ```tsx

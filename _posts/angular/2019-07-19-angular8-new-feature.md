@@ -75,22 +75,22 @@ formArray.clear()
 
 ## ViewChild 변경
 
-ViewChild 호출 시 static을 설정할 수 있게 되었습니다. 이로서 기존에 애매했던 호출 시점을 명확히 잡을 수 있게 되었습니다.<br>
-단, 호출되는 Directive나 Component에 ngIf 등의 동적 랜더링 조건이 들어간다면 static은 동작하지 않습니다.<br>
-이제 ViewChild는 ngAfterViewInit 이전에 호출됩니다.
+`ViewChild` 호출 시 static을 설정할 수 있게 되었습니다. 이로서 기존에 애매했던 호출 시점을 명확히 잡을 수 있게 되었습니다.<br>
+단, 호출되는 Directive나 Component에 `ngIf` 등의 동적 랜더링 조건이 들어간다면 static은 동작하지 않습니다.<br>
+이제 ViewChild는 `ngAfterViewInit` 이전에 호출됩니다.
 
 ```ts
 @ViewChild(selector: directive type / querying name, {read: boolean, static: boolean})
 ```
 
 selector에는 아래의 값이 들어갈 수 있습니다.
-> template의 reference 변수값 (<my-component #cmp></my-component> 을 @ViewChild('cmp')으로 호출)
+> template의 reference 변수값 ({% raw %}<my-component #cmp></my-component> {% end raw %}을 `@ViewChild('cmp')`으로 호출)
 
-> child component가 가진 provider (@ViewChild(SomeService) someService: SomeService)
+> child component가 가진 provider (`@ViewChild(SomeService) someService: SomeService`)
 
-> string 토큰으로 정의된 provider ( @ViewChild('someToken') someTokenVal: any)
+> string 토큰으로 정의된 provider ( `@ViewChild('someToken') someTokenVal: any`)
 
-> TemplateRef (e.g. query <ng-template></ng-template> with @ViewChild(TemplateRef) template;)
+> TemplateRef (e.g. query {% raw %}<ng-template></ng-template> {% end raw %} with `@ViewChild(TemplateRef) template`;)
 
 
 

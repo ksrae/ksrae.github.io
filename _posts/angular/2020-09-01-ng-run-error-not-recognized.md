@@ -42,7 +42,7 @@ npm uninstall -g @angular/cli
 npm cache clean --force
 ```
 
-이 때 반드시 --force 옵션을 넣어야 합니다. 그렇지 않으면 실행이 취소되며 npm cache verify 를 권장합니다.
+이 때 반드시 --force 옵션을 넣어야 합니다. 그렇지 않으면 실행이 취소되며 `npm cache verify` 를 권장합니다.
 
 3. 재설치
 ```

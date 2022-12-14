@@ -115,7 +115,7 @@ export class ValidatorService {
 passwordValidator는 정규 표현식이 적용되어 있습니다. 정규 표현식에 대해서는 설명이 잘 되어있는 좋은 사이트가 많으므로 여기에서는 설명을 생략하겠습니다.<br><br>
 
 equalTo 함수를 보면 field_name을 받고, ValdatorFn 형식을 리턴합니다.<br>
-모든 control 중 field_name을 가진 control의 값과 현재 control의 값이 일치하면 null (정상)을 일치하지 않으면 { equalTo: false } 값을 리턴합니다.
+모든 control 중 field_name을 가진 control의 값과 현재 control의 값이 일치하면 null (정상)을 일치하지 않으면 `{ equalTo: false }` 값을 리턴합니다.
 
 
 

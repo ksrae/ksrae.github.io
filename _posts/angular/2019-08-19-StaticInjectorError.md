@@ -10,7 +10,7 @@ tags: [universal]
 StaticInjectorError(AppServerModule)[InjectionToken ng-toolkit-window] 에러를 해결해보겠습니다.
 
 
-Angular universal에서 window를 사용하기 위해서 @ng-toolkit/universal에서 import 합니다.
+Angular universal에서 window를 사용하기 위해서 `@ng-toolkit/universal`에서 import 합니다.
 
 ```ts
 import { WINDOW } from '@ng-toolkit/universal';
@@ -26,7 +26,7 @@ constructor(
 StaticInjectorError(AppServerModule)[InjectionToken ng-toolkit-window]
 ```
 
-이를 해결하기 위해서는 @Inject() 앞에 @Optional을 추가하여야 합니다.
+이를 해결하기 위해서는 `@Inject()` 앞에 `@Optional`을 추가하여야 합니다.
 
 ```ts
 import { Optional } from '@angular/core';

@@ -6,25 +6,24 @@ categories: angular
 tags: [dynamic, component, createcomponent, tooltip]
 ---
 
-dynamic component 기능인 createComponent를 활용하여 Tooltip을 만들어 봅시다.<br/>
+dynamic component 기능인 `createComponent`를 활용하여 Tooltip을 만들어 봅시다.<br/>
 <br/>
 # 기본 동작
 
-div 2개와 tooltip 2개를 만들어 각각을 mouseenter, mouseleave 했을 때 서로 다른 툴팁이 표시되었다가 제거되는 코드를 작성합니다.<br/>
+div 2개와 tooltip 2개를 만들어 각각을 `mouseenter`, `mouseleave` 했을 때 서로 다른 툴팁이 표시되었다가 제거되는 코드를 작성합니다.<br/>
 
-1. tooltip component를 2개 생성합니다.
-2. tooltip component를 호출할 container component를 생성합니다.
-3. createComponent를 통해 tooltip component를 호출할 directive를 생성합니다.
+1. `tooltip component`를 2개 생성합니다.
+2. `tooltip component`를 호출할 `container component`를 생성합니다.
+3. `createComponent`를 통해 `tooltip component`를 호출할 `directive`를 생성합니다.
 
 <br/>
 
 # component 생성하기
 
-<br/>
 
 ## container component
 
-div 2개를 만들고 directive를 호출하는 형태로 구성합니다.
+{% raw %}<div>{% end raw %} 2개를 만들고 `directive`를 호출하는 형태로 구성합니다.
 
 ```tsx
 @Component({
@@ -124,6 +123,6 @@ export class TooltipDirective {
 
 # 주의사항
 
-module에 directive와 TooltipComponent 들이 모두 정의되어야 합니다. <br/>
-특히 위 예제의 경우 directive가 component 정보를 담고 있으므로 한 module에 모두 정의 되어야 합니다.
+`module`에 `directive`와 `TooltipComponent` 들이 모두 정의되어야 합니다. <br/>
+특히 위 예제의 경우 `directive`가 `component` 정보를 담고 있으므로 한 `module`에 모두 정의 되어야 합니다.
 

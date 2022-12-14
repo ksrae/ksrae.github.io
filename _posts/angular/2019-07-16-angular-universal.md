@@ -14,7 +14,7 @@ Angular에서 SSR을 사용하는 방법입니다. 우수한 Framework 답게 �
 ## 동작 원리 
 
 Universal 웹 서버는 static HTML 페이지를 template 엔진에 랜더링 하며, 브라우저의 도움 없이 DOM, XMLHttpRequest 또는 low-level 을 서버에서 처리할 수 있습니다.<br><br>
-서버는 클라이언트의 요청을 ngExpressEngine에 전달하고 renderModuleFactory() 함수를 통해 template 태그의 내용을 랜더링하여 client에 전달합니다.
+서버는 클라이언트의 요청을 ngExpressEngine에 전달하고 `renderModuleFactory()` 함수를 통해 template 태그의 내용을 랜더링하여 client에 전달합니다.
 
 
 ## 지원 여부
@@ -124,7 +124,7 @@ app.get('*.*', express.static(join(DIST_FOLDER, 'browser')));
 ### tsconfig.server.json
 
 기존 tsconfig.app.json 파일은 클라이언트의 설정이라면 tsconfig.server.json은 서버의 설정입니다.<br><br>
-구성은 크게 다르지 않으나 "angularCompilerOptions"에서 entryModule을 정의하고 있는 점이 특징입니다.
+구성은 크게 다르지 않으나 `angularCompilerOptions`에서 entryModule을 정의하고 있는 점이 특징입니다.
 
 ```json
 {

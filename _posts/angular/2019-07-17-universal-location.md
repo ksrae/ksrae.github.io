@@ -9,7 +9,7 @@ tags: [universal, location]
 
 
 angular universal 프로젝트가 server platform에서 실행 중일 때 window.location 명령을 사용하는 방법 입니다.<br><br>
-@angular/common에서 지원하는 Location Service를 활용하는 방법이므로 별도의 라이브러리를 가져올 필요는 없습니다.
+`@angular/common`에서 지원하는 Location Service를 활용하는 방법이므로 별도의 라이브러리를 가져올 필요는 없습니다.
 
 
 ## component

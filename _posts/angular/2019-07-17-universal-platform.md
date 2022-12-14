@@ -17,7 +17,7 @@ Angular가 실행 중인 플랫폼이 브라우저인지 서버인지 확인하�
 
 ## 원리
 
-프로젝트가 실행되면 PLATFORM_ID가 생성 되는데 이를 @angular/common에서 지원하는 isPlatformBrowser와 isPlatformServer 함수에 파라미터로 던져 그 결과로 판단할 수 있습니다.
+프로젝트가 실행되면 PLATFORM_ID가 생성 되는데 이를 `@angular/common`에서 지원하는 isPlatformBrowser와 isPlatformServer 함수에 파라미터로 던져 그 결과로 판단할 수 있습니다.
 
 
 ## component
