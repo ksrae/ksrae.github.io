@@ -13,7 +13,7 @@ Highcharts에서는 chart 변수에 직접 options을 주입하기 때문에 api
 
 ## Highcharts 에서 chart 변수 접근하기
 
-Highcharts에서는 아래와 같이 chart 변수에 직접 Highchart.chart를 주입합니다. <br/>
+Highcharts에서는 아래와 같이 chart 변수에 직접 `Highchart.chart`를 주입합니다. <br/>
 
 ```tsx
 export HighchartsComponent implements OnInit {
@@ -42,7 +42,7 @@ Highcharts-angular에서는 chart 변수에서 options에 접근하려면 chart 
 
 답은 바로 눈에 보이는 Chart 변수가 아닌 배열로 구성된 charts[] 변수에 접근 하는 것입니다. 차트가 하나라면 chart[0]에 접근할 수 있으며, 이제 비로소 highcharts에서의 chart 변수값과 같은 값을 가짐을 확인할 수 있습니다.<br/>
 <br/>
-즉, highcharts의 this.chart 는 highcharts-angular의 this.Highcharts.charts[0]과 같다고 할 수 있습니다.<br/>
+즉, highcharts의 this.chart 는 highcharts-angular의 `this.Highcharts.charts[0]`과 같다고 할 수 있습니다.<br/>
 
 ```tsx
 const series = this.Highcharts.chart[0].series;
