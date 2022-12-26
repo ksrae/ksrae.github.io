@@ -5,6 +5,7 @@ comments: true
 categories: angular
 tags: [routing, routeroutlet]
 ---
+
 > 이번 시간은 router-outlet 태그의 name attribute의 활용에 대해 알아보겠습니다.
 
 <br/>
@@ -72,13 +73,13 @@ export class AppComponent {
 http://localhost:4200/(route1:path1)
 ```
 
-이는 기본 route는 Routes에 설정된 path를 보고 구성하였으나, 이제 outlet이 key가 되고 path가 outlet의 value가 되는 구성으로 이루어지기 때문입니다.
+이는 기본 route는 Routes에 설정된 path를 보고 구성하였으나, 이제 outlet이 key가 되고 path가 outlet의 value가 되는 구성으로 이루어지기 때문입니다.<br/>
 따라서, 다양한 path를 <% raw %><router-outlet><% endraw %> 의 name attribute 구성에 따라 다양하게 표현할 수 있습니다.
 
 
 ## child outlet
-child component 구조를 outlet으로 설정할 경우에 대해 알아봅시다.
-
+child component 구조를 outlet으로 설정할 경우에 대해 알아봅시다.<br/>
+<br/>
 app-routing.module.ts의 Routes 의 구조는 다음과 같습니다.
 ```tsx
 const routes: Routes = [
@@ -91,7 +92,7 @@ const routes: Routes = [
 ];
 ```
 
-app.component.html은 Route1Component를 호출하면 되므로 <% raw %><router-outlet><% endraw %>을 호출합니다.
+app.component.html은 Route1Component를 호출하면 되므로 <% raw %><router-outlet><% endraw %>을 호출합니다.<br/>
 쉽게 이동할 수 있도록 <% raw %><a routerLink><% endraw %>를 함께 활용해 봅시다.
 
 ```html
