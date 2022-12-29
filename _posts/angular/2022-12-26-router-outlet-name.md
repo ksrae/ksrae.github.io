@@ -32,7 +32,11 @@ const routes: Routes = [
 
 ## navigation
 
-위와 같이 outlet을 설정하였으면 이제 template이나 또는 component에서 navigation을 설정합니다.
+위와 같이 outlet을 설정하였으면 이제 template이나 또는 component에서 navigation을 설정합니다.<br/>
+<br/>
+이 때, "outlets" object의 구성은 다음과 같습니다.<br/>
+`Routes 에서 설정한 outlet : outlet이 설정된 object의 path 명`
+
 
 ### Template
 
@@ -77,6 +81,7 @@ http://localhost:4200/(route1:path1)
 child component 구조를 outlet으로 설정할 경우에 대해 알아봅시다.<br/>
 <br/>
 app-routing.module.ts의 Routes 의 구조는 다음과 같습니다.
+
 ```tsx
 const routes: Routes = [
   { path: '', children: [
@@ -87,12 +92,12 @@ const routes: Routes = [
   ]},
 ];
 ```
-
+(outlet이 다르면 확실히 동작하므로 약간 응용하여 outlet이 같고, path가 다른 경우의 예를 알아봅시다.)<br/>
+<br/>
 app.component.html은 Route1Component를 호출하면 되므로 `<router-outlet>` 을 호출합니다.<br/>
 쉽게 이동할 수 있도록 `<a routerLink>` 를 함께 활용해 봅시다.
 
 ```html
-
   <a [routerLink]="['./path1', {outlets:{route1:['path-first']}}]">first</a>
   <br/>
   <a [routerLink]="['./path1', {outlets:{route1:['path-second']}}]">second</a>
@@ -113,9 +118,10 @@ http://localhost:4200/path1/(route1:path-first)
 http://localhost:4200/path1/(route1:path-second)
 ```
 
-즉, root가 아닌 하위 path 에도 다양한 outlet을 구성할 수 있다는 것을 확인할 수 있습니다.
-
-
+즉, root가 아닌 하위 path 에도 다양한 outlet을 구성할 수 있다는 것을 확인할 수 있습니다.<br/>
+또한, 하나의 outlet에 여러 path를 넣어도 잘 동작함을 확인할 수 있습니다.<br/>
+이를 활용하여 단순히 page 이동으로서의 route가 아닌 module의 재활용을 위한 용도로 확장하여 사용해도 좋을 것 같습니다.<br/>
+<br/>
 
 
 
