@@ -14,9 +14,7 @@ tags: [routing, routeroutlet]
 name attribute는 다음과 같이 사용합니다.
 
 ```html
-<% raw %>
 <router-outlet name="sample1"></router-outlet>
-<% endraw %>
 ```
 
 이 name attribute는 Routes의 outlet 설정과 관련이 있습니다.
@@ -41,9 +39,7 @@ const routes: Routes = [
 template에서 navigation 하는 방법은 다음과 같습니다.
 
 ```html
-<% raw %>
 <a [routerLink]="[{outlets:{route1:['path1']}}]">go to path1</a>
-<% endraw %>
 ```
 
 ### Component
@@ -74,7 +70,7 @@ http://localhost:4200/(route1:path1)
 ```
 
 이는 기본 route는 Routes에 설정된 path를 보고 구성하였으나, 이제 outlet이 key가 되고 path가 outlet의 value가 되는 구성으로 이루어지기 때문입니다.<br/>
-따라서, 다양한 path를 <% raw %><router-outlet><% endraw %> 의 name attribute 구성에 따라 다양하게 표현할 수 있습니다.
+따라서, 다양한 path를 `<router-outlet>` 의 name attribute 구성에 따라 다양하게 표현할 수 있습니다.
 
 
 ## child outlet
@@ -92,25 +88,22 @@ const routes: Routes = [
 ];
 ```
 
-app.component.html은 Route1Component를 호출하면 되므로 <% raw %><router-outlet><% endraw %>을 호출합니다.<br/>
-쉽게 이동할 수 있도록 <% raw %><a routerLink><% endraw %>를 함께 활용해 봅시다.
+app.component.html은 Route1Component를 호출하면 되므로 `<router-outlet>` 을 호출합니다.<br/>
+쉽게 이동할 수 있도록 `<a routerLink>` 를 함께 활용해 봅시다.
 
 ```html
- <% raw %> 
+
   <a [routerLink]="['./path1', {outlets:{route1:['path-first']}}]">first</a>
   <br/>
   <a [routerLink]="['./path1', {outlets:{route1:['path-second']}}]">second</a>
   <br/>
   <router-outlet></router-outlet>
- <% endraw %>
  ```
 
-route1.component.ts 는 child component의 구조가 outlet 형태이므로 <% raw %><router-outlet><% endraw %> 에 name attribute를 설정해야 합니다.
+route1.component.ts 는 child component의 구조가 outlet 형태이므로 `<router-outlet>` 에 name attribute를 설정해야 합니다.
 
 ```html
- <% raw %> 
   <router-outlet name="route1"></router-outlet>
- <% endraw %>
  ```
 
 실행해보면 각각 다음과 같은 URL을 갖는 것을 확인할 수 있습니다.
