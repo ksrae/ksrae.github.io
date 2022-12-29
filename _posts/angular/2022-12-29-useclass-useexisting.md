@@ -40,7 +40,7 @@ providers: [
 <br/>
 
 ## Setting Default Services for Testing
-두가지 service가 존재한다고 합니다. 형태는 유사하지만 값이 다른 모양이므로 쉽게 구분할 수 있습니다.<br/>
+예를 들어 두 가지 service가 존재한다고 합시다. 두 service는 형태는 유사하지만 값이 다른 모양으로 쉽게 구분할 수 있게 구성하였습니다.<br/>
 <br/>
 
 ```tsx
