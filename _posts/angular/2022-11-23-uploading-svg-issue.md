@@ -1,5 +1,5 @@
 ---
-title: "How to solve svg unsafe"
+title: "svg 적용 실패 해결 - How to solve svg unsafe"
 date: 2022-11-23 14:17:00 +0900
 comments: true
 categories: angular

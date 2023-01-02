@@ -1,5 +1,5 @@
 ---
-title: "Highcharts Drag로 다중 포인트 선택하기 Multiple Point Selection by Draging"
+title: "Highcharts Drag로 다중 포인트 선택하기 - Multiple Point Selection by Draging"
 date: 2023-01-02 18:46:00 +0900
 comments: true
 categories: angular

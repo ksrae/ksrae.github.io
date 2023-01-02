@@ -1,5 +1,5 @@
 ---
-title: "how to use name attribute of router-outlet"
+title: "router-outlet에서 name attr 사용 방법 - how to use name attribute of router-outlet"
 date: 2022-12-26 13:29:00 +0900
 comments: true
 categories: angular

@@ -1,5 +1,5 @@
 ---
-title: "Highcharts-angular easy update with oneToOne Option"
+title: "Highcharts-angular oneToOnt 옵션으로 쉽게 데이터 업데이트 하기 - easy update with oneToOne Option"
 date: 2022-11-28 18:11:00 +0900
 comments: true
 categories: angular

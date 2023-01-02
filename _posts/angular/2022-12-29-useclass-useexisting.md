@@ -1,5 +1,5 @@
 ---
-title: "different between useClass and useExisting"
+title: "useClass와 useExisting의 비교 - different between useClass and useExisting"
 date: 2022-12-29 11:52:00 +0900
 comments: true
 categories: angular

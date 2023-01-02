@@ -1,5 +1,5 @@
 ---
-title: "Highcharts 모든 선택한 Points 가져오기 Getting All Selected Points by .getSelectedPoints()"
+title: "Highcharts 모든 선택한 Points 가져오기 - Getting All Selected Points by .getSelectedPoints()"
 date: 2023-01-02 18:46:00 +0900
 comments: true
 categories: angular

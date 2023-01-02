@@ -1,5 +1,5 @@
 ---
-title: "How to handle browser close (unload event)"
+title: "브라우저 닫을 때 이벤트 정리 - How to handle browser close (unload event)"
 date: 2022-12-01 10:47:00 +0900
 comments: true
 categories: angular
