@@ -5,7 +5,8 @@ comments: true
 categories: angular
 tags: [unload, beforeunload]
 ---
-이번 시간은 Browser를 닫을 때 이벤트를 처리하는 방법에 대해 정리해보고 예제를 통해 알아보겠습니다.
+
+> 이번 시간은 Browser를 닫을 때 이벤트를 처리하는 방법에 대해 정리해보고 예제를 통해 알아보겠습니다.
 
 <br/>
 
@@ -23,7 +24,7 @@ document unload를 진행하기 전에 이벤트가 발생합니다. document는
 
 이 이벤트가 발생하면 confirm 이벤트가 발생하며, 이 때 unload를 진행하거나 또는 취소 할 수 있습니다.
 
-단, confirm 이벤트를 발생시키려면 preventDefault() 또는 return false를 구현해야 합니다.
+단, confirm 이벤트를 발생시키려면 `preventDefault()` 또는 `return false` 를 구현해야 합니다.
 
 <br/>
 
@@ -40,7 +41,7 @@ beforeunload 이후에 발생하는 이벤트 입니다. 일반적으로 documen
 
 # Angular Example
 
-angular에서는 @Hostlistener를 통해 이벤트를 받아 처리합니다.
+angular에서는 `@Hostlistener` 를 통해 이벤트를 받아 처리합니다.
 
 <br/>
 
