@@ -14,7 +14,7 @@ tags: [routing, routeroutlet]
 name attribute는 다음과 같이 사용합니다.
 
 ```html
-<router-outlet name="sample1"></router-outlet>
+<router-outlet name="route1"></router-outlet>
 ```
 
 이 name attribute는 Routes의 outlet 설정과 관련이 있습니다.
