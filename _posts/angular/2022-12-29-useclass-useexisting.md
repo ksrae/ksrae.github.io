@@ -164,3 +164,42 @@ newTest: 6
 test: 7
 newTest: 8
 ``` 
+
+
+## Angular Standalone에서 useClass와 useExisting 활용
+standalone에서는 module을 사용하지 않으므로 위의 예제를 활용하려면 service에서 직접 선언해야 합니다. <br/>
+Injectable의 파라미터에서 useClass와 useExisting을 제공하므로 이를 활용할 수 있습니다.<br/>
+위의 예제를 수정해봅시다.<br/>
+
+### useClass
+```tsx
+@Injectable({
+   providedIn: 'root',
+   useClass: TestService
+})
+export class NewTestService {
+  index = 0;
+
+  add(): number {
+    this.index += 10;
+    return this.index;
+  }
+}
+```
+
+
+### useExisting
+```tsx
+@Injectable({
+   providedIn: 'root',
+   useExisting: TestService
+})
+export class NewTestService {
+  index = 0;
+
+  add(): number {
+    this.index += 10;
+    return this.index;
+  }
+}
+```
