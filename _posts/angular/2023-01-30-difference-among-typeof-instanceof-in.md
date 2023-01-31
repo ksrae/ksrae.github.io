@@ -3,10 +3,10 @@ title: "typeof, instanceof, keyof and in의 차이점(difference among typeof, i
 date: 2023-01-30 11:07:00 +0900
 comments: true
 categories: angular
-tags: [typescript, instanceof, typeof, in]
+tags: [typescript, instanceof, typeof, keyof, in]
 ---
 
-> TypeScript에서 typeof, instanceof, in 연산자는 각각 다음과 같은 역할을 합니다.
+> TypeScript에서 typeof, instanceof, keyof, in 연산자는 각각 다음과 같은 역할을 합니다.
 
 ## typeof 연산자
 typeof 연산자는 변수 또는 값의 타입을 반환하는 데 사용됩니다.
@@ -184,7 +184,8 @@ let anotherUser: User = {
   age: 20
 }
 
-console.log('name' if User) // error
+console.log('name' in User) // error
+console.log('name' in anotherUser) // true
 ```
 
 정리하자면, TypeScript에서 typeof, instanceof, in 연산자는 각각 변수 또는 값의 타입, 객체의 인스턴스 여부, 객체의 프로퍼티 여부를 확인하는 데 사용됩니다. <br/>
