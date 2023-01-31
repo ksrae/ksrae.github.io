@@ -24,7 +24,7 @@ console.log(typeof myString); // 출력: string
 ### 확인 가능한 자료형
 확인 가능한 자료형은 다음과 같습니다.
 
-- "undefined": ㅕndefined
+- "undefined": undefined
 - "boolean": boolean
 - "number": 일반적인 숫자형 Number
 - "bigint": Number보다 큰 숫자형
