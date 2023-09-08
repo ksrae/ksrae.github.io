@@ -3,10 +3,10 @@ title: "typeof, instanceof, keyof and in의 차이점(difference among typeof, i
 date: 2023-01-30 11:07:00 +0900
 comments: true
 categories: angular
-tags: [typescript, instanceof, typeof, in]
+tags: [typescript, instanceof, typeof, keyof, in]
 ---
 
-> TypeScript에서 typeof, instanceof, in 연산자는 각각 다음과 같은 역할을 합니다.
+> TypeScript에서 typeof, instanceof, keyof, in 연산자는 각각 다음과 같은 역할을 합니다.
 
 ## typeof 연산자
 typeof 연산자는 변수 또는 값의 타입을 반환하는 데 사용됩니다.
@@ -24,7 +24,7 @@ console.log(typeof myString); // 출력: string
 ### 확인 가능한 자료형
 확인 가능한 자료형은 다음과 같습니다.
 
-- "undefined": ㅕndefined
+- "undefined": undefined
 - "boolean": boolean
 - "number": 일반적인 숫자형 Number
 - "bigint": Number보다 큰 숫자형
@@ -58,13 +58,13 @@ Car.prototype = {};
 console.log(auto instanceof Car);
 ```
 
-javascript에서는 auto가 Car의 prototype을 가졌으므로 첫번째 console.log의 값은 true가 됩니다.<br/>
-그러나 만일 두번째 console.log의 케이스와 같이 auto를 선언한 후에 Car를 다른 값으로 변경했다면, 값은 false가 됩니다. <br/>
+auto가 Car의 prototype을 가졌으므로 첫번째 console.log의 값은 true가 됩니다.<br/>
+그러나 만일 두번째 console.log의 케이스와 같이 auto를 선언한 후에 Car를 다른 값으로 변경했으므로, 값은 false가 됩니다. <br/>
 
 ```tsx
 class User {
   name: string;
-  constructor(*name*: string) {
+  constructor(name: string) {
     this.name = name;
   }
 }
@@ -102,12 +102,13 @@ type guard는 여기에서 하나 더 나아가 bar가 Foo타입인지 Bar타입
 ## keyof 연산자
 keyof 키워드는 객체 타입의 프로퍼티 이름의 타입을 정의할 때 사용합니다.
 
-### in Json
+### Json
 
 ```javascript
 let myObject = { name: "John", age: 30 };
-let myObjectKey: keyof typeof myObject;
-// name, age
+let myObjectKey: keyof typeof myObject; // name, age
+myObjectKey = 'name';
+
 ```
 
 위 예제에서 myObjectKey 변수는 myObject 객체의 프로퍼티 이름(name과 age)의 타입을 나타냅니다.<br/>
@@ -116,7 +117,7 @@ keyof 키워드를 사용하면 객체 타입의 프로퍼티 이름을 타입�
 type 변수에서는 조금 더 간단하게 작성할 수 있습니다.<br/>
 
 
-### in Type
+### Type
 keyof 키워드를 Type 변수에서도 사용할 수 있습니다.
 
 ```typescript
@@ -144,7 +145,6 @@ console.log("email" in myObject); // 출력: false
 
 
 ### index in Array
-
 배열에서도 사용할 수 있으나 배열에서는 값을 찾을 수 없고, index만 확인할 수 있습니다.<br/>
 다음의 예를 참고하세요.<br/>
 
@@ -158,7 +158,6 @@ let count = ['one', 'two', 'three', 'four'];
 ```
 
 ### key in Json
-
 json에서는 key가 존재하는지 확인할 때 사용합니다.<br/>
 
 ```tsx
@@ -167,6 +166,27 @@ let user = {
   age: 10
 }
 console.log('name' in user) // true
+```
+
+### dynamic key in Type
+json에서 제한된 가변 키를 갖도록 정의할 수 있습니다.<br/>
+'제한된'이라는 의미를 사용한 이유는 정의된 json 또는 type의 key 값만 활용할 수 있기 때문입니다.<br/>
+
+```ts
+  let myObject = { name: "John", age: 30 };
+  type ObjType = {
+    [key in keyof typeof myObjectKey]: number // name or age
+  }
+```
+
+type을 활용하면 조금 더 간단하게 표현된다.
+
+```ts
+  type AllowedKeys = 'name' | 'age';
+
+  type ObjType1 = {
+    [key in AllowedKeys]: number // name or age
+  }
 ```
 
 ### not working in Interface
@@ -184,7 +204,8 @@ let anotherUser: User = {
   age: 20
 }
 
-console.log('name' if User) // error
+console.log('name' in User) // error
+console.log('name' in anotherUser) // true
 ```
 
 정리하자면, TypeScript에서 typeof, instanceof, in 연산자는 각각 변수 또는 값의 타입, 객체의 인스턴스 여부, 객체의 프로퍼티 여부를 확인하는 데 사용됩니다. <br/>
