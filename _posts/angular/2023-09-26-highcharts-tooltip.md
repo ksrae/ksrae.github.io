@@ -6,9 +6,24 @@ categories: angular
 tags: [highcharts, highcharts-angular]
 ---
 
-> 이 글에서는 Highchart의 Tooltip에서 사용가능한 Options 설명과 Clone, 그리고 Customizing 방법에 대해서 알아보겠습니다.
- 
+
+
 ## Tooltip Options
+먼저, Highcharts의 툴팁 옵션에 대해 알아봅시다. 툴팁은 데이터 포인트를 가리킬 때 정보를 표시하는데 사용됩니다. 다양한 옵션을 통해 툴팁을 사용자 정의할 수 있습니다.<br/>
+<br/>
+- headerFormat: 툴팁 상단에 표시되는 텍스트 포맷을 설정합니다.
+- pointFormat: 데이터 포인트의 포맷을 설정하며, 시리즈 이름, 데이터 값 등을 표시할 수 있습니다.
+- footerFormat: 툴팁 하단에 표시되는 텍스트 포맷을 설정합니다.
+- valueDecimals: 소수점 자릿수를 지정합니다.
+- shared: 동일한 x 좌표의 모든 정보를 하나의 툴팁에 표시할지 여부를 설정합니다.
+- split: 여러 개의 툴팁을 표시할지 여부를 설정합니다.
+- useHTML: HTML을 사용하여 툴팁 내용을 포맷할지 여부를 설정합니다.
+- followPointer: 마우스 위치에 따라 툴팁이 이동할지 여부를 설정합니다.
+- shadow: 그림자 표시 여부를 설정합니다.
+<br/>
+위의 옵션들을 조합하여 툴팁을 원하는 대로 사용자 정의할 수 있습니다.<br/>
+<br/>
+
 ```tsx
   tooltip: {
     headerFormat: '<table><tr><th colspan="2">{point.key}</th></tr>', // 툴팁 상단 표시, 굵기가 자동 설정됨. point와 series 값을 별도의 정의 없이 사용할 수 있음. series의 임의의 값도 가져올 수 있음.
@@ -37,8 +52,8 @@ tags: [highcharts, highcharts-angular]
 
 ## Tooltip Clone
 
-Tooltip을 복사하여 여러 개를 띄우는 방법 입니다.
-단 이 방법은 useHTML이 true인 경우에는 text가 없는 껍데기만 복사되므로 이 방법을 활용하려면 <b>Tooltip에 html 이 없어야 합니다.</b>
+툴팁을 복사하여 여러 개를 표시하는 방법도 있습니다. 이렇게 하면 툴팁을 동적으로 추가할 수 있습니다. 하지만 useHTML 옵션이 true로 설정된 경우, 텍스트만 복사되므로 HTML이 없는 툴팁에서 사용해야 합니다.<br/>
+<br/>
 
 ```tsx
  this.chart = Highcharts.chart({
@@ -63,10 +78,8 @@ Tooltip을 복사하여 여러 개를 띄우는 방법 입니다.
 
 
 ## Tooltip Customized
-
-기존 tooltip clone 방법은 html을 사용할 수 없다는 큰 단점이 있으므로 이를 극복하기 위한 다른 방법을 알아봅시다. 
-이 방법은 lable을 Tooltip 처럼 표시하는 방법입니다. point click을 통해 Tooltip과 동일한 동작을 구현하는 방법을 적용하였습니다.
-
+툴팁을 커스터마이징하는 또 다른 방법은 기본 툴팁을 비활성화하고, 사용자 정의 레이블을 툴팁처럼 표시하는 것입니다. 이를 통해 사용자가 원하는 형태로 툴팁을 디자인할 수 있습니다.<br/>
+<br/>
 이 방법을 적용하려면 기본 tooltip 옵션 중 몇가지 옵션을 다음과 같이 설정해야 합니다.
 - enabled; false
 - followPointer: false
@@ -90,10 +103,10 @@ Tooltip을 복사하여 여러 개를 띄우는 방법 입니다.
                 this.chart.plotTop + p.point.plotY // y position
               )
               .attr({
-                  padding: 10,
-                  r: 5,
+                  padding: 10, // this is an example, change to any number
+                  r: 5, // this is an example, change to any number
                   fill: '#000',
-                  zIndex: 5
+                  zIndex: 5 // this is an example, change to any number
               })
               .css({
                   color: 'white'
@@ -106,7 +119,10 @@ Tooltip을 복사하여 여러 개를 띄우는 방법 입니다.
     },
   });
 ```
+위의 코드 예제를 통해 툴팁 옵션 설정 및 사용자 정의 방법을 자세히 살펴보았습니다. Highcharts를 효과적으로 사용하여 데이터 시각화를 개선하고 사용자 경험을 향상시킬 수 있습니다. <br/>
+<br/>
+위의 예제들은 highcharts의 jsfiddle에 있는 코드를 참조하여, 직접 typescript 버전으로 수정한 코드입니다. <br/>
+추가 질문이나 코드 수정에 관한 문의가 있으면 언제든지 댓글이나 이메일로 문의해 주시기 바랍니다.<br/>
 
 
-위의 예제들은 highcharts의 jsfiddle에 있는 코드를 참조하여, 제가 직접 typescript 버전으로 수정한 코드입니다. 
-만일 highcharts-angular에 적용이 필요한 코드나 수정한 코드에 대한 문의는 댓글이나 이메일 주시면 답변 드리겠습니다.
+
