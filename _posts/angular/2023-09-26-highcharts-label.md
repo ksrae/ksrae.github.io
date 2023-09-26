@@ -1,6 +1,6 @@
 ---
 title: "Highcharts Label - Changing Attributes Dynamically)"
-date: 2022-10-21 13:49:00 +0900
+date: 2023-09-26 13:49:00 +0900
 comments: true
 categories: angular
 tags: [highcharts, highcharts-angular]
