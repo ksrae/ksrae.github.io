@@ -12,10 +12,10 @@ tags: [highcharts, highcharts-angular]
 ## 분석
 label의 attribute를 변경하는 것은 일반적인 방법으로는 중간에 값을 변경하기 어려습니다.
 
-이를 확인하기 위해 label의 html 구조를 보면 label은 <g>태그와, 별도의 <div>가 조합된 것을 볼 수 있습니다.
+이를 확인하기 위해 label의 html 구조를 보면 label은 {% raw %}<g>{% end raw %}태그와, 별도의 {% raw %}<div>{% end raw %}가 조합된 것을 볼 수 있습니다.
 
-만일 component에서 label의 이벤트를 세팅하여 lable을 표시하는 dom을 가져오려고 시도하면 <g> 태그가 잡히게 되는데
-문제는 우리가 원하는 attribute의 설정은 <div> 태그와 관련이 있다는 점 입니다.
+만일 component에서 label의 이벤트를 세팅하여 lable을 표시하는 dom을 가져오려고 시도하면 {% raw %}<g>{% end raw %} 태그가 잡히게 되는데
+문제는 우리가 원하는 attribute의 설정은 {% raw %}<div>{% end raw %} 태그와 관련이 있다는 점 입니다.
 
 이러한 문제를 해결하고자 몇가지 편법을 사용하려고 합니다.
 
@@ -109,8 +109,8 @@ label.on('click', (event: any) => {
 });
 ```
 
-이 때 주의해야할 점은 event가 target으로 삼는 dom은 <g> 라는 점입니다. 
-우리가 활용할 값은 바로 변수 label의 element 입니다. 이 값은 <div>에 속해 있는데 이 값을 통해 class를 변경할 수 있습니다.
+이 때 주의해야할 점은 event가 target으로 삼는 dom은 {% raw %}<g>{% end raw %} 라는 점입니다. 
+우리가 활용할 값은 바로 변수 label의 element 입니다. 이 값은 {% raw %}<div>{% end raw %}에 속해 있는데 이 값을 통해 class를 변경할 수 있습니다.
 또한 div 안의 버튼이나 기타 dom에도 접근할 수 있습니다.
 
 ```tsx

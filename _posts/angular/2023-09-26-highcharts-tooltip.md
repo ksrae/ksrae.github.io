@@ -11,18 +11,7 @@ tags: [highcharts, highcharts-angular]
 ## Tooltip Options
 먼저, Highcharts의 툴팁 옵션에 대해 알아봅시다. 툴팁은 데이터 포인트를 가리킬 때 정보를 표시하는데 사용됩니다. 다양한 옵션을 통해 툴팁을 사용자 정의할 수 있습니다.<br/>
 <br/>
-- headerFormat: 툴팁 상단에 표시되는 텍스트 포맷을 설정합니다.
-- pointFormat: 데이터 포인트의 포맷을 설정하며, 시리즈 이름, 데이터 값 등을 표시할 수 있습니다.
-- footerFormat: 툴팁 하단에 표시되는 텍스트 포맷을 설정합니다.
-- valueDecimals: 소수점 자릿수를 지정합니다.
-- shared: 동일한 x 좌표의 모든 정보를 하나의 툴팁에 표시할지 여부를 설정합니다.
-- split: 여러 개의 툴팁을 표시할지 여부를 설정합니다.
-- useHTML: HTML을 사용하여 툴팁 내용을 포맷할지 여부를 설정합니다.
-- followPointer: 마우스 위치에 따라 툴팁이 이동할지 여부를 설정합니다.
-- shadow: 그림자 표시 여부를 설정합니다.
-<br/>
-위의 옵션들을 조합하여 툴팁을 원하는 대로 사용자 정의할 수 있습니다.<br/>
-<br/>
+
 
 ```tsx
   tooltip: {
@@ -77,7 +66,7 @@ tags: [highcharts, highcharts-angular]
 ```
 
 
-## Tooltip Customized
+## Tooltip Customizing
 툴팁을 커스터마이징하는 또 다른 방법은 기본 툴팁을 비활성화하고, 사용자 정의 레이블을 툴팁처럼 표시하는 것입니다. 이를 통해 사용자가 원하는 형태로 툴팁을 디자인할 수 있습니다.<br/>
 <br/>
 이 방법을 적용하려면 기본 tooltip 옵션 중 몇가지 옵션을 다음과 같이 설정해야 합니다.
