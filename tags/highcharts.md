@@ -1,4 +1,4 @@
 ---
 layout: tag
-title: highchart
+title: highcharts
 ---
