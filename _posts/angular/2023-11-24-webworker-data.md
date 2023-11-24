@@ -1,9 +1,9 @@
 ---
-title: "ngDoc - Install"
-date: 2023-09-27 16:32:00 +0900
+title: "Web Worker in Angular"
+date: 2023-11-24 16:22:00 +0900
 comments: true
 categories: angular
-tags: [document, ngdoc]
+tags: [webworker]
 ---
 
 # Angular에서 Worker 활용하기
