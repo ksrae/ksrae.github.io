@@ -20,6 +20,7 @@ ng generate web-worker [경로]
 ```
 다만 자동으로 만드는 코드는 component에서 직접 worker에 접근하는 코드이며, 아래에서 설명할 instance 를 통한 방법은 아니기 때문에 아래 코드를 적용하기 위해서는 생성 후 일부 코드를 수정해야 합니다.
 
+보다 자세한 내용은 문서 가장 하단의 "nx환경에서 수동으로 worker 설정" 을 참고하세요.
 
 
 ## 2. Worker File 작성
@@ -107,5 +108,150 @@ export class AppComponent {
 }
 ```
 
+## 결론
+
 이제 Worker를 통해 백그라운드에서 작업을 처리하고 결과를 메인 스레드에 전달할 수 있습니다. 이를 통해 애플리케이션의 성능을 향상시킬 수 있습니다.
+
+
+## nx환경에서 수동으로 worker 설정
+
+### 수동으로 worker용 tsconfig 생성
+tsconfig.worker.json 파일을 tsconfig.json과 같은 위치에 생성하고 아래의 코드를 입력 합니다.
+```json
+/* To learn more about this file see: https://angular.io/config/tsconfig. */
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "./out-tsc/worker",
+    "lib": [
+      "es2018",
+      "webworker"
+    ],
+    "types": []
+  },
+  "include": [
+    "src/**/*.worker.ts"
+  ]
+}
+```
+
+### angular.json에 tsconfig.webworker.json 등록
+위에서 작성한 tsconfig.webworker.json 파일을 angular.json에 반드시 등록해주어야 합니다.
+자동으로 생성했을 때 기본적으로 두 군데에 생성이 되며,
+- architect > build > obtions
+- test > obtions
+추가 되는 값은 다음과 같습니다.
+```
+"webWorkerTsConfig": "tsconfig.worker.json"
+```
+
+자동으로 생성했을 때의 angular.json의 전체 코드는 다음과 같습니다.
+```json
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "webworker": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "",
+      "sourceRoot": "src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/webworker",
+            "index": "src/index.html",
+            "main": "src/main.ts",
+            "polyfills": [
+              "zone.js"
+            ],
+            "tsConfig": "tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "src/favicon.ico",
+              "src/assets"
+            ],
+            "styles": [
+              "src/styles.scss"
+            ],
+            "scripts": [],
+            "webWorkerTsConfig": "tsconfig.worker.json"
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "webworker:build:production"
+            },
+            "development": {
+              "browserTarget": "webworker:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "webworker:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ],
+            "tsConfig": "tsconfig.spec.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "src/favicon.ico",
+              "src/assets"
+            ],
+            "styles": [
+              "src/styles.scss"
+            ],
+            "scripts": [],
+            "webWorkerTsConfig": "tsconfig.worker.json"
+          }
+        }
+      }
+    }
+  }
+}
+```
 
