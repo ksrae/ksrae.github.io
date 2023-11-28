@@ -1,5 +1,5 @@
 ---
-title: "Web Worker in Angular"
+title: "Enhancing Web Worker Performance with Transferable Objects in Angular"
 date: 2023-11-24 16:22:00 +0900
 comments: true
 categories: angular
