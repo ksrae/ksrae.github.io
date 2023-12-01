@@ -78,7 +78,10 @@
   dl {
     font-size: 0.95em;
   }
-
+  li,
+  dl {
+    font-style: italic;
+  }
   /* paragraph indents */
   p {
     margin: 0 0 $indent-var;
