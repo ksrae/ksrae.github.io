@@ -1,6 +1,6 @@
 ---
 title: "Angular Route를 활용한 Modal 관리(Manage Modal with Angular Route)"
-date: 2023-12-23 14:36:00 +0900
+date: 2023-12-22 14:36:00 +0900
 comments: true
 categories: angular
 tags: [routing]
