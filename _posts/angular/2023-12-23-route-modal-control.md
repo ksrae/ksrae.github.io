@@ -24,21 +24,26 @@ export const appRoutes: Routes = [
 
 
 ## 2. Template에 Route 설정
-html에 모달을 열고 닫을 수 있는 코드를 추가합니다.
-Route를 통해 모달을 호출할 예정이므로 a tag에 routetLink를 설정합니다.
-모달이 노출될 위치에 <router-outlet> 을 정의 합니다.
+html에 모달을 열고 닫을 수 있는 코드를 추가합니다.<br/>
+Route를 통해 모달을 호출할 예정이므로 a tag에 routetLink를 설정합니다.<br/>
+모달이 노출될 위치에 {% raw %}<router-outlet>{% endraw %} 을 정의 합니다.
 
 ```html
 <!-- app.component.html -->
 <button>
-  <a [routerLink]="['/modal/hellomodal']"> Show Modal </a>
+  <a [routerLink]="['/modal/hellomodal']"> Open Hello Modal </a>
+</button>
+<br/>
+<button>
+  <a [routerLink]="['/modal/samplemodal']"> Open Sample Modal </a>
 </button>
 <router-outlet></router-outlet>
 ```
 
 
 ## 3. Modal Routes 정의
-Modal을 여러 개 사용할 수 있도록 각각의 Modal에 대한 Routes를 정의합니다. modal.routes.ts 파일을 생성하고 다음과 같이 작성합니다.
+Modal을 여러 개 사용할 수 있도록 각각의 Modal에 대한 Routes를 정의합니다. modal.routes.ts 파일을 생성하고 다음과 같이 작성합니다.<br/>
+여기에서는 helloModal과 sampleModal 을 추가해보았습니다.
 
 ```ts
 import { Routes } from '@angular/router';
