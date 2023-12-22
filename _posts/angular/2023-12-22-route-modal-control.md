@@ -102,7 +102,21 @@ dialog {
 
 ```
 
-## 6. 기타
+## 6. standalone component imports issue
+standalone인 경우 routerLink를 사용하려면 반드시 component에 RouterModule을 import 해주어야 합니다.
+그렇지 않으면 template에서 routerLink에 에러가 발생하므로 주의해야 합니다.
+```ts
+import { RouterModule } from '@angular/router';
+@Component({
+  ...
+  standalone: true,
+  imports: [RouterModule],
+  ...
+})
+```
+
+
+## 7. 기타
 프로젝트에서 Router를 사용 중인데 모달을 Router로 관리하고 싶다면, router-outlet의 name을 활용할 수 있습니다. 
 자세한 내용은 [router-outlet에서 name attr 사용 방법 - how to use name attribute of router-outlet](https://ksrae.github.io//angular/router-outlet-name/) 을 참고하세요.
 
