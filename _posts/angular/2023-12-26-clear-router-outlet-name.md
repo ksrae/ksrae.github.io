@@ -21,10 +21,10 @@ Outlet의 Name attribute 값을 null로 설정하는 방법은 간단하면서�
   standalone: true,
   imports: [RouterModule],
   template: `
-    <dialog open #modal>
+    <dialog open>
       <h2>Popup</h2>
       <p>This is a popup content.</p>
-      <a [routerLink]="['/', {outlets: {popupType: null}}]">Close</a>
+      
     </dialog>
   `,
   styleUrls: ['./popup.component.css'],
@@ -47,7 +47,7 @@ Router.navigate를 활용하여 현재 Route를 Outlet에서 제거하는 방법
   standalone: true,
   imports: [RouterModule],
   template: `
-    <dialog open #modal>
+    <dialog open>
       <h2>Popup</h2>
       <p>This is a popup content.</p>
       <button (click)="close()">Close</button>
@@ -82,7 +82,7 @@ Location.back() 메서드를 활용하여 현재 Route를 제거하는 방법은
   standalone: true,
   imports: [RouterModule],
   template: `
-    <dialog open #modal>
+    <dialog open>
       <h2>Popup</h2>
       <p>This is a popup content.</p>
       <button (click)="back()">Back</button>
@@ -143,7 +143,7 @@ export class AppComponent {
     RouterModule
   ],
   template: `
-  <dialog open #modal>
+  <dialog open>
     <h2>Popup</h2>
     <p>This is a popup content.</p>
 
