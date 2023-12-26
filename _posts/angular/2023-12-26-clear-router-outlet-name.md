@@ -24,7 +24,7 @@ Outlet의 Name attribute 값을 null로 설정하는 방법은 간단하면서�
     <dialog open>
       <h2>Popup</h2>
       <p>This is a popup content.</p>
-      
+      <a [routerLink]="'/', {outlets: {popupType: null}}]">Close</a>
     </dialog>
   `,
   styleUrls: ['./popup.component.css'],
