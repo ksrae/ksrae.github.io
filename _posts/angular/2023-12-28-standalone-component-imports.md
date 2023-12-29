@@ -34,41 +34,41 @@ export class AppComponent {}
 
 
 ## 2. CommonModule
-템플릿에서 CommonModule에 속한 파이프 또는 디렉티브를 사용하는 경우, 최적화를 위해 각 항목을 개별적으로 imports 하는 것이 좋습니다. <br/>예를 들어 자주 사용하는 ngIf, ngFor나 async pipe의 경우 CommonModule을 imports 하거나 또는 CommonModule에 속한 해당 항목을 imports 합니다. <br/>가급적이면 성능 최적화를 위해 CommonModule을 직접 imports 하지말고, 정확하게 필요한 항목만 imports 하는 것을 추천합니다. <br/> 아래는 CommonModule에 포함된 Directive와 Pipe의 목록 입니다.
+Template에서 CommonModule에 속한 Pipe 또는 Directive를 사용하는 경우, 최적화를 위해 각 항목을 개별적으로 imports 하는 것이 좋습니다. <br/>예를 들어 자주 사용하는 ngIf, ngFor나 async pipe의 경우 CommonModule을 imports 하거나 또는 CommonModule에 속한 해당 항목을 imports 합니다. <br/>가급적이면 성능 최적화를 위해 CommonModule을 직접 imports 하지말고, 정확하게 필요한 항목만 imports 하는 것을 추천합니다. <br/> 아래는 CommonModule에 포함된 Directive와 Pipe의 목록 입니다.
 
 #### Directive
 
-NgClass
-NgComponentOutlet
-NgFor
-NgForOf
-NgIf
-NgPlural
-NgPluralCase
-NgStyle
-NgSwitch
-NgSwitchCase
-NgSwitchDefault
-NgTemplateOutlet
+- NgClass
+- NgComponentOutlet
+- NgFor
+- NgForOf
+- NgIf
+- NgPlural
+- NgPluralCase
+- NgStyle
+- NgSwitch
+- NgSwitchCase
+- NgSwitchDefault
+- NgTemplateOutlet
 
 
 #### Pipe
-AsyncPipe
-CurrencyPipe
-DatePipe
-DecimalPipe
-JsonPipe
-KeyValuePipe
-LowerCasePipe
-UpperCasePipe
-TitleCasePipe
-PercentPipe
-SlicePipe
+- AsyncPipe
+- CurrencyPipe
+- DatePipe
+- DecimalPipe
+- JsonPipe
+- KeyValuePipe
+- LowerCasePipe
+- UpperCasePipe
+- TitleCasePipe
+- PercentPipe
+- SlicePipe
 
 
 
 ## 3. createComponent로 생성된 Component
-createComponent를 사용하여 동적으로 생성된 Component는 imports에 추가할 필요가 없습니다. <br/>Angular 프레임워크가 이 방식으로 생성된 컴포넌트의 인스턴스를 자동으로 관리합니다.
+createComponent를 사용하여 동적으로 생성된 Component는 imports에 추가할 필요가 없습니다. <br/>Angular 프레임워크가 이 방식으로 생성된 Component의 인스턴스를 자동으로 관리합니다.
 
 
 ```ts
