@@ -63,7 +63,7 @@ export class AppComponent {}
 - UpperCasePipe
 - TitleCasePipe
 - PercentPipe
-- SlicePipe :  <% raw %> {{ str | slice: 0:4 }} <% endraw %>
+- SlicePipe
 
 
 
