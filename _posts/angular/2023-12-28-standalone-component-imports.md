@@ -39,7 +39,7 @@ export class AppComponent {}
 #### Directive
 
 | Name | Template | 
-|:---|---:| 
+|:---:|:---| 
 | NgClass | [ngClass] | 
 | NgComponentOutlet | <ng-container *ngComponentOutlet="componentTypeExpression"></ng-container> | 
 | NgFor | *ngFor |
@@ -56,7 +56,7 @@ export class AppComponent {}
 
 #### Pipe
 | Name | Template | 
-|:---|---:| 
+|:---:|:---| 
 | AsyncPipe | {{ observable$ \| async }} |
 | CurrencyPipe | {{ num \| currency }} |
 | DatePipe | {{ str \| date }} |
