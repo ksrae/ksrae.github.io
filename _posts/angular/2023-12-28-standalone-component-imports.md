@@ -36,7 +36,38 @@ export class AppComponent {}
 ## 2. CommonModule
 템플릿에서 CommonModule에 속한 파이프 또는 디렉티브를 사용하는 경우, 최적화를 위해 각 항목을 개별적으로 imports 하는 것이 좋습니다.
 
+#### Directive
 
+| Name | Template | 
+|:---:|:---| 
+| NgClass | <% raw %> [ngClass] <% endraw %> | 
+| NgComponentOutlet |  <% raw %> <ng-container *ngComponentOutlet="componentTypeExpression"></ng-container> <% endraw %>| 
+| NgFor |  <% raw %> *ngFor <% endraw %>|
+| NgForOf |  <% raw %> <ng-template ngFor let-item [ngForOf]="items" let-i="index" [ngForTrackBy]="trackByFn"> <% endraw %>|
+| NgIf |  <% raw %> *ngIf <% endraw %>|
+| NgPlural |  <% raw %> <some-element [ngPlural]="value"> <% endraw %>|
+| NgPluralCase |  <% raw %> <ng-template ngPluralCase="=0">there is nothing</ng-template> <% endraw %>|
+| NgStyle |  <% raw %> [ngStyle] <% endraw %>|
+| NgSwitch |  <% raw %> <container-element [ngSwitch]="switch_expression"> <% endraw %>|
+| NgSwitchCase |  <% raw %> <some-element *ngSwitchCase="match_expression_1">...</some-element> <% endraw %>|
+| NgSwitchDefault |  <% raw %> <some-element *ngSwitchDefault>...</some-element> <% endraw %>|
+| NgTemplateOutlet |  <% raw %> <ng-container *ngTemplateOutlet="greet"></ng-container> <% endraw %>|
+
+
+#### Pipe
+| Name | Template | 
+|:---:|:---| 
+| AsyncPipe |  <% raw %> {{ observable$ \| async }} <% endraw %>|
+| CurrencyPipe |  <% raw %> {{ num \| currency }} <% endraw %>|
+| DatePipe |  <% raw %> {{ str \| date }} <% endraw %>|
+| DecimalPipe |  <% raw %> {{ num \| decimal }} <% endraw %>|
+| JsonPipe |  <% raw %> {{ obj \| json }} <% endraw %>|
+| KeyValuePipe |  <% raw %> {{ obj \| keyvalue }} <% endraw %>|
+| LowerCasePipe |  <% raw %> {{ str \| lowercase }} <% endraw %>|
+| UpperCasePipe |  <% raw %> {{ str \| uppercase }} <% endraw %>|
+| TitleCasePipe |  <% raw %> {{ str \| titlecase }} <% endraw %>|
+| PercentPipe |  <% raw %> {{ num \| percent }} <% endraw %>|
+| SlicePipe |  <% raw %> {{ str \| slice: 0:4 }} <% endraw %>|
 
 
 
