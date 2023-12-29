@@ -36,38 +36,7 @@ export class AppComponent {}
 ## 2. CommonModule
 템플릿에서 CommonModule에 속한 파이프 또는 디렉티브를 사용하는 경우, 최적화를 위해 각 항목을 개별적으로 imports 하는 것이 좋습니다.
 
-#### Directive
 
-| Name | Template | 
-|:---:|:---| 
-| NgClass | [ngClass] | 
-| NgComponentOutlet | <ng-container *ngComponentOutlet="componentTypeExpression"></ng-container> | 
-| NgFor | *ngFor |
-| NgForOf | <ng-template ngFor let-item [ngForOf]="items" let-i="index" [ngForTrackBy]="trackByFn"> |
-| NgIf | *ngIf |
-| NgPlural | <some-element [ngPlural]="value"> |
-| NgPluralCase | <ng-template ngPluralCase="=0">there is nothing</ng-template> |
-| NgStyle | [ngStyle] |
-| NgSwitch | <container-element [ngSwitch]="switch_expression"> |
-| NgSwitchCase | <some-element *ngSwitchCase="match_expression_1">...</some-element> |
-| NgSwitchDefault | <some-element *ngSwitchDefault>...</some-element> |
-| NgTemplateOutlet | <ng-container *ngTemplateOutlet="greet"></ng-container> |
-
-
-#### Pipe
-| Name | Template | 
-|:---:|:---| 
-| AsyncPipe | {{ observable$ \| async }} |
-| CurrencyPipe | {{ num \| currency }} |
-| DatePipe | {{ str \| date }} |
-| DecimalPipe | {{ num \| decimal }} |
-| JsonPipe | {{ obj \| json }} |
-| KeyValuePipe | {{ obj \| keyvalue }} |
-| LowerCasePipe | {{ str \| lowercase }} |
-| UpperCasePipe | {{ str \| uppercase }} |
-| TitleCasePipe | {{ str \| titlecase }} |
-| PercentPipe | {{ num \| percent }} |
-| SlicePipe | {{ str \| slice: 0:4 }}
 
 
 
