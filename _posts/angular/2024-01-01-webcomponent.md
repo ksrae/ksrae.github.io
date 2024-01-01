@@ -53,14 +53,6 @@ export class WebComponentLibComponent {
 ```
 
 
-## @angular/elements 설치
-library를 webcomponent로 만들기 위해 @angular/elements의 createCustomElement() 함수가 반드시 필요합니다. <br/>
-이를 사용하기 위해 @angular/elements를 install 해야 합니다.
-
-```
-npm i @angular/elements
-```
-
 
 ## application 구현
 
@@ -83,6 +75,16 @@ export const appConfig: ApplicationConfig = {
     ],
 };
 ```
+
+
+## @angular/elements 설치
+library를 webcomponent로 만들기 위해 @angular/elements의 createCustomElement() 함수가 반드시 필요합니다. <br/>
+이를 사용하기 위해 @angular/elements를 install 해야 합니다.
+
+```
+npm i @angular/elements
+```
+
 
 
 ### main.ts 수정
