@@ -18,10 +18,8 @@ tags: [standalone, webcomponent]
 
 그런 다음, Web Component 의 소스가 될 Library와 이를 감싸 Web Component로 변환할 Application을 추가합니다.
 
-```
-ng g library web-component-lib
-ng g application web-component-app
-```
+```ng g library web-component-lib```
+```ng g application web-component-app```
 
 
 
@@ -98,7 +96,7 @@ customElements.define의 첫 번째 매개변수는 외부에서 이 library를 
 <html lang="en">
     <head>
         <meta charset="utf-8" />
-        <title>EtlpWc</title>
+        <title>Web Component</title>
         <base href="/" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
     </head>
@@ -139,11 +137,8 @@ scripts 폴더를 생성하고 postbuild-bundler.js 을 생성합니다.
 
 ```js
 async function loadModules() {
-    // Import the polyfills and main modules and wait for them to finish
     await import('./polyfills.js');
     await import('./main.js');
-
-    // Do any extra stuff you need for init here.
   }
 
   loadModules();
