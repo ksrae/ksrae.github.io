@@ -34,7 +34,7 @@ tags: [standalone, webcomponent]
   standalone: true,
   imports: [],
   template: `
-  <% raw %> {{ val }} <% endraw %>
+  {% raw %} {{ val }} {% endraw %}
   <button (click)="onClick($event)">Emit</button>
   `,
   styles: ``,
