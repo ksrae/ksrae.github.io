@@ -18,14 +18,14 @@ tags: [standalone, webcomponent]
 
 그런 다음, Web Component 의 소스가 될 Library와 이를 감싸 Web Component로 변환할 Application을 추가합니다.
 
-```ng g library web-component-lib```
+```ng g library web-component-lib``` <br/>
 ```ng g application web-component-app```
 
 
 
 ## library 구현
 
-라이브러리 코드에 원하는 기능을 작성합니다. 필요한 경우 Angular의 기능인 @Input 및 @Output을 포함시켜도 됩니다.<br/>
+라이브러리 코드에 원하는 기능을 작성합니다. 필요한 경우 Angular의 기능 (예: @Input 및 @Output)을 포함시켜도 됩니다.<br/>
 필요한 경우 Shadow DOM을 설정합니다.
 
 ```ts
@@ -33,10 +33,21 @@ tags: [standalone, webcomponent]
   selector: 'lib-web-component-lib',
   standalone: true,
   imports: [],
-  templateUrl: './web-component-lib.component.html',
+  template: `
+  {{ val }}
+  <button (click)="onClick($event)">Emit</button>
+  `,
   styles: ``,
   encapsulation: ViewEncapsulation.ShadowDom // optional
 })
+export class WebComponentLibComponent {
+  @Input() val!: string;
+  @Output() onResult = new EventEmitter();
+
+  onClick(e: any) {
+    this.onResult.emit(e);
+  }
+}
 ```
 
 
