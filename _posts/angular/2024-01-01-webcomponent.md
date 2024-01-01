@@ -118,9 +118,9 @@ customElements.define의 첫 번째 매개변수는 외부에서 이 library를 
 ```
 
 #### input, output 작성
-만일 library에 input과 output이 있을 경우 webcomponent에서도 사용할 수 있습니다.
-input의 경우 attribute와 유사한 방식으로 사용할 수 있으며, (단, 대문자가 들어간 경우 ```하이픈(-)소문자``` 로 표시해야 합니다. )
-output의 경우 addEventListener로 이벤트를 가져와야 합니다.
+만일 library에 input과 output이 있을 경우 webcomponent에서도 사용할 수 있습니다. <br/>
+input의 경우 attribute와 유사한 방식으로 사용할 수 있으며, (단, 대문자가 들어간 경우 ```하이픈(-)소문자``` 로 표시해야 합니다. ) <br/>
+output의 경우 addEventListener로 이벤트를 가져와야 합니다. <br/><br/>
 
 index.html을 다음과 같이 고쳐봅시다.
 
@@ -137,7 +137,7 @@ index.html을 다음과 같이 고쳐봅시다.
         <web-component-lib set-value="'sample'"></web-component-lib>
     </body>
     <script>
-      const el = document.querySelector('web-component-lib');
+      const el = document.querySelector('web-component-lib'); // or set id to the dom and find the id.
       el.addEventListener('onResult', (event) => {
         console.log({event});
       });
@@ -165,7 +165,7 @@ package.json에 등록해두면 편리합니다.
 
 
 ## 실행
-빌드된 app이 정상적으로 작동하는지 확인하기 위해 dist 폴더에서 app을 찾아 http-server에 올려 보세요. (단순히 파일을 실행해서는 동작하지 않습니다.)
+빌드된 app이 정상적으로 작동하는지 확인하기 위해 dist 폴더에서 app을 찾아 http-server에 올려 보세요. (단순히 파일을 실행해서는 동작하지 않습니다.) <br/><br/>
 
 http-server가 없다면 크롬의 확장 프로그램 (예: [Simple WebServer](https://simplewebserver.org/download.html) )을 활용할 수도 있습니다.
  
@@ -235,7 +235,7 @@ webcomponent를 사용하는 방법에 대해서는 [Web Components In Angular](
 
 ## 고려사항
 
-빌드된 웹 컴포넌트를 사용하려면 main.js, polyfills.js, bundle.js 파일을 꼭 포함해야 합니다. 이를 하나의 파일로 결합하면 더 편리할 것 같지만 마땅한 해결책을 찾을 수 없습니다.
+빌드된 웹 컴포넌트를 사용하려면 main.js, polyfills.js, bundle.js 파일을 꼭 포함해야 합니다. 이를 하나의 파일로 결합하면 더 편리할 것 같지만 마땅한 해결책을 찾을 수 없습니다.<br/><br/>
 
 fs-extra와 concat을 install 하여 main.js와 polyfills.js를 하나의 파일로 합치는 방법을 제시하는 문서를 참고하였으나 실행하였을 경우 중복된 변수에 대한 에러가 발생하여 사용할 수 없습니다.
 
