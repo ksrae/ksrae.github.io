@@ -23,6 +23,8 @@ tags: [standalone, webcomponent]
 
 
 
+
+
 ## library 구현
 
 라이브러리 코드에 원하는 기능을 작성합니다. 필요한 경우 Angular의 기능 (예: @Input 및 @Output)을 포함시켜도 됩니다.<br/>
@@ -50,6 +52,14 @@ export class WebComponentLibComponent {
 }
 ```
 
+
+## @angular/elements 설치
+library를 webcomponent로 만들기 위해 @angular/elements의 createCustomElement() 함수가 반드시 필요합니다. <br/>
+이를 사용하기 위해 @angular/elements를 install 해야 합니다.
+
+```
+npm i @angular/elements
+```
 
 
 ## application 구현
