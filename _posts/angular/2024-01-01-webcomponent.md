@@ -34,14 +34,14 @@ tags: [standalone, webcomponent]
   standalone: true,
   imports: [],
   template: `
-  {% raw %} {{ val }} {% endraw %}
+  {% raw %} {{ setValue }} {% endraw %}
   <button (click)="onClick($event)">Emit</button>
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.ShadowDom // optional
 })
 export class WebComponentLibComponent {
-  @Input() val!: string;
+  @Input() setValue!: string;
   @Output() onResult = new EventEmitter();
 
   onClick(e: any) {
@@ -116,6 +116,36 @@ customElements.define의 첫 번째 매개변수는 외부에서 이 library를 
     </body>
 </html>
 ```
+
+#### input, output 작성
+만일 library에 input과 output이 있을 경우 webcomponent에서도 사용할 수 있습니다.
+input의 경우 attribute와 유사한 방식으로 사용할 수 있으며, (단, 대문자가 들어간 경우 ```하이픈(-)소문자``` 로 표시해야 합니다. )
+output의 경우 addEventListener로 이벤트를 가져와야 합니다.
+
+index.html을 다음과 같이 고쳐봅시다.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Web Component</title>
+        <base href="/" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+    </head>
+    <body>
+        <web-component-lib set-value="'sample'"></web-component-lib>
+    </body>
+    <script>
+      const el = document.querySelector('web-component-lib');
+      el.addEventListener('onResult', (event) => {
+        console.log({event});
+      });
+    </script>
+</html>
+```
+
+
 
 
 ### angular.json 수정
