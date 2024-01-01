@@ -225,6 +225,9 @@ angular.json 파일을 수정합니다.
 
 ```npm run build:all```
 
+
+#### index.html 수정
+
 이제 dist 파일의 app 폴더의 index.html 에서 두개의 스크립트를 호출하는 코드를 제거하고 bundle.js 만 호출하도록 수정합니다.
 
 
