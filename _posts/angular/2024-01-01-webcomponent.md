@@ -125,6 +125,8 @@ customElements.define의 첫 번째 매개변수는 외부에서 이 library를 
     </head>
     <body>
         <web-component-lib></web-component-lib>
+        <script src="./main.js" type="module"></script>
+        <script src="./polyfills.js" type="module"></script>
     </body>
 </html>
 ```
@@ -147,17 +149,18 @@ index.html을 다음과 같이 고쳐봅시다.
     </head>
     <body>
         <web-component-lib set-value="'sample'"></web-component-lib>
+        <script src="./main.js" type="module"></script>
+        <script src="./polyfills.js" type="module"></script>
+        <script>
+          const el = document.querySelector('web-component-lib'); // or set id to the dom and find the id.
+          el.addEventListener('onResult', (event) => {
+            console.log({event});
+          });
+        </script>
     </body>
-    <script>
-      const el = document.querySelector('web-component-lib'); // or set id to the dom and find the id.
-      el.addEventListener('onResult', (event) => {
-        console.log({event});
-      });
-    </script>
+
 </html>
 ```
-
-
 
 
 ### angular.json 수정
@@ -183,7 +186,8 @@ http-server가 없다면 크롬의 확장 프로그램 (예: [Simple WebServer](
  
 
 ## 개선 
-dist 폴더에서 app 폴더의 파일 중 index.html 파일을 보면 main.js와 polyfills.js를 script로 호출하고 있는 것을 볼 수 있습니다. 여러 library가 있을 경우 파일명이 모두 동일하므로 사용이 불편할 수 있으므로 이를 개선해봅시다.
+dist 폴더에서 app 폴더의 파일 중 index.html 파일을 보면 main.js와 polyfills.js를 script로 호출하고 있는 것을 볼 수 있습니다.<br/>
+여러 library가 있을 경우 파일명이 모두 동일하므로 사용이 불편할 수 있으므로 이를 개선해봅시다.
 
 #### script 파일 추가
 scripts 폴더를 생성하고 postbuild-bundler.js 을 생성합니다.
@@ -222,7 +226,7 @@ angular.json 파일을 수정합니다.
 ### 빌드
 
 아래의 명령을 실행하여 빌드와 동시에 script 파일도 생성되도록 합니다.
-
+<br/>
 ```npm run build:all```
 
 
@@ -234,6 +238,10 @@ angular.json 파일을 수정합니다.
 ```html
 ...
 <script src="bundle.js" type="module"></script>
+<!-- remove those codes
+  <script src="./main.js" type="module"></script>
+  <script src="./polyfills.js" type="module"></script> 
+-->
 ...
 
 ```
@@ -250,7 +258,8 @@ webcomponent를 사용하는 방법에 대해서는 [Web Components In Angular](
 
 ## 고려사항
 
-빌드된 웹 컴포넌트를 사용하려면 main.js, polyfills.js, bundle.js 파일을 꼭 포함해야 합니다. 이를 하나의 파일로 결합하면 더 편리할 것 같지만 마땅한 해결책을 찾을 수 없습니다.<br/><br/>
+빌드된 웹 컴포넌트를 사용하려면 main.js, polyfills.js, bundle.js 파일을 꼭 포함해야 합니다. <br/>
+이를 하나의 파일로 결합하면 더 편리할 것 같지만 마땅한 해결책을 찾을 수 없습니다.<br/><br/>
 
 fs-extra와 concat을 install 하여 main.js와 polyfills.js를 하나의 파일로 합치는 방법을 제시하는 문서를 참고하였으나 실행하였을 경우 중복된 변수에 대한 에러가 발생하여 사용할 수 없습니다.
 
