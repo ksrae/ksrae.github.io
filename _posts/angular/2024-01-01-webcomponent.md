@@ -7,8 +7,9 @@ tags: [standalone, webcomponent]
 ---
 
 이 글에서는 Angular에서 Web Component를 만드는 과정을 살펴보겠습니다. <br/>
-이 글에서는 Angular Standalone 환경일 때 Web Component를 만드는 방법에 대해 정리하였습니다.<br/>
-많은 글들이 Module 방식에 중점을 두고 있으므로 Module 방식은 다른 문서를 확인하시기 바랍니다.
+많은 글들이 Module 방식에 중점을 두고 있으므로 Module 방식은 다른 문서를 확인하시고,<br/>
+여기에서는 Angular Standalone 환경일 때 Web Component를 만드는 방법에 대해 정리하였습니다.<br/>
+ 
 
 
 ## Workspace 설정
