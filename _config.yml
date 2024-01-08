@@ -148,7 +148,7 @@ footer:
       icon: "fab fa-fw fa-github"
       url: "https://github.com/ksrae"
     - label: "Linkedin"
-      icon: "fas fa-fw fa-linkedin"
+      icon: "fa fa-linkedin"
       url: "https://www.linkedin.com/in/%EC%84%B1%EB%9E%98-%EA%B9%80-612024179/"
       # url:
     # - label: "GitLab"
