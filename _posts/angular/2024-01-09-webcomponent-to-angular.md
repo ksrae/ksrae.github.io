@@ -89,7 +89,7 @@ import "./src/scripts/bundle.js";
 ## CUSTOM_ELEMENTS_SCHEMA 설정
 
 위와 같이 정의한 뒤 프로젝트를 실행해도 webcomponent가 로드되지 않는데 이는 webcomponent는 angular 프로젝트 내에서 작성된 component가 아니기 때문입니다.<br/>
-따라서 외부 component를 허용하도록 Schmema를 설정해주어야 합니다.<br/>
+따라서 외부 component를 허용하도록 schema를 설정해주어야 합니다.<br/>
 사용 가능한 schema는 두 가지가 있는데 사용자 지정 요소를 허용하는 ```CUSTOM_ELEMENMTS_SCHEMA``` 와 알 수 없는 요소나 속성을 사용할 때 관련 에러를 무시하도록 허용하는 ```NO_ERRORS_SCHEMA``` 가 있습니다.<br/>
 상황에 따라 선택할 수 있으나 NO_ERROES_SCHMEA의 경우 관련 에러를 모두 무시하므로 필요한 에러 메시지를 받을 수 없는 상황이 있을 수 있어 사용 전에 잘 검토해야 합니다.
 
