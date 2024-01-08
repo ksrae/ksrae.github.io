@@ -6,7 +6,6 @@ categories: angular
 tags: [webcomponent]
 ---
 
-
 이번 글에서는 이전에 작성한 [webcomponent](https://ksrae.github.io/angular/webcomponent/)을 Angular 프로젝트에 통합하는 방법에 대해 살펴보겠습니다. <br/>
 특히, index.html이 아닌 Angular 컴포넌트 내에서 WebComponent를 호출하는 방법에 중점을 둘 것입니다.
 
