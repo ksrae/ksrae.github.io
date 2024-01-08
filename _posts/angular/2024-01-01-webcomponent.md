@@ -221,7 +221,7 @@ angular.json 파일을 수정합니다.
 빌드할 때 script 파일도 동시에 실행되도록 package.json에 script를 하나 더 추가합니다.
 
 ```json
-"build:all": "npm run build:lib && npm run build:app && node ./postbuild-bundler.js",
+"build:all": "npm run build:lib && npm run build:app",
 ```
 
 ### 빌드
