@@ -10,7 +10,7 @@ tags: [viewchild, template]
 이 글에서는 Angular 애플리케이션에서 값이 템플릿에 즉시 반영되지 않는 문제를 해결하는 방법에 대해 탐구합니다.<br/> 
 보통 선언된 변수는 즉시 템플릿에 반영되지만 OnPush 변경 감지를 사용하는 경우와 같이 특정 상황에서는 그렇지 않을 수 있습니다.<br/>  
 이 글은 변경 감지에 대한 깊은 설명을 생략하고 공식 Angular 문서로 대처합니다: [Angular 변경 감지 및 런타임 최적화](https://angular.io/guide/change-detection)
-
+<br/>
 지연된 템플릿 업데이트 문제는 변수를 업데이트하는 상태가 Angular 주기와 일치하지 않을 때 발생합니다. 여기에는 일반적인 시나리오가 있습니다.
 
 ## Subscribe 사용
@@ -79,10 +79,10 @@ export class ParentComponent {
 
 
 ## Angular 주기 밖
-Angular 주기와 일치하지 않아 업데이트가 즉시 템플릿에 반영되지 않는 다양한 상황이 있습니다. 해당 상황에 대한 자세한 내용은 다른 문서를 참고하세요.
+Angular 주기와 일치하지 않아 업데이트가 즉시 템플릿에 반영되지 않는 다양한 상황이 있습니다. <br/>해당 상황에 대한 자세한 내용은 다른 문서를 참고하세요.
 
 ## 해결 방법
-지연된 템플릿 업데이트를 해결하기 위해 `ChangeDetectorRef.markForCheck()` 또는 `detectChanges()` 를 활용하여 값의 업데이트 시기를 조절할 수 있습니다. 예를 들어, subscribe를 사용하는 경우 다음 수정으로 문제를 해결할 수 있습니다.
+지연된 템플릿 업데이트를 해결하기 위해 `ChangeDetectorRef.markForCheck()` 또는 `detectChanges()` 를 활용하여 값의 업데이트 시기를 조절할 수 있습니다. <br/>예를 들어, subscribe를 사용하는 경우 다음 수정으로 문제를 해결할 수 있습니다.
 
 ```ts
 @Component({
