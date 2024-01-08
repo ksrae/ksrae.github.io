@@ -7,7 +7,6 @@ tags: [webcomponent]
 ---
 
 이번 글에서는 webcomponent를 Angular 프로젝트에서 사용하는 방법에 대해 살펴보겠습니다.<br/>
-webcomponent는 이전에 작성한 [webcomponent](https://ksrae.github.io/angular/webcomponent/)을 적용하려고 하니 함께 참조하세요. <br/>
 특히, index.html이 아닌 Angular component 에서 WebComponent를 호출하는 방법에 중점을 둘 것입니다.
 
 ## webcomponent 준비
@@ -23,7 +22,9 @@ npm new angular-webcomponent
 
 ## script 파일 복사
 이전에 작성한 WebComponent의 3개 파일(bundle.js, main.js, polyfills.js)을 새 프로젝트로 복사합니다. <br/>
-폴더의 위치는 중요하지 않습니다. 이 글에서는 src/scripts 폴더를 생성하였습니다.
+폴더의 위치는 중요하지 않습니다. 이 글에서는 src/scripts 폴더를 생성하였습니다.<br/>
+<br/>
+(만일 webcomponent를 npm으로 설치한 경우는 이 과정이 필요 없으므로 이 영역은 무시해도 됩니다.)
 
 
 ## webcomponent tag 호출
