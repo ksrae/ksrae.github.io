@@ -22,7 +22,7 @@ Angular에서는 Micro Frontend 환경을 구축하기 위해 module federation�
 Micro Frontend는 기본적으로 두 개 이상의 프로젝트를 연결하는 개념입니다. <br/>
 따라서 이 글에서는 두 개의 프로젝트를 생성하고, 하나는 호스트로, 다른 하나는 원격 프로젝트로 구성하여 호스트가 원격 컴포넌트를 가져오는 코드를 작성할 것입니다.
 
-## 호스트 프로젝트 설정 
+## Host(Shell) 프로젝트 설정 
 ### project 생성
 먼저 호스트 프로젝트를 생성합니다. 이 예제에서는 Angular 17로 esbuild를 기반으로 하는 프로젝트를 생성하며, 프로젝트명은 `native-federation-shell` 로 정했습니다.
 ```ng new native-federation-shell```
@@ -80,7 +80,7 @@ export const routes: Routes = [
 ```
 
 #### route에서 remote route 호출
-remote의 route를 호출할 수도 있습니다. 이 때는 loadRemoteModule이 아닌 loadChildren을 사용해야 합니다.
+remote의 route를 호출할 수도 있습니다. 이 때는 loadComponent가 아닌 loadChildren을 사용해야 합니다.
 ```ts
 {
     path: 'remote-routes',
@@ -107,7 +107,7 @@ remote의 route를 호출할 수도 있습니다. 이 때는 loadRemoteModule이
 
 
 
-## remote
+## Remote 프로젝트 설정
 이제 remote 프로젝트를 생성하고 host와 연결합니다.
 
 ### project 생성
