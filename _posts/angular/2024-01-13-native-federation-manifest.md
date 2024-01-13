@@ -9,19 +9,18 @@ tags: [webcomponent, nativefederation, manifest]
 이 글에서는 Native Federation을 활용하여 Micro Frontend를 구축하는 과정을 예제를 통해 살펴보겠습니다.
 
 ## Native Federation 정의
-Native Federation은 module federation을 esbuild 등 다양한 환경에서도 Micro Frontend 환경을 구축할 수 있도록 지원하는 라이브러리입니다.<br/>
+Native Federation은 module federation을 esbuild 등 다양한 번들로 Micro Frontend 환경을 구축할 수 있도록 지원하는 라이브러리입니다.<br/>
 <br/>
-Angular에서는 Micro Frontend을 구축하기 위해 module federation을 사용합니다. [관련 링크](https://www.npmjs.com/package/@angular-architects/module-federation).<br/>
+Angular에서는 Micro Frontend 환경을 구축하기 위해 module federation을 사용합니다. [관련 링크](https://www.npmjs.com/package/@angular-architects/module-federation).<br/>
 현재 module federation은 Angular 12에서 16까지 지원되며, 그 이상의 버전에서도 webpack 환경인 경우 사용 가능합니다.<br/>
-<br/>
-Native Federation은 Angular 16 이상을 사용하는 프로젝트를 esbuild로 구축한 환경을 지원합니다.[관련 링크](https://www.npmjs.com/package/@angular-architects/native-federation)<br/>
+그런데 만일 Angular 16 이상을 사용하는 프로젝트에서 esbuild 번들러를 사용한다면 module federation의 활용이 어려울 수 있으므로, native Federation를 활용하여 micro frotend 환경을 구축하는 것을 추천합니다.[관련 링크](https://www.npmjs.com/package/@angular-architects/native-federation)<br/>
 <br/>
 <br/>
 
 
 ## 개요
 Micro Frontend는 기본적으로 두 개 이상의 프로젝트를 연결하는 개념입니다. <br/>
-이 글에서는 두 개의 프로젝트를 생성하고, 하나는 호스트로, 다른 하나는 원격 프로젝트로 구성하여 호스트가 원격 컴포넌트를 가져오는 코드를 작성할 것입니다.
+따라서 이 글에서는 두 개의 프로젝트를 생성하고, 하나는 호스트로, 다른 하나는 원격 프로젝트로 구성하여 호스트가 원격 컴포넌트를 가져오는 코드를 작성할 것입니다.
 
 ## 호스트 프로젝트 설정 
 ### project 생성
