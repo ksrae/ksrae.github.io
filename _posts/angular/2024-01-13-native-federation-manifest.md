@@ -186,7 +186,7 @@ host와 remote 두 프로젝트 모두를 실행하고, host에서 링크를 클
 
 ## 결론
 두 개의 독립된 프로젝트가 마치 하나의 프로젝트인 것처럼 host에서 remote의 component를 사용하는 micro frontend방식에 대해서 native-federation으로 구축해 보았습니다.<br/>
-이를 통해 하나의 프로젝트를 다른 여러 프로젝트를 통해 구축할 수 있다는 것을 확인할 수 있었고 또한 native federation을 통해 webpack이 아닌 esbuild 환경에서도 micro frontend를 구축할 수 있다는 것을 확인할 수 있습니다.<br/>
+이를 통해 하나의 프로젝트를 다른 여러 프로젝트를 통해 구축할 수 있다는 것을 확인할 수 있었고 또한 native federation을 통해 webpack이 아닌 esbuild 번들러를 사용하는 프로젝트에서도 micro frontend 환경을 구축할 수 있다는 것을 확인할 수 있습니다.<br/>
 <br/>
 module federation도 일부 설정의 차이만 있을 뿐 방식은 유사하므로 참고하시기 바랍니다.<br/>
 아래 참고 사이트를 통해 더 자세하고 정확한 정보를 확인하십시오.
