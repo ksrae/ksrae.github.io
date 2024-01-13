@@ -3,7 +3,7 @@ title: "Standalone Component에서 imports 방법 (Managing Imports in Standalon
 date: 2023-12-28 10:20:00 +0900
 comments: true
 categories: angular
-tags: [angular17, update]
+tags: [standalone, update]
 ---
 
 ## 소개

@@ -3,7 +3,7 @@ title: "ngIf에서 여러 Observable 설정하기 (More than one Observable in a
 date: 2021-06-30 14:16:00 +0900
 comments: true
 categories: angular
-tags: [ngIf, Observable]
+tags: [ngif, observable]
 ---
 
 

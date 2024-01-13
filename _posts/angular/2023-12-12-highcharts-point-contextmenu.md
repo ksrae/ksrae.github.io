@@ -3,7 +3,7 @@ title: "Setting Contextmenu Event to all Points in a series of Highcharts withou
 date: 2023-12-12 14:08:00 +0900
 comments: true
 categories: angular
-tags: [highcharts, highcharts-angular, contextmenu]
+tags: [highcharts, contextmenu]
 ---
 
 

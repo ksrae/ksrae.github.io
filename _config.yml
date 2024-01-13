@@ -126,7 +126,7 @@ author:
     #  icon: "fab fa-fw fa-facebook-square"
       # url: "https://facebook.com/"
     - label: "Linkedin"
-      icon: "fas fa-fw fa-linkedin"
+      icon: "fab fa-linkedin-in"
       url: "https://www.linkedin.com/in/%EC%84%B1%EB%9E%98-%EA%B9%80-612024179/"
     - label: "GitHub"
       icon: "fab fa-fw fa-github"

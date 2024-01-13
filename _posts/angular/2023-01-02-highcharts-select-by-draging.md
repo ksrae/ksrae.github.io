@@ -3,7 +3,7 @@ title: "Highcharts Drag로 다중 포인트 선택하기 - Multiple Point Select
 date: 2023-01-02 18:46:00 +0900
 comments: true
 categories: angular
-tags: [highcharts, highcharts-angular]
+tags: [highcharts]
 ---
 
 > 이 글에서는 Highchart에서 지원하지 않는 마우스 drag로 point를 선택하는 방법을 알아봅시다.
