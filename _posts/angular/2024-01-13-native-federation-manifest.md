@@ -3,7 +3,7 @@ title: "Angular 프로젝트에 Native Federation의 manifest를 활용한 Micro
 date: 2024-01-13 14:11:00 +0900
 comments: true
 categories: angular
-tags: [webcomponent, nativefederation, manifest]
+tags: [nativefederation, manifest]
 ---
 
 이 글에서는 Native Federation을 활용하여 Micro Frontend를 구축하는 과정을 예제를 통해 살펴보겠습니다.

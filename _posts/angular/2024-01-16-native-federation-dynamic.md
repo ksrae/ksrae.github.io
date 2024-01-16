@@ -1,9 +1,9 @@
 ---
-title: "Angular 프로젝트에 Native Federation에서 manifest 없이 Micro Frontend 구축(Micro Frotend with Native Federation without Manifest)"
+title: "Angular 프로젝트에 Native Federation에서 동적으로 Micro Frontend 구축(Micro Frotend with Native Federation without Manifest)"
 date: 2024-01-16 13:06:00 +0900
 comments: true
 categories: angular
-tags: [webcomponent, nativefederation]
+tags: [nativefederation, dynamic]
 ---
 
 이전 글에서는 Manifest를 사용하여 remote를 정의하는 정적인 방식으로 Micro Frontend를 구축하는 방법을 살펴봤습니다.<br/>
@@ -30,7 +30,7 @@ remote의 경우 이전 글에서 작성한 코드와 변화가 없으므로, �
 
 
 ### main.ts 설정
-`bootstrap.ts`` 파일을 호출하기 전 `initFederation`을 호출해야 합니다.<br/> 
+`bootstrap.ts` 파일을 호출하기 전 `initFederation` 을 호출해야 합니다.<br/> 
 `initFederation`를 정의할 때 `manifest`를 정의하지 않으므로 remote와 같이 파라미터 없이 사용합니다.
 ```ts
 import { initFederation } from '@angular-architects/native-federation';
@@ -117,7 +117,7 @@ export class AppComponent {
 
 ### remote component 호출
 
-마지막으로 `loadRemoteModule()`` 로 remote 컴포넌트를 가져온 후, `createComponent()`` 로 정의한 DOM에 추가합니다. <br/>
+마지막으로 `loadRemoteModule()` 로 remote 컴포넌트를 가져온 후, `createComponent()` 로 정의한 DOM에 추가합니다. <br/>
 만약 컴포넌트의 changeDetection이 OnPush로 설정되어 있다면, 반드시 수동으로 ChangeDetectorRef를 정의해야 합니다
 
 
