@@ -154,3 +154,8 @@ export class AppComponent {
   }
 }
 ```
+
+## 결론
+native federation을 dynamic하게 설정할 경우 host와 remote의 관계가 무의미 해집니다. 모든 project가 host 또는 remote로 정의될 수 있으며, 동시에 정의될 수도 있습니다.<br/>
+<br/>
+즉, expose에 정의된 component라면 여러 project의 component를 재구성하는 형식의 project를 구성할 수 있는 등 다양한 방식으로 project를 구성할 수 있습니다.<br/>
