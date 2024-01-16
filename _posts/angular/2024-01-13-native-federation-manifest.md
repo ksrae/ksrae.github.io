@@ -34,7 +34,10 @@ Micro Frontend는 기본적으로 두 개 이상의 프로젝트를 연결하는
 다양한 방식에 대응할 수 있도록 `type`을 `dynamic-host` 로 설정합니다.
 ```ng g @angular-architects/native-federation:init --type dynamic-host```
 
-설정이 완료되면 `federation.config.js`` 파일이 생성되고, `angular.json` 의 설정이 변경되어 있음을 확인할 수 있습니다.
+설정이 완료되면 `federation.config.js` 파일이 생성되고, `angular.json` 의 설정이 변경되어 있음을 확인할 수 있습니다.
+<br/>
+또한 `package.json` 의 `dependencies`에 `es-module-shims`가 추가되어 있는 것을 확인할 수 있습니다. (^1.5.12 or higher)
+
 
 ### manifest 설정
 assets에 federation.manifest.json 파일을 생성합니다.<br/>
@@ -48,7 +51,7 @@ assets에 federation.manifest.json 파일을 생성합니다.<br/>
 
 ### main.ts 설정
 `bootstrap.ts`` 파일을 호출하기 전 `initFederation`을 호출해야 합니다.<br/> 
-또한 `initFederation`의 파라미터로 `manifest`` 파일을 연결합니다.
+또한 `initFederation`의 파라미터로 `manifest` 파일을 연결합니다.
 ```ts
 import { initFederation } from '@angular-architects/native-federation';
 
@@ -119,6 +122,8 @@ remote의 route를 호출할 수도 있습니다. 이 때는 loadComponent가 �
 ### native federation 설정
 host와는 달리 `type`을 `remote`로 설정합니다.
 ```ng g @angular-architects/native-federation:init --type remote```
+
+설정이 완료되면 host와 마찬가지로 `federation.config.js` `angular.json` `package.json` 이 추가 또는 변경됩니다.
 
 ### federation.config.js 수정
 호스트의 설정과 유사하지만 원격에서는 호스트에 노출할 컴포넌트를 작성해야 합니다.<br/>
