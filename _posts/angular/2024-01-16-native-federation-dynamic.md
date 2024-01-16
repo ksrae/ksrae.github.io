@@ -6,7 +6,7 @@ categories: angular
 tags: [nativefederation, dynamic]
 ---
 
-이전 글에서는 Manifest를 사용하여 remote를 정의하는 정적인 방식으로 Micro Frontend를 구축하는 방법을 살펴봤습니다.<br/>
+[이전 글](https://ksrae.github.io/angular/native-federation-manifest/)에서는 Manifest를 사용하여 remote를 정의하는 정적인 방식으로 Micro Frontend를 구축하는 방법을 살펴봤습니다.<br/>
 이번 글에서는 Native Federation에서 manifest를 정의하지 않고 동적으로 remote를 정의하여 Micro Frontend를 구축하는 방법을 예제를 통해 살펴보겠습니다.
 
 ## 개요
