@@ -15,7 +15,7 @@ tags: [standalone, webcomponent]
 ## Workspace 설정
 쉬운 관리를 위해 먼저 workspace를 생성합니다.
 
-```ng new workspace -no-create-application```
+```ng new workspace --no-create-application```
 
 그런 다음, Web Component 의 소스가 될 Library와 이를 감싸 Web Component로 변환할 Application을 추가합니다.
 
