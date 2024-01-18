@@ -3,7 +3,7 @@ title: "What is charts variables of Highcharts in Highcharts-angular?"
 date: 2022-11-15 13:49:00 +0900
 comments: true
 categories: angular
-tags: [highcharts, highcharts-angular]
+tags: [highcharts]
 ---
 
 Highcharts에서는 chart 변수에 직접 options을 주입하기 때문에 api 의 활용은 물론, 값의 수정도 쉽게 적용할 수 있습니다.<br/>

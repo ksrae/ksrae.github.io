@@ -3,7 +3,7 @@ title: "How to setup highcharts-angular"
 date: 2022-10-21 13:49:00 +0900
 comments: true
 categories: angular
-tags: [chart, highcharts, highcharts-angular]
+tags: [chart, highcharts]
 ---
 
 Highcharts-Angular는 Highcharts를 Angular에서 사용하기 쉽도록 작성된 library 입니다.<br/>
