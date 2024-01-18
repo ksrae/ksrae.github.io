@@ -3,7 +3,7 @@ title: "Highcharts Label - Changing Attributes Dynamically)"
 date: 2023-09-26 13:49:00 +0900
 comments: true
 categories: angular
-tags: [highcharts, highcharts-angular]
+tags: [highcharts]
 ---
 
 > 이 글에서는 Highchart에서 label을 사용할 때 style을 변경하는 방법에 대해 알아보겠습니다.

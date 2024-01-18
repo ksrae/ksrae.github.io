@@ -15,7 +15,7 @@ tags: [standalone, webcomponent]
 ## Workspace 설정
 쉬운 관리를 위해 먼저 workspace를 생성합니다.
 
-```ng new workspace -no-create-application```
+```ng new workspace --no-create-application```
 
 그런 다음, Web Component 의 소스가 될 Library와 이를 감싸 Web Component로 변환할 Application을 추가합니다.
 
@@ -221,7 +221,7 @@ angular.json 파일을 수정합니다.
 빌드할 때 script 파일도 동시에 실행되도록 package.json에 script를 하나 더 추가합니다.
 
 ```json
-"build:all": "npm run build:lib && npm run build:app && node ./postbuild-bundler.js",
+"build:all": "npm run build:lib && npm run build:app",
 ```
 
 ### 빌드

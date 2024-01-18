@@ -3,7 +3,7 @@ title: "Highcharts-angular oneToOne 옵션으로 쉽게 데이터 업데이트 �
 date: 2022-11-28 18:11:00 +0900
 comments: true
 categories: angular
-tags: [highcharts-angular]
+tags: [highcharts]
 ---
 
 Highchart는 데이터를 수정하기 위한 다양한 옵션을 가지고 있고, 관련 api 문서도 잘 구성되어 있기 때문에 highcharts-angular를 사용함에 있어서도 큰 어려움이 없습니다.<br/>

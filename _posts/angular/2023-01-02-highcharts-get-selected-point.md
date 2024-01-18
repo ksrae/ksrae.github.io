@@ -3,7 +3,7 @@ title: "Highcharts 선택한 모든 Points 가져오기 - Getting All Selected P
 date: 2023-01-02 18:46:00 +0900
 comments: true
 categories: angular
-tags: [highcharts, highcharts-angular]
+tags: [highcharts]
 ---
 
 > 이 글에서는 Highchart에서 유저가 선택한 모든 point의 정보를 가져오는 방법을 알아봅시다.

@@ -3,7 +3,7 @@ title: "How to Use This of Highchart in Typescript"
 date: 2022-10-21 13:49:00 +0900
 comments: true
 categories: angular
-tags: [highcharts, highcharts-angular]
+tags: [highcharts]
 ---
 
 예제들을 검색하다보면 javascript 또는 jquery로 된 예제들을 볼 수 있는데, 그런 예제들 중에 this로 처리되어 있는 예제들을 간혹 확인할 수 있습니다.<br/>

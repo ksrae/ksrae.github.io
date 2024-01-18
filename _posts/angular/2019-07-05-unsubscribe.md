@@ -107,3 +107,22 @@ mountSubscription: Subscription = new Subscription();
   }
 }
 ```
+
+## takeUntilDestroyed (>= Angular 16)
+Angular 16 버전부터 OnDestroy를 대신할 수 있는 DestroyRef 를 지원합니다.<br/>
+또한 rxjs에서는 takeUntilDestroyed 함수를 지원하는데 DestroyRef와 함께 사용하면 Subscription을 사용하지 않고도 Component의 OnDestroy cycle에 해당 Observable을 unsubscribe 할 수 있습니다.
+
+```ts
+import { inject, DestroyRef } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+
+export class TestComponent {
+  destroyRef = inject(DestroyRef);
+
+  ...
+
+  this.sample$.pipe(
+    takeUntilDestroyed(this.destroyRef)
+  ).subscribe();
+}
+```

@@ -3,7 +3,7 @@ title: "All about Highcharts Tooltip (Options, Clone, Customize)"
 date: 2023-09-26 13:49:00 +0900
 comments: true
 categories: angular
-tags: [highcharts, highcharts-angular]
+tags: [highcharts]
 ---
 
 
