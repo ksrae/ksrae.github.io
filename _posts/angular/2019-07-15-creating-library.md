@@ -7,8 +7,10 @@ tags: [library, package]
 ---
 
 ## 이 문서는 새로 업데이트 되었습니다.
-[업데이트된 글로 바로가기]()
-
+[업데이트된 글로 바로가기](https://ksrae.github.io/angular/creating-library-revised/)
+<br/>
+<br/>
+<br/>
 자체 개발한 라이브러리를 마치 외부 라이브러리를 사용하는 것처럼 만들 수 있습니다.<br><br>
 
 Angular6 부터 ng-packagr가 정식 지원 되어 쉽게 만을 수 있으니 <br>
