@@ -6,11 +6,12 @@ categories: angular
 tags: [library, package]
 ---
 
-2019년 7월에 작성한 [Creating Library 문사](https://ksrae.github.io//angular/creating-library/)가 미흡하여 보다 이해하기 쉽게 재작성하였습니다.<br/>
+2019년 7월에 작성한 [Creating Library 문서](https://ksrae.github.io//angular/creating-library/)가 미흡하여 보다 이해하기 쉽게 재작성하였습니다.<br/>
 <br/>
 이 글에서는 자체 개발한 라이브러리를 마치 외부 라이브러리처럼 사용하는 방법에 대해 다루어 보겠습니다.<br><br>
 
-Angular6 부터 ng-packagr가 정식 지원 되어 쉽게 만을 수 있으니 자주 사용하는 기능은 라이브러리로 만들고 package화 해서 편리하게 재활용 하시기 바랍니다.<br>
+Angular6 부터 ng-packagr가 정식 지원 되어 쉽게 만을 수 있으니 자주 사용하는 기능은 라이브러리로 만들고 package화 해서 편리하게 재활용 하시기 바랍니다.<br/>
+
 
 ## 1. 프로젝트 생성
 
