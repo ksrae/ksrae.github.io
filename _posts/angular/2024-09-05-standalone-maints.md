@@ -60,16 +60,16 @@ bootstrapApplication(AppComponent, {
 });
 ```
 
-1. withJsonpSupport()
+### withJsonpSupport()
 JSONP는 주로 CORS 이슈를 해결하기 위해 사용되는 방식으로, 다른 도메인의 자원을 요청할 때 서버에서 CORS 설정이 되어 있지 않은 경우 JSONP를 사용해 응답을 받을 수 있습니다. withJsonpSupport()는 Angular의 HttpClient에 JSONP 지원을 추가합니다. 이는 필요한 경우에만 활성화하면 됩니다.
 
-2. withXsrfConfiguration()
+### withXsrfConfiguration()
 이 옵션은 XSRF (Cross-Site Request Forgery) 보호를 위한 설정입니다. 기본적으로 Angular는 쿠키와 헤더를 이용해 XSRF 보호를 지원합니다. 이 함수는 보호에 사용되는 쿠키 이름과 헤더 이름을 커스터마이즈할 수 있게 해줍니다.
 
 - cookieName: 'TOKEN': CSRF 토큰이 담긴 쿠키의 이름을 설정합니다. 기본값은 XSRF-TOKEN입니다.
 - headerName: 'X-TOKEN': 요청 시 서버로 보내는 XSRF 토큰을 포함할 헤더 이름을 설정합니다. 기본값은 X-XSRF-TOKEN입니다.
 
-3. withNoXsrfProtection()
+### withNoXsrfProtection()
 XSRF 보호를 비활성화하는 옵션입니다. 보안이 중요한 API 호출에서 사용하면 안 되며, XSRF 토큰을 보내지 않아도 되는 상황에서 사용할 수 있습니다. 예를 들어, 외부 API와 통신할 때 사용할 수 있습니다.
 
 ## provideRouter 라우팅 설정
@@ -91,22 +91,22 @@ bootstrapApplication(AppComponent, {
 });
 ```
 
-1. withPreloading()
+### withPreloading()
 이 옵션은 미리 로딩할 모듈을 지정하는 데 사용됩니다.
 
 - NoPreloading: 모듈을 미리 로드하지 않으며, 사용자가 해당 라우트로 이동할 때만 로딩됩니다.
 - PreloadAllModules: 애플리케이션이 로드된 후 나중에 필요할 수 있는 모든 모듈을 미리 로드합니다. 대형 애플리케이션에서 페이지 로딩 속도를 향상시키는 데 유용합니다.
 
-2. withDebugTracing()
+### withDebugTracing()
 이 옵션을 사용하면 Angular 라우터가 실행되는 동안 발생하는 다양한 이벤트를 콘솔에 출력해 디버깅할 수 있습니다. 라우팅 흐름을 추적하고 싶을 때 유용합니다.
 
-3. withDisabledInitialNavigation()
+### withDisabledInitialNavigation()
 라우터가 애플리케이션 부트스트랩 후 처음 로딩될 때, 자동으로 네비게이션이 시작되지 않도록 비활성화합니다. 복잡한 초기화 논리나 타이밍 이슈가 있는 애플리케이션에서 사용할 수 있습니다.
 
-4. withEnabledBlockingInitialNavigation()
+### withEnabledBlockingInitialNavigation()
 부트스트랩이 완료되기 전에 네비게이션이 완료될 때까지 기다리도록 설정하는 옵션입니다. 서버사이드 렌더링 (SSR)에서는 이 옵션을 사용하는 것이 필수적입니다. 이 옵션을 사용하면 초기 네비게이션이 완료될 때까지 앱 로드가 지연됩니다.
 
-5. withInMemoryScrolling()
+### withInMemoryScrolling()
 이 옵션은 스크롤 동작을 제어합니다. 예를 들어, 페이지 이동 시 이전 스크롤 위치를 유지하거나 페이지 상단으로 이동하는 등의 동작을 정의할 수 있습니다.
 
 - anchorScrolling: 'enabled': 앵커를 통한 스크롤을 활성화합니다.
@@ -115,7 +115,7 @@ bootstrapApplication(AppComponent, {
     - 'top': 새로 로드된 페이지의 상단으로 스크롤합니다.
     - 'disabled': 스크롤 위치를 복원하지 않습니다.
 
-6. withRouterConfig()
+### withRouterConfig()
 라우터의 전체 동작을 더 세밀하게 조정할 수 있는 옵션입니다.
 
 - canceledNavigationResolution: 'replace' | 'computed': 네비게이션이 취소된 경우 URL을 어떻게 처리할지 결정합니다.
