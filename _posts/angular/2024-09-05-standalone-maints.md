@@ -42,6 +42,9 @@ bootstrapApplication(AppComponent).catch(err => console.error(err));
 # main.ts에서의 초기 로딩 작업
 main.ts에서 수행하는 초기 로딩 작업은 애플리케이션의 동작을 제어하는 중요한 역할을 합니다. 특히 HTTP 클라이언트 설정, 라우팅 및 다국어 처리 등의 작업은 이 파일에서 이루어져야 합니다. Standalone 컴포넌트 방식에서는 이러한 설정들을 모듈 대신 providers를 통해 전달하게 되며, Angular는 이를 전역 서비스로 사용하게 됩니다.
 
+## providers
+
+
 ## HTTP 클라이언트 설정
 Angular의 HttpClient는 서버와의 통신을 담당하는 핵심 모듈입니다. Standalone 애플리케이션에서도 서버와의 통신을 위해 HttpClientModule을 사용할 수 있으며, 이는 main.ts에서 초기화할 수 있습니다. 예를 들어, XSRF 보호 설정, JSONP 지원 등을 main.ts에서 선언할 수 있습니다.
 
@@ -71,6 +74,64 @@ JSONP는 주로 CORS 이슈를 해결하기 위해 사용되는 방식으로, �
 
 ### withNoXsrfProtection()
 XSRF 보호를 비활성화하는 옵션입니다. 보안이 중요한 API 호출에서 사용하면 안 되며, XSRF 토큰을 보내지 않아도 되는 상황에서 사용할 수 있습니다. 예를 들어, 외부 API와 통신할 때 사용할 수 있습니다.
+
+
+## Zoneless: 새로운 Change Detection 방식
+
+### Zoneless의 개념과 변화
+기존에 zone.js 라이브러리를 사용해 Change Detection을 자동으로 트리거했습니다. 하지만 zone.js는 성능과 개발 경험 측면에서 단점이 존재했습니다. 이러한 문제를 해결하기 위해 Angular는 18 버전부터 Zoneless라는 새로운 방식을 도입했습니다. Zoneless는 zone.js에 의존하지 않는 방식으로, 성능 최적화와 더불어 여러 이점을 제공합니다.<br/>
+<br/>
+Zoneless를 사용하면 더 빠른 초기 렌더링과 런타임, 더 작은 번들 크기, 간소화된 디버깅 경험을 얻을 수 있습니다. Zoneless 기능을 사용하려면 애플리케이션 부트스트랩 시 provideExperimentalZonelessChangeDetection을 추가하고, angular.json 파일에서 zone.js를 제거하면 됩니다.
+
+```typescript
+
+bootstrapApplication(AppComponent, {
+  providers: [
+    provideExperimentalZonelessChangeDetection()
+  ]
+});
+```
+Zoneless 방식에서는 기존 ChangeDetectionStrategy.OnPush를 사용하는 컴포넌트들이 대부분 호환되며, signal을 활용한 상태 관리 방식으로 UI 업데이트가 이루어집니다.
+
+```typescript
+@Component({
+  standalone: true,
+  template: `
+    <h1>Hello from {{ name() }}!</h1>
+    <button (click)="handleClick()">Go Zoneless</button>
+  `,
+})
+export class AppComponent {
+  protected name = signal('Angular');
+
+  handleClick() {
+    this.name.set('Zoneless Angular');
+  }
+}
+```
+
+이 방식에서는 상태 변경이 발생할 때 Angular가 자동으로 Change Detection을 트리거하지 않고, 신호(signal)가 업데이트될 때만 UI가 변경됩니다. 또한 새로운 스케줄러가 연속적인 Change Detection을 하나로 합쳐 최적화된 성능을 제공합니다.
+
+### Zoneless의 장점
+마이크로 프론트엔드 및 다른 프레임워크와의 상호 운용성 향상: Zoneless는 다른 프레임워크와 함께 사용할 때 더욱 유연합니다.
+- 더 빠른 초기 렌더 및 런타임: 불필요한 zone.js 트리거를 제거함으로써 성능이 개선됩니다.
+- 번들 크기 감소: zone.js 제거로 더 작은 번들 크기를 유지할 수 있습니다.
+- 간결한 디버깅 경험: 스택 트레이스가 더 간결하고 명확해집니다.
+- 단순한 디버깅 및 유지보수: 디버깅이 직관적으로 변하며, 스케줄링으로 인해 Change Detection이 여러 번 트리거되는 문제를 해결할 수 있습니다.
+
+### Zoneless 전환 방법
+Zoneless로의 전환은 비교적 간단하며, 특히 기존에 ChangeDetectionStrategy.OnPush를 사용한 컴포넌트는 큰 수정 없이 전환할 수 있습니다. bootstrapApplication에서 provideZoneChangeDetection을 사용해 이벤트 병합 기능을 활성화할 수도 있습니다.
+
+```typescript
+bootstrapApplication(AppComponent, {
+  providers: [
+    provideZoneChangeDetection({ eventCoalescing: true })
+  ]
+});
+```
+또한 Zoneless 애플리케이션에서는 native async/await를 사용할 수 있어, zone.js에서 필요했던 다운레벨링이 필요 없게 됩니다. 이로 인해 번들 크기와 디버깅 성능이 개선됩니다.
+
+
 
 ## provideRouter 라우팅 설정
 Angular 라우팅 설정도 main.ts에서 수행됩니다. Standalone 방식에서는 RouterModule 대신 provideRouter를 사용하여 라우팅 설정을 제공합니다. 이는 라우트 구성과 함께 다양한 추가 설정을 통해 네비게이션 동작을 제어할 수 있습니다.
