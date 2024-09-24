@@ -6,7 +6,6 @@ categories: angular
 tags: [standalone, routing]
 ---
 
-# Angular Standalone Routing: 모듈 기반 방식과의 차이점
 Angular Standalone에서는 특히 라우팅(Routing) 부분에서 많은 변화가 있습니다. 독립적인 컴포넌트 관리와 더불어 성능 최적화 및 코드 구조 단순화에 기여합니다. 이 글에서는 Standalone 방식의 라우팅을 살펴보고, 기존의 모듈 기반 라우팅과 어떻게 다른지 설명하겠습니다.
 
 ## Angular의 전통적인 모듈 기반 라우팅

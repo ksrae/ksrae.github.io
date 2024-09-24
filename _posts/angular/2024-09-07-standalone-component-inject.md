@@ -6,7 +6,6 @@ categories: angular
 tags: [standalone, inject, ondestroy, afterrender, afternextrender]
 ---
 
-# Angular Standalone Component와 새로운 의존성 주입 방식
 Angular는 최신 버전에서 개발자 경험을 크게 개선하는 여러 기능을 도입했습니다. 그 중에서도 Standalone Component와 inject API는 Angular 애플리케이션의 구조와 의존성 관리 방식을 변화시키는 핵심 요소입니다. 이 글에서는 이러한 변화들이 Angular 개발에 미치는 영향을 살펴보고, 최신 의존성 주입 방식인 inject와 컴포넌트 생명주기 관리에 관한 새로운 패턴을 소개하겠습니다.
 
 ## Standalone Component: 모듈 종속성 없이 컴포넌트 사용

@@ -6,7 +6,6 @@ categories: angular
 tags: [standalone, maints]
 ---
 
-# Angular Standalone: Standalone 개념과 main.ts의 중요성
 Angular는 애플리케이션 아키텍처를 간소화하고 성능을 최적화하기 위한 여러 기능을 도입했습니다. 그중에서도 가장 중요한 변화인 Standalone는 Angular 애플리케이션 개발 방식에 큰 변화를 가져온 중요한 기능입니다. 기존의 NgModule 기반 아키텍처에서 벗어나 컴포넌트를 독립적으로 선언하고 사용할 수 있게 함으로써, 모듈 종속성을 최소화하고 애플리케이션 초기화 과정도 간결하게 만듭니다. 본 글에서는 Angular Standalone의 개념과 이를 왜 사용해야 하는지, 그리고 main.ts에서의 초기 로딩 작업의 필요성에 대해 다뤄보겠습니다.
 
 # Standalone 컴포넌트란?
