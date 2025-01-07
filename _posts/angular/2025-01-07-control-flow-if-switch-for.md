@@ -1,6 +1,6 @@
 ---
 title: "Control flow - If, Switch and For"
-date: 2025-01-07 12:00:00 +0900
+date: 2025-01-07 10:41:00 +0900
 comments: true
 categories: angular
 tags: [controlflow, ngif, ngfor]
