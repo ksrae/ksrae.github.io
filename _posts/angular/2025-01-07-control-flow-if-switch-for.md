@@ -57,7 +57,8 @@ export class AppComponent {}
 이로 인해 코드의 가독성이 높아지고, 불필요한 DOM 요소를 줄일 수 있습니다.<br/>
 아래의 예제에서 condition이 true일 경우 첫 번째 <div>가 렌더링되고, false일 경우 두 번째 또는 세 번째 <div>가 렌더링됩니다.
 
-```ts
+```html
+{% raw %}
 @if(condition) {
 	<div>Content</div>
 } @else if (!condition) {
@@ -65,6 +66,8 @@ export class AppComponent {}
 } @else {
 	<div>Else Content</div>
 }
+{% endraw %}
+
 ```
 
 ## @switch
@@ -72,7 +75,8 @@ export class AppComponent {}
 여러 케이스를 정의하고, 주어진 조건에 따라 해당 케이스에 맞는 콘텐츠를 렌더링합니다.<br/>
 
 
-```ts
+```html
+{% raw %}
 @switch(condition) {
 	@case ('a') {
 		<div>A</div>
@@ -82,16 +86,19 @@ export class AppComponent {}
 		<div>Others</div>
 	}
 }
+{% endraw %}
 ```
 
 ## @for
 @for는 리스트를 반복하여 각 항목을 처리하는 기능입니다. 이 기능을 통해 동적인 데이터를 쉽게 렌더링할 수 있습니다.<br/>
 반복문을 사용함으로써 코드 중복을 줄이고, 데이터가 변경될 때 유연하게 대처할 수 있습니다.
 
-```ts
+```html
+{% raw %}
 @for(item of list) {
-	<li>{{item | json}}</li>
+	<li>{{item.value}}</li>
 }
+{% endraw %}
 ```
 
 ### track
@@ -99,10 +106,12 @@ export class AppComponent {}
 track은 ngFor의 trackBy 기능과 유사하여, 리스트의 각 항목을 효율적으로 추적할 수 있게 해줍니다.<br/>
 이 기능을 활용하면 Angular는 각 항목의 고유 ID를 기반으로 DOM 요소를 관리합니다.
 
-```ts
+```html
+{% raw %}
 @for(item of list;track item.id) {
-	<li>{{item | json}}</li>
+	<li>{{item.value}}</li>
 }
+{% endraw %}
 ```
 
 track은 또한 내장 variable을 활용한 확장이 가능합니다.
@@ -115,10 +124,12 @@ track은 또한 내장 variable을 활용한 확장이 가능합니다.
 | $odd | 홀수 row |
 
 
-```ts
+```html
+{% raw %}
 @for(item of list; track trackId($index, item)) {
 	<li>{{item | json}}</li>
 }
+{% endraw %}
 ```
 이렇게 하면 trackId 함수를 통해 track을 설정할 수 있습니다.
 
@@ -126,7 +137,8 @@ track은 또한 내장 variable을 활용한 확장이 가능합니다.
 @for에서는 기본 변수를 활용하여 각 항목에 대한 추가 정보를 제공할 수 있습니다.<br/>
 아래의 예제에서는 $index, $first, $last, $even, $odd와 같은 내장 변수를 사용하고 있습니다.
 
-```ts
+```html
+{% raw %}
 @for(item of list;let index = $index, let first = $first, let last = $last, let even = $even, let odd = $odd) {
 	<li>
 		{{index}}
@@ -136,16 +148,19 @@ track은 또한 내장 variable을 활용한 확장이 가능합니다.
 		{{odd}}
 	</li>
 }
+{% endraw %}
 ```
 
 ## @empty
 @empty는 반복문을 수행했을 때 리스트가 비어 있는 경우에 실행되는 블록입니다. <br/>
 리스트의 길이가 0이거나 undefined인 경우에 사용자에게 적절한 메시지를 표시할 수 있습니다.
 
-```ts
+```html
+{% raw %}
 @for(item of list) {
 	<li>{{item | json}}</li>
 } @empty {
 	No Item
 }
+{% endraw %}
 ```
