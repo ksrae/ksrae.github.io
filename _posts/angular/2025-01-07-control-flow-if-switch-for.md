@@ -116,8 +116,9 @@ track은 ngFor의 trackBy 기능과 유사하여, 리스트의 각 항목을 효
 
 track은 또한 내장 variable을 활용한 확장이 가능합니다.
 
-| $index | row index |
+| 내장 변수 | 설명 |
 | --- | --- |
+| $index | row index |
 | $first | first row |
 | $last | last row |
 | $even | 짝수 row |
