@@ -2,7 +2,7 @@
 title: "How to prototyping with the Github AI models"
 date: 2025-01-10 22:31:00 +0900
 comments: true
-categories: angular
+categories: javascript
 tags: [nodejs, githubmodels, gpt]
 ---
 
