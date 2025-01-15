@@ -11,16 +11,20 @@ tags: [controlflow, ngif, ngfor, async]
 # html에서 Observable 변수에 async pipe 사용하기
 html에서 Observable 변수를 사용할 때 async pipe를 사용하면 Observable이 발행하는 값을 구독할 수 있습니다.
 ```html
+
 <div>
+	{% raw %}
 	{{ observable$ | async }}
+	{% endraw %}
 </div>
+```
 
 하지만 Observable 변수를 사용할 때마다 async pipe를 사용해야 하므로 사용이 불편하고 코드가 반복되는 단점이 있습니다.
 
 ```html
-<div>{{ observable$ | async }}</div>
-<div>{{ observable$ | async }}</div>
-<div>{{ observable$ | async }}</div>
+<div>{% raw %}{{ observable$ | async }}{% endraw %}</div>
+<div>{% raw %}{{ observable$ | async }}{% endraw %}</div>
+<div>{% raw %}{{ observable$ | async }}{% endraw %}</div>
 ```
 
 # CommonModule에서 async에 alias 활용하기
@@ -29,16 +33,16 @@ html에서 Observable 변수를 사용할 때 async pipe를 사용하면 Observa
 
 ```html
 <ng-container *ngIf="observable$ | async as data">
-	<div>{{ data }}</div>
-	<div>{{ data }}</div>
-	<div>{{ data }}</div>
+	<div>{% raw %}{{ data }}{% endraw %}</div>
+	<div>{% raw %}{{ data }}{% endraw %}</div>
+	<div>{% raw %}{{ data }}{% endraw %}</div>
 </ng-container>
 ```
 
 ngFor에서도 async pipe를 사용하고 alias를 설정할 수 있습니다.
 ```html
 <ng-container *ngFor="let item of observable$ | async as data">
-	<div>{{ item }}</div>
+	<div>{% raw %}{{ item }}{% endraw %}</div>
 </ng-container>
 ```
 
@@ -52,22 +56,11 @@ CommonModule 대신 Control flow를 사용할 수 있는데 Control flow에서�
 
 ```html
 @if (observable$ | async; as data) {
-	<div>{{ data }}</div>
-	<div>{{ data }}</div>
-	<div>{{ data }}</div>
+	<div>{% raw %}{{ data }}{% endraw %}</div>
+	<div>{% raw %}{{ data }}{% endraw %}</div>
+	<div>{% raw %}{{ data }}{% endraw %}</div>
 }
 ```
-
-
-# control flow에서 for문을 사용할 때 track은 필수 입니다.
-Control flow에서 for를 사용할 때 에러가 발생한다면 track을 사용했는지 체크합니다. track은 async pipe의 trackBy와 동일한 역할을 하며, Control flow에서는 필수로 사용해야 합니다.
-
-```html
-@for(let item of data; track item.id) {
-	<div>{{ item.id }}</div>
-}
-```
-
 
 
 # Reference
