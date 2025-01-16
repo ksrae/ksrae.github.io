@@ -95,7 +95,7 @@ export class AppComponent {}
 
 ```html
 {% raw %}
-@for(item of list) {
+@for(item of list; track item) {
 	<li>{{item.value}}</li>
 }
 {% endraw %}
@@ -104,11 +104,13 @@ export class AppComponent {}
 ### track
 
 track은 ngFor의 trackBy 기능과 유사하여, 리스트의 각 항목을 효율적으로 추적할 수 있게 해줍니다.<br/>
-이 기능을 활용하면 Angular는 각 항목의 고유 ID를 기반으로 DOM 요소를 관리합니다.
+이 기능을 활용하면 Angular는 각 항목의 고유 ID를 기반으로 DOM 요소를 관리합니다.<br/>
+또한 track은 리스트의 변경을 감지하여 불필요한 DOM 조작을 줄여 성능을 향상시킵니다.<br/>
+특히 Control flow에서 track은 반드시 사용해야 하는 기능으로 추가되어 중요도가 매우 높습니다.
 
 ```html
 {% raw %}
-@for(item of list;track item.id) {
+@for(item of list; track item.id) {
 	<li>{{item.value}}</li>
 }
 {% endraw %}
@@ -133,6 +135,15 @@ track은 또한 내장 variable을 활용한 확장이 가능합니다.
 {% endraw %}
 ```
 이렇게 하면 trackId 함수를 통해 track을 설정할 수 있습니다.
+
+### control flow에서 for문을 사용할 때 track은 필수 입니다.
+Control flow에서 for를 사용할 때 에러가 발생한다면 track을 사용했는지 체크합니다. track은 async pipe의 trackBy와 동일한 역할을 하며, Control flow에서는 필수로 사용해야 합니다.
+
+```html
+@for(let item of data; track item.id) {
+	<div>{% raw %}{{ item.id }}{% endraw %}</div>
+}
+```
 
 ### 내장 변수 활용
 @for에서는 기본 변수를 활용하여 각 항목에 대한 추가 정보를 제공할 수 있습니다.<br/>

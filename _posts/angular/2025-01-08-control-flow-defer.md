@@ -6,8 +6,6 @@ categories: angular
 tags: [controlflow]
 ---
 
-## @defer
-
 지연 가능한 뷰, 즉 @defer 블록은 페이지의 초기 렌더링에 엄격히 필요하지 않은 코드의 로딩을 지연시켜 애플리케이션의 초기 번들 크기를 줄입니다.<br/>
 이로 인해 초기 로드 속도가 빨라지고 Core Web Vitals(CWV), 특히 Largest Contentful Paint(LCP)와 Time to First Byte(TTFB)가 개선되는 경우가 많습니다.
 
