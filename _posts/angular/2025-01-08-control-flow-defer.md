@@ -26,11 +26,9 @@ tags: [controlflow]
 @defer는 템플릿 내에서 다음과 같은 블록으로 사용됩니다:
 
 ```html
-{% raw %}
-@defer(condition) {
+{% raw %}@defer(condition) {
 ...deferred stuff
-}
-{% endraw %}
+}{% endraw %}
 ```
 
 - condition: 이 조건이 충족되면 블록 내의 내용이 로드됩니다. 예를 들어, 특정 버튼 클릭 시 로드될 수 있습니다.
@@ -45,14 +43,12 @@ tags: [controlflow]
 이를 위해 초기 콘텐츠를 @placeholder 블록으로 감싸면 됩니다:
 
 ```html
-{% raw %}
-@defer {
+{% raw %}@defer {
 	<large-component />
 } 
 @placeholder {
 	<initial-content />
-}
-{% endraw %}
+}{% endraw %}
 ```
 
 defer가 수행되면 placeholder는 제거되고 그 위치에 large-component가 표시됩니다.
@@ -63,14 +59,12 @@ defer가 수행되면 placeholder는 제거되고 그 위치에 large-component�
 minimum은 플레이스홀더 블록이 사용자에게 표시될 최소 시간을 설정하는 데 사용됩니다:
 
 ```html
-{% raw %}
-@defer {
+{% raw %}@defer {
 	<large-component />
 } 
 @placeholder (minimum 2s) {
 	<initial-content />
-}
-{% endraw %}
+}{% endraw %}
 ```
 
 위의 코드는 &lt;initial-content /&gt; 를 2초 동안 렌더링한 후 &lt;large-component /&gt; 가 나타나게 합니다.
@@ -81,14 +75,12 @@ minimum은 플레이스홀더 블록이 사용자에게 표시될 최소 시간�
 @loading 블록은 @defer 블록이 백그라운드에서 자바스크립트 번들을 로드하는 동안 일부 콘텐츠를 표시하는 데 사용됩니다.
 
 ```html
-{% raw %}
-@defer {
+{% raw %}@defer {
 	<large-component />
 } 
 @loading {
 	<loading-spinner />
-}
-{% endraw %}
+}{% endraw %}
 ```
 
 로딩이 완료되면 &lt;loading-spinner /&gt; 는 페이지에서 제거되고 &lt;large-component /&gt; 가 그 자리에 렌더링됩니다.
@@ -100,13 +92,11 @@ minimum과 after를 허용합니다:
 - after: 로딩 프로세스가 시작된 후 @loading 표시기를 표시하기 전에 기다려야 하는 시간을 지정하는 데 사용됩니다.
 
 ```html
-{% raw %}
-@defer {
+{% raw %}@defer {
 <large-component />
 } @loading (after 1s; minimum 2s) {
 <loading-spinner />
-}
-{% endraw %}
+}{% endraw %}
 ```
 
 로딩 표시기는 로딩이 1초 이상 걸리는 경우에만 표시되며, 그렇지 않으면 절대 표시되지 않습니다.<br/>
@@ -128,13 +118,11 @@ minimum과 after를 허용합니다:
 @error 블록은 @defer 블록의 로딩이 어떤 이유로 실패했을 때 콘텐츠를 표시하는 데 사용됩니다.
 
 ```html
-{% raw %}
-@defer {
+{% raw %}@defer {
 	<large-component />
 } @error {
 	<error-message />
-}
-{% endraw %}
+}{% endraw %}
 ```
 
 ## when
@@ -186,11 +174,9 @@ export class MainComponent {
 
 
 ```html
-{% raw %}
-@defer (on idle) {
+{% raw %}@defer (on idle) {
 	<large-cmp />
-}
-{% endraw %}
+}{% endraw %}
 ```
 
 #### interaction
@@ -199,24 +185,20 @@ interaction 트리거는 사용자가 특정 요소와 상호작용할 때 지�
 기본적으로 플레이스홀더가 상호작용 요소로 작동합니다. 즉, 플레이스홀더를 클릭하거나 키 입력을 하면 @defer 블록이 트리거되어 지연된 콘텐츠가 로드됩니다. 
 
 ```html
-{% raw %}
-@defer (on interaction) {
+{% raw %}@defer (on interaction) {
   <large-cmp />
 } @placeholder {
   <div>플레이스홀더</div> // 클릭 시 trigger
-}
-{% endraw %}
+}{% endraw %}
 ```
 
 또한, 동일한 템플릿 내에서 템플릿 참조 변수를 사용하여 상호작용할 요소를 지정할 수도 있습니다. 예를 들어:
 
 ```html
-{% raw %}
-<div #greeting>Hello!</div>
+{% raw %}<div #greeting>Hello!</div>
 @defer (on interaction(greeting)) {
 	<greetings-cmp />
-}
-{% endraw %}
+}{% endraw %}
 
 ```
 
@@ -225,11 +207,9 @@ interaction 트리거는 사용자가 특정 요소와 상호작용할 때 지�
 이 트리거는 @defer 블록을 즉시 트리거합니다. 어떤 이벤트가 발생할 때까지 기다리지 않습니다.
 
 ```html
-{% raw %}
-@defer (on immediate) {
+{% raw %}@defer (on immediate) {
 	<large-component />
-}
-{% endraw %}
+}{% endraw %}
 ```
 
 이것은 브라우저가 유휴 상태가 될 때까지 기다리지 않고 이 이벤트를 트리거한다는 것을 의미합니다.
@@ -240,11 +220,9 @@ interaction 트리거는 사용자가 특정 요소와 상호작용할 때 지�
 타이머 값은 밀리초(ms) 또는 초(s)로 설정할 수 있습니다.
 
 ```html
-{% raw %}
-@defer (on timer(5s)) {
+{% raw %}@defer (on timer(5s)) {
 	<large-component />
-}
-{% endraw %}
+}{% endraw %}
 ```
 
 위의 코드에서 @defer 블록은 5초 후에 트리거됩니다.<br/>
@@ -256,49 +234,41 @@ interaction 트리거는 사용자가 특정 요소와 상호작용할 때 지�
 이 이벤트는 @placeholder 블록에 단일 노드만 포함된 경우에만 트리거됩니다.
 
 ```html
-{% raw %}
-@defer (on hover) {
+{% raw %}@defer (on hover) {
 	<large-component />
 } @placeholder {
 	<loading-spinner />
-}
-{% endraw %}
+}{% endraw %}
 ```
 
 아래의 예제는 #title 요소가 hover되거나 포커스될 때 @defer 블록이 트리거됩니다.
 
 ```html
-{% raw %}
-<div #title>Title</div>
+{% raw %}<div #title>Title</div>
 
 @defer (on hover(title)) {
 	<large-component />
-}
-{% endraw %}
+}{% endraw %}
 ```
 
 #### viewport
 
 
 ```html
-{% raw %}
-@defer (on viewport) {
+{% raw %}@defer (on viewport) {
   <large-cmp />
 } @placeholder {
 	placeholder // 이게 보이면 trigger 됨.
-}
-{% endraw %}
+}{% endraw %}
 ```
 
 또한, 동일한 템플릿 내에서 템플릿 참조 변수를 지정하여 뷰포트에 들어가는 요소를 감시할 수도 있습니다. 
 
 ```html
-{% raw %}
-<div #greeting>Hello!</div>
+{% raw %}<div #greeting>Hello!</div>
 @defer (on viewport(greeting)) {
 	<greetings-cmp />
-}
-{% endraw %}
+}{% endraw %}
 ```
 
 위의 코드에서는 페이지를 아래로 스크롤하다가 #greeting이라는 요소가 화면에 나타나면, 그때 @defer 블록이 트리거되어 greetings-cmp가 로드됩니다.
@@ -308,21 +278,17 @@ interaction 트리거는 사용자가 특정 요소와 상호작용할 때 지�
 리소스를 미리 메모리에 로드하여 필요할 때 사용할 수 있도록 하는 과정입니다.
 
 ```html
-{% raw %}
-@defer (on timer(5s)) {
+{% raw %}@defer (on timer(5s)) {
 	<large-component />
-}
-{% endraw %}
+}{% endraw %}
 ```
 
 기능적으로는 다음과 동일합니다:
 
 ```html
-{% raw %}
-@defer (on timer(5s); prefetch on idle) {
+{% raw %}@defer (on timer(5s); prefetch on idle) {
 	<large-component />
-}
-{% endraw %}
+}{% endraw %}
 ```
 
 번들은 브라우저가 유휴 상태가 될 때 사전 로드되며, 이는 기본 동작입니다.<br/>
@@ -338,13 +304,11 @@ interaction 트리거는 사용자가 특정 요소와 상호작용할 때 지�
 다음과 같이 할 수 있습니다:
 
 ```html
-{% raw %}
-@defer (on interaction; prefetch on viewport) {
+{% raw %}@defer (on interaction; prefetch on viewport) {
 	<large-component />
 } @placeholder {
 	<input />
-}
-{% endraw %}
+}{% endraw %}
 ```
 
 모든 내장 트리거는 사전 로드와 @defer 블록 표시 모두에 사용할 수 있습니다.
@@ -399,16 +363,14 @@ export class AppComponent {
 둘을 조합하여 표현할 수도 있습니다.
 
 ```html
-{% raw %}
-@defer (on interaction; prefetch on viewport) { 
+{% raw %}@defer (on interaction; prefetch on viewport) { 
 	@if (someCondition) {
 		<large-component />
 	} 
 	@placeholder {
 		<placeholder-component />
 	}
-}
-{% endraw %}
+}{% endraw %}
 ```
 
 이 설정을 통해 &lt;large-component /&gt; 는 사용자가 페이지를 아래로 스크롤할 때만 로드됩니다.<br/><br/>

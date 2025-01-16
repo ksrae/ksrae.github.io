@@ -13,9 +13,7 @@ html에서 Observable 변수를 사용할 때 async pipe를 사용하면 Observa
 ```html
 
 <div>
-	{% raw %}
-	{{ observable$ | async }}
-	{% endraw %}
+	{% raw %}{{ observable$ | async }}{% endraw %}
 </div>
 ```
 
