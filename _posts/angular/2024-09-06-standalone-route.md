@@ -43,7 +43,7 @@ Angular의 라우터는 import()에서 default export가 포함된 경우 이를
 ```typescript
 // 메인 애플리케이션의 routes.ts:
 export const ROUTES: Route[] = [
-  { path: 'admin', loadChildren: () => import('./admin/routes') },
+  { path: 'admin', loadChildren: () => import('./admin/routes').then(m => m.adminRoutes) },
 ];
 
 // admin/routes.ts:
@@ -127,7 +127,7 @@ Lazy Loading과 Provider Scoping은 서로 결합하여 사용할 수도 있습�
 export const ROUTES: Route[] = [
   {
     path: 'admin',
-    loadChildren: () => import('./admin/admin.routes'),
+    loadChildren: () => import('./admin/admin.routes').then(m => m.adminRoutes),
     providers: [
       AdminService,
       { provide: ADMIN_API_KEY, useValue: 'admin-key' },
@@ -153,7 +153,7 @@ export const ROUTES: Route[] = [
       { provide: ADMIN_API_KEY, useValue: 'admin-key' },
     ],
     canActivate: [AuthGuard],  // AuthGuard 적용
-    loadChildren: () => import('./admin/admin.routes'),
+    loadChildren: () => import('./admin/admin.routes').then(m => m.adminRoutes),
   },
 ];
 ```
