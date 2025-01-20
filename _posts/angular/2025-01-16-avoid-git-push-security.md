@@ -34,7 +34,7 @@ remote:          - commit: 8292d3c0f2414a62f1455cb65db363094c9631f2
 remote:            path: chatbot.js:4
 remote:
 remote:        (?) To push, remove secret from commit(s) or follow this URL to allow the secret.
-remote:        https://github.com/(USER_NAME)/(GIT_TITLE)/security/secret-scanning/unblock-secret/2rh0izZBzpiGKXf71CLxo8n8Cwa
+remote:        https://github.com/(USER_NAME)/(GIT_TITLE)/security/secret-scanning/unblock-secret/{UNBLOCK_KEY}
 remote:
 remote:
 remote:
@@ -87,7 +87,7 @@ git filter-repo --path chatbot.js --invert-paths
 에러 메시지의 끝부분에는 다음과 같은 링크가 제공됩니다.
 
 ```
-https://github.com/(USER_NAME)/(GIT_TITLE)/security/secret-scanning/unblock-secret/2rh0izZBzpiGKXf71CLxo8n8Cwa
+https://github.com/(USER_NAME)/(GIT_TITLE)/security/secret-scanning/unblock-secret/(UNBLOCK_KEY)
 ```
 
 ### 링크에 접속
