@@ -1,35 +1,76 @@
 ---
-title: "모든 에러 핸들러 만들기 (All Error Handler Class)"
+title: "All Error Handler Class"
 comments: true
 categories: angular
 tags: [error, module]
 date: 2019-07-01 17:37:00 +0900
 ---
 
+Catch All Angular Errors with a Custom Error Handler
 
-Angular 에러 발생 이벤트를 모두 캐치하는 클래스를 만들어 봅시다. <br>
+## 1. How to Use
+Leverage Angular's built-in ErrorHandler to catch all errors globally. By implementing the handleError method, you can centralize your error-handling logic in one place. This approach applies to both the Module-based and Standalone implementations of Angular apps.
 
+## 2. Code
+### Module-Based Implementation
+If your Angular app is not using the Standalone API (i.e., you're using the traditional Module-based approach), you can implement the custom error handler as follows:
 
-
-## 1. 사용방법
-
-내장 함수인 ErrorHandler를 활용하며, 최상위 모둘에 적용합니다.<br><br>
-에러를 처리하는 handleError 함수를 사용하여 에러 처리를 한 곳에서 진행할 수 있습니다.<br>
-
-## 2. 코드
+The NgModule refers to the root module of your application (e.g., AppModule). Add the providers array to the module to register your custom error handler.
 
 ```ts
 class MyErrorHandler implements ErrorHandler {
   handleError(error) {
-    // do something with the exception
+    // Handle the error globally
   }
 }
 
 @NgModule({
-  providers: [{provide: ErrorHandler, useClass: MyErrorHandler}]
+  providers: [{ provide: ErrorHandler, useClass: MyErrorHandler }]
 })
 class AppModule {}
 ```
 
-<br>
-끝.
+### Standalone Implementation
+In a Standalone Angular app, you can create a custom error handler by registering the provider in the bootstrapApplication method or directly within the component.
+
+#### 1. Global Error Handler
+To handle errors globally in a Standalone app, use the bootstrapApplication method:
+
+```ts
+import { ErrorHandler, Injectable } from '@angular/core';
+import { bootstrapApplication } from '@angular/platform-browser';
+import { AppComponent } from './app/app.component';
+
+@Injectable()
+class MyErrorHandler implements ErrorHandler {
+  handleError(error: any): void {
+    console.error('Global Error:', error);
+  }
+}
+
+bootstrapApplication(AppComponent, {
+  providers: [
+    { provide: ErrorHandler, useClass: MyErrorHandler },
+  ]
+});
+```
+
+#### 2. Local Error Handler
+If you need to register the error handler locally within a Standalone component, do the following:
+
+```ts
+import { Component, ErrorHandler } from '@angular/core';
+
+@Component({
+  standalone: true,
+  providers: [
+    { provide: ErrorHandler, useClass: MyErrorHandler }
+  ],
+  template: ``
+})
+export class MyStandaloneComponent {
+  // Component-specific logic
+}
+```
+
+And that's it! Whether you’re using a Module-based or Standalone approach, you can now handle all Angular errors with ease.

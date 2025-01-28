@@ -135,7 +135,56 @@ const materialRoutes: Routes = [
   export class MaterialRoutingModule { }
 ```
 
-### 3.2. component를 ngIf로 호출하여 Lazy Loading 구현
+### 3.2. standalone에서의 lazy loading
+standalone의 경우 두 가지 방법을 활용하여 component를 lazy loading할 수 있습니다.
+첫번째는 loadComponent 입니다.
+
+#### loadComponent
+route에서 component를 직접 lazy load하도록 설정할 수 있습니다.
+
+```ts
+import { Routes } from '@angular/router';
+
+export const routes: Routes = [
+  {
+    path: '',
+    children: [
+      { path: '', redirectTo: 'login', pathMatch: 'full'},
+      { path: 'login', loadComponent: () => import('./login/login.component').then(m => m.LoginComponent) },
+    ]
+  }
+];
+
+```
+
+#### loadChildren에서 route 호출
+두번째 방법은 loadChildren에서 module이 아닌 route를 직접 호출하는 방식입니다.
+이렇게 route를 직접 호출하면 하위 component들이 모두 lazy loading됩니다.
+이 기능은 standalone에서만 사용할 수 있으므로 유의해야 합니다.
+
+```ts
+import { Routes } from '@angular/router';
+
+export const routes: Routes = [
+  {
+    path: '',
+    children: [
+      { path: '', redirectTo: 'login', pathMatch: 'full'},
+      { path: 'login', loadChildren: () => import('./login/login.routes').then(m => m.loginRoutes) },
+    ]
+  }
+];
+
+// login.routes
+...
+export const loginRoutes: Routes = [
+  { path: '', component: LoginComponent }
+];
+
+```
+
+
+### 3.3. component를 ngIf로 호출하여 Lazy Loading 구현
 
 ngIf가 false 인 경우 브라우저가 해당 dom을 로드하지 않으므로 <br>dom을 구성하는데 필요한 관련 데이터도 로드하지 않는 방법을 이용하는 것입니다.<br><br>
 ngIf가 true가 되었을 때 비로소 해당 dom의 모든 데이터를 로드하므로, <br>module의 Lazy Loading 방식과 동일한 효과를 볼 수 있습니다.<br><br>
@@ -154,6 +203,7 @@ import { Component, OnInit, OnDestroy, ChangeDetectionStrategy, ChangeDetectorRe
 import { RouterLink } from '@angular/router';
 
 @Component({
+  standalone: true // module 코드라면 이 부분만 제거하면 됩니다.
   selector: 'material',
   template: `
   <h1>hello material world</h1>
@@ -164,8 +214,7 @@ import { RouterLink } from '@angular/router';
 
 export class MaterialComponent implements OnInit {
 
-  constructor(
-    private cd: ChangeDetectorRef) { }
+  constructor() { }
 
   ngOnInit() {}
 
@@ -176,4 +225,16 @@ export class MaterialComponent implements OnInit {
 
 ## 4. 주의사항
 
-Lazy Loading을 Routing으로 구현하는 경우 BrowserModule은 최상위 Module만 사용해야 하며 <br>하위 Module에서는 같은 기능을 사용하기 위해 CommonModule을 import 해야 합니다.<br>
+standalone이 아닌 Module로 구성된 경우에는 Lazy Loading을 Routing으로 구현하는 경우에는 유의할 점이 있습니다.<br><br>
+
+반드시 BrowserModule은 최상위 Module만 사용해야 합니다.<br>
+또한 하위 Module에서는 같은 기능을 사용하기 위해 CommonModule을 import 해야 합니다.
+
+## 5. 결론
+Lazy Loading은 초기 로딩 속도를 크게 개선하며, 사용자 경험을 향상시키는 데 중요한 역할을 합니다. 특히 대규모 SPA(Single Page Application)에서 초기 로드 속도가 사용자 만족도에 직접적으로 영향을 미치는 점을 고려할 때, Lazy Loading은 반드시 도입해야 할 필수적인 설계 방식입니다.<br><br>
+
+장점으로는 필요한 모듈과 컴포넌트만 로드하여 불필요한 리소스 낭비를 막을 수 있고, 부모와 자식 모듈 간의 의존성을 낮춤으로써 애플리케이션 구조를 보다 유연하고 독립적으로 관리할 수 있다는 점이 있습니다. 또한, standalone 방식에서도 간단한 구현으로 컴포넌트를 효율적으로 로드할 수 있어 코드의 가독성과 유지보수성도 크게 개선됩니다.<br><br>
+
+다만, Lazy Loading을 도입할 때 약간의 로드 딜레이와 데이터 접근 제한 같은 단점이 있을 수 있으나, 적절한 설계와 로딩 경험 개선(예: 로딩 스피너)으로 충분히 극복 가능합니다.<br><br>
+
+이러한 이점을 고려할 때, Lazy Loading은 대규모 애플리케이션 개발뿐만 아니라, 확장성과 성능이 중요한 모든 프로젝트에서 반드시 사용해야 하는 설계 방식입니다. 초기에 조금의 구현 노력이 필요할 수 있지만, 장기적으로 유지보수성과 사용자 경험에서 확실한 이점을 제공하는 Lazy Loading을 꼭 도입하시길 추천드립니다.
