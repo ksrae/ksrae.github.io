@@ -1,5 +1,5 @@
 ---
-title: "ngx-translate을 활용한 다국어 적용 (Support Multiple Languages with ngx-translate)"
+title: "Apply Multiple Languages with ngx-translate"
 comments: true
 categories: angular
 tags: [language, translate]
@@ -7,250 +7,351 @@ date: 2019-07-03 12:20:00 +0900
 ---
 
 
-
-ngx-translate를 활용하여, 서버 요청 및 리로딩 없이 즉시 다국어를 적용합니다.<br>
-
-
-## 1. 적용
+Apply multiple languages instantly using ngx-translate without server requests or reloading.<br>
 
 
+# Implementing Internationalization with ngx-translate in Angular
 
-우선 ngx-translate/core를 설치합니다.<br>
+This guide covers implementing internationalization in Angular applications using ngx-translate, supporting both NgModule and Standalone approaches. We'll explore advanced configuration options and best practices for enterprise-level applications.
 
-```
-npm install @ngx-translate/core --save
-```
-    
+## Installation
 
-## 2. 코드
+Install the required dependencies:
 
-### 2-1. 기본 호출 방법
-
-##### app.module.ts
-
-최상위 모듈에 TranslateModue.forRoot()를 import 합니다.<br>
-하위 모듈에는 .forChild()를 import 합니다.<br>
-
-```ts
-import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
-import {TranslateModule} from '@ngx-translate/core';
-
-@NgModule({
-    imports: [
-        BrowserModule,
-        TranslateModule.forRoot()
-    ],
-    bootstrap: [AppComponent]
-})
-export class AppModule { }
+```bash
+npm install @ngx-translate/core @ngx-translate/http-loader --save
 ```
 
+## Implementation Approaches
 
-### 2-2. json으로 언어값 관리 및 AoT 기법 활용
+### 1. NgModule-based Implementation
 
-aot기법으로 언어값을 호출할 수 있습니다. <br>
-위의 app.module.ts 를 확장하여 재작성하면 아래와 같습니다.<br>
-기본적으로는 유사하나 forRoot의 옵션 일부와 HttpLoader를 통한 파일 로드 과정이 추가됩니다.<br>
+#### Core Module Configuration
 
-이 때는 http-loader를 설치해야 합니다.<br>
-
-```
-npm install @ngx-translate/http-loader --save
-```
-
-##### app.module.ts
-
-```ts
-import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
+```typescript
+// app.module.ts
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
-
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import { TranslateHttpLoader } from "@ngx-translate/http-loader";
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
-  return new TranslateHttpLoader(httpClient, "assets/i18n/", ".json");
+  return new TranslateHttpLoader(httpClient, 'assets/i18n/', '.json');
 }
 
 @NgModule({
-    imports: [
-        BrowserModule,
-        TranslateModule.forRoot({
-           loader: {
-             provide: TranslateLoader,
-             useFactory: HttpLoaderFactory,
-             deps: [HttpClient]
-           }
-        }),
-    ]
-    bootstrap: [AppComponent]
+  imports: [
+    BrowserModule,
+    HttpClientModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      },
+      defaultLanguage: 'en-US',
+      useDefaultLang: true
+    })
+  ],
+  bootstrap: [AppComponent]
 })
 export class AppModule { }
 ```
 
-### lang.interface.ts
+### 2. Standalone Implementation
 
-interface가 제각각이므로 언어 코드를 미리 interface화 해두는 것이 좋습니다.<br><br>
-'ko', 'en'과 같이 두단어로 구성하거나 'kor', 'eng'와 같이 세단어로 구성해도 되나 <br>
-만일 아래와 같이 2-2 로 구성할 경우 반드시 키값에 따옴표를 넣어야 합니다.<br><br>
+#### Bootstrap Configuration
 
+```typescript
+// main.ts
+import { bootstrapApplication } from '@angular/platform-browser';
+import { AppComponent } from './app/app.component';
+import { HttpClient, provideHttpClient } from '@angular/common/http';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { importProvidersFrom } from '@angular/core';
 
-```ts
+export function HttpLoaderFactory(httpClient: HttpClient) {
+  return new TranslateHttpLoader(httpClient, 'assets/i18n/', '.json');
+}
+
+bootstrapApplication(AppComponent, {
+  providers: [
+    provideHttpClient(),
+    importProvidersFrom(
+      TranslateModule.forRoot({
+        loader: {
+          provide: TranslateLoader,
+          useFactory: HttpLoaderFactory,
+          deps: [HttpClient]
+        },
+        defaultLanguage: 'en-US',
+        useDefaultLang: true
+      })
+    )
+  ]
+}).catch(err => console.error(err));
+```
+
+#### Standalone Component Implementation
+
+```typescript
+// app.component.ts
+import { Component, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { TranslateModule } from '@ngx-translate/core';
+import { LanguageService } from './services/language.service';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [
+    CommonModule,
+    TranslateModule
+  ],
+  providers: [LanguageService],
+  template: `
+    <div [innerHTML]="'common.welcome' | translate"></div>
+  `
+})
+export class AppComponent {
+  // for standalone
+  languageService = inject(LanguageService);
+
+  // for module
+  constructor(private languageService: LanguageService) {
+    this.languageService.initialize();
+  }
+}
+```
+
+## Type-Safe Language Configuration
+
+### Language Interface
+
+```typescript
+// interfaces/language.interface.ts
 export enum LanguageCode {
-    'ko-kr' = '한국어',
-    'en-us' = 'English',
-    'zh-cn' = '简体中文'
+  'en-US' = 'English',
+  'ko-KR' = '한국어',
+  'zh-CN' = '简体中文',
+  'ja-JP' = '日本語'
+}
+
+export interface TranslationKeys {
+  common: {
+    welcome: string;
+    login: string;
+    logout: string;
+  };
+  errors: {
+    required: string;
+    invalid: string;
+  };
 }
 ```
 
+### Language Service Implementation
 
-#### language.service.ts
-
-translateService를 그대로 사용할 수도 있으나 <br>초기 설정 및 interface와 transService를 맞추기 위한 별도의 서비스를 추가합니다.<br>
-
-```ts
-
-import { Injectable } from '@angular/core';
-
+```typescript
+// services/language.service.ts
+import { Injectable, inject } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { LanguageCode } from '../interface/lang.interface';
+import { LanguageCode } from '../interfaces/language.interface';
+import { BehaviorSubject, Observable } from 'rxjs';
 
-@Injectable()
-
+@Injectable({ providedIn: 'root' })
 export class LanguageService {
-    private langList: Array<string>;
+  private currentLang = new BehaviorSubject<string>(null);
+  currentLang$ = this.currentLang.asObservable();
+  
+  // for standalone
+  translateService = inject(TranslateService);
 
-    constructor(private translateService: TranslateService) {
-        this.langList = Object.keys(LanguageCode);
-    }
+  // for module
+  constructor(private translateService: TranslateService) {}
 
-    public onInit(){
-        //translateService에 변역 가능한 언어를 추가합니다.
-        for(let lang of this.langList){
-            this.translateService.addLangs([lang]);
-        }
+  initialize(): void {
+    const languages = Object.keys(LanguageCode);
+    this.translateService.addLangs(languages);
+    
+    const browserLang = this.translateService.getBrowserLang();
+    const defaultLang = languages.find(lang => 
+      browserLang.toLowerCase() === lang.toLowerCase()
+    ) || 'en-US';
+    
+    this.translateService.setDefaultLang(defaultLang);
+    this.setLanguage(defaultLang);
+  }
 
-        // 브라우저 언어를 우선 적용합니다.
-        let browserLang = this.translateService.getBrowserLang();
-        let existLang = this.langList.find(lang => browserLang == lang);
-        let matchingLang = existLang ? browserLang : 'ko-kr';
+  setLanguage(lang: keyof typeof LanguageCode): void {
+    this.translateService.use(lang);
+    this.currentLang.next(lang);
+  }
 
-        // default 언어를 설정하고 사용할 언어를 정합니다.
-        this.translateService.setDefaultLang(matchingLang);
-        this.translateService.use(matchingLang);
-    }
-
-    // 변경할 언어를 translateService에 알립니다.
-    public change(language: LanguageCode){
-        let existLang = this.langList.find(lang => LanguageCode[language] == lang);
-        if(existLang){
-            this.translateService.use(LanguageCode[language]);
-        }
-    }
+  getCurrentLang(): Observable<string> {
+    return this.currentLang$;
+  }
 }
 ```
 
-### 2-2. json 파일 관리
-
-interface에서 정의한 값대로 json 파일을 생성합니다.<br>
-> 예) ko.json, en.json 또는 ko-kr.json, en-us.json
-
-생성한 파일에 "key": "해당 언어값" 과 같이 json을 구성합니다.<br>
-만일 ko-kr.json 파일을 생성한다면 아래와 같이 만들어 줍니다.<br>
+## Translation Files Structure
 
 ```json
+// assets/i18n/en-US.json
 {
-    "login": "로그인",
-    "email": "이메일" 
+  "common": {
+    "welcome": "Welcome to our application",
+    "login": "Login",
+    "logout": "Logout"
+  },
+  "errors": {
+    "required": "This field is required",
+    "invalid": "Invalid input value"
+  }
 }
 ```
 
-### 2-3. template에서의 활용
+## Advanced Usage Examples
 
-직접 <% raw %>{{ }}<% endraw %> 에서 적용할 수 있으나 번역 내용에 tag가 들어간 경우 innerHTML에서 사용할 수도 있습니다.<br>
+### 1. Dynamic Translation with Parameters
 
-```html
-{% raw %}
-<div>{{ 'login' | translate }}</div>
-{% endraw %}
-```
+```typescript
+// template usage
+@Component({
+  template: `
+    <div [innerHTML]="'notifications.welcome' | translate:{ username: currentUser.name }"></div>
+  `
+})
 
-- 언어값 내에 tag가 있는 경우 innerHTML을 사용합니다.
-
-```html
-{% raw %}
-<div [innerHTML]="'login' | translate"></div>
-{% endraw %}
-```
-
-> 추천드리는 방법은 innerHTML에 적용하고, text 영역에는 기본 값을 적어놓는 것입니다. 이렇게 하면 번역 키를 따라 번역 값을 일일이 확인하지 않아도 어떤 값이 적용되었는지 코드상에서 바로 파악할 수 있으며, 실제는 innerHTML의 내용이 반영되므로 코드에 영향도 없어 효율적입니다.
-
-```html
-{% raw %}
-<div [innerHTML]="'login' | translate">로그인</div>
-{% endraw %}
-```
-
-### 2-4. 공용 번역값 적용하기
-
-만일 값을 유동적으로 적용하고 싶은 값이 있다면 아래와 같이 중괄호 안에 키 값을 넣습니다.<br>
-
-```json
+// translation file
 {
-    "changeItem": "<% raw %>{{item}}<% endraw %> 변경",
-    "password": "비밀번호",
-    "username": "유저명",
+  "notifications": {
+    "welcome": "Welcome back, {{username}}!"
+  }
 }
 ```
 
-만일 template 에서 "비밀번호 변경"을 적용하고 싶다면, <br>
-먼저 changeItem의 translate 파라미터에 적용하고자 하는 키 값인 item에 번역한 "password"를 정의합니다. <br>
+### 2. Implementing Language Switcher
 
-```html
-{% raw %}
-<div [innerHTML]="'changeItem' | translate: {item: 'password' | translate } "></div>
-{% endraw %}
-```
+```typescript
+@Component({
+  selector: 'app-language-switcher',
+  standalone: true,
+  imports: [CommonModule, TranslateModule],
+  template: `
+    <select (change)="onLanguageChange($event)" [value]="currentLang$ | async">
+      <option *ngFor="let lang of languageCodes" [value]="lang">
+        {{ LanguageCode[lang] }}
+      </option>
+    </select>
+  `
+})
+export class LanguageSwitcherComponent {
+  protected readonly LanguageCode = LanguageCode;
+  protected readonly languageCodes = Object.keys(LanguageCode);
+  protected currentLang$ = this.languageService.getCurrentLang();
 
-길어지긴 했지만 위와 같은 방법으로 적용할 수 있습니다.<br>
+  // for stadnalone
+  languageService = inject(LanguageService);
 
+  // for module
+  constructor(private languageService: LanguageService) {}
 
-## 3. 유의점
-
-translate을 사용할 경우 하위 태그가 만들어지지 않는다는 점을 유의하여야 합니다.<br>
-
-```html
-{% raw %}
-<div>{{ 'login' | translate }} <span>사용자 이름을 입력하세요</span></div>
-{% endraw %}
-```
-
-위의 예시의 경우 span 태그가 무시되어 버립니다.<br>
-
-> 해결 방법은 하위 태그가 필요한 경우 같은 레벨로 만들어주거나,<br>
-
-```html
-{% raw %}
-<div><span>{{ 'login' | translate }}</span> <span>사용자 이름을 입력하세요</span></div>
-{% endraw %}
-```
-
-> 번역에 하위 태그를 포함할 수 있습니다.
-```html
-{% raw %}
-<div>{{ 'login' | translate }} <span>사용자 이름을 입력하세요</span></div>
-{% endraw %}
-```
-
-```json
-{
-    "login": "로그인 <span>사용자 이름을 입력하세요</span>"
+  onLanguageChange(event: Event): void {
+    const lang = (event.target as HTMLSelectElement).value as keyof typeof LanguageCode;
+    this.languageService.setLanguage(lang);
+  }
 }
 ```
 
+## Best Practices and Considerations
 
-이 외에도 TranslateService에는 다양한 함수가 존재하니 다음 시간에 보다 자세히 다루어 보도록 하겠습니다.<br>
+1. **Performance Optimization**
+   - Use lazy loading for translation files in large applications
+   - Implement caching strategies for loaded translations
+   - Consider using translation compilation for production builds
 
-## 참고 사이트
-- [ngx-translate 사이트](https://github.com/ngx-translate/core)
+2. **Type Safety**
+   - Define strong types for translation keys
+   - Use TypeScript interfaces for translation structures
+   - Implement validation for translation files during build process
+
+3. **Maintenance**
+   - Organize translations in a hierarchical structure
+   - Implement translation key management system
+   - Use translation management tools for large projects
+
+4. **HTML Content Handling**
+   - Always use [innerHTML] for translations containing HTML
+   - Implement sanitization for user-provided translation content
+   - Consider accessibility implications when using HTML in translations
+
+## Common Pitfalls and Solutions
+
+1. **Nested HTML Elements**
+   ```typescript
+   // Incorrect
+   <div>{{ 'key.with.html' | translate }}<span>Additional content</span></div>
+   
+   // Correct
+   <div [innerHTML]="'key.with.html' | translate"></div>
+   <span>Additional content</span>
+   ```
+
+2. **Async Translation Loading**
+   ```typescript
+   // Handle translation loading state
+   this.translateService.get('key').subscribe({
+     next: (translation: string) => {
+       // Handle successful translation
+     },
+     error: (err) => {
+       console.error('Translation error:', err);
+       // Provide fallback
+     }
+   });
+   ```
+
+## Integration with Angular Features
+
+1. **Route Guards**
+   ```typescript
+   @Injectable({ providedIn: 'root' })
+   export class TranslationLoadGuard implements CanActivate {
+    // for standalone
+    translateService = inject(TranslateService);
+
+    // for module
+    constructor(private translateService: TranslateService) {}
+
+    canActivate(): Observable<boolean> {
+       return this.translateService.get('common.welcome')
+         .pipe(map(() => true));
+     }
+   }
+   ```
+
+2. **Error Handling**
+   ```typescript
+   @Injectable({ providedIn: 'root' })
+   export class GlobalErrorHandler implements ErrorHandler {
+    // for standalone
+    translateService = inject(TranslateService);
+
+    // for module
+    constructor(private translateService: TranslateService) {}
+
+     handleError(error: Error): void {
+       this.translateService.get('errors.unexpected')
+         .subscribe(message => {
+           // Handle error with translated message
+         });
+     }
+   }
+   ```
+
+
+## Reference
+- [ngx-translate](https://github.com/ngx-translate/core)
