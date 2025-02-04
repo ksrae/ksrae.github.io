@@ -6,64 +6,173 @@ categories: angular
 tags: [routing]
 ---
 
-  ## Server-side vs. Client-side Routing
+This post compares routing implementations between server-side and client-side approaches.
 
-  Server-side routing involves handling requests on the server to generate complete pages that are returned to the client. This approach lends itself to robust SEO capabilities and often simpler state management, but it requires additional round-trips to the server for page updates.
+## Key Differences
 
-  Client-side routing, on the other hand, relies on JavaScript frameworks to intercept URL changes and render views on the client. This allows for faster, more dynamic transitions once the application is loaded, though it may require extra steps to ensure proper SEO and initial page load performance.
+### Server-side Routing
+Server-side routing handles navigation requests on the server. When a user accesses a page, the request reaches the server, which then renders the appropriate page and returns it to the client. This is the traditional way web applications worked before Single Page Applications (SPAs) became popular.
 
-  ### Example: Node.js and Express (Server-side)
-  ```javascript
-  const express = require('express');
-  const app = express();
+### Client-side Routing
+Client-side routing handles navigation within the client application itself. When calling a specific page, it loads sequentially from the root to the target page. The routing is managed on the client side after the web application has been initially loaded.
 
-  app.get('/', (req, res) => {
-    res.send('Home Page');
-  });
+## Similarities
 
-  app.get('/about', (req, res) => {
-    res.send('About Page');
-  });
+### Server-side
+When using View Layouts in frameworks like ASP.NET MVC, you can overlay views in a way similar to client-side routing. However, there's no clear module separation in this case, and layouts simply serve as views without dedicated controllers.
 
-  app.listen(3000, () => {
-    console.log('Server is running on port 3000');
-  });
-  ```
+### Client-side
+Each layout component has its own components and provides independent functionality. This enables better modularity and composition on the client side.
 
-  ### Example: Angular (Client-side)
-  ```typescript
-  import { NgModule } from '@angular/core';
-  import { RouterModule, Routes } from '@angular/router';
-  import { HomeComponent } from './home.component';
-  import { AboutComponent } from './about.component';
+## Important Considerations
 
-  const routes: Routes = [
-    { path: '', component: HomeComponent },
-    { path: 'about', component: AboutComponent },
-  ];
+### Server-side
+- Forced navigation must use server routing mechanisms
+- Server controls page rendering
+- Each navigation triggers a full page reload
+- Better for initial page load SEO
 
-  @NgModule({
-    imports: [RouterModule.forRoot(routes)],
-    exports: [RouterModule],
-  })
-  export class AppRoutingModule {}
-  ```
+### Client-side
+- Must traverse through parent components when calling child routes
+- Requires careful planning of component hierarchy
+- Provides smoother user experience with no full page reloads
+- May require additional SEO considerations
 
-  ### Additional Example with Standalone Components (Angular)
-  ```typescript
-  import { Component } from '@angular/core';
-  import { RouterModule } from '@angular/router';
+## Routing Implementation Examples
 
-  @Component({
-    standalone: true,
-    imports: [RouterModule],
-    selector: 'app-standalone-home',
-    template: `
-      <h1>Standalone Home</h1>
-      <p>This standalone component illustrates a simple client-side route.</p>
-    `
-  })
-  export class StandaloneHomeComponent {}
-  ```
+### Server-side Routing Example
+Here's a simple server-side routing example using Node.js and Express.js:
 
-  Using standalone components can reduce complexity by removing the need for an NgModule. They also help streamline project structure, making it clearer how each route is tied to its own dedicated component.
+```javascript
+const express = require('express');
+const app = express();
+
+// Home page route handler
+app.get('/', (req, res) => {
+  res.send('Home Page');
+});
+
+// About page route handler
+app.get('/about', (req, res) => {
+  res.send('About Page');
+});
+
+// User profile page with parameters
+app.get('/user/:id', (req, res) => {
+  res.send(`User Profile Page - ID: ${req.params.id}`);
+});
+
+app.listen(3000, () => {
+  console.log('Server running on port 3000');
+});
+```
+
+### Client-side Routing Examples
+
+#### Traditional Angular Module-based Routing
+
+```typescript
+// app-routing.module.ts
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { HomeComponent } from './home.component';
+import { AboutComponent } from './about.component';
+import { UserProfileComponent } from './user-profile.component';
+
+const routes: Routes = [
+  { path: '', component: HomeComponent },
+  { path: 'about', component: AboutComponent },
+  { path: 'user/:id', component: UserProfileComponent },
+  { path: '**', redirectTo: '' }
+];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
+})
+export class AppRoutingModule { }
+```
+
+```html
+<!-- app.component.html -->
+<nav>
+  <ul>
+    <li><a routerLink="/">Home</a></li>
+    <li><a routerLink="/about">About</a></li>
+    <li><a [routerLink]="['/user', '1']">User Profile</a></li>
+  </ul>
+</nav>
+
+<router-outlet></router-outlet>
+```
+
+#### Angular Standalone Component Routing (Angular 14+)
+
+```typescript
+// app.routes.ts
+import { Routes } from '@angular/router';
+import { HomeComponent } from './home.component';
+import { AboutComponent } from './about.component';
+import { UserProfileComponent } from './user-profile.component';
+
+export const routes: Routes = [
+  { path: '', component: HomeComponent },
+  { path: 'about', component: AboutComponent },
+  { path: 'user/:id', component: UserProfileComponent },
+  { path: '**', redirectTo: '' }
+];
+```
+
+```typescript
+// app.component.ts
+import { Component } from '@angular/core';
+import { RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [CommonModule, RouterModule],
+  template: `
+    <nav>
+      <ul>
+        <li><a routerLink="/">Home</a></li>
+        <li><a routerLink="/about">About</a></li>
+        <li><a [routerLink]="['/user', '1']">User Profile</a></li>
+      </ul>
+    </nav>
+    <router-outlet></router-outlet>
+  `
+})
+export class AppComponent { }
+```
+
+```typescript
+// main.ts
+import { bootstrapApplication } from '@angular/platform-browser';
+import { AppComponent } from './app.component';
+import { provideRouter } from '@angular/router';
+import { routes } from './app.routes';
+
+bootstrapApplication(AppComponent, {
+  providers: [
+    provideRouter(routes)
+  ]
+}).catch(err => console.error(err));
+```
+
+## Key Takeaways
+
+1. **Server-side Routing**:
+   - Better for traditional multi-page applications
+   - Each route request triggers a server round-trip
+   - Simpler to implement for basic websites
+   - Better initial SEO performance
+
+2. **Client-side Routing**:
+   - Ideal for single-page applications (SPAs)
+   - Smoother user experience with no page refreshes
+   - More complex to implement but offers better interactivity
+   - Requires additional consideration for SEO
+
+Choose your routing strategy based on your application's needs, considering factors such as user experience, SEO requirements, and application complexity.
