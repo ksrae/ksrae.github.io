@@ -1,25 +1,140 @@
 ---
-title: "@Input이 데이터를 전달하지 못하는 원인 (@Input Not Passing Data)"
+title: "@Input Failes Passing Data"
 date: 2019-07-05 12:08:00 +0900
 comments: true
 categories: angular
 tags: [input, ngonchange, subject, observable]
 ---
 
-@Input이 데이터를 전달하지 못하는 원인을 분석합니다.<br>
+This post analyzes why @Input fails to pass data.
 
+## Situation
+When updating data while maintaining the page state (without routing), child components or directives passed through @Input are not functioning.
 
+## Symptoms
+- Even when forcibly sending identical data, it maintains the existing state and doesn't pass to child components or directives.
+- No matter how many times you push to an Array, it doesn't pass to child components or directives.
 
-## 상황
+## Solutions
+1. Check if the same value was passed
+@Input doesn't pass identical values. In other words, if the same value comes in multiple times, it ignores this and doesn't trigger events.
 
-페이지를 유지한 상태(route 하지 않은 상태)에서 데이터를 업데이트할 때 <br>@Input으로 전달한 child나 directive가 동작하지 않는 상태.<br>
+2. Verify if events are coming into ngOnChange(value: SimpleChanges)
+If they are coming in, you might not be receiving them due to LifeCycle issues. You can handle it directly in ngOnChange, but note that ngOnChange is processed before ngOnInit.
 
-## 증상
+3. If all else fails, passing through Service using Subject or Observable is the most reliable solution
+This is the most reliable solution as it definitely passes data despite all the above symptoms.<br/>
+Let me explain Angular's @Input data passing issues in more detail.<br/>
 
-- 동일한 데이터는 강제로 보내더라도 기존 상태를 유지하기 때문에 child나 directive에 전달하지 않습니다.
-- Array에 아무리 push를 해도 이를 child나 directive를 전달하지 않습니다.
+## What is Angular's @Input?
+@Input is a decorator used in Angular to pass data from parent components to child components. You can think of it as similar to props in React.
 
-## 해결
-1. 기존과 같은 값을 전달하였는지 확인합니다. <br>Input은 동일한 값은 전달하지 않습니다. <br>즉, 동일한 값이 여러번 들어오면 이를 무시하여 이벤트를 일으키지 않습니다.<br><br>
-2. ngOnChange(value: SimpleChanges) 에 이벤트가 들어오는지 확인합니다. <br>만일 들어온다면 LifeCycle의 문제로 받지 못하였을 수 있습니다. <br>ngOnChange에서 직접 처리하면 되는데 ngOnChange는 ngOnInit보다 선행처리 되므로 유의하여야 합니다.<br><br>
-3. 그래도 안되면 Service를 통한 Subject나 Observable로 전달하는게 확실합니다. <br>위의 모든 증상에도 확실히 전달하므로 가장 확실한 해결 방법입니다.<br>
+### Problem Description
+This issue occurs when updating data on the same page without page refresh or routing.
+
+### Specific Symptoms
+When trying to pass identical data:
+
+```typescript
+// Parent component
+@Component({
+  template: '<child-component [data]="someData"></child-component>'
+})
+class ParentComponent {
+  someData = "Hello";
+  
+  updateData() {
+    this.someData = "Hello"; // Reassigning the same value
+  }
+}
+```
+
+In this case, the child component won't detect the change.
+
+#### When changing array data:
+
+```typescript
+// Parent component
+@Component({
+  template: '<child-component [items]="itemList"></child-component>'
+})
+class ParentComponent {
+  itemList = [];
+  
+  addItem() {
+    this.itemList.push('new item'); // Adding new item to array
+  }
+}
+```
+
+Simply pushing to an array might not be detected as a change.
+
+### Solutions
+1. Changing Reference Values
+Create and pass a new reference even if the data is the same:
+
+```typescript
+updateData() {
+  this.someData = new String("Hello"); // Creating new string object
+  // Or for arrays
+  this.itemList = [...this.itemList, 'new item']; // Creating new array
+}
+```
+
+2. Using ngOnChanges
+Directly detect changes in the child component:
+
+```typescript
+// Child component
+@Component({
+    ...
+})
+class ChildComponent implements OnChanges {
+  @Input() data: any;
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['data']) {
+      // Code to execute whenever data changes
+      console.log('Data changed:', changes['data'].currentValue);
+    }
+  }
+}
+```
+
+3. State Management through Services
+Instead of using Input, you can pass data streams through services.<br/>
+Note that all Components using this service will share the same data.
+
+```typescript
+// Data service
+@Injectable({
+  providedIn: 'root'
+})
+class DataService {
+  private dataSubject = new BehaviorSubject<any>(null);
+  data$ = this.dataSubject.asObservable();
+
+  updateData(newData: any) {
+    this.dataSubject.next(newData);
+  }
+}
+
+// Child component
+@Component({
+    ...
+})
+class ChildComponent implements OnInit {
+  constructor(private dataService: DataService) {}
+
+  ngOnInit() {
+    this.dataService.data$.subscribe(data => {
+      // Code to execute whenever data changes
+    });
+  }
+}
+```
+
+## Additional Tips
+When passing objects or arrays, it's always good to maintain immutability.<br/>
+Consider using state management libraries like NgRx or RxJS if you need complex data flows.<br/>
+Using ChangeDetectionStrategy.OnPush improves performance but requires more attention to data change detection.<br/>
