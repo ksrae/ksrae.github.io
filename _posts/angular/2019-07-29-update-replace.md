@@ -1,5 +1,5 @@
 ---
-title: "MongoDB의 update와 replace의 차이 (Differenct between update and replace)"
+title: "Differenct between update and replace"
 date: 2019-07-29 12:26:00 +0900
 comments: true
 categories: mongodb
@@ -7,16 +7,11 @@ tags: [update, replace]
 ---
 
 
+Let's compare `update` and `replace` operations in MongoDB. This explanation is based on a review of resources.
 
-mongoDB에서 update와 replace의 차이를 비교해보겠습니다.<br>
-한국어로는 관련 내용이 없어서 stackoverflow를 참고하여 정리하였습니다.
+### Update Operations
 
-
-
-
-### update
-
-```
+```jsx
 db.collection.update(
    <query>,
    <update>,
@@ -29,7 +24,6 @@ db.collection.update(
    }
 )
 
-
 db.collection.updateOne(
    <filter>,
    <update>,
@@ -40,7 +34,6 @@ db.collection.updateOne(
      arrayFilters: [ <filterdocument1>, ... ]
    }
 )
-
 
 db.collection.updateMany(
    <filter>,
@@ -54,52 +47,43 @@ db.collection.updateMany(
 )
 ```
 
-update는 Update, One, Many 세 가지 함수가 있습니다.<br/>
-모두 데이터를 갱신하는 역할을 하며 update에만 multi 여부를 묻고 다른 함수는 multi 여부가 없습니다.<br/>
-즉, update는 multi의 true/false 여부에 따라 updateOne이나 updateMany 모두 구현 가능합니다.<br><br>
+The `update` functionality in MongoDB offers three distinct methods: `update`, `updateOne`, and `updateMany`. These methods primarily serve to modify existing data within a collection. Notably, the `update` method includes a `multi` option, which determines whether to update multiple documents or just one. The `updateOne` and `updateMany` methods implicitly handle single and multiple document updates, respectively. Therefore, the `update` method, when combined with the `multi` option, can effectively replicate the behavior of both `updateOne` and `updateMany`.
 
-update는 우리가 일반적으로 아는 DB의 update와 같습니다. <br/>
-존재하는 데이터의 항목의 값을 변경하는 것입니다.<br/>
-여기에 만일 존재하지 않으면 추가하는 항목인 upsert 와 filter 등의 옵션도 제공하고 있습니다.<br/>
+`update` operations function similarly to standard database update commands. They modify specific fields within a document. The `upsert` option allows for the insertion of a new document if no matching document is found based on the filter criteria.
 
-
-예를 들어 봅시다.
+Consider the following JSON document:
 
 ```json
 {
-id: 12345,
-name: "test",
-age: 1
+  "id": 12345,
+  "name": "test",
+  "age": 1
 }
 ```
 
+To update the `age` field to `10`, you would use the `$set` operator:
 
- 
-위의 데이터에서 `age`를 `10`살로 갱신(update)하려면, `{$set}`을 사용해야 합니다.
-
-```
+```jsx
 db.collection.update( {id: 12345}, {$set: {age: 10}}, {multi: false})
 ```
 
-`id:12345`의 `age`를 `10`으로 set 하게 됩니다.
+This command sets the `age` field of the document with `id: 12345` to `10`, resulting in the following document:
 
 ```json
 {
-id: 12345,
-name: "test",
-age: 10
+  "id": 12345,
+  "name": "test",
+  "age": 10
 }
 ```
 
+Within the filter, operators like `$gte` (greater than or equal to) and `$lte` (less than or equal to) can be utilized, especially when combined with `{multi: true}` for updating multiple documents. Additionally, the `$unset` operator can be used to remove a field from a document.
 
-filter에는 검색 때와 같이 `$gte` `$lte` 도 사용할 수 있으며 (이때는 `{multi: true}`로 설정), `$unset`은 항목을 제거하는 것입니다.
+### Replace Operations
 
+Starting from version 3.2, MongoDB introduced the `replaceOne` method.
 
-### replace
-
-버전 3.2부터 replaceOne이 적용되었습니다.
-
-```
+```jsx
 db.collection.replaceOne(
    <filter>,
    <replacement>,
@@ -111,37 +95,32 @@ db.collection.replaceOne(
 )
 ```
 
-replace는 replaceOne 밖에 없습니다. 즉, 여러 데이터를 한번에 replace 할 수는 없다는 점이 update하고 다른 점입니다.<br>
-<br/>
-또 하나의 다른 점은 데이터를 완전히 변경한다는 점입니다. 즉, update는 해당 필드만 수정하는데에 반해 replaceOne은 해당 필드로 데이터를 완전히 바꾸어 버립니다. <br>
-<br/>
+Unlike the `update` operation, `replaceOne` is the *only* available method for replacing documents. This means you cannot replace multiple documents with a single command. This distinguishes it significantly from the `update` operation.
 
-예를 들어 설명해보면,
+Another key difference lies in the scope of the operation. While `update` modifies specific fields, `replaceOne` replaces the *entire* document with a new document.
 
-```json
-{
-id: 12345,
-name: "test",
-age: 1
-}
-```
- 
-위의 데이터에서 age를 10살로 변경(replace) 해보겠습니다. `$set`을 사용할 필요가 없습니다.
-
-```
-db.collection.replaceOne( {id: 12345}, {age: 10}};
-```
-
-`id:12345`의 데이터는 `age: 10`으로 변경되었습니다.
+Consider the following JSON document:
 
 ```json
 {
-id: 12345,
-age: 10
+  "id": 12345,
+  "name": "test",
+  "age": 1
 }
 ```
 
-기존 버전에서는 애매했던 update와 replace간의 역할이 3.2 버전부터는 보다 명확해졌습니다. <br>
-따라서, 목적에 맞게 데이터를 갱신하려면 update를, 데이터를 변경하려면 replace를 사용하여야 합니다. 
+To replace the document's data, setting `age` to `10`, you would use:
 
-끝.
+```jsx
+db.collection.replaceOne( {id: 12345}, {age: 10});
+```
+
+This command replaces the entire document with `id: 12345` with a new document containing only the `age` field set to `10`, resulting in:
+
+```json
+{
+  "age": 10
+}
+```
+
+With the introduction of `replaceOne` in version 3.2, the distinction between `update` and `replace` became more defined. Consequently, to modify specific fields within a document, the `update` operation should be used. To replace an entire document, the `replaceOne` operation should be employed.

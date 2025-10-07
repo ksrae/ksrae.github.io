@@ -6,26 +6,29 @@ categories: angular
 tags: [error]
 ---
 
-### 원인
-form 태그에 ngModel을 넣었을 때 Cannot bind to 'ngModel' since it isn't a known property of 'input' 에러가 발생합니다.
+### Cause
 
+The error "Cannot bind to 'ngModel' since it isn't a known property of 'input'" occurs when using `ngModel` within a form tag without importing the necessary Angular FormsModule.
 
-### 환경
-- Angular 8.x 버전에서 발생하였습니다.
+### Environment
 
+- This issue was observed in Angular version 8.x.
 
-### 해결
-form을 사용하기 위해서는 반드시 모듈에 FormsModule을 선언해주어야 하는데 이는 '@angular/forms'로부터 끌어와야 합니다.
+### Solution
 
-- '@angular/forms'에서 FormsModule을 import
-- NgModule의 imports 목록에 FormsModule 추가
+To utilize forms properly in Angular, the `FormsModule` must be declared within your module. This module is provided by `@angular/forms`.  Follow these steps to resolve the issue:
 
-```typescript
-	import { FormsModule } from '@angular/forms';
+- Import `FormsModule` from `@angular/forms`.
+- Add `FormsModule` to the `imports` array of your `NgModule`.
 
-	@NgModule({
-		imports: [
-			FormsModule
-		]
-	})
+```tsx
+import { FormsModule } from '@angular/forms';
+
+@NgModule({
+    imports: [
+        FormsModule
+    ]
+})
 ```
+
+This import makes the `ngModel` directive available for use within your Angular templates, enabling two-way data binding with form elements.

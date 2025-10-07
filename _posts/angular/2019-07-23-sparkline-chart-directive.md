@@ -1,31 +1,30 @@
 ---
-title: "ng2-nvd3를 활용하여 스파크라인 차트 만들기 (Creating Sparkline Chart Directive with ng2-nvd3)"
+title: "Creating Sparkline Chart Directive with ng2-nvd3"
 date: 2019-07-23 16:11:00 +0900
 comments: true
 categories: angular
 tags: [sparkline, chart, directive, nvd3, ng2-nvd3]
 ---
 
+I'm attempting to create a Sparkline Chart because most typical chart libraries don't support it, especially those compatible with Angular. I plan to build this chart myself and leverage `ng2-nvd3` since I prefer charts rendered with this library. To ensure ease of reuse, I'll implement it as an Angular Directive.
 
-보통의 차트 라이브러리가 Sparkline Chart를 지원하지 않아 (특히 Angular를 지원하는 차트 라이브러리) 직접 만들어 사용해보려고 합니다.<br>
-다양한 차트 라이브러리 중 `ng2-nvd3`로 그린 차트가 가장 마음에 들어서 이 라이브러리를 활용하여 만들어 보겠습니다.<br>
-손쉬운 재활용을 위해 Directive로 제작하였습니다. 
+## Prerequisites
 
+To use nvd3 with Angular, you must install ng2-nvd3:
 
-## 필요사항
-nvd3를 활용하되 angular 에서 사용하려면 ng2-nvd3를 install 해야합니다.
+```bash
+npm install ng2-nvd3
+```
 
-    npm install ng2-nvd3
+## Key Features
 
+- Sparkline Charts differentiate themselves by using a single line where areas above and below a threshold have different colors. Standard line charts lack this feature.
+- The implementation strategy involves overlaying two charts. The fill area of one chart is inverted, and both are clipped based on the threshold value.
+- Rather than relying on nvd3 commands, this directive directly renders SVG elements to the DOM.
 
-## 특징
-- Sparkline Chart는 하나의 라인에 기준점을 기준으로 상, 하에 각기 다른 색을 지정할 수 있는 차트를 의미합니다. 일반 라인 차트는 이러한 기능을 제공하지 않습니다.
-- 같은 차트 2개를 겹쳐 그리고 한쪽 차트의 칠하는 범위를 반전한 뒤 기준점을 기준으로 잘라내는 방법을 사용합니다.
-- nvd3 명령을 사용하지 않고 dom에 직접 svg를 그려보려고 합니다.
+## Directive Parameters
 
-
-## Directive params
-Directive 호출할 때 사용할 옵션 입니다. default가 없는 파라미터는 반드시 채워 넣어야 합니다.
+These options are available when invoking the directive. Parameters without defaults are mandatory.
 
 ```html
 {% raw %}
@@ -41,33 +40,35 @@ Directive 호출할 때 사용할 옵션 입니다. default가 없는 파라미�
 {% endraw %}
 ```
 
-### 설명
-- id:  여러 directive를 한 페이지에서 동시에 활용하기 위해 dom은 반드시 id를 가지도록 설계하였습니다.
-- sparklineThreshold: directive 이름 입니다, 여기에 chart data를 전송하면 됩니다. 데이터는 Array\<number>로 구조로 보냅니다.
-- height: svg의 높이
-- width: svg의 길이. width를 기준으로 x축을 데이터 길이에 따라 나누어 만들어 냅니다.
-- type: linear와 basis 두 가지가 있는데 default는 linear를 적용합니다. basis는 곡선으로 그려주는 옵션입니다.
-- threshold: 기준점. 상, 하 차트를 그리는 기준점이 되므로 이 기준에 따라 색의 적용 범위가 결정됩니다.
-- strokecolors: 상, 하 차트의 선 색. default는 'red', 'blue'
-- fillcolors: 상, 하 차트의 배경색. default는 '#da343452', '#c7daea'
+### Parameter Details
 
-### 데이터 구성
-- threshold: min, max값을 넘지 않도록 하고 이 값을 비율로 계산합니다.
+- `id`:  An ID is required for the DOM element to allow multiple directives to be used simultaneously on a single page.
+- `sparklineThreshold`: The directive name. Pass chart data as an `Array<number>`.
+- `height`: The height of the SVG element.
+- `width`: The width of the SVG element, which determines the x-axis division based on the data length.
+- `type`: Either `linear` (default) for straight lines or `basis` for curved lines.
+- `threshold`: The reference point. The colors of the chart are determined based on this value.
+- `strokecolors`: An array containing the line colors for above and below the threshold. Defaults to `['red','blue']`.
+- `fillcolors`: An array containing the fill colors for above and below the threshold. Defaults to `['#da343452', '#c7daea']`.
 
-```ts
+### Data Structure
+
+- `threshold`: This value is constrained within the min and max values of the dataset, and then calculated as a percentage.
+
+```tsx
 this.maxData = Math.max(...this.rawData);
 this.minData = Math.min(...this.rawData);
 
-// threshold가 max를 넘지 않는 범위에서 퍼센트로 변경
+// Ensure the threshold does not exceed max/min bounds
 let threshold = (this.rawThreshold > this.maxData) ? this.maxData : this.rawThreshold;
 threshold = (this.rawThreshold < this.minData) ? this.minData : this.rawThreshold;
 this.threshold = Math.round((1 - (this.maxData - threshold) / this.maxData) * 100);
 ```
 
-- x축: width를 기준으로 구성.
-- y축: 최대값을 기준으로 비율로 구성.
+- x-axis: Based on the specified width.
+- y-axis: Calculated as a percentage based on the maximum data value.
 
-```ts
+```tsx
 const dataLength = this.rawData.length;
 const step = Math.round(this.width / this.rawData.length);
 let i = 0;
@@ -80,23 +81,27 @@ for (const item of this.rawData) {
 }
 ```
 
-### 그래프 그리기
-- 동일한 두 개의 그래프를 그립니다.
-- domain을 min 부터 max 데이터까지 범위를 설정합니다.
-- range를 height 부터 0까지 범위를 설정합니다.
+### Chart Rendering
 
-#### 상한가 그래프
-- clipPath의 y를 0. height를 scale된 threshold 로 설정합니다.
-- path에서 clipPath를 설정합니다.
-- clipPath에 의해 위쪽 데이터만 구현됩니다.
+- The process involves drawing two identical charts.
+- The domain is set from the minimum to the maximum data value.
+- The range spans from the specified height down to 0.
 
-#### 하한가 그래프
-- clipPath의 y를 scale된 threshold 로 설정하고, height는 maxData로 설정합니다.
-- path에서 clipPath를 설정합니다. 
-- clipPath에 의해 아래쪽 데이터만 구현됩니다.
+**Upper Chart**
 
-## 전체소스
-```ts
+- The `clipPath` has a y-coordinate of 0 and a height corresponding to the scaled threshold.
+- This `clipPath` is applied to the path.
+- Only the data above the threshold is visible.
+
+**Lower Chart**
+
+- The `clipPath`'s y-coordinate is set to the scaled threshold, with a height up to the maximum data value.
+- This `clipPath` is applied to the path.
+- Only the data below the threshold is visible.
+
+## Complete Source Code
+
+```tsx
 import { Directive, Input, ViewContainerRef, AfterViewInit } from '@angular/core';
 declare let d3: any;
 
@@ -118,11 +123,11 @@ export class SparkLineThresholdDirective implements AfterViewInit {
     bottomFillColor = '#c7daea';
     elementId;
 
-    // 실 데이터 = [ 숫자 ] 형태
+    // Actual data = Array of Numbers
     @Input('sparklineThreshold') set setData(data: Array<number>) {
       this.rawData = data;
       
-      // 여기는 테스트
+      // Test Data
      // const numPoints = 50;
      //   for (let i = 1; i < numPoints; i++) {
      //       const rnd = Math.floor(Math.random() * (250)) + 1;
@@ -147,7 +152,7 @@ export class SparkLineThresholdDirective implements AfterViewInit {
         this.elementId = this.viewContainer.element.nativeElement.id;
     }
 
-    // rawdata가 있어야 하고, id가 있어야 한다.
+    // Rawdata and ID are required
     ngAfterViewInit() {
         if (!this.rawData || !this.rawData.length) {
             console.log('rawData are required');
@@ -158,10 +163,14 @@ export class SparkLineThresholdDirective implements AfterViewInit {
             return;
         }
 
-        // 초기값
+        // Initial values
         this.maxData = Math.max(...this.rawData);
         this.minData = Math.min(...this.rawData);
-        // threshold가 max를 넘지 않는 범위에서 퍼센트로 변경
+        // threshold does not exceed the max range to chang
+```
+
+```tsx
+e the percentage
         let threshold = (this.rawThreshold > this.maxData) ? this.maxData : this.rawThreshold;
         threshold = (this.rawThreshold < this.minData) ? this.minData : this.rawThreshold;
         this.threshold = (100 - Math.round(((this.maxData - threshold) / this.maxData) * 100));
@@ -173,7 +182,7 @@ export class SparkLineThresholdDirective implements AfterViewInit {
         // resize https://github.com/novus/nvd3/issues/645
     }
 
-    // rawData를 mapping 한다.
+    // Mapping rawData
     setSparklineData() {
         const dataLength = this.rawData.length;
         const step = Math.round(this.width / this.rawData.length);
@@ -190,12 +199,12 @@ export class SparkLineThresholdDirective implements AfterViewInit {
         }
     }
 
-    // 그리자
+    // Drawing
     drawSparkLine() {
         const svg = d3.select(this.viewContainer.element.nativeElement).append('svg');
         svg.attr('width', this.width).attr('height', this.height + 5); 
-        // 안보이는 margin이 있어서 5 정도 여유를 두어야 한다. 
-        // 안그러면 끝점이 가려지는 부분이 생긴다.
+        // Add a margin of about 5 because there is an invisible margin.
+        // Otherwise, the end point may be hidden.
 
         const draw = svg.append('g');
 
@@ -213,12 +222,16 @@ export class SparkLineThresholdDirective implements AfterViewInit {
         draw.append('clipPath')
         .attr('id', this.elementId + '-top')
         .append('rect')
-        .attr('x', 1) // area라 0점에서 시작하기 때문에 좌측 시작점을 가리기 위해 1을 준다.
+        .attr('x', 1) // Give 1 to hide the left starting point because it starts at 0 point.
         .attr('y', 0)
         .attr('rx', 0)
         .attr('ry', 0)
         .attr('height', yScale(this.threshold))
-        .attr('width', this.maxWidth - 2); // area라 끝점에서 0으로 수렴하는 부분을 가리기 위해 2를 뺀다.
+        .attr('width', this.maxWidth - 2); // Subtract 2 to hide the part that converges to 0 at the end po
+```
+
+```tsx
+int.
 
         draw.append('path')
         .data([this.data])
@@ -238,12 +251,12 @@ export class SparkLineThresholdDirective implements AfterViewInit {
         draw.append('clipPath')
         .attr('id', this.elementId + '-bottom')
         .append('rect')
-        .attr('x', 1) // area라 0점에서 시작하기 때문에 좌측 시작점을 가리기 위해 1을 준다.
+        .attr('x', 1) // Give 1 to hide the left starting point because it starts at 0 point.
         .attr('y', yScale(this.threshold))
         .attr('rx', 0)
         .attr('ry', 0)
         .attr('height', this.maxData)
-        .attr('width', this.maxWidth - 2); // area라 끝점에서 0으로 수렴하는 부분을 가리기 위해 2를 뺀다.
+        .attr('width', this.maxWidth - 2); // Subtract 2 to hide the part that converges to 0 at the end point.
 
         draw.append('path')
         .data([this.data])
@@ -256,5 +269,4 @@ export class SparkLineThresholdDirective implements AfterViewInit {
 }
 ```
 
-끝.
-
+Complete.

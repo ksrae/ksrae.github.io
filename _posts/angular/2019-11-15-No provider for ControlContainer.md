@@ -6,25 +6,25 @@ categories: angular
 tags: [error]
 ---
 
-### 원인
-form 태그에 formGroup을 설정하였는데 'No provider for ControlContainer' 에러가 발생하였습니다.
+### Cause
 
+A 'No provider for ControlContainer' error occurred when setting formGroup in the form tag.
 
-### 환경
-- Angular 8.x 버전에서 발생하였습니다.
-- Angular Material을 적용하였습니다.
+### Environment
 
+- The issue occurred in Angular version 8.x.
+- Angular Material was applied.
 
-### 해결
-formGroup 외에 angular에서 사용하는 form 명령을 사용하려면 module에서 ReactiveFormsModule 을 import 해야 합니다.
-ReactiveFormsModule는 '@angular/forms'에 있습니다.
+### Solution
 
-```typescript
-	import { ReactiveFormsModule } from '@angular/forms';
+To use form commands in Angular in addition to formGroup, you need to import ReactiveFormsModule in the module. ReactiveFormsModule is located in '@angular/forms'.
 
-	@NgModule({
-		imports: [
-			ReactiveFormsModule
-		]
-	})
+```tsx
+import { ReactiveFormsModule } from '@angular/forms';
+
+@NgModule({
+    imports: [
+        ReactiveFormsModule
+    ]
+})
 ```

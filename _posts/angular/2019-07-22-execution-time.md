@@ -6,35 +6,32 @@ categories: javascript
 tags: [console, time]
 ---
 
+Let's explore methods for measuring JavaScript execution time.
 
-자바스크립트 수행 시간 측정 방법에 대해 알아보겠습니다.<br><br>
+The conventional approach involves using the `getTime()` method of the `Date` object to calculate time differences. The resulting value represents milliseconds.
 
-일반적으로는 Date의 getTime()를 사용하여 시간을 계산합니다.<br>
-결과값은 ms 입니다.
+```jsx
+const beginTime = new Date().getTime();
 
-```js
-var beginTime = new Date().getTime();
+// Code to be timed
 
-// 처리할 코드
-
-console.log(new Date().getTime() - startTime);
+console.log(new Date().getTime() - beginTime);
 ```
 
+Alternatively, for quick verification of processing speed during development, the `console.time` and `console.timeEnd` functions can be employed.
 
-만일 간단히 개발과정에서의 처리 속도 확인 용도라면 console.time / timeEnd 기능을 사용할 수 있습니다.<br>
-time은 시작점, timeEnd는 끝점을 의미하며, str은 반드시 같은 값을 가져야 합니다.<br>
-마찬가지로 결과값은 ms 입니다.
+`console.time` marks the starting point, and `console.timeEnd` marks the ending point. The `str` argument passed to both functions must have the same value. The output represents the elapsed time in milliseconds.
 
-```js
-console.time(str);
+```jsx
+const timerName = "myTimer"; // Use a descriptive timer name
+console.time(timerName);
 
-// 처리할 코드
+// Code to be timed
 
-console.timeEnd(str);
-
+console.timeEnd(timerName);
 ```
 
+## References
 
-## 참고 사이트
-- [자바스크립트 수행시간 측정 - 제타위키](https://zetawiki.com/wiki/%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8_%EC%88%98%ED%96%89%EC%8B%9C%EA%B0%84_%EC%B8%A1%EC%A0%95)
-- [NodeJS 프로그램 수행시간 측정 : 네이버 블로그](http://blog.naver.com/PostView.nhn?blogId=deepplin&logNo=60203067634)
+- [JavaScript Execution Time Measurement - Zeta Wiki](https://zetawiki.com/wiki/%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8_%EC%88%98%ED%96%89%EC%8B%9C%EA%B0%84_%EC%B8%A1%EC%A0%95)
+- [NodeJS Program Execution Time Measurement : Naver Blog](http://blog.naver.com/PostView.nhn?blogId=deepplin&logNo=60203067634)

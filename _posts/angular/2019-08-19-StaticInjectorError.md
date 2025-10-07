@@ -7,37 +7,24 @@ tags: [universal]
 ---
 
 
-StaticInjectorError(AppServerModule)[InjectionToken ng-toolkit-window] 에러를 해결해보겠습니다.
+Let's investigate the `@ng-toolkit/universal ERROR: Cannot read property 'unshift' of undefined` error.
 
-
-Angular universal에서 window를 사용하기 위해서 `@ng-toolkit/universal`에서 import 합니다.
-
-```ts
-import { WINDOW } from '@ng-toolkit/universal';
-...
-constructor(
-  @Inject(WINDOW) public window: Window
-)
-```
-
-그런데 빌드하면 다음과 같은 에러가 발생합니다.
+To utilize the `window` object within an Angular Universal application, the `@ng-toolkit/universal` package is typically installed.
 
 ```
-StaticInjectorError(AppServerModule)[InjectionToken ng-toolkit-window]
+ng add @ng-toolkit/universal
 ```
 
-이를 해결하기 위해서는 `@Inject()` 앞에 `@Optional`을 추가하여야 합니다.
+However, when attempting installation with Angular 8, an `unshift` error may occur.
 
-```ts
-import { Optional } from '@angular/core';
-import { WINDOW } from '@ng-toolkit/universal';
-...
-constructor(
-  @Optional() @Inject(WINDOW) public window: Window
-)
+```
+@ng-toolkit/universal ERROR: Cannot read property 'unshift' of undefined
 ```
 
+Investigation suggests that this issue stems from a version incompatibility.
 
-## 참고 사이트
-- [Unable to inject window into component · Issue #515 · maciejtreder/ng-toolkit · GitHub](https://github.com/maciejtreder/ng-toolkit/issues/515)
- 
+The `ng add` command might install version `1.1.21` of `@ng-toolkit/universal`. This version is outdated. Upgrading to the latest version, `7.1.2`, resolves the aforementioned error.
+
+## Reference
+
+- [ERROR: Cannot read property 'unshift' of undefined i'm getting this error when adding SSR to exist angular 6 project · Issue #578 · maciejtreder/ng-toolkit · GitHub](https://github.com/maciejtreder/ng-toolkit/issues/578)

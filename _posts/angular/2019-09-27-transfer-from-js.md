@@ -6,19 +6,15 @@ categories: angular
 tags: [storage, window]
 ---
 
+## Analysis: Accessing Angular from JavaScript
 
-## 분석
-angular에서 js 파일에 접근할 때는 d.ts를 활용하거나 import 하여 사용할 수 있습니다.<br>
-그러나, 반대의 경우 js에서 angular에 접근하고 싶을 때는 어떻게 할까요?<br><br>
+In Angular, accessing JavaScript files typically involves utilizing declaration files (`.d.ts`) or employing `import` statements. However, the question arises: how do we achieve the reverse – accessing Angular components or variables from within JavaScript?
 
-일반적으로는 불가능합니다. 왜냐하면 스코프(Scope)가 다르기 때문입니다.<br><br>
+Generally, direct access is not feasible due to differing scopes. Variables declared within an Angular class are, by default, inaccessible from external JavaScript libraries.
 
-다시 말해서, angular 라는 클래스 안에 선언된 변수는 외부 라이브러리에서 접근할 수 없습니다.<br><br>
+Consider this illustrative JavaScript example:
 
-예를 들면, 아래와 같습니다.
-
-
-```js
+```jsx
 function sayHello () {
   const hello = 'Hello CSS-Tricks Reader!'
   console.log(hello)
@@ -27,43 +23,40 @@ sayHello() // 'Hello CSS-Tricks Reader!'
 console.log(hello) // Error, hello is not defined
 ```
 
-외부에서는 노출된 sayHello라는 함수는 접근할 수 있으나 그 내부에 선언된 hello 에는 접근할 수 없으며 이를 스코프라고 합니다.<br>
-(반대의 경우, 함수 내부에서 바깥에 선언된 변수 (또는 함수)에 접근하는 것은 클로져라고 합니다.)<br><br>
+While the externally exposed `sayHello` function is accessible, the `hello` variable declared within its scope remains private. This concept is known as scope. Conversely, accessing variables or functions declared outside a function from within that function is known as closure.
 
-이와 같은 케이스는 다양하게 있으나 근본적으로 "외부에서 내부(또는 함수 간)에 선언된 변수는 접근할 수 없다."는 것은 같습니다.
+These scoping rules apply across various scenarios, but the fundamental principle remains consistent: variables declared within a specific scope (e.g., inside a function or class) are not directly accessible from outside that scope.
 
+## Solutions: Bridging the Gap Between JavaScript and Angular
 
-## 해결
+So, how can we enable JavaScript to access Angular's internal variables? In other words, how can we transmit values from JavaScript to Angular?
 
-그러면 어떻게 하면 js에서 angular의 내부 변수에 접근할 수 있을까요? 다시 말해서 어떻게 하면 js에서 angular에 값을 전달할 수 있을까요?
+### 1. Leveraging Storage Mechanisms
 
-### 1. storage의 활용
+One approach involves utilizing `localStorage` or `sessionStorage`. JavaScript can store values in storage, which Angular can then retrieve.
 
-local storage나 session storage를 활용할 수 있겠습니다. <br>
-즉, js 에서 local storage에 값을 저장하면 이 값을 가져가는 방식입니다. <br><br>
+This method offers a straightforward solution to the problem.
 
-이는 매우 간단히 문제를 해결할 수 있는 방법입니다.<br><br>
+However, it introduces complexities. Determining when the value has been written to storage can be challenging, necessitating periodic checks or assumptions about the data's availability. These factors can make this approach less than ideal.
 
-다만, storage에 저장된 시점을 알 수 없으므로 변수시로 체크하거나 값이 설정되었을 것이라고 가정하고 접근하여야 하는 또 다른 문제가 발생하므로 좋은 방법이라고 할 수는 없습니다.
+### 2. Utilizing the Global Scope
 
+Another technique involves leveraging the global scope accessible to both Angular and JavaScript. We can declare variables on the `window` object and use them to pass values.
 
-### 2. global scope의 활용
+Let's illustrate this with an example where JavaScript modifies a value after a delay, which Angular then detects and renders.
 
-angular와 js의 영역 상단의 전역 scope를 활용하는 방법입니다.<br>
-window 객체에 변수를 선언하고 이를 통해 값을 전달할 수 있습니다.<br><br>
+Within the Angular component, create an object named `pipe` on the `window` object. This `pipe` will serve as the conduit for transferring values from JavaScript to Angular.
 
-n초 뒤에 js에서 값이 변경되면 이를 감지하여 angular에 랜더링하는 코드를 작성해보겠습니다<br><br>
-
-component에서 window에 pipe라는 객체를 만듭니다. 이를 통해 js -> angular로 값을 전달할 것입니다.
-```ts
+```tsx
   // app.component.ts
   window['pipe'] = (value) => { 
     this.render = value;
   }    
 ```
 
-이제 js에서 setTimeout을 통해 n초 뒤에 pipe에 값을 전달합니다.
-```js
+Now, in JavaScript, use `setTimeout` to transmit a value to the `pipe` after a specified delay.
+
+```jsx
 // global.js
 var n = 1000;
 
@@ -72,10 +65,9 @@ setTimeout(() => {
 }, n);
 ```
 
-이를 실행하면 잘 동작하는 것을 알 수 있습니다.
+Executing this code demonstrates a functional data transfer between JavaScript and Angular.
 
+## References
 
-
-## 참고 사이트
-- [자바스크립트 스코프(scope)](https://yuddomack.tistory.com/entry/%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8-%EC%8A%A4%EC%BD%94%ED%94%84scope)
-- [[번역] 자바스크립트 스코프와 클로저(JavaScript Scope and Closures)](https://medium.com/@khwsc1/%EB%B2%88%EC%97%AD-%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8-%EC%8A%A4%EC%BD%94%ED%94%84%EC%99%80-%ED%81%B4%EB%A1%9C%EC%A0%80-javascript-scope-and-closures-8d402c976d19)
+- [JavaScript Scope (scope)](https://yuddomack.tistory.com/entry/%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8-%EC%8A%A4%EC%BD%94%ED%94%84scope)
+- [Translation] JavaScript Scope and Closures](https://medium.com/@khwsc1/%EB%B2%88%EC%97%AD-%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8-%EC%8A%A4%EC%BD%94%ED%94%84%EC%99%80-%ED%81%B4%EB%A1%9C%EC%A0%80-javascript-scope-and-closures-8d402c976d19)

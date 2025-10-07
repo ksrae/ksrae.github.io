@@ -7,41 +7,42 @@ tags: [query]
 ---
 
 
-MongoDB에서 전체 검색과 범위 검색 쿼리 만드는 방법입니다.
+# Implementing Full-Text and Range Queries in MongoDB
 
+This document outlines techniques for constructing full-text and range-based queries within MongoDB, focusing on practical implementation for developers.
 
-## 전체검색
-전체 검색 쿼리는 그냥 쿼리문에 해당 키를 적지 않으면 되는데 코딩하다보면 if 조건에 의해 키를 넣어야 하는 상황이 생깁니다. <br><br>
+## Full-Text Search
 
-이 때, 전체 검색하는 방법은 regex 를 활용하는 것인데 /./ 로 처리할 수 있습니다.
+In scenarios where conditional logic dictates the inclusion of a specific key in your query, situations may arise where you need to effectively bypass the key to perform a full-text search. Instead of omitting the key entirely (which can be straightforward in simple cases), a workaround is needed when the key's presence is determined by conditional statements.
 
-```ts
-if(value) {
+One approach involves leveraging regular expressions. Specifically, the `/./` regex pattern can be utilized to match any character, effectively selecting all documents regardless of the key's value.
+
+```tsx
+if (value) {
   DB.find({
     key: value ? value : /./
   }).toArray();
 }
 ```
 
-## 범위 검색
+In the preceding TypeScript code snippet, if the `value` variable is truthy, the query will filter based on that value. Otherwise, the `/./` regex will ensure that all documents are returned, effectively performing a full-text search across the collection.
 
-전화번호부 검색과 같이 첫글자 '가~나' 인 모든 값을 검색하는 방법입니다.<br>
-구글에 검색해봐도 없어서 어려운건가 했는데 생각보다 쉽게 검색할 수 있습니다.<br><br>
+## Range Queries
 
-바로 `$gte`와 `$lt`를 사용하는 방법입니다.<br>
-`$gte`는 (>=) `$lt`는 (<)를 의미합니다. <br><br>
+Range queries, which allow you to retrieve documents within a specified interval (e.g., searching a phone book for entries starting with "A" through "B"), can be implemented efficiently in MongoDB. Despite the apparent complexity, these queries can be constructed using intuitive operators.
 
-일반적으로 비교 연산은 숫자에 사용하는데 문자에 그것도 한글과 같은 2바이트 문자에도 사용이 가능합니다.
+The key lies in utilizing the `$gte` (greater than or equal to) and `$lt` (less than) operators. These operators, commonly used for numerical comparisons, can also be applied to strings, including double-byte character sets like Korean.
 
+```tsx
+DB.find({
+  key: {
+    '$gte': 'A', '$lt': 'B'
+  }
+});
+```
 
-```ts
-  DB.find({
-    key: {
-      '$gte':'가', '$lt': '나'
-    }
-  };
-```  
-  
-쉽지만 모르면 헤매게 되는 검색 방법에 대해 알아보았습니다.<br><br>
+The above code snippet demonstrates a range query using `$gte` and `$lt`. It will retrieve all documents where the `key` field's value is greater than or equal to "A" and less than "B".  This technique allows for effective range-based searches, even when dealing with non-numeric data.
 
-끝.
+While these methods are relatively straightforward, understanding their application is crucial for efficient data retrieval in MongoDB. This exploration aimed to clarify these techniques and prevent common pitfalls.
+
+Conclusion.

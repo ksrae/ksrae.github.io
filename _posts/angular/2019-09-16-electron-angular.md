@@ -1,32 +1,32 @@
 ---
-title: "Electron에서 쉽게 Angular 프로젝트 로드 (angular project on electron)"
+title: "angular project on electron"
 date: 2019-09-16 10:19:00 +0900
 comments: true
 categories: angular
 tags: [electron, error]
 ---
 
+## Setting up Electron
 
-## electron 설치
-electron을 npm에서 간단히 받아 설치할 수 있습니다.
+Electron can be easily installed from npm.
 
 ```
 npm i electron@latest
 ```
 
+## Building the Angular Project
 
-## angular 프로젝트 빌드
-angular project를 electron에서 실행하려면 우선 프로젝트를 빌드하여 dist 폴더를 생성합니다.
+To run an Angular project within Electron, you first need to build the project to generate the `dist` folder.
 
 ```
 ng build
 ```
 
-## main.js 생성
-electron은 js 파일을 수행하여 html을 load하는 방식이므로 js 파일을 생성하여야 합니다.
-아래와 같이 main.js 파일을 생성합니다.
+## Creating `main.js`
 
-```js
+Electron executes a JavaScript file that loads the HTML. Therefore, you need to create a `main.js` file. Here's an example of what `main.js` should look like:
+
+```jsx
 const {app, BrowserWindow} = require('electron')
 const url = require("url");
 const path = require("path");
@@ -42,8 +42,7 @@ function createWindow () {
     }
   })
 
-  mainWindow.loadURL(/*url 또는 파일명*/)
-
+  mainWindow.loadURL(/*url or file name*/)
 
   mainWindow.on('closed', function () {
     mainWindow = null
@@ -62,17 +61,16 @@ app.on('activate', function () {
 
 ```
 
-## 프로젝트 load
+## Loading the Project
 
-angular 프로젝트를 local이나 서버에 올린 뒤 주소를 electron에서 로드하거나 파일을 직접 로드할 수 있습니다.
-loadURL에서 이를 설정할 수 있습니다. 만일 파일인 경우 정확한 경로와 실행할 html 파일을 설정하여야 합니다.
+You can either load the Angular project from a local file or a server address. This is configured in the `loadURL` method. For local files, specify the accurate path and the HTML file to execute.
 
-```js
+```jsx
 
-  // online에서 실행
+  // Running from online
   mainWindow.loadURL('http://127.0.0.1:4000')
 
-  // offline에서 실행
+  // Running from offline
   mainWindow.loadURL(
     url.format({
       pathname: path.join(__dirname, `/dist/index.html`),
@@ -83,36 +81,36 @@ loadURL에서 이를 설정할 수 있습니다. 만일 파일인 경우 정확�
 
 ```
 
+## Modifying `package.json`
 
-## package.json 수정
+Modify the `package.json` configuration to enable easy execution.
 
-package.json을 설정을 수정하여 쉬운 실행을 설정합니다.
-
-```
+```json
   "scripts": {
 	...
 	"start:electron": "ng build --prod --base-href ./ && electron .",
     "electron": "electron .",
   }
-  ```
+```
 
-angular 빌드와 electron을 한번에 실행하기 위한 start:electron과 electron만 별도로 실행할 두개의 스크립트를 생성했습니다.
-하나만 생성해도 상관 없습니다. 또한 prod 와 base-href 설정을 추가하였는데 빼도 상관 없습니다.
+Two scripts are created: `start:electron` to execute the Angular build and Electron in one step, and `electron` to execute Electron separately. Creating only one script is also fine. The `prod` and `base-href` settings are added, but you can remove them if necessary.
 
-이제 스크립트를 실행하면 앱으로 실행되는 것을 확인할 수 있습니다.
+Executing the script will now show the app running as a desktop application.
 
+## Troubleshooting
 
-## 에러 해결
+> If the app doesn't run despite the above settings, verify the following in the generated `index.html` file within the build folder:
+1) Is `base href` set to `"./"`?
+The default is `/`, so change it to `"./"`.
+> 
 
-> 위의 설정대로 진행하였어도 실행 안되면 빌드 후 생성된 index.html에서 두 가지를 확인하시기 바랍니다.
-> 1) base href 가 "./" 으로 되어 있는가? 
-> 기본 "/" 으로 설정되어 있으므로 "./" 으로 수정.
 >
-> 2) script의 type이 text/javascript 인가
-> 기본 type="module"로 되어 있으므로 "text/javascript"로 수정.
 
+> 2) Is the `type` of the script set to `"text/javascript"`?
+The default is `type="module"`, so change it to `"text/javascript"`.
+> 
 
+## References
 
-## 참고 사이트
-- [https://www.sitepoint.com/build-a-desktop-application-with-electron-and-angular/] (https://www.sitepoint.com/build-a-desktop-application-with-electron-and-angular/)
+- https://www.sitepoint.com/build-a-desktop-application-with-electron-and-angular/
 - [Build Angular Desktop Apps With Electron \| AngularFirebase](https://angularfirebase.com/lessons/desktop-apps-with-electron-and-angular/)
