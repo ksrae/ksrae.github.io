@@ -1,5 +1,5 @@
 ---
-title: "PWA로 오프라인 공지하기 (Make Matenenance or Offline Notice using PWA)"
+title: "Make Matenenance or Offline Notice using PWA"
 date: 2019-07-08 16:50:00 +0900
 comments: true
 categories: angular
@@ -8,43 +8,41 @@ tags: [pwa, maintenance, offline]
 
 
 
-PWA를 활용하여 점검 또는 오프라인 공지를 만드는 방법입니다.
+How to Implement Maintenance or Offline Notices Using a PWA
 
+## Objective
 
+- Implement an easy way to display maintenance messages within a PWA.
+- Ensure the app remains functional while informing users about their offline status.
 
+## Maintenance Mode Implementation
 
-## 목적
-  - 쉽게 점검 표시를 하기 위한 방법을 PWA에 적용하기
-  - offline일 때 앱은 살아 있되 사용자가 offline임을 인지할 수 있도록 함
+To quickly display maintenance messages, we use a `.json` file that is read upon application load. This approach allows for dynamic updates without requiring a full application redeployment.
 
+## Challenges
 
-## 점검하기
-가장 빠른 점검 메시지를 적용하기 위해 .json 에 기록 후 읽어가는 방식을 활용합니다.
+When developing a PWA, `.json` files can be cached, leading to two primary issues:
 
+- **Delayed Updates:** Updates to the `.json` file might not be immediately reflected, potentially causing users to experience outdated maintenance information.
+- **Offline Data Integrity:** Even in offline mode, the cached `.json` file will be read, preventing the display of specific offline messages.
 
-## 문제
-PWA로 개발 시 .json 파일이 cache에 물려있게 되며 이 때, 두 가지 문제가 발생합니다.
+## Solution
 
-- 접속 시 .json의 업데이트 적용에 간격이 있고, 그 동안 사용자를 대기 시킬 수 없습니다.
-- offline 시에도 캐싱된 .json을 읽어버리기 때문에 별도의 메시지를 표시하기 어렵습니다.
+Prevent the `.json` file from being cached by excluding it from the `ngsw.json` configuration.
 
+- **Initial Load Strategy:**
+- Read the `.json` file during the initial module load.
+- On success, store the result in a variable or subject for later use.
+- On failure (e.g., network error), handle the exception in a catch event.
+- **Component Integration:**
+- Subscribe to the variable or subject within the component's `onInit` lifecycle hook to react to changes in the maintenance status.
 
-## 해결
-ngsw.json 에서 .json 파일 내역을 지웁니다. 즉, 캐싱되지 않도록 합니다.
+## Outcome
 
-- 최초로 load되는 module에서 json 파일을 읽기.
-  - 성공: 결과를 변수 또는 subject에 저장.
-  - 실패: catch 이벤트에서 처리.
+- Maintenance messages are applied immediately, independent of application updates.
+- Custom offline messages and network troubleshooting instructions can be displayed.
 
-- component는 onInit 시 해당 변수 또는 해당 subject를 subscribe하여 결과를 반영합니다.
-
-## 결과
-
-- maintenance가 업데이트와 관계없이 즉시 적용됩니다.
-- offline 안내 및 재접속 또는 네트워크 확인 안내 등이 가능합니다.
-
-
-## 소스 코드
+## Source Code
 
 ```json
 // maintenance.json
@@ -54,8 +52,7 @@ ngsw.json 에서 .json 파일 내역을 지웁니다. 즉, 캐싱되지 않도�
 ```
 
 ```json
-// ngsw.json (maintenance.json 파일이 캐싱되지 않음)
-
+// ngsw.json (maintenance.json is excluded from caching)
 {
   "configVersion": 1,
   "index": "/index.html",
@@ -82,7 +79,7 @@ ngsw.json 에서 .json 파일 내역을 지웁니다. 즉, 캐싱되지 않도�
 }
 ```
 
-```ts
+```tsx
 // app.module.ts
 
 export function getConfig(config: AppService) {
@@ -100,7 +97,7 @@ export function getConfig(config: AppService) {
   ]
 ```
 
-```ts
+```tsx
 // app.service.ts
 
     getMaintenance() {
@@ -117,7 +114,7 @@ export function getConfig(config: AppService) {
     }
 ```
 
-```ts
+```tsx
 // app.component.ts
 
   ngOnInit() {
@@ -135,14 +132,10 @@ export function getConfig(config: AppService) {
     }
 ```
 
+## Application
 
-## 응용
+Now, to initiate maintenance, simply update the `"maintenance"` value in `maintenance.json` to `true` and deploy only that file.
 
-이제 점검 중일 때는 maintenance.json의 "maintenance" 값을 true로 수정한 뒤 이 파일만 배포하면 되며, <br>
-offline일 시 오프라인임을 알려주거나 네트워크 점검이 필요하다는 안내문구를 넣을 수 있습니다.<br><br>
+When the application is offline, you can display a message indicating the offline status or instructions for checking the network connection.
 
-"maintenance"에 시간 값을 추가하여 client에서 해당 시간 범위만큼일 때만 maintenance의 값을 처리하게 할 수도 있을 것 입니다.<br>
-
-
-
-
+You could also enhance the `"maintenance"` property by adding a time range. The client could then process the maintenance value only during the specified time window.

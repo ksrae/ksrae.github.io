@@ -1,5 +1,5 @@
 ---
-title: "Rxjs의 pipe 주요 명령어 (Rxjs Pipe Operators)"
+title: "Rxjs Pipe Operators"
 date: 2019-07-05 15:00:00 +0900
 comments: true
 categories: angular
@@ -7,32 +7,34 @@ tags: [rxjs, subscribe]
 ---
 
 
+## `take(n)`
 
-rxjs에서 pipe에서 주로 사용하는 명령들을 정리하였습니다.
+**Description:** Emits only the first `n` values emitted by the source Observable, then completes.
 
+[](http://img1.daumcdn.net/thumb/R1920x0/?fname=http%3A%2F%2Fcfile30.uf.tistory.com%2Fimage%2F997D983359BA8B6804950D)
 
+Marble Diagram: take(n)
 
-
-## take(n)
-> n번 subscribe 후 해제
-
-![?fname=http%3A%2F%2Fcfile30.uf.tistory.com%2Fimage%2F997D983359BA8B6804950D](http://img1.daumcdn.net/thumb/R1920x0/?fname=http%3A%2F%2Fcfile30.uf.tistory.com%2Fimage%2F997D983359BA8B6804950D)
-
-```ts
+```tsx
 this.mount.pipe(take(2)).subscribe();
 ```
 
-## takeUntil(Observable)
-> Observable이 데이터를 받거나 완료되면 해제
+**Usage Notes:**  Useful for scenarios where you only need a limited number of emissions from an observable.
 
-![?fname=http%3A%2F%2Fcfile3.uf.tistory.com%2Fimage%2F99591B3359BB22561F61F7](http://img1.daumcdn.net/thumb/R1920x0/?fname=http%3A%2F%2Fcfile3.uf.tistory.com%2Fimage%2F99591B3359BB22561F61F7)
+## `takeUntil(notifier: Observable)`
 
-```ts
-unsubscribe: Subject = new Subject(void);
+**Description:** Emits the values from the source Observable until the `notifier` Observable emits a value or completes.  Upon notification, `takeUntil` unsubscribes from the source Observable.
+
+[](http://img1.daumcdn.net/thumb/R1920x0/?fname=http%3A%2F%2Fcfile3.uf.tistory.com%2Fimage%2F99591B3359BB22561F61F7)
+
+Marble Diagram: takeUntil(Observable)
+
+```tsx
+unsubscribe: Subject<void> = new Subject<void>();
 
 public ngOnInit() {
   this.tagService.getTags({category: 'keyword'})
-    .takeUntil(this.unsubscribe)
+    .pipe(takeUntil(this.unsubscribe))
     .subscribe(tags => {
       this.tags = tags;
     });
@@ -44,25 +46,30 @@ public ngOnDestroy() {
 }
 ```
 
-## takeWhile(function)
-> 함수가 true이면 해제
+**Usage Notes:** A common pattern in Angular components to unsubscribe from observables when the component is destroyed, preventing memory leaks.  The `notifier` is often a `Subject` that emits a value in the `ngOnDestroy` lifecycle hook.
 
-![?fname=http%3A%2F%2Fcfile9.uf.tistory.com%2Fimage%2F99F6553359BA8BA230F5B0](http://img1.daumcdn.net/thumb/R1920x0/?fname=http%3A%2F%2Fcfile9.uf.tistory.com%2Fimage%2F99F6553359BA8BA230F5B0)
+## `takeWhile(predicate: function)`
 
-```ts
+**Description:** Emits values from the source Observable as long as the `predicate` function returns `true`.  Once the `predicate` returns `false`, the Observable completes.
+
+[](http://img1.daumcdn.net/thumb/R1920x0/?fname=http%3A%2F%2Fcfile9.uf.tistory.com%2Fimage%2F99F6553359BA8BA230F5B0)
+
+Marble Diagram: takeWhile(function)
+
+```tsx
 alive = true;
 
 ngOnInit() {
   this.filterChange$
-    .takeWhile(() => this.alive)
+    .pipe(takeWhile(() => this.alive))
     .subscribe(filter => {
-      // 필터가 변경되었을때의 처리
+      // Handle filter changes
     });
 
   this.keywordChange$
-    .takeWhile(() => this.alive)
+    .pipe(takeWhile(() => this.alive))
     .subscribe(keyword => {
-      // 키워드가 변경되었을때의 처리
+      // Handle keyword changes
     });
 }
 
@@ -71,59 +78,96 @@ ngOnDestroy() {
 }
 ```
 
-## takeLast(n)
-> 마지막 n번째 값만 처리하고 해제. 마지막이 어디인지 명확히 알아야 함
+**Usage Notes:** Similar to `takeUntil`, but uses a synchronous predicate function to determine when to unsubscribe.
 
-![takeLast.png](https://rxjs-dev.firebaseapp.com/assets/images/marble-diagrams/takeLast.png)
+## `takeLast(n)`
 
-## first()
-> 첫번째만 처리하고 해제
+**Description:** Emits only the last `n` values emitted by the source Observable upon completion. Requires the source Observable to complete to emit any values.
 
-![first.png](https://rxjs-dev.firebaseapp.com/assets/images/marble-diagrams/first.png)
+[](https://rxjs-dev.firebaseapp.com/assets/images/marble-diagrams/takeLast.png)
 
-```ts
+Marble Diagram: takeLast.png
+
+**Usage Notes:**  Useful when you need to process the final `n` values of a finite observable stream.
+
+## `first()`
+
+**Description:** Emits only the first value emitted by the source Observable, then completes.  Optionally accepts a predicate function to filter values.
+
+[](https://rxjs-dev.firebaseapp.com/assets/images/marble-diagrams/first.png)
+
+Marble Diagram: first.png
+
+```tsx
 this.mount.pipe(first()).subscribe();
 ```
 
-## take(function)
-> 조건이 맞으면 해제
+**Usage Notes:**  Useful for retrieving the first value from an Observable and then completing the subscription.
 
-![take.png](https://rxjs-dev.firebaseapp.com/assets/images/marble-diagrams/take.png)
+## `take(predicate: function)`
 
-```ts
-this.mount.pipe(take(2)).subscribe();
+**Description:** **Note:** This is functionally equivalent to `first(predicate)`. Emits the first value that satisfies the provided `predicate` function, then completes.
+
+[](https://rxjs-dev.firebaseapp.com/assets/images/marble-diagrams/take.png)
+
+Marble Diagram: take.png
+
+```tsx
+this.mount.pipe(take(2)).subscribe(); // This example is misleading; it would be better with a predicate.
 ```
 
-## skip(n)
-> 1부터 n개  스킵하고 나머지만 처리
+**Usage Notes:** Although named `take`, when used with a function, it behaves like `first` and emits only one value that satisfies the condition. Be careful to distinguish this usage from `take(n)`.
 
-![skip.png](https://rxjs-dev.firebaseapp.com/assets/images/marble-diagrams/skip.png)
+## `skip(n)`
 
+**Description:** Skips the first `n` values emitted by the source Observable, then emits the remaining values.
 
-## Last() , Last(function)
-> takeLast(1)과 동일하거나 조건에 맞는 최종 데이터만 처리
+[](https://rxjs-dev.firebaseapp.com/assets/images/marble-diagrams/skip.png)
 
-![last.png](https://rxjs-dev.firebaseapp.com/assets/images/marble-diagrams/last.png)
+Marble Diagram: skip.png
 
+**Usage Notes:**  Useful when you need to ignore a known number of initial emissions.
 
-## SkipLast(n)
-> 마지막부터 n개 스킵한 나머지만 처리
+## `last(predicate?: function)`
 
-![skipLast.png](https://rxjs-dev.firebaseapp.com/assets/images/marble-diagrams/skipLast.png)
+**Description:** Emits only the last value emitted by the source Observable (or the last value that satisfies the optional `predicate` function) upon completion.  Effectively equivalent to `takeLast(1)` when no predicate is used.
 
+[](https://rxjs-dev.firebaseapp.com/assets/images/marble-diagrams/last.png)
 
-## SkipUntil(Observable)
-> Observable이 Observable이 데이터를 받거나 완료되기 전까지를 스킵
+Marble Diagram: last.png
 
-![skipUntil.png](https://rxjs-dev.firebaseapp.com/assets/images/marble-diagrams/skipUntil.png)
+**Usage Notes:** Similar to `takeLast(1)`, but can also be used with a predicate to find the last value that matches a specific condition.
 
+## `skipLast(n)`
 
-## SkipWhile(function)
-> 함수가 true이기 전까지 스킵
+**Description:** Skips the last `n` values emitted by the source Observable.  Requires the source Observable to complete to emit any values.
 
-![skipWhile.png](https://rxjs-dev.firebaseapp.com/assets/images/marble-diagrams/skipWhile.png)
+[](https://rxjs-dev.firebaseapp.com/assets/images/marble-diagrams/skipLast.png)
 
+Marble Diagram: skipLast.png
 
-* 위의 내용은 Rxjs 공식 홈페이지를 참조하였습니다.
-* [RxJS](https://rxjs-dev.firebaseapp.com/api/operators)
+**Usage Notes:**  Useful when you need to ignore a known number of final emissions of a finite observable.
 
+## `skipUntil(notifier: Observable)`
+
+**Description:** Skips values emitted by the source Observable until the `notifier` Observable emits a value or completes.  After the `notifier` emits, `skipUntil` starts emitting values from the source Observable.
+
+[](https://rxjs-dev.firebaseapp.com/assets/images/marble-diagrams/skipUntil.png)
+
+Marble Diagram: skipUntil.png
+
+**Usage Notes:**  Useful when you want to start processing values only after a specific event has occurred.
+
+## `skipWhile(predicate: function)`
+
+**Description:** Skips values emitted by the source Observable as long as the `predicate` function returns `true`.  Once the `predicate` returns `false`, `skipWhile` starts emitting all subsequent values from the source Observable.
+
+[](https://rxjs-dev.firebaseapp.com/assets/images/marble-diagrams/skipWhile.png)
+
+Marble Diagram: skipWhile.png
+
+**Usage Notes:** Useful when you want to start processing values only after a specific condition is no longer met.
+
+*The content above references the official RxJS documentation.*
+
+- [RxJS Official Documentation](https://rxjs-dev.firebaseapp.com/api/operators)

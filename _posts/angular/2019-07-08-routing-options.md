@@ -8,14 +8,11 @@ tags: [routing]
 
 
 
-Component에서 라우팅 적용 시 사용할 수 있는 옵션 목록 입니다.
-
-
-
+A comprehensive list of options for applying routing in Angular components.
 
 [Angular Docs](https://angular.io/api/router/NavigationExtras)
 
-```ts
+```tsx
 interface NavigationExtras {
   relativeTo?: ActivatedRoute | null
   queryParams?: Params | null
@@ -25,87 +22,96 @@ interface NavigationExtras {
   preserveFragment?: boolean
   skipLocationChange?: boolean
   replaceUrl?: boolean
-  state?: {...}
+  state?: { [k: string]: any }
 }
 ```
 
-## relativeTo?: ActivatedRoute | null	
-> 링크가 어디에 기초하는지 정의
+## relativeTo?: ActivatedRoute | null
 
-```ts
-// this.route.root, .parent 등 다양한 기준이 있으므로 절대/상대 설정에 따라 정의.
-this.router.navigate(['../list'], { relativeTo: this.route }); 
+> Defines the basis for the link. In essence, it specifies which `ActivatedRoute` the navigation is relative to. This enables relative navigation within the application.
+> 
+
+```tsx
+// Several baselines are available such as this.route.root and .parent; define based on absolute/relative configurations.
+this.router.navigate(['../list'], { relativeTo: this.route });
 ```
 
+## queryParams?: Params | null
 
-## queryParams?: Params | null	
-> URL에 파라미터 붙이는 방법
+> A method for appending parameters to the URL, providing a way to pass data through the route.
+> 
 
-```ts
+```tsx
 // Navigate to /results?page=1
 this.router.navigate(['/results'], { queryParams: { page: 1 } });
 ```
 
+## fragment?: string
 
-## fragment?: string	
-> frament를 붙이는 방법
+> How to append a fragment (also known as an anchor) to the URL. This is commonly used for in-page navigation.
+> 
 
-```ts
+```tsx
 // Navigate to /results#top
 this.router.navigate(['/results'], { fragment: 'top' });
-```   
-        
+```
 
-## preserveQueryParams?: boolean	
-> 다른 주소로 이동할 때 현재 가진 파라미터를 전달.
-> 7버전부터 폐기되므로 대신 queryParamsHandling 를 사용.
+## preserveQueryParams?: boolean
 
-```ts
+> While navigating to a different address, this allows the preservation of the current query parameters. Note that this has been deprecated since version 7; `queryParamsHandling` should be used instead.
+> 
+
+```tsx
 // Preserve query params from /results?page=1 to /view?page=1
 this.router.navigate(['/view'], { preserveQueryParams: true });
 ```
-        
-        
-## queryParamsHandling?: QueryParamsHandling | null	
-> 쿼리 파라미터 관리 확장버전.
 
-```ts
+## queryParamsHandling?: QueryParamsHandling | null
+
+> An extended version for managing query parameters, offering greater control over how they are handled during navigation.
+> 
+
+```tsx
 // from /results?page=1 to /view?page=1&page=2
-this.router.navigate(['/view'], { queryParams: { page: 2 },  queryParamsHandling: 'merge' });
- ```
+this.router.navigate(['/view'], { queryParams: { page: 2 }, queryParamsHandling: 'merge' });
+```
 
-- merge: 현재 URL에 포함된 파라미터를 함께 전달
-- preserve: 현재 파라미터만 전달
-- default: 기본형. 일반적인 방법으로 파라미터를 사용
+Options include:
 
- 
-## preserveFragment?: boolean	
-> 현재 fragment를 전달할지 여부
+- `merge`: Passes parameters included in the current URL along with the new parameters.
+- `preserve`: Only passes the current parameters, discarding any new ones provided in the navigation.
+- `default`: The standard behavior. Uses parameters in the conventional manner.
 
-```ts
+## preserveFragment?: boolean
+
+> Determines whether the current fragment should be passed along during navigation.
+> 
+
+```tsx
 // Preserve fragment from /results#top to /view#top
 this.router.navigate(['/view'], { preserveFragment: true });
 ```
 
+## skipLocationChange?: boolean
 
-## skipLocationChange?: boolean	
- > history에 포함하지 않고 이동. back할 때 이동하지 않음.
+> Navigates without adding the route to the history. This means when the user clicks 'back', they won't navigate to this route.
+> 
 
-```ts
+```tsx
 // Navigate silently to /view
 this.router.navigate(['/view'], { skipLocationChange: true });
-```   
-        
-        
-## replaceUrl?: boolean	
-> url을 현재 주소로 교체할 것인지 여부. 
-
-```ts
-// Navigate to /view
-this.router.navigate(['/view'], { replaceUrl: true });
- state?: {
-    [k: string]: any;
-}	
 ```
 
+## replaceUrl?: boolean
 
+> Determines whether to replace the current URL with the new URL.
+> 
+
+```tsx
+// Navigate to /view
+this.router.navigate(['/view'], { replaceUrl: true });
+
+state?: {
+  [k: string]: any;
+}
+```
