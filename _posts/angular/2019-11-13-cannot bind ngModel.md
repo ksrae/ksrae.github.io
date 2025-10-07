@@ -32,3 +32,23 @@ import { FormsModule } from '@angular/forms';
 ```
 
 This import makes the `ngModel` directive available for use within your Angular templates, enabling two-way data binding with form elements.
+
+
+### Angular 17 or above
+
+```tsx
+// src/app/app.config.ts
+
+import { ApplicationConfig } from '@angular/core';
+import { provideRouter } from '@angular/router';
+import { provideFormsModule } from '@angular/forms';
+
+import { routes } from './app.routes';
+
+export const appConfig: ApplicationConfig = {
+  providers: [
+    provideRouter(routes),
+    provideFormsModule()
+  ]
+};
+```

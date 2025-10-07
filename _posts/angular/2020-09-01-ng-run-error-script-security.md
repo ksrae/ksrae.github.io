@@ -1,6 +1,5 @@
 ---
-title: "ng: 이 시스템에서 스크립트를 실행할 수 없으므로 ... (cannot be loaded because 
-running scripts is disabled on this system)"
+title: "cannot be loaded because running scripts is disabled on this system"
 date: 2020-09-01 21:11:00 +0900
 comments: true
 categories: angular
@@ -8,44 +7,50 @@ tags: [error]
 ---
 
 
-## 환경
-- windows
-- vscode
-- powershell
-- Angular 10.0.8
+## Environment Setup
 
+- Operating System: Windows
+- IDE: VS Code
+- Shell: PowerShell
+- Framework: Angular 10.0.8
 
-## 원인
-Environment Variables를 설정하였음에도 스크립트를 실행할 수 없다는 에러가 발생합니다.
+## Problem Description
+
+An error occurs preventing script execution, despite having configured environment variables correctly. The error message is similar to:
 
 ```
-ng : 이 시스템에서 스크립트를 실행할 수 없으므로 C:\Users\< username >\AppData\Roaming\npm\ng.ps1 파일을 로드할 수 없습니다. 
-자세한 내용은 about_Execution_Policies(https://go.microsoft.com/fwlink/?LinkID=135170)를 참조하십시오.
-위치 줄:1 문자:1
+ng : Cannot load the file C:\Users\< username >\AppData\Roaming\npm\ng.ps1 because running scripts is disabled on this system. 
+For more information, see about_Execution_Policies at https://go.microsoft.com/fwlink/?LinkID=135170.
+At line:1 char:1
 ...
 ...
 ...
 ```
-## 실패 케이스
-1. `C:\Users\< username >\AppData\Roaming\npm\ng.ps1` 읽기 모드 해제<br/>
--> 이미 해제 되어 있으며, 상위 폴더의 읽기 모드를 해제 하여도 동작하지 않습니다.<br/>
-<br/>
-2. `C:\Users\< username >\AppData\Roaming\npm\ng.ps1` 삭제<br/>
--> npm install -g @angular/cli 실행하면 다시 설치되며 같은 에러가 발생합니다.<br/>
 
+This indicates an issue with PowerShell's execution policy preventing the `ng` command from running.
 
-## 해결
+## Unsuccessful Attempts
 
-```
-Set-ExecutionPolicy -ExecutionPolicy
-// 또는
+1. Removing Read-Only Attribute from `C:\Users\< username >\AppData\Roaming\npm\ng.ps1`
+
+Attempting to remove the read-only attribute from the `ng.ps1` file, or even the parent directory, does not resolve the issue. The file is often already not read-only, and changing this setting has no effect.
+
+1. Deleting and Reinstalling `ng.ps1`
+
+Deleting the `ng.ps1` file and reinstalling the Angular CLI via `npm install -g @angular/cli` results in the file being recreated, but the same error persists upon execution. This confirms the issue is not with a corrupted file, but rather with the execution policy.
+
+## Solution
+
+The problem lies in the PowerShell execution policy, which restricts the execution of scripts. The following command resolves this:
+
+```powershell
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 ```
 
-스크립트 정책이 풀리면서 실행 가능해집니다.
+This command sets the execution policy to `RemoteSigned` for the current user.  `RemoteSigned` allows execution of scripts that are downloaded from the internet and signed by a trusted publisher or scripts that are written locally.  This policy scope limits the change to the current user, minimizing potential security risks.
 
+After running this command, PowerShell will be able to execute the `ng` command and other Angular CLI commands. You might need to close and reopen your PowerShell session for the changes to take effect.
 
+## References
 
-
-## 참고 사이트
 - [why-powershell-does-not-run-angular-commands](https://stackoverflow.com/questions/58032631/why-powershell-does-not-run-angular-commands)

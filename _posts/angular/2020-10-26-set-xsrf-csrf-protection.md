@@ -1,5 +1,5 @@
 ---
-title: "XSRF 방어하기 (XSRF Protection)"
+title: "XSRF Protection"
 date: 2020-10-26 14:00:00 +0900
 comments: true
 categories: angular
@@ -7,13 +7,10 @@ tags: [xsrf, csrf, protection]
 ---
 
 
-## 환경
-Angular 10
+## Cause
 
-  
-## 원인
-(서버에서 xsrf 또는 csrf를 허용한 경우)<br/>
-Angular 6 이하에서는 http 전송 시 csrf 쿠키값을 헤더에 넣기 위해 HttpInterceptor를 사용하였는데, 여기에 csrf의 값이 담긴 쿠키값을 가져와 헤더를 생성하여야 하는 불편함이 있었습니다.<br/>
+(If the server has enabled XSRF or CSRF)<br>
+In Angular 6 and earlier, HttpInterceptor was used to include the CSRF cookie value in the header during HTTP transmission. This required the inconvenience of retrieving the cookie value containing the CSRF value and creating a header.<br>
 
 ```tsx
 @Injectable({ providedIn: 'root' })
@@ -32,8 +29,8 @@ export class ApiInterceptor implements HttpInterceptor {
 }
 ```
 
-Angular 7 버전부터 HttpClientXsrfModule을 지원하여, 이를 보다 손쉽게 정리할 수 있습니다.<br/>
-모듈에서 직접 설정할 수 있기 때문에 하드코딩이 상위로 올라와 관리 포인트를 줄일 수 있으며, 직관적인 확인이 가능합니다. <br/> 
+From Angular 7 onwards, HttpClientXsrfModule is supported, allowing for easier management. <br>
+Because it can be configured directly in the module, hard coding can be reduced, and intuitive confirmation is possible.<br>
 
 ```tsx
 import { HttpClientModule, HttpClientXsrfModule } from '@angular/common/http';
@@ -47,20 +44,18 @@ imports: [
 ],
 ```
 
-## 에러
+## Error
 
-이렇게 설정하였는데도 막상 실행해보면 에러가 발생한다면, <br/>
-이는 인증을 이용한 요청방식을 위해 서버에서는 아래와 같이 Credentials 값을 true로 요구하고 있기 때문입니다.<br/>
+If an error occurs even after setting it up like this, <br>
+this is because the server requires the Credentials value to be true for authentication request methods, as shown below.<br>
 
 ```
 response.setHeader("Access-Control-Allow-Credentials", "true")
 ```
 
+## Solution
 
-
-## 해결
-Angular에서 http request 마다 또는 Interceptor에서 withCredential 값을 true로 설정해주어야 합니다.<br/>
-
+In Angular, the withCredential value must be set to true for each HTTP request or in the Interceptor.<br>
 
 ```tsx
 @Injectable()
@@ -77,8 +72,51 @@ export class HttpConfigInterceptor implements HttpInterceptor {
 }
 ```
 
+## Additionally: Solution in Modern Angular (v17+)
+Starting with Angular 17, the default is to use Standalone APIs without NgModule. Global HTTP configuration is managed in the app.config.ts file using the provideHttpClient provider function and its accompanying features.
 
+### Solution (Standalone API-based - Angular 17+)
+Configure both XSRF settings and the interceptor at once in the app.config.ts file.
+- XSRF Configuration: Use the withXsrfConfiguration feature.
+- withCredentials Configuration: Use the withInterceptors feature to register a functional interceptor.
 
-## 참고 사이트
+```TypeScript
+// src/app/app.config.ts
+
+import { ApplicationConfig } from '@angular/core';
+import { provideRouter } from '@angular/router';
+// 1. Import necessary functions from @angular/common/http
+import { provideHttpClient, withXsrfConfiguration, withInterceptors, HttpInterceptorFn } from '@angular/common/http';
+
+import { routes } from './app.routes';
+
+// 2. Define a functional interceptor
+const credentialsInterceptor: HttpInterceptorFn = (req, next) => {
+  const clonedReq = req.clone({
+    withCredentials: true,
+  });
+  return next(clonedReq);
+};
+
+export const appConfig: ApplicationConfig = {
+  providers: [
+    provideRouter(routes),
+
+    // 3. Add HttpClient configuration to the providers array
+    provideHttpClient(
+      // XSRF configuration
+      withXsrfConfiguration({
+        cookieName: 'My-Xsrf-Cookie',
+        headerName: 'My-Xsrf-Header',
+      }),
+      // Interceptor configuration
+      withInterceptors([credentialsInterceptor])
+    )
+  ]
+};
+```
+
+## References
+
 - [XSRF protection](https://angular.io/guide/http#security-xsrf-protection)
 - [HttpRequest](https://angular.io/api/common/http/HttpRequest)

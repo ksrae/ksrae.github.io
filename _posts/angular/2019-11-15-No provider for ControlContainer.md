@@ -28,3 +28,23 @@ import { ReactiveFormsModule } from '@angular/forms';
     ]
 })
 ```
+
+
+### Angular 17 or above
+
+```tsx
+// src/app/app.config.ts
+import { ApplicationConfig } from '@angular/core';
+import { provideRouter } from '@angular/router';
+import { provideReactiveFormsModule } from '@angular/forms'; 
+
+import { routes } from './app.routes';
+
+export const appConfig: ApplicationConfig = {
+  providers: [
+    provideRouter(routes),
+    provideReactiveFormsModule()
+  ]
+};
+
+```

@@ -7,21 +7,19 @@ tags: [ngfor, trackby]
 ---
 
 
-ngFor는 DOM을 반복해서 출력해주는 기능을 합니다. 여기에 몇가지 추가 요소를 붙일 수 있는데 대표적인 것으로는 index가 있습니다.
+`ngFor` is a structural directive in Angular that iterates over a collection and renders a template for each item. While powerful, it has a potential performance drawback: by default, any change within the loop triggers a refresh of *all* DOM elements rendered by `ngFor`. This can lead to unnecessary re-renders and performance degradation, especially with large datasets.
 
 ```html
-{% raw %}
 <div *ngFor="let item of items;let idx=index;"></div>
-<!-- 또는 -->
+<!-- or -->
 <div *ngFor="let item of items;index as idx;"></div>
-{% endraw %}
 ```
 
-ngFor의 단점은 for문 안에 영향을 미치는 이벤트가 발동되면 모든 Dom이 refresh 된다는 점입니다. 즉, 많은 돔이 물려 있을수록 더 많은 부하가 걸릴 수 있습니다. 
+## Optimizing `ngFor` with `trackBy`
 
-## 사용법
+The `trackBy` option provides a mechanism to optimize `ngFor`'s rendering behavior. It allows Angular to identify which items in the collection have actually changed, and only update the corresponding DOM elements. This significantly reduces the number of re-renders, resulting in improved performance.
 
-trackBy를 활용하면 이벤트에 해당하는 DOM만 refresh가 발동합니다. 단, 이 때, trackBy에는 primary 값. 다시 말해서 고유값만 포함하여야 합니다. 사용법은 아래와 같습니다.
+To use `trackBy`, you need to provide a function that uniquely identifies each item in the collection. This function should return a stable identifier, typically a primary key or unique ID.
 
 ```tsx
 let items = [
@@ -31,30 +29,55 @@ let items = [
 	{ id: 4, name: 'fourth'}
 ];
 
-trackByItem = (item): number => item.id;
+trackByItem = (item: any): number => item.id;
 ```
 
-위와 같은 데이터가 있다고 할 때, trackByItem이라는 추적할 대상(trackBy)을 리턴하는 함수를 만들어 둡니다. 그리고, Template에서는 아래와 같이 작성합니다.
+In this example, the `trackByItem` function returns the `id` property of each item, which is assumed to be unique. Now, you can use this function in your template:
 
 ```html
-{% raw %}<div *ngFor="let item of items;trackBy: trackByItem"></div>{% endraw %}
+<div *ngFor="let item of items;trackBy: trackByItem"></div>
 ```
 
-이제 for문 내의 데이터는 오직 이벤트에 해당하는 DOM만 refresh 됩니다.
+With `trackBy` in place, Angular will only re-render DOM elements corresponding to items whose identifiers have changed.
 
-## 추가
-Angular 버전에 따라 아래의 함수를 작성할 경우 에러가 발생할 수 있습니다.
+## Angular Version Considerations
 
-```
-trackByItem = (item): number => item.id;
-```
+In some Angular versions, the `trackByItem` function signature might require the `index` as the first parameter. If you encounter errors related to the function's arguments, adjust the signature to include the index:
 
-이는 파라미터로 index를 받도록 변경되었기 때문이므로 파라미터를 item 외에 index를 함께 받아주어 해결할 수 있습니다.
-
-```
+```tsx
 trackByItem = (index: number, item: any): number => item.id;
 ```
 
-## 참고 사이트
-- [https://angular.io/guide/template-syntax#ngfor-with-trackby](https://angular.io/guide/template-syntax#ngfor-with-trackby)
-- [https://stackoverflow.com/questions/42108217/how-to-use-trackby-with-ngfor](https://stackoverflow.com/questions/42108217/how-to-use-trackby-with-ngfor)
+This ensures compatibility with newer Angular versions.
+
+
+## Angular 17+ - Control flow
+
+There are two primary ways to use track with @for<br/>
+<br/>
+1. Tracking by a Unique Property (Recommended & Simplest)
+The most common and readable method is to track an item directly by its unique property. You no longer need a separate function in your component for this simple case.
+
+```Html
+<!-- New way with @for block -->
+@for (item of items; track item.id) {
+  <div>{{ item.name }}</div>
+}
+```
+Here, track item.id tells Angular to use the id property of each item as its unique identifier.
+
+2. Tracking with a Function
+If your tracking logic is more complex (e.g., combining multiple properties), you can still use a function. The syntax is slightly different from *ngFor.
+
+```Html
+<!-- Using the same trackByItem function from before -->
+@for (item of items; track trackByItem) {
+  <div>{{ item.name }}</div>
+}
+```
+
+
+## Additional Resources
+
+- [Angular `ngFor` Documentation](https://angular.io/guide/template-syntax#ngfor-with-trackby)
+- [Stack Overflow Discussion on `trackBy`](https://stackoverflow.com/questions/42108217/how-to-use-trackby-with-ngfor)

@@ -1,5 +1,5 @@
 ---
-title: "ngZoneEventCoalescing으로 이벤트 버블링 해결(ngZoneEventCoalescing for Preventing Event Bubbling)"
+title: "ngZoneEventCoalescing for Preventing Event Bubbling"
 date: 2020-09-03 17:04:00 +0900
 comments: true
 categories: angular
@@ -7,45 +7,80 @@ tags: [bubbling, changedetection, ngzone]
 ---
 
 
-## 환경
-Angular 9
+## Root Cause
 
-  
-## 원인
-js에는 부모와 자식간 이벤트 버블링이 발생하는데 대부분의 경우 이벤트 버블링 때문에 불 필요한 이벤트를 처리하는 등의 문제를 겪습니다.<br/>
-Angular에서도 역시 이벤트 버블링이 발생하는데 이는 랜더링 성능에 영향을 끼치게 됩니다.<br/>
-<br/>
-이를 해결하기 위해 changeDetection을 설정하는데 9버전 이하에서는 changeDetection을 설정하여도 ngAfterViewInit에서 타이밍 이슈로 인해 setTimeout에 함수를 담아야 실행 되는 경우가 있었습니다.<br/>
+JavaScript incorporates event bubbling between parent and child elements. In many scenarios, this event bubbling leads to the handling of unnecessary events, causing performance issues. Similarly, Angular experiences event bubbling, negatively impacting rendering performance.
+
+To address this, change detection is configured. However, in versions prior to Angular 9, even with change detection enabled, timing issues in `ngAfterViewInit` often necessitated encapsulating functions within `setTimeout` for proper execution.
 
 ```tsx
-ngAfterViewInit(){  
+ngAfterViewInit(){
     setTimeout(()=> {
         this.changeStatus()
-    })  
+    })
 }
 ```
 
-Angular 9 버전부터 보다 근본적인 버블링 해결책을 구현하였으며, 또한 위의 setTimeout 코드는 changeDetection의 detectChange으로 이벤트를 문제없이 적용할 수 있습니다.<br/>
+Angular 9 introduced a more fundamental solution to event bubbling. The `setTimeout` code block above can be replaced with `cdr.detectChanges()` to ensure events are applied correctly without timing conflicts.
 
 ```tsx
-ngAfterViewInit(){  
+ngAfterViewInit(){
     this.changeStatus();
-    this.cdr.detectChanges();  
+    this.cdr.detectChanges();
 }
 ```
 
+## Solution
 
-## 해결
-
-main.ts에서 Angular Module boostrap 설정 시 옵션을 추가합니다.
+In `main.ts`, add an option during Angular Module bootstrap configuration:
 
 ```tsx
-   platformBrowserDynamic()
+platformBrowserDynamic()
   .bootstrapModule(AppModule, { ngZoneEventCoalescing: true })
 ```
 
+## Additionally: Solution in Modern Angular (v17+)
+Starting with Angular 17, the default architecture is based on Standalone APIs, which do not use NgModule. <br/>
+In this environment, bootstrapApplication() in main.ts replaces platformBrowserDynamic().bootstrapModule(), and global application configuration is handled in the app.config.ts file.<br/>
+The ngZoneEventCoalescing setting is a configuration option for NgZone. It is now configured using a provider function called provideZoneChangeDetection.<br/>
+
+### Solution (Standalone API-based - Angular 17+)
+In your app.config.ts file, add provideZoneChangeDetection to the providers array and pass the option eventCoalescing: true.
+
+```TypeScript
+// src/app/app.config.ts
+
+import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
+import { provideRouter } from '@angular/router';
+
+import { routes } from './app.routes';
+
+export const appConfig: ApplicationConfig = {
+  providers: [
+    provideRouter(routes),
+
+    // 1. Call the provider function for Zone.js configuration.
+    // 2. Enable event coalescing via the options object.
+    provideZoneChangeDetection({ eventCoalescing: true })
+  ]
+};
+```
+
+This appConfig is then passed to the bootstrapApplication function in main.ts, applying the configuration to the entire application.
 
 
-## 참고 사이트
+```TypeScript
+// src/main.ts (for reference)
+
+import { bootstrapApplication } from '@angular/platform-browser';
+import { AppComponent } from './app/app.component';
+import { appConfig } from './app/app.config';
+
+bootstrapApplication(AppComponent, appConfig)
+  .catch((err) => console.error(err));
+```
+
+## References
+
 - [how-to-prevent-event-bubbling-in-angular-9-with-setinterval](https://stackoverflow.com/questions/60854223/how-to-prevent-event-bubbling-in-angular-9-with-setinterval)
 - [change-detection-strategy-in-angular](https://dev.to/gaurangdhorda/change-detection-strategy-in-angular-25mc)
