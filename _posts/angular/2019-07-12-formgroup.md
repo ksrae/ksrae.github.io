@@ -7,35 +7,27 @@ tags: [form, formgroup]
 ---
 
 
-Html에서 Form은 자주 사용되는데 Angular에서는 이 사용법이 은근 쉽지 않습니다.<br><br>
+## Implementing Angular Forms: A Comprehensive Guide
 
-몇 가지 설정과 세팅을 해주어야 비로소 유용하고 편리하게 사용할 수 있는데 이 과정이 매번 프로젝트 생성할 때마다 맞는지 꼼꼼히 확인하지 않으면 에러가 발생합니다.<br><br>
+Working with forms in HTML is a common task. However, in Angular, the implementation might not be immediately straightforward. Several configurations and setups are required to use forms effectively and conveniently. Errors can occur if these steps aren't carefully verified each time a new project is created. This guide aims to provide a consolidated reference for implementing Angular forms.
 
-앞으로도 자주 찾아볼거 같아 한 번 정리해두려고 합니다.<br>
+## Module Registration
 
+Import `ReactiveFormsModule` into the module containing the component that will use the form or into a shared module if the form is used across multiple components.
 
-## Module 등록
-
-form을 사용할 component를 포함하고 있는 module이나 공통으로 사용하는 shared module에 ReactiveFormsModule을 import 합니다.
-
-
-
-```ts
-
+```tsx
 import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-      imports: [
-            ReactiveFormsModule
-      ]
+  imports: [
+    ReactiveFormsModule
+  ]
 })
 ```
 
+Additionally, since we'll be using Angular-specific form elements instead of standard HTML tags, add `CUSTOM_ELEMENTS_SCHEMA` to the module. This prevents errors related to unknown elements.
 
-그리고 일반 html 태그가 아닌 angular전용 태그를 사용할 것이므로 `CUSTOM_ELEMENTS_SCHEMA`도 해당 module에 추가해주어야 합니다.
-
-```ts
-
+```tsx
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 @NgModule({
@@ -45,89 +37,92 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 })
 ```
 
-## template 작성
+## Template Creation
 
-사용할 form을 작성합니다.
+Create the form in your component's template.
 
 ```html
-{% raw %}
 <form class="input-form" [formGroup]="searchForm" (ngSubmit)="submit($event)">
-      <input type="text" formControlName="item" placeholder="검색어를 입력하세요" tabindex="1" />
-      <button type="submit">검색</button><!--활설화 class="on" -->
+  <input type="text" formControlName="item" placeholder="Enter search term" tabindex="1" />
+  <button type="submit">Search</button>
 </form>
-{% endraw %}
-
 ```
 
-위의 코드를 정리하면 다음과 같습니다.
-- {% raw %} [formGroup] {% endraw %}에는 component에서 사용할 변수명을 입력합니다.
-- `(ngSubmit)` 에는 submit을 수행할 함수명을 입력합니다.
-- `formControlName` 에는 해당 input의 값을 처리할 변수명을 입력합니다.
+Breaking down the code above:
 
+- `[formGroup]` specifies the name of the `FormGroup` instance defined in your component.
+- `(ngSubmit)` binds the form's submit event to a function in your component.
+- `formControlName` associates each input element with a specific `FormControl` within the `FormGroup`.
 
-## component 작성
+## Component Implementation
 
-이제 component 작성만 하면 됩니다.
+Now, let's implement the corresponding component logic.
 
-```ts
+```tsx
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { Component } from '@angular/core';
 
 @Component({
- ...
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-    searchForm: FormGroup;
+  searchForm: FormGroup;
 
-    constructor(
-          private fb: FormBuilder
-    ) {
-          this.searchForm = this.fb.group({
-                item: ['', [Validators.required]]
-          });
+  constructor(
+    private fb: FormBuilder
+  ) {
+    this.searchForm = this.fb.group({
+      item: ['', [Validators.required]]
+    });
 
-          this.searchForm.valueChanges.subscribe(observer => {
-                console.log(this.searchForm.valid);
-          });          
-    }
+    this.searchForm.valueChanges.subscribe(observer => {
+      console.log('Form Valid:', this.searchForm.valid);
+    });
+  }
 
-      submit(e) {
-            const { item } = this.searchForm.controls; 
-            console.log(item.value);
-      }
+  submit(e: Event) {
+    e.preventDefault(); // Prevent default form submission
+    const { item } = this.searchForm.controls;
+    console.log('Search Term:', item.value);
+  }
 }
 ```
 
+First, import `FormGroup`, `Validators`, and `FormBuilder` from `@angular/forms`. `Validators` are optional and can be omitted if validation is handled in the template or not required.
 
-먼저 FormGroup, Validators, FormBuilder를 import 합니다.<br>
-Validators는 사용하지 않거나 template에서 validation을 처리한다면 호출하지 않아도 됩니다.<br>
+```tsx
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+```
 
-      import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+Declare a variable for the `FormGroup` you'll use, matching the name specified in the template via `[formGroup]`.
 
-template에서 작성한 FormGroup명을 변수로 선언합니다.
+```tsx
+searchForm: FormGroup;
+```
 
-      searchForm: FormGroup;
+Inject the `FormBuilder` service via the constructor.
 
-FormBuilder를 DI로 가져옵니다. 
+```tsx
+constructor(
+  private fb: FormBuilder
+)
+```
 
-      constructor(
-            private fb: FormBuilder
-      )
+Define the `FormGroup` in the `constructor` (or `ngOnInit`).
 
+```tsx
+this.searchForm = this.fb.group({
+  item: ['', [Validators.required]]
+})
+```
 
-onInit이나 constructor에 formgroup을 정의합니다.
+Specify the `formControlName` for each form control within the `FormGroup`. The first argument in the `fb.group` configuration is the initial value, and the second argument is an array of validators. If there's no initial value, use an empty string (`''`). If no validation is needed, you can provide an empty array.
 
-      this.searchForm = this.fb.group({
-            item: ['', [Validators.required]]
-      })
+Angular provides several built-in validators:
 
-이 때, 사용되는 모든 form의 `formControlName`을 입력합니다. <br>
-'' 부분은 초기값으로 초기값이 있으면 입력하고, 없으면 비워둡니다.<br>
-Validation은 배열 형태로 구성하되 없으면 빈 배열로 두어도 됩니다.<br>
-
-
-기본 제공하는 Validators의 종류는 아래와 같습니다.
-
-```ts
+```tsx
 class Validators {
   static min(min: number): ValidatorFn
   static max(max: number): ValidatorFn
@@ -143,20 +138,24 @@ class Validators {
 }
 ```
 
-참고: https://angular.io/api/forms/Validators
+Reference: [Angular Validators Documentation](https://angular.io/api/forms/Validators)
 
+The `valueChanges` observable allows you to subscribe to changes in the form's values and react accordingly.
 
-valueChanges 이 부분은 form 값을 subscribe 하여 값의 변화를 실시간으로 체크하는 부분입니다.
+```tsx
+this.searchForm.valueChanges.subscribe(observer => {
+  console.log('Form Valid:', this.searchForm.valid);
+});
+```
 
-      this.searchForm.valueChanges.subscribe(observer => {
-            console.log(this.searchForm.valid);
-      });   
+Finally, implement the `submit` function to handle form submission, validation checks, data processing, and other actions.
 
-끝으로 submit 함수에는 form 입력 이후 validation 체크나 데이터를 가공하는 등의 처리를 합니다.
+```tsx
+submit(e: Event) {
+  e.preventDefault(); // Prevent default form submission
+  const { item } = this.searchForm.controls;
+  console.log('Search Term:', item.value);
+}
+```
 
-      submit(e) {
-            const { item } = this.searchForm.controls; 
-            console.log(item.value);
-      }
-
-끝.
+That's it! You should now have a functional Angular form.

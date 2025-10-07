@@ -8,58 +8,62 @@ tags: [ssr, seo, universal]
 
 
 
-Angular에서 SSR을 사용하는 방법입니다. 우수한 Framework 답게 쉽고 빠르게 적용할 수 있도록 잘 구성되어 있기 때문에, 아래의 예제만 따라해도 충분히 실전에 사용할 수 있을 것 입니다.
+# Implementing Server-Side Rendering (SSR) in Angular
 
+Angular, being a robust framework, provides a straightforward approach to implement Server-Side Rendering (SSR). This guide outlines the steps to integrate SSR into your Angular application, enabling improved performance and SEO.
 
-## 동작 원리 
+## How SSR Works
 
-Universal 웹 서버는 static HTML 페이지를 template 엔진에 랜더링 하며, 브라우저의 도움 없이 DOM, XMLHttpRequest 또는 low-level 을 서버에서 처리할 수 있습니다.<br><br>
-서버는 클라이언트의 요청을 ngExpressEngine에 전달하고 `renderModuleFactory()` 함수를 통해 template 태그의 내용을 랜더링하여 client에 전달합니다.
+The Universal web server renders static HTML pages using a template engine. This allows the server to process the Document Object Model (DOM), XMLHttpRequest, and low-level operations independently, without relying on a browser.
 
+<br>
 
-## 지원 여부
-Angular Universal은 대표적으로 4가지 방식의 엔진을 지원하고 있습니다. 
+The server forwards client requests to the `ngExpressEngine` and leverages the `renderModuleFactory()` function to render the content within template tags before delivering it to the client. This pre-rendering enhances the initial loading speed and provides better support for search engine crawlers.
 
-    @nguniversal/express-engine
-    @nguniversal/aspnetcore-engine
-    @nguniversal/hapi-engine
-    @nguniversal/socket-engine
-    
+## Supported Engines
 
-이 외에도 모질라의 dom.js 기반  및  공통으로 처리할 common 등이 개발되어 있으며 계속 업데이트 중에 있습니다.
+Angular Universal supports several server-side rendering engines:
 
+```
+@nguniversal/express-engine
+@nguniversal/aspnetcore-engine
+@nguniversal/hapi-engine
+@nguniversal/socket-engine
+```
 
-## 프로젝트 생성
+Additionally, engines based on Mozilla's `dom.js` and a common engine for shared processing are under development and continuously updated. The selection of the appropriate engine depends on your project's server-side environment.
 
-angular 프로젝트를 생성합니다. 기존 angular 프로젝트 생성과 방식은 동일합니다.
+## Project Setup
+
+Start by creating a new Angular project. The process is identical to creating a standard Angular project.
 
 ```bash
 ng new ssr_project
 ```
 
-ssr_project라는 이름의 프로젝트를 생성하였습니다.
+This command generates a project named `ssr_project`.
 
+## Adding the Universal Engine
 
-## universal 엔진 추가
-
-프로젝트가 생성된 폴더로 이동 후 서버 엔진을 추가합니다. 여기에서는 Node.js의 express 엔진을 사용하겠습니다. 따라서 Node가 반드시 설치 되어 있어야 합니다.
+Navigate to the project directory and add the server engine. This guide uses the Express engine for Node.js. Ensure Node.js is installed.
 
 ```bash
 ng add @nguniversal/express-engine --clientProject ssr_project
 ```
 
+This command adds necessary configuration files and dependencies to your project, facilitating server-side rendering capabilities.
 
-이 명령이 완료되면 폴더에 몇 개의 파일이 추가되어 있을 것입니다.<br>
-이는 서버에서의 설정 및 Angular boostrap 등에 필요한 파일입니다.<br>
-하나씩 알아보겠습니다.
+<br>
 
-## 분석
+After running this command, several files are added to the project. These files are essential for server-side configuration and Angular bootstrapping. Let's examine each file:
+
+## File Analysis
 
 ### server.ts
 
-노드 서버를 가동하는 코드 이며, express 엔진을 호출하고 있습니다.
+This file contains the code to start the Node.js server and invokes the Express engine.
 
-```ts
+```tsx
 import 'zone.js/dist/zone-node';
 
 import * as express from 'express';
@@ -93,21 +97,21 @@ app.get('*', (req, res) => {
 app.listen(PORT, () => {
   console.log(`Node Express server listening on http://localhost:${PORT}`);
 });
-
 ```
 
+When configuring the server, differentiate between page calls within the application, API calls, and asset calls.
 
-서버를 구성할 때 유의할 점은 app 내의 페이지 호출과 다른 api 호출, asset 호출을 구분하는 것입니다.<br>
-이는 아래와 같이 정의하여 구분할 수 있습니다.
+<br>
 
-- api 호출은 /api 내부에 구성하여 /api 호출은 data 호출로
-- /api 호출이 아니고 파일 확장자가 없으면 app 내의 페이지 호출로
-- 기타 호출은 asset 호출로
+This can be achieved by structuring your application as follows:
 
+- Configure API calls within the `/api` route, ensuring that `/api` calls are treated as data requests.
+- Treat calls without a file extension as page calls within the application.
+- Consider other calls as asset requests.
 
-만일 이와 같이 구성한 경우 node 에서는 다음과 같이 link를 구분하여 처리할 수 있습니다.
+If you structure your application like this, Node.js can distinguish between links as follows:
 
-```ts
+```tsx
 app.get('/api/*', (req, res) => {
   res.status(404).send('data requests are not supported');
 });
@@ -119,12 +123,13 @@ app.get('*', (req, res) => {
 app.get('*.*', express.static(join(DIST_FOLDER, 'browser')));
 ```
 
-
-
 ### tsconfig.server.json
 
-기존 tsconfig.app.json 파일은 클라이언트의 설정이라면 tsconfig.server.json은 서버의 설정입니다.<br><br>
-구성은 크게 다르지 않으나 `angularCompilerOptions`에서 entryModule을 정의하고 있는 점이 특징입니다.
+While the existing `tsconfig.app.json` file configures the client-side, `tsconfig.server.json` configures the server-side.
+
+<br>
+
+The configuration is not significantly different; however, the `angularCompilerOptions` section defines the `entryModule`.
 
 ```json
 {
@@ -136,15 +141,13 @@ app.get('*.*', express.static(join(DIST_FOLDER, 'browser')));
     "entryModule": "./src/app/app.server.module#AppServerModule"
   }
 }
-
 ```
-
 
 ### webpack.server.config.js
 
-webpack의 서버 설정 입니다.
+This file contains the Webpack configuration for the server.
 
-```js
+```jsx
 const path = require('path');
 const webpack = require('webpack');
 
@@ -188,14 +191,13 @@ module.exports = {
     )
   ]
 };
-
 ```
 
 ### src/main.server.ts
 
-서버에서 boostrap 하기 위한 코드 입니다.
+This file contains the code to bootstrap the application on the server.
 
-```ts
+```tsx
 import { enableProdMode } from '@angular/core';
 
 import { environment } from './environments/environment';
@@ -207,17 +209,13 @@ if (environment.production) {
 export { AppServerModule } from './app/app.server.module';
 export { ngExpressEngine } from "@nguniversal/express-engine";
 export { provideModuleMap } from "@nguniversal/module-map-ngfactory-loader";
-
 ```
-
-
-
 
 ### src/app/app.server.module.ts
 
-서버에서 호출하는 서버사이드용 module 입니다.
+This module is called from the server-side.
 
-```ts
+```tsx
 import { NgModule } from '@angular/core';
 import { ServerModule } from '@angular/platform-server';
 
@@ -234,31 +232,24 @@ import { ModuleMapLoaderModule } from '@nguniversal/module-map-ngfactory-loader'
   bootstrap: [AppComponent],
 })
 export class AppServerModule {}
-
 ```
 
+The SSR setup is now complete. Angular simplifies the SSR setup with just a few commands.
 
-이제 SSR 설정을 마쳤습니다. Angular에서는 이렇게 명령어 한 두개로 쉽게 SSR 설정을 완료할 수 있습니다.
+## Important Considerations
 
+- Since rendering occurs on the server rather than the client, browser commands are no longer available.
+- `window`, `document`, `navigator`, and `location` are no longer accessible directly.
+- To address this, Angular provides injectable APIs such as `Location` and `DOCUMENT`.
 
+(More precisely, they are unavailable only when the platform's state is `server`. For a detailed explanation, refer to [Angular Universal Platform](https://ksrae.github.io/angular/universal-platform).)
 
-## 유의점
+- Similarly, clicks and user events cannot be processed server-side. You must determine the rendering target for these events and implement routing functionality.
+- Links must use absolute URL values. The official Angular documentation suggests the following code as a guideline.
 
-- 랜더링 시점이 클라이언트가 아닌 서버로 변경되었으므로, 브라우저 명령을 더 이상 사용할 수 없습니다.
-- 즉, window, document, navigator, location은 더 이상 사용할 수 없습니다.
-- 이를 해결하기 위해 Angular에서는 Injectable한 Location, DOCUMENT와 같은 몇 가지 API를 제공합니다.
-(더 정확히는 platform의 상태가 server 일 때만 사용 불가 합니다. 더 자세한 설명은 [Angular Universal Platform](https://ksrae.github.io/angular/universal-platform) 을 확인하시기 바랍니다.)
+Create `universal-interceptor.ts`.
 
-
-- 마찬가지로 클릭이나 유저의 이벤트 또한 서버 사이드에서는 처리할 수 없으므로 이를 처리할 랜더링 대상을 결정해야 하며, 반드시 Routing 기능을 구현하여야 합니다.
-
-
-- 링크는 반드시 절대 링크 값을 사용해야 합니다. Angular 공식 사이트에서는 아래의 코드를 가이드로 제시하고 있습니다.
-
-
-universal-interceptor.ts 를 생성합니다.
-
-```ts
+```tsx
 import {Injectable, Inject, Optional} from '@angular/core';
 import {HttpInterceptor, HttpHandler, HttpRequest, HttpHeaders} from '@angular/common/http';
 import {Request} from 'express';
@@ -282,12 +273,11 @@ export class UniversalInterceptor implements HttpInterceptor {
     return next.handle(serverReq);
   }
 }
-
 ```
 
-작성한 파일을 app.server.module.ts에 추가합니다.
+Add the created file to `app.server.module.ts`.
 
-```ts
+```tsx
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {UniversalInterceptor} from './universal-interceptor';
  
@@ -302,14 +292,11 @@ import {UniversalInterceptor} from './universal-interceptor';
 export class AppServerModule {}
 ```
 
-이제 서버에서 수행된 모든 http 요청은 이 인터셉터에 의해 절대 url로 변경됩니다.
+Now, all HTTP requests performed on the server will be changed to absolute URLs by this interceptor.
 
+## Execution
 
-
-
-## 실행
-
-package.json을 열어 scripts에 정의되어 있는대로 실행하면 됩니다.
+Execute the commands defined in the `scripts` section of `package.json`.
 
 ```json
   "scripts": {
@@ -326,38 +313,42 @@ package.json을 열어 scripts에 정의되어 있는대로 실행하면 됩니�
   },
 ```
 
-### 빌드
+### Build
 
-build:ssr 명령을 실행합니다.
+Run the `build:ssr` command.
 
 ```bash
 npm run build:ssr
 ```
 
+### Start the Server
 
-### 서버 기동
-
-package.json의 serve:ssr 명령을 수행하거나 dist 폴더로 이동하여 node server 명령을 수행해도 됩니다.
+Execute the `serve:ssr` command in `package.json`, or navigate to the `dist` folder and run the `node server` command.
 
 ```bash
 npm run serve:ssr
 ```
 
-또는 
+Or
 
 ```bash
 dist> node server
 ```
 
-### 브라우저에서 확인
+### Verify in Browser
 
-서버 가동 후 server.ts 에 설정된 포트 (여기에서는 4000) 를 확인합니다.<br>
-로컬로 실행할 경우 localhost:4000을 확인합니다.<br><br>
+After starting the server, check the port set in `server.ts` (4000 in this case).
 
+<br>
 
-페이지가 기존 Angular 프로젝트와 동일하게 보인다면 성공입니다.<br><br>
+If running locally, check `localhost:4000`.
 
+<br>
 
+If the page looks the same as the original Angular project, the setup is successful.
 
-## 참고 사이트
-- [Angular](https://angular.io/guide/universal)
+<br>
+
+## Resources
+
+- [Angular Universal Guide](https://angular.io/guide/universal)

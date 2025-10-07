@@ -1,5 +1,5 @@
 ---
-title: "Angular Universal에서 플랫폼(브라우저 여부) 체크 (Angular Universal Platform Check)"
+title: "Angular Universal Platform Check"
 date: 2019-07-17 14:07:00 +0900
 comments: true
 categories: angular
@@ -8,21 +8,19 @@ tags: [universal, platform]
 
 
 
-Angular가 실행 중인 플랫폼이 브라우저인지 서버인지 확인하는 코드 입니다.<br><br>
+Checking whether the platform Angular is running on is a browser or a server.
 
-확인하는 이유는 Angular가 서버 플랫폼에서 실행 중인 경우 브라우저에서만 사용 가능한 명령인 window, location, document 등을 사용할 수 없기 때문입니다.<br><br>
+The reason for checking is that if Angular is running on a server platform, commands that are only available in the browser, such as window, location, and document, cannot be used.
 
-이 글은 angular universal이 적용된 프로젝트가 있다는 가정하에 작성하므로, angular universal 적용 방법은 [Angular Universal](https://ksrae.github.io/angular/angular-universal)을 참고하시기 바랍니다.
+This post assumes that an Angular Universal project is already set up, so please refer to [Angular Universal](https://ksrae.github.io/angular/angular-universal) for how to apply Angular Universal.
 
+## Principle
 
-## 원리
+When the project is executed, a `PLATFORM_ID` is generated, which can be passed as a parameter to the `isPlatformBrowser` and `isPlatformServer` functions supported by `@angular/common` to determine the platform.
 
-프로젝트가 실행되면 PLATFORM_ID가 생성 되는데 이를 `@angular/common`에서 지원하는 isPlatformBrowser와 isPlatformServer 함수에 파라미터로 던져 그 결과로 판단할 수 있습니다.
+## Component
 
-
-## component
-
-```ts
+```tsx
 import { OnInit, Component, Inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 
@@ -33,10 +31,9 @@ import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 export class AppComponent implements OnInit {
 	isBrowser: boolean = false;
 	isServer: boolean = false;
-	
 
   constructor(
-	@Inject(PLATFORM_ID) private platformId: object	
+	@Inject(PLATFORM_ID) private platformId: object
   ) {
 
   }
@@ -48,16 +45,13 @@ export class AppComponent implements OnInit {
 }
 ```
 
-## template
+## Template
 
 ```html
-{% raw %}
 <p>isPlatformBrowser: <span>{{isBrowser}}</span></p>
 <p>isPlatformServer: <span>{{isServer}}</span></p>
-{% endraw %}
 ```
 
-이제 실행해보면 어떤 플랫폼에서 실행되었는지 알 수 있습니다.
+Now, running the application will show on which platform it is being executed.
 
-
-끝.
+End.
