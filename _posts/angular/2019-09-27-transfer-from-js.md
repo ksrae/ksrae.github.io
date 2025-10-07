@@ -1,5 +1,5 @@
 ---
-title: "js프로젝트에서 Angular 프로젝트의 데이터 접근 (transfer data js to angular)"
+title: "transfer data js to angular"
 date: 2019-09-27 12:01:00 +0900
 comments: true
 categories: angular
