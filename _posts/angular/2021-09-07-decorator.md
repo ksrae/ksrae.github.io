@@ -1,26 +1,28 @@
 ---
-title: "Decorator 란? (What is decorator?)"
+title: "What is decorator?"
 date: 2021-09-07 20:01:00 +0900
 comments: true
 categories: javascript
 tags: [decorator, typescript]
 ---
 
-함수가 실행 되기 전에 반복적으로 선행되어야 할 명령을 별도의 함수로 구현한 뒤 이를 한줄의 명령어로 쉽게 호출하는 방법 입니다.<br/>
-일반적으로 `@Decorator`와 같이 앞에 @을 붙여서 호출하며, 클래스, 함수, 변수, 심지어 함수의 파라미터에도 적용할 수 있으나 각각의 적용하는 파라미터가 다르므로 유의하여야 합니다.<br/><br/>
+A decorator is a way to implement instructions that need to be executed repeatedly before a function is executed, as a separate function, and then easily call it with a single line of code.
 
-아래에서는 Decorator의 종류에 대해 알아보겠습니다.<br/>
-(코드는 typescript에서 작성되었습니다.)
+Generally, it is called by adding `@Decorator` before it. It can be applied to classes, functions, variables, and even function parameters, but you should be careful because each has different parameters.
+
+Below, we will explore the types of decorators.
+(The code is written in TypeScript.)
 
 ## Class Decorator
-클래스명 상단에 작성합니다.<br/>
-일반적으로 호출하는 Decorator에는 파라미터가 없고 함수명만 기입합니다.<br/><br/>
 
-class Decorator 함수는 생성자를 인수로 호출하며, 해당 클래스의 생성자 및 함수에 접근할 수 있습니다.<br/>
-다만, 클래스에 선언된 변수에는 접근할 수 없습니다.<br/><br/>
+Written above the class name.
+Generally, the decorator being called has no parameters, and only the function name is entered.
 
-만일 Decorator에 파라미터를 넣어 클래스의 변화를 외부에서 조정하고 싶다면, Factory를 앞단에 두는 방법이 있습니다.<br/>
-즉, Decorator를 대신 받아주는 factory를 작성하고, 이 factory가 실제 Class Decorator 함수를 호출하는 방법 입니다.<br/>
+A class decorator function calls the constructor as an argument and can access the constructor and functions of that class.
+However, it cannot access variables declared in the class.
+
+If you want to adjust the change of the class from the outside by putting parameters in the decorator, there is a way to put a factory in the front end.
+In other words, it is a method of writing a factory that receives the decorator instead and this factory calls the actual class decorator function.
 
 ```tsx
 @testFactory(false)
@@ -49,20 +51,20 @@ function testFactory(setDefault: boolean) {
 }
 ```
 
-위의 예시에서는 test01Factory의 파라미터 값에 따라 클래스 생성시 값을 지정할지 여부를 결정합니다.<br/>
-만일 값이 `true`라면 클래스는 호출되는 즉시 `name = 'SM6', price = 10000, color = 'black' ` 값을 가지고,<br/>
-만일 값이 `false`라면 클래스는 생성 시 `name = '', price = 0, color = 'white' ` 값을 가지게 됩니다.
-
-
+In the example above, it is determined whether to specify a value when creating a class depending on the parameter value of `test01Factory`.
+If the value is `true`, the class has the values `name = 'SM6', price = 10000, color = 'black'` as soon as it is called.
+If the value is `false`, the class has the values `name = '', price = 0, color = 'white'` when it is created.
 
 ## Method Decorator
-함수명 상단에 작성합니다.<br/>
-Method Decorator함수는 3가지 인수를 가질 수 있으며 순서대로 다음과 같습니다.
-- `target`: class의 prototype. 클래스의 모든 함수 (생성자 포함)에 접근할 수 있습니다.
-- `propName`: 해당 method의 key 값이며, Decorator가 붙은 함수의 함수명이 `string`형태로 들어옵니다.
-- `description`: 함수가 가지는 기능을 가집니다.
 
-아래의 예시는 Method Decorator를 활용하여, 함수의 접근을 막는 예제입니다.
+Written above the function name.
+A method decorator function can have three arguments, in the following order:
+
+- `target`: The prototype of the class. It can access all functions of the class (including the constructor).
+- `propName`: The key value of the corresponding method. The function name of the function with the decorator is entered in `string` format.
+- `description`: Has the function's functionality.
+
+The example below is an example of preventing access to a function using a method decorator.
 
 ```tsx
 class Person {
@@ -86,24 +88,26 @@ function editable(isEditable: boolean) {
     description.writable = isEditable;
 	}
 ```
-target은 Class Decorator의 인수 값과 동일합니다.<br/>
-`propName`의 경우 여기에서는 editable Decorator가 적용된 `test02`를 갖습니다.<br/>
-그리고, description에는 3가지 기능이 있는데 각각 다음과 같습니다.
-- `writable`: 수정 가능 여부, `false`이면 함수를 호출할 때 파라미터 값을 수정할 수 없습니다.
-- `enumerable`: 열거형인지 여부, `false`이면 Object.keys()를 호출할 때 값을 볼 수 없습니다.
-- `configurable`: `writable`, `enumerable` 적용 여부, `false`이면 둘다 임의로 적용 불가능 합니다.
-- `value`: 값 (함수형)
 
-value는 함수의 값을 가지는데 함수형의 형태로 가지므로 유의하여야 합니다.
+`target` is the same as the argument value of the class decorator.
+In the case of `propName`, it has `test02` to which the `editable` decorator is applied.
+And the description has three functions, each of which is as follows:
 
+- `writable`: Whether modification is possible. If `false`, you cannot modify the parameter value when calling the function.
+- `enumerable`: Whether it is an enumeration type. If `false`, you cannot see the value when calling `Object.keys()`.
+- `configurable`: Whether to apply `writable` and `enumerable`. If `false`, both cannot be applied arbitrarily.
+- `value`: value (functional)
+
+Note that `value` has the value of the function in the form of a function.
 
 ## Parameter Decorator
-함수의 각각의 파라미터에도 Decorator를 설정할 수 있습니다.<br/>
-이 경우에도 3가지 인수를 가질 수 있는데, 순서대로 다음과 같습니다.
-- `target`: class의 prototype. 클래스의 모든 함수 (생성자 포함)에 접근할 수 있습니다.
-- `methodName`: 해당 파라미터를 포함한 함수의 key 값이며, Decorator가 붙은 파라미터의 함수명이 `string`형태로 들어옵니다.
-- `paramIndex`: 파라미터의 호출 순서를 의미하며, 첫번째로 호출되면 0 값을 갖습니다.
 
+You can also set decorators for each parameter of a function.
+In this case, it can also have three arguments, in the following order:
+
+- `target`: The prototype of the class. It can access all functions of the class (including the constructor).
+- `methodName`: The key value of the function including the parameter. The function name of the parameter with the decorator is entered in `string` format.
+- `paramIndex`: Refers to the calling order of the parameters, and has a value of 0 when called first.
 
 ```tsx
 function printInfo(target: any, methodName: string, paramIndex: number) {
@@ -126,9 +130,10 @@ class Person {
 	}
 }
 ```
-위의 예제에서 `methodName`은 `test`를 가지며, `paramIndex`는 `0`값을 가집니다.<br/><br/>
 
-재미있게도 생성자의 파라미터에도 Decorator를 걸 수 있습니다. 예를 들어, 위의 예제의 `age`에 decorator를 걸면, 아래의 예제와 같습니다.
+In the example above, `methodName` has `test` and `paramIndex` has a value of `0`.
+
+Interestingly, you can also put a decorator on the parameters of the constructor. For example, if you put a decorator on `age` in the example above, it is like the example below.
 
 ```tsx
 function printInfo(target: any, methodName: string, paramIndex: number) {
@@ -152,23 +157,24 @@ class Person {
 }
 ```
 
-결과는 다음과 같습니다.
+The result is as follows:
 
 ```
 methodName: undefined
 paramIndex: 1
 ```
 
-즉, 생성자에서 호출하였으나 함수명은 `undefined` 값을 가지며, 호출 순서는 2번째를 갖습니다.
+In other words, even though it was called in the constructor, the function name has an `undefined` value and the calling order is second.
 
-### Parameter Decorator의 활용
-예제에서 보면 Parameter Decorator는 리턴 값이 없는 것을 볼 수 있습니다.<br/>
-그러면 Parameter Decorator는 어떻게 활용할 수 있을까요?<br/><br/>
+### Use of Parameter Decorator
 
-이를 활용하기 위해서는 `reflect-metadata`에 명시적으로 접근해야 합니다.<br/>
-이를 통해 파라미터의 값을 수정할 수 있습니다.<br/><br/>
+In the example, you can see that the parameter decorator has no return value.
+So how can the parameter decorator be used?
 
-만일 `refrect-metadata`를 import하고자 한다면, `tsconfig.json`의 옵션에서 `emitDecoratorMetadata` 를 추가하여야 합니다.
+To use this, you must explicitly access `reflect-metadata`.
+Through this, you can modify the value of the parameter.
+
+If you want to import `refrect-metadata`, you must add `emitDecoratorMetadata` in the options of `tsconfig.json`.
 
 ```json
 {
@@ -180,16 +186,17 @@ paramIndex: 1
 }
 ```
 
-이에 대해서는 여기에서 자세히 다루지 않으므로 관련 사이트를 참고 하시기 바랍니다.
-
+This will not be covered in detail here, so please refer to the related site.
 
 ## Variable Decorator
-마지막으로 변수에도 Decorator를 걸 수 있는데 2개의 인수를 가질 수 있습니다.
-- `target`: class의 prototype. 클래스의 모든 함수 (생성자 포함)에 접근할 수 있습니다.
-- `propName`: 해당 변수의 key 값이며, Decorator가 붙은 변수의 변수명이 `string`형태로 들어옵니다.
 
-Variable Decorator는 리턴값으로 Method Decorator의 description과 같은 PropertyDescriptor 형을 리턴할 수 있습니다.<br/>
-아래의 예제는 decorator의 파라미터에 따라 변수를 `readonly`로 만들지 여부를 결정하는 방법 입니다.
+Finally, you can put a decorator on a variable, which can have two arguments.
+
+- `target`: The prototype of the class. It can access all functions of the class (including the constructor).
+- `propName`: The key value of the corresponding variable. The variable name of the variable with the decorator is entered in `string` format.
+
+The variable decorator can return a `PropertyDescriptor` type, which is the same as the description of the method decorator, as a return value.
+The example below is a method of determining whether to make a variable `readonly` depending on the decorator's parameter.
 
 ```tsx
 function writable(isWritable: boolean) {
@@ -210,10 +217,10 @@ class Person {
 }
 ```
 
-## 참고 사이트
-- [Typescript Decorators](https://www.typescriptlang.org/docs/handbook/decorators.html)
-- [TypeScript Decorator 직접 만들어보자](https://dparkjm.com/typescript-decorators)
-- [IT 마이닝 - Typescript Decorator](https://itmining.tistory.com/88)
-- [Typescript의 Decorator - 1. Class Decorator](https://partnerjun.tistory.com/61)
-- [Typescript의 Decorator - 2. Property Decorator, 간단한 Dependency Injection](https://partnerjun.tistory.com/62?category=705423)
+## Reference Sites
 
+- [Typescript Decorators](https://www.typescriptlang.org/docs/handbook/decorators.html)
+- [Let's create a TypeScript Decorator](https://dparkjm.com/typescript-decorators)
+- [IT Mining - Typescript Decorator](https://itmining.tistory.com/88)
+- [Typescript's Decorator - 1. Class Decorator](https://partnerjun.tistory.com/61)
+- [Typescript's Decorator - 2. Property Decorator, Simple Dependency Injection](https://partnerjun.tistory.com/62?category=705423)

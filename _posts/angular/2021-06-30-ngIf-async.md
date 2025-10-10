@@ -1,5 +1,5 @@
 ---
-title: "ngIf에서 여러 Observable 설정하기 (More than one Observable in a *ngIf statement)"
+title: "Handling Multiple Observables in @if"
 date: 2021-06-30 14:16:00 +0900
 comments: true
 categories: angular
@@ -7,16 +7,26 @@ tags: [ngif, observable]
 ---
 
 
-## 계획
-1. ngIf에서 하나의 Observable 정의합니다.
-2. ngIf에서 둘 이상의 Observable 정의합니다.
+## Plan
 
+1. Define a single Observable within `ngIf or @if`.
+2. Define multiple Observables within `ngIf or @if`.
 
+## Applying a Single Observable
 
-## 하나의 Observable 적용
-async를 적용하려면 변수명 뒤에 async pipe를 추가하고 as로 사용할 변수명을 정의해줍니다.
+To utilize the `async` pipe, append it to the variable name and define a variable name to use with `as`. This allows direct access to the resolved value of the Observable within the template.
 
 ```html
+<!-- control flow -->
+@if (user$ | async; as user) {
+  <div>
+    <p>{{ user.name }}</p>
+  </div>
+}
+```
+
+```html
+<!-- ngif -->
 {% raw %}
 <div *ngIf="user$ | async as user">
   <p>{{user.name}}</p>
@@ -24,31 +34,54 @@ async를 적용하려면 변수명 뒤에 async pipe를 추가하고 as로 사�
 {% endraw %}
 ```
 
-## 여러개의 Observable 적용
-여러 개의 Observable을 정의할 때, 하나의 Observable과 같이 작성할 경우 에러가 발생합니다.
+## Applying Multiple Observables
+
+Defining multiple Observables in `@if or ngIf` in the same manner as a single Observable will result in an error. This is due to the template parser's inability to correctly handle the combined asynchronous operations directly within the `@if or *ngIf` directive.
 
 ```html
+<!-- control flow -->
+@if ((user$ | async; as user) || (item$ | async; as item)) {
+  <!-- This syntax is not valid -->
+}
+```
+
+```html
+<!-- ngif -->
 {% raw %}
-<!-- 에러 발생 -->
+<!-- error -->
 <div *ngIf="(user$ | async as user) || (item$ | async as item)"></div>
 {% endraw %}
 ```
 
+## Solution - Applying Multiple Observables
 
-## 해결 - 여러개의 Observable 적용
-여러개의 Observable 적용하기 위해서는 Object 형태로 변형하여 사용해야 합니다.<br>
-아래의 코드는 정상 동작 합니다.
+To work with multiple Observables effectively, transform them into an object. This approach allows the `@if or *ngIf` directive to manage the asynchronous subscriptions properly. The code below demonstrates the correct implementation and will execute without errors. This encapsulates multiple Observables into a single object that can be evaluated.
 
 ```html
+<!-- control flow -->
+@if ({ user: user$ | async, item: item$ | async }; as data) {
+  <div>
+    @if (data.user; as user) {
+      <p>User Name: {{ user.name }}</p>
+    }
+
+    @if (data.item; as item) {
+      <p>Item Name: {{ item.name }}</p>
+    }
+  </div>
+}
+```
+
+```html
+<!-- ngif -->
 {% raw %}
-<div *ngIf="{user: user$ | async, item: item$ | async} as userInfo">
-	<p>{{userInfo.user.name}}</p>
+<div *ngIf="{user: user$ | async, item: item$ | async} as data">
+	<p>{{data.user.name}}</p>
+  <p>{{data.item.name}}</p>
 </div>
 {% endraw %}
 ```
 
+## Reference Site
 
-
-## 참고 사이트
 - [ngx-translate-router](https://github.com/gilsdav/ngx-translate-router)
-

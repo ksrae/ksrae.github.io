@@ -1,5 +1,5 @@
 ---
-title: "Scully에 ngx-translate 적용 시 rehydration 방지 (Prevent rehydration using ngx-translate on scully)"
+title: "Prevent rehydration using ngx-translate on scully"
 date: 2021-02-08 14:37:00 +0900
 comments: true
 categories: angular
@@ -7,57 +7,72 @@ tags: [ngx-translate, rehydrate, scully]
 ---
 
 
-## 과제
-1. scully에 ngx-translate 적용하기<br/>
-2. 실행 후 언어를 변경하고 refresh 했을 때 rehydration 현상 확인<br/>
-3. 처음부터 변경된 언어로 작성된 static html을 화면에 노출하기<br/>
+## Task
 
+This document outlines the process of applying `ngx-translate` to a Scully-based Angular application and addressing the rehydration issue that arises when refreshing the page after changing the language. Specifically, it details how to ensure that the statically generated HTML reflects the user's chosen language from the initial page load.
 
+## Objective
 
+1. Implement `ngx-translate` within a Scully application.
+2. Identify the rehydration problem where the initial static HTML is generated in the default language, and then the translated content loads after a brief delay when refreshing the page.
+3. Configure the application to serve the correct language-specific static HTML from the very first render.
 
-## 계획
-1. LocalStorage를 활용하여 변경된 언어를 저장합니다.<br/>
-2. 리로드 시 페이지 로딩 첫 시점부터 변경된 언어가 적용된 html 이 보여야 합니다.<br/>
+## Implementation Plan
 
+1. Utilize `LocalStorage` to persist the user's selected language.
+2. Ensure that the initially served HTML incorporates the language setting stored in `LocalStorage`.
 
+## Detailed Steps
 
-## DEMO 작성
-### 다국어 적용 (ngx-translate 적용)
-기존 코드에 ngx-translate을 설치합니다. 다국어 파일을 httploader를 통해 불러오므로 함께 설치합니다.<br/>
+### Implementing Internationalization with ngx-translate
+
+Begin by installing `ngx-translate` and its HTTP loader. The HTTP loader is necessary for loading translation files.
 
 ```
 npm i @ngx-translate/core @ngx-translate/http-loader
 ```
 
-app.module에서 ngx-translate 사용을 설정합니다. 이 때, defaultLanguage를 localstorage에서 가져온 값으로 설정합니다. 
+Next, configure `ngx-translate` in `app.config.ts`. Critically, set the `defaultLanguage` to the value retrieved from `localStorage` if available, defaulting to 'ko' (Korean) otherwise.
 
 ```tsx
-...
+// src/app/app.config.ts
+import { ApplicationConfig, importProvidersFrom } from '@angular/core';
+import { provideRouter } from '@angular/router';
+import { HttpClient, provideHttpClient } from '@angular/common/http';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { routes } from './app.routes';
+
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
- 
- 
-...
-  imports: [
-    BrowserModule.withServerTransition({ appId: 'serverApp' }),
-    HttpClientModule,
-    TranslateModule.forRoot({
-      defaultLanguage: localStorage.getItem('lang') ?? 'ko',
-      loader: {
+
+const defaultLanguage = (typeof window !== 'undefined' && window.localStorage.getItem('lang')) || 'ko';
+
+export const appConfig: ApplicationConfig = {
+  providers: [
+    provideRouter(routes),
+    provideHttpClient(), 
+    importProvidersFrom(
+      TranslateModule.forRoot({
+        defaultLanguage: defaultLanguage,
+        loader: {
           provide: TranslateLoader,
-          useFactory: (createTranslateLoader),
-          deps: [HttpClient]
-      }
-  }),
+          useFactory: createTranslateLoader,
+          deps: [HttpClient],
+        },
+      })
+    ),
+  ],
+};
 ```
 
-assets/i18n에 다국어를 위해 ko.json과 en.json을 만들고 값을 넣습니다. (한국어를 길게 넣은 이유는 테스트 결과 확인 시 잘 보이도록 하기 위함입니다.)
+Create `ko.json` and `en.json` files in the `assets/i18n` directory to hold the Korean and English translations, respectively. The following example contains a longer Korean translation for easier visual identification during testing.
 
 ```json
 // ko.json
 {
-  "lang": "한국어한국어한국어한국어한국어한국어"
+  "lang": "KoreanKoreanKoreanKoreanKoreanKorean"
 }
 // en.json
 {
@@ -65,81 +80,143 @@ assets/i18n에 다국어를 위해 ko.json과 en.json을 만들고 값을 넣습
 }
 ```
 
-template에 언어 변경 버튼 및 텍스트를 배치합니다.
+Add language selection buttons and a translated text element to the component's template.
 
-```html
-<% raw %>
-<button (click)="change('ko')">KO</button>
-<button (click)="change('en')">EN</button>
-<p>{{'a' | translate}}</p>
-<% endraw %>
-```
+```ts
+// src/app/app.component.ts
+import { Component, inject } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
-component에는 change 함수를 추가합니다. 이 때, constructor에 translateService를 선언해야 합니다.
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [RouterOutlet, TranslateModule], 
+  template: `
+    <button (click)="changeLanguage('ko')">KO</button>
+    <button (click)="changeLanguage('en')">EN</button>
+    
+    <p>{{ 'lang' | translate }}</p>
 
-```tsx
-change(type: string) {
-  localStorage.setItem('lang', type);
-  this.translateService.use(type);
+    <router-outlet></router-outlet>
+  `,
+})
+export class AppComponent {
+  private translateService = inject(TranslateService);
+
+  constructor() {
+    const lang = localStorage.getItem('lang') ?? 'ko';
+    this.translateService.setDefaultLang(lang);
+    this.translateService.use(lang);
+  }
+
+  changeLanguage(lang: string): void {
+    localStorage.setItem('lang', lang);
+    this.translateService.use(lang);
+  }
 }
 ```
 
-이 상태로 scully를 실행하여 영문으로 변경한 뒤 새로고침을 해보면, static으로 생성된 국문 html 파일이 먼저 생성된 후 변경된 언어가 적용됨을 확인할 수 있습니다. 즉, 목적에서 짚은 현상이 발견 되는 것을 확인할 수 있습니다.
+At this point, running Scully and changing the language to English before refreshing will demonstrate the initial problem: the statically generated Korean HTML is displayed briefly before the English translation is loaded. This confirms the presence of the rehydration issue.
 
+## Solution: Utilizing ngx-translate-router
 
-## 해결
-### ngx-translate-router 적용
-위의 목적을 달성해줄 라이브러리를 설치합니다.
+To resolve the issue, install `@gilsdav/ngx-translate-router`.
 
 ```
 npm i @gilsdav/ngx-translate-router
 ```
 
-app-routing.module에 LocalizeRouterModule을 선언합니다. 이 때, 반드시 TranslateService와 RouterModule 이 먼저 선언 되어야 합니다.
+### 1. Adding LocalizeRouterModule to app.config.ts
+
+Import and configure `LocalizeRouterModule` in `app.config..ts`.  It's crucial that `TranslateModule` and `RouterModule` are declared before `LocalizeRouterModule`.
 
 ```tsx
-  TranslateModule.forRoot({
-    defaultLanguage: localStorage.getItem('lang') ?? 'ko',
-    loader: {
-        provide: TranslateLoader,
-        useFactory: (createTranslateLoader),
-        deps: [HttpClient]
-    }
-}),
-RouterModule.forRoot(routes),
-LocalizeRouterModule.forRoot(routes),
-AppRoutingModule,
+// src/app/app.config.ts
+import { ApplicationConfig, importProvidersFrom } from '@angular/core';
+import { provideRouter } from '@angular/router';
+import { HttpClient, provideHttpClient } from '@angular/common/http';
+import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { LocalizeRouterModule, LocalizeRouterSettings, LocalizeParser } from '@gilsdav/ngx-translate-router';
+import { routes } from './app.routes';
+
+// ... (omitted) ...
+
+export const appConfig: ApplicationConfig = {
+  providers: [
+    provideRouter(routes),
+    provideHttpClient(),
+    importProvidersFrom(
+      TranslateModule.forRoot({
+        defaultLanguage: defaultLanguage,
+        loader: {
+          provide: TranslateLoader,
+          useFactory: createTranslateLoader,
+          deps: [HttpClient],
+        },
+      }),
+
+      LocalizeRouterModule.forRoot(routes, {
+        parser: {
+          provide: LocalizeParser,
+          useFactory: (translate: TranslateService, location: Location, settings: LocalizeRouterSettings) =>
+            new ManualParserLoader(translate, location, settings, ['en', 'ko']), 
+          deps: [TranslateService, Location, LocalizeRouterSettings],
+        },
+        initialNavigation: true,
+      })
+    ),
+  ],
+};
 ```
 
-이제 scully를 실행하여 영문으로 변경한 뒤 새로고침을 해보면 static 파일이 영문 html이 생성되어 즉시 로딩 된 것을 확인할 수 있습니다. (국문도 동일합니다.)
+### 2. Setting skipRouteLocalization to app.routes.ts
+```ts
+// src/app/app.routes.ts
+import { Routes } from '@angular/router';
+import { HomeComponent } from './home/home.component';
+import { LoginComponent } from './login/login.component';
 
-
-## 결론
-`@ gilsdav/ngx-translate-router`는 localized 방식으로 동작합니다. 즉, 모든 언어의 라우터를 생성한 뒤 해당 라우터만 사용하는 방식입니다.<br/>
-접근하는 시점에서 라우터를 가로 채고 localized된 route를 redirectTo 경로로 변환합니다.  예를 들어 `/home`은 `/ko/home`, `/en/home` 중 ngx-translate이 선택한 경로로 변환합니다. <br/>
-라우터 변환을 일반 애플리케이션 변환과 분리하기 위해 접두사를 사용합니다. escapePrefix를 사용하여 접두사가 제거되고 세그먼트가 번역되지 않도록 할 수 있습니다. <br/>
-
-```tsx
-  let routes = [
-  // localized를 적용합니다.
+export const routes: Routes = [
+  // localized
   { path: 'home', component: HomeComponent },
-  // 적용하지 않습니다.
-  { path: 'login', component: LoginComponent, data: { skipRouteLocalization: true } }
-    // route에는 적용하지 않으나 redirect에만 적용합니다.
-  { path: 'logout', redirectTo: 'login', data: { skipRouteLocalization: { localizeRedirectTo: true } } }
+  
+  // skip localized
+  { 
+    path: 'login', 
+    component: LoginComponent, 
+    data: { skipRouteLocalization: true } 
+  },
+  
+  // apply localized redirect only
+  { 
+    path: 'logout', 
+    redirectTo: 'login', 
+    data: { skipRouteLocalization: { localizeRedirectTo: true } } 
+  },
+
+  { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];
 ```
 
-이 라이브러리는 ngx-translate이 선택한 locales를 자동으로 인식하여 동작합니다.
+Running Scully again, changing the language to English, and refreshing the page should now result in the correct English HTML being served immediately from the static file, resolving the rehydration problem.
+
+## Conclusion
+
+`@gilsdav/ngx-translate-router` operates by localizing routes. It generates routes for all supported languages and redirects the user to the appropriate language-specific route.
+
+The library intercepts the requested route and redirects to the localized route (e.g., `/home` is transformed to either `/ko/home` or `/en/home` based on the current language selected by `ngx-translate`).
+
+A prefix is employed to separate route conversion from standard application conversions. You can prevent segments from being translated and remove the prefix by using the `escapePrefix`.
+
+The library automatically detects the locales chosen by `ngx-translate` and adjusts accordingly.
 
 ```tsx
 this.translate.setDefaultLang();
 this.translate.use();
 ```
 
+## References
 
-
-
-## 참고 사이트
 - [ngx-translate-router](https://github.com/gilsdav/ngx-translate-router)
-

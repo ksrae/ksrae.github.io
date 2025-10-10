@@ -1,5 +1,5 @@
 ---
-title: "JAMStack과 SSG (Definition of JAMStack and SSG)"
+title: "Definition of JAMStack and SSG"
 date: 2021-01-25 14:06:00 +0900
 comments: true
 categories: javascript
@@ -7,85 +7,86 @@ tags: [ssg]
 ---
 
 
-## 1. 개요
-JAMStack은  기존 용어인 ‘LAMPStack (Linux, Apache, MySql, PHP)’ 혹은 ‘MEANStack (MongoDB, ExpressJS, AngularJS, NodeJS)’ 같은 단어와 비슷한 최근 웹 기술에서 구성해야할 요소의 모음입니다.<br/>
-<br/>
-JAMStack은 2018년 넷틀리파이에서 제안한 표현으로 서버의 요청을 최소화 하여 성능 및 보안 등에서의 높은 효과를 가져오기 위한 방법으로 제안되었으며, Javascript, APIs, Markup 의 앞글자를 딴 것입니다. 이는 기존 SPA의 방향과 많은 부분에서 일치하나 몇 가지 추가적인 기능을 포함합니다. <br/>
-<br/>
-정적 사이트 생성 (Static Site Generator)<br/>
-CDN 의 활용<br/>
+## 1. Overview
 
-![cdn](https://t1.daumcdn.net/cfile/tistory/99C3E0435F3641130F)
+The JAMstack is a modern web development architecture, similar to terms like 'LAMP Stack (Linux, Apache, MySQL, PHP)' or 'MEAN Stack (MongoDB, ExpressJS, AngularJS, NodeJS)', that describes a collection of essential elements for building modern web applications.
 
+Introduced by Netlify in 2018, the JAMstack aims to minimize server requests, enhancing performance and security. The acronym stands for Javascript, APIs, and Markup. It aligns with many aspects of Single Page Applications (SPAs) but includes additional functionalities.
 
-(전통적인 웹 개발 구조와 JAMStack 구조의 차이)<br><br>
+Key components of the JAMstack include:
 
+- Static Site Generation (SSG)
+- Content Delivery Network (CDN) Utilization
 
+[](https://t1.daumcdn.net/cfile/tistory/99C3E0435F3641130F)
 
-CDN의 도입은 말 그대로 웹 서버를 대신할 목적이므로 크게 논의할 바 없으며, 사이트 환경에 따라 사용이 불가한 곳이 있으므로 여기에서는 논외로 하고, <br>
+cdn
 
-이 글에서는 정적 사이트 생성에 대해서 자세히 알아보겠습니다.
+*(Difference between traditional web development structure and JAMstack structure)*
 
+While CDN implementation is primarily for replacing web servers and requires minimal discussion, its feasibility depends on the site environment and is excluded from further discussion here.
 
+This article will delve into Static Site Generation (SSG).
 
 ## 2. SSG (Static Site Generator)
-### 2-1. 배경
-SSG를 알아보기 전 배경을 이해하면 SSG의 도입 이유를 쉽게 이해할 수 있으므로 배경에 대해서 알아볼 필요가 있습니다.<br><br>
 
-웹 개발자라면 CSR과 SSR에 대해 들어보셨을 것이라 생각합니다. 이 둘의 특징은 다음과 같습니다.<br>
+### 2-1. Background
 
-SSR: 서버에서 html 페이지를 모두 구성하는 방식. 첫 페이지 로딩을 빠르게 사용자에게 전달할 수 있으며, SEO에 강합니다. <br>
-단, 서버에서 html을 만들어야 하기 때문에 TTFB(Time to First Byte)가 느리며, 서버 자원을 사용하므로 서버에 부하를 줄 수 있으며, 요청이 잦아 트래픽이 높아질수록 성능이 떨어지며 공격에 취약합니다.
-![SSR](https://unicorn-utterances.com/b3d14065d4f3d7e5aa6de108174946eb/ssr.svg)
-<br>
-CSR: SPA(Single Page Application) 방식이 도입되면서 랜더링 부분을 클라이언트에서 모두 구성하는 방식으로 TTFB가 빠르며, 서버 요청 횟수가 낮아 서버 부담을 줄이고 트래픽의 영향을 덜 받습니다.<br>
-단, SEO에 매우 취약하며, 전체적인 페이지 완료 시점은 SSR보다 느려지며, 클라이언트의 성능에 의존하므로 시점의 속도 차가 발생합니다.
-![CSR](https://unicorn-utterances.com/6ef74dd32a6c239ddddab157667aa542/csr.svg)
+Understanding the background of SSG is crucial to grasp its adoption rationale. A brief overview of the context is necessary.
 
+Web developers are likely familiar with Client-Side Rendering (CSR) and Server-Side Rendering (SSR). Their key characteristics are as follows:
 
-### 2-2. 정의
-SSG는 CSR의 SEO의 취약함을 보완하고, SSR의 서버 부하 문제를 해결하기 위해서 제안된 방식입니다. <br>
+SSR: The server constructs complete HTML pages. This approach enables rapid initial page load and enhances SEO.
+However, since the server generates the HTML, the Time to First Byte (TTFB) is slower. It also consumes server resources, potentially leading to server overload, performance degradation with frequent requests, and vulnerability to attacks.
 
-SSG는 빌드 타임에 정적 페이지를 pre-rendering하여 이를 클라이언트에게 전달하며, 이 후 CSR 방식으로 동작하도록 하는 방식입니다.<br><br>
+[](https://unicorn-utterances.com/b3d14065d4f3d7e5aa6de108174946eb/ssr.svg)
 
-CDN에 쉽게 호스팅할 수 있으며, SEO 설정이 가능하다는 장점이 있으나, query data에 액세스할 수 없으므로 정적인 페이지인 경우 유리합니다. (이는 라이브러리에서 해결할 수 있으나 각각 다릅니다.)
-![SSG](https://unicorn-utterances.com/241bc1a087bc9659d71d3655a36d1718/ssg.svg)
+SSR
 
+CSR: With the introduction of Single Page Applications (SPAs), rendering is primarily handled on the client side. This results in faster TTFB, fewer server requests, reduced server load, and less sensitivity to traffic fluctuations.
+However, CSR is SEO-unfriendly. The overall page completion time is slower than SSR, and performance depends on client-side capabilities, leading to varying speeds.
 
+[](https://unicorn-utterances.com/6ef74dd32a6c239ddddab157667aa542/csr.svg)
 
+CSR
 
+### 2-2. Definition
 
+SSG is a method proposed to mitigate CSR's SEO weaknesses and SSR's server load issues.
 
-SSG는 쉽게 이해하면 SSR과 CSR의 중간쯤으로 보이나 엄밀히 따지면, 목적이 엄연히 다릅니다.<br>
- SSG의 목적은 Headless에 있으며, 이는 Front-end, Back-end의 개념과는 다른, 생성된 하나의 페이지가 API 조차 필요 없이 어디서나 서비스 가능한 환경을 만드는 것에 그 목적이 있습니다.<br><br>
-  따라서, 전형적인 서버-클라이언트 방식에서 벗어나고자 CDN과 같은 환경의 Serverless를 선호하며, <br>
-  최소한의 요청으로 다양하고 많은 서비스를 할 수 있다는 점에서 비용면에서 클라우드 환경에서 매우 유리한 방식이라고 볼 수 있습니다.
+SSG pre-renders static pages at build time and delivers them to the client, subsequently operating in a CSR manner.
 
+It offers easy hosting on CDNs and SEO configuration advantages. However, it's best suited for static pages because it cannot directly access query data (though libraries may offer solutions).
 
+[](https://unicorn-utterances.com/241bc1a087bc9659d71d3655a36d1718/ssg.svg)
 
+SSG
 
+SSG can be loosely seen as a middle ground between SSR and CSR, but their purposes are distinctly different.
+SSG's purpose lies in Headless architecture, aiming to create an environment where a generated page can be served anywhere without even requiring APIs, moving beyond the front-end and back-end paradigm.
 
-## 3. 생태계 
-가장 유명한 SSG는 jekyll이 있으며, 깃허브 블로그 사용자들이 주로 사용하고 있습니다.<br><br>
+Therefore, it favors serverless environments like CDNs, moving away from the typical server-client approach.
+The ability to deliver diverse and numerous services with minimal requests makes it a cost-effective option in cloud environments.
 
-React 쪽에서는 다양한 라이브러리가 있는데 그중 Gatsby와 next.js가 있으며, Vue.js에서는 next.js를 개조한 nuxt.js가 주로 쓰이고 있습니다.<br>
+## 3. Ecosystem
 
-Angular 진영에서는 이렇다 할 라이브러리가 없다가 2019년 말 개발된 Scully가 각광받고 있습니다. Universal이 SSR을 표방한다면, Scully는 SSG의 방식을 따르고 있어 Universal과 대조되고 있습니다.
+The most renowned SSG is Jekyll, widely used by GitHub blog users.
 
+In the React ecosystem, Gatsby and Next.js are prominent libraries. For Vue.js, Nuxt.js, a modified version of Next.js, is commonly used.
 
+The Angular community lacked a significant library until Scully, developed in late 2019, gained popularity. While Universal aims for SSR, Scully adopts an SSG approach, contrasting with Universal.
 
-## 4. Angular의 SSG
-<br/>
-Angular 9부터 Universal도 SSG와 같이 Static HTML을 빌드 타임에 생성할 수 있는 prerender 옵션을 제공합니다.<br/>
-따라서 이미 Version9 이상의 Universal로 제작된 프로젝트의 경우 걷어낼 필요 없이 빌드 명령의 교체만으로 적용할 수 있습니다.<br/>
-<br/>
+## 4. SSG in Angular
+
+From Angular 9 onwards, Universal offers a prerender option that allows generating static HTML at build time, similar to SSG.
+
+Therefore, projects already built with Universal version 9 or higher can be adapted simply by changing the build command, without requiring major restructuring.
 
 ### 4.1. Angular Universal Prerender
 
-<br/>
-angular.json의 prerender option과 package.json의 빌드 옵션을 확인하여 지원 여부를 확인할수 있습니다.
+Verify support for prerendering by checking the `prerender` option in `angular.json` and the build options in `package.json`.
 
-```ts
+```tsx
 // angular.json
 "serve-ssr": {
     "builder": "@nguniversal/builders:ssr-dev-server",
@@ -114,29 +115,25 @@ angular.json의 prerender option과 package.json의 빌드 옵션을 확인하�
     }
 ```
 
-아래 package.json의 prerender 실행 명령을 확인하여 빌드를 수행합니다.
+Execute the build by verifying the `prerender` execution command in `package.json`.
 
-```ts
+```tsx
 // package.json
 "prerender": "ng run prerender-demo:prerender"
 ```
-
 
 ```bash
 > npm run prerender
 ```
 
-
-
-
 ### 4.2. Scully
-Angular Universal Prerender의 단점은 여전히 Server Side 여부를 확인해야 하며, window 등의 browser 명령을 즉시 사용할 수 없다는 점입니다.<br/>
-Scully는 Client에서만 동작하므로 SSG를 도입할 때 더욱 편하게 코딩할 수 있는 장점이 있습니다.<br/>
-<br/>
-Scully의 동작 방식은 다음과 같습니다.<br/>
-<br/>
 
-> - Angular 코드 빌드 시 Scully의 머신 러닝을 통해 라우팅을 모두 검색하여 라우팅의 첫 페이지들을 모두 정적 html로 pre-rendering합니다. 
-> - 이 때, Scully는 크롬 브라우저의 Puppeteer를 사용하여 Angular 앱을 실행하여 모든 페이지를 연 뒤 IdleMonitorService를 통해 zone.js를 기반으로 스냅샷이 완료되었는지 여부를 결정합니다.
-> - 이를 통해 pre-rendering된 결과를 확인하고, 디버깅이 가능하도록 지원 합니다.
+A disadvantage of Angular Universal Prerender is the continued need to check for server-side conditions, preventing immediate use of browser commands like `window`.
 
+Scully operates solely on the client-side, allowing for easier coding when adopting SSG.
+
+Scully's operation is as follows:
+
+> - During Angular code build, Scully's machine learning scans all routes and pre-renders the first pages of these routes as static HTML.
+> - At this point, Scully uses Chrome browser's Puppeteer to execute the Angular app, opening all pages and then using IdleMonitorService to determine whether the snapshot is complete, based on zone.js.
+> - This enables verification of the pre-rendered results and supports debugging.
