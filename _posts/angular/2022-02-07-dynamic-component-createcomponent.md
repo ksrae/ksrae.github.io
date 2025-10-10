@@ -1,27 +1,27 @@
 ---
-title: "createComponent으로 동적 컴포넌트 만들기 (Dynamic Component with createComponent)"
+title: "Dynamic Component with createComponent"
 date: 2022-02-07 17:46:00 +0900
 comments: true
 categories: angular
 tags: [dynamic, component, createcomponent]
 ---
 
-보다 범용적인 버전에서 활용할 수 있는 `createComponent`를 사용하여 dynamic component를 구현합니다.<br/>
+Implementing dynamic components with `createComponent` offers a flexible approach to component management, especially useful in more versatile versions.
 
-# 기본 원리
+# Core Principles
 
-1. `componentFactory`를 활용하여 호출할 component의 정보를 가져옵니다.
-2. component를 담을 container component의 `viewContainerRef`를 가져옵니다.
-3. `viewContainerRef`의 `createComponent` 함수를 통해 호출할 component를 container component에 랜더링 합니다.
-4. `viewContainerRef`의 `clear` 함수를 활용하여 호출한 component를 제거 합니다.
+The following outlines the fundamental principles involved in dynamically creating components:
 
+1. **Component Factory Retrieval:** Utilize the `componentFactory` to obtain the necessary information about the component you intend to instantiate.
+2. **Container's View Container Reference:** Access the `viewContainerRef` of the container component where the dynamic component will reside.
+3. **Component Rendering:** Employ the `createComponent` function of the `viewContainerRef` to render the target component within the container.
+4. **Component Removal:** Use the `clear` function of the `viewContainerRef` to remove the dynamically created component when it's no longer needed.
 
-# component 생성하기
+# Creating Components
 
-## container component
+## Container Component
 
-dynamic component를 호출하는 container에 해당하는 component를 작성해 봅시다.<br/>
-버튼 2개를 클릭했을 때 서로 다른 component가 화면에 출력되는 예제 입니다.
+Let's craft a container component responsible for hosting the dynamic components. The example below showcases rendering different components upon clicking respective buttons.
 
 ```tsx
 @Component({
@@ -39,18 +39,19 @@ export class ContainerComponent {
 
   callAComponent() {
     const resolve = this.resolver.resolveComponentFactory(AComponent);
-    this.viewContainerRef.crateComponent(resolve);
-  } 
+    this.viewContainerRef.createComponent(resolve);
+  }
   callBComponent() {
     const resolve = this.resolver.resolveComponentFactory(BComponent);
-    this.viewContainerRef.crateComponent(resolve);
+    this.viewContainerRef.resolveComponentFactory(BComponent);
+    this.viewContainerRef.createComponent(resolve);
   }
 }
 ```
 
-## dynamic components
+## Dynamic Components
 
-호출할 두개의 component를 작성해봅시다. css를 작성하면 보다 확실히 확인할 수 있으나 여기에서는 생략합니다.
+Now, let's define the two dynamic components we'll be rendering. While CSS styling could enhance visual clarity, it's omitted here for brevity.
 
 ```tsx
 @Component({
@@ -72,24 +73,19 @@ export class BComponent {
 }
 ```
 
-예제를 실행하면 버튼을 클릭하여 `AComponent`, `BComponent`를 스위치하여 화면에 표시합니다.
+Executing this example allows you to toggle between `AComponent` and `BComponent` by clicking the respective buttons.
 
+## Injecting Values
 
-## 값을 주입하는 방법
+Injecting values into dynamic components is straightforward. You can access the instance returned by `createComponent` and set the desired values on its properties.
 
-값을 주입하는 방법은 매우 간단합니다. `createComponent`의 리턴 값을 받아 instance에 값을 주입하면 됩니다.<br/>
-여기에서 instance란 쉽게 말해 호출할 component의 public 변수 / 함수 라고 생각하면 됩니다.<br/>
-<br/>
-또한, `@Input()` 으로 선언된 변수에도 주입이 가능하지만 `@Input('') set ...` 에는 적용되지 않습니다.<br/>
-그리고, `onchange` 사이클에도 잡히지 않으므로 주의하여야 합니다.<br/>
-<br/>
-위의 component들을 다시 작성해보겠습니다.<br/>
+In essence, the "instance" refers to the public variables or functions of the component you're instantiating.
 
+Furthermore, you can inject values into variables decorated with `@Input()`. However, note that this approach does *not* work with `@Input('') set ...` and doesn't trigger the `onchange` lifecycle hook. Exercise caution when using this method.
 
-### container component
+Let's rewrite the components to demonstrate value injection.
 
-dynamic component를 호출하는 container에 해당하는 component를 작성해 봅시다.<br/>
-버튼 2개를 클릭했을 때 서로 다른 component가 화면에 출력되는 예제 입니다.
+### Container Component
 
 ```tsx
 @Component({
@@ -107,24 +103,24 @@ export class ContainerComponent {
 
   callAComponent() {
     const resolve = this.resolver.resolveComponentFactory(AComponent);
-    const componentRef = this.viewContainerRef.crateComponent(resolve);
+    const componentRef = this.viewContainerRef.createComponent(resolve);
     componentRef.instance.data = 'hello world';
   }
   callBComponent() {
     const resolve = this.resolver.resolveComponentFactory(BComponent);
-    const componentRef = this.viewContainerRef.crateComponent(resolve);
+    const componentRef = this.viewContainerRef.createComponent(resolve);
     componentRef.instance.data = 'good bye';
   }
 }
 ```
 
-### dynamic components
+### Dynamic Components
 
 ```tsx
 @Component({
   selector: 'a-component',
   template: `
-    <p><% raw %>{{data}}<% endraw %></p>`
+    <p>{{data}}</p>`
 })
 export class AComponent {
   data!: string;
@@ -133,23 +129,21 @@ export class AComponent {
 @Component({
   selector: 'b-component',
   template: `
-    <p><% raw %>{{data}}<% endraw %></p>`
+    <p>{{data}}</p>`
 })
 export class BComponent {
   @Input() data!: string;
 }
 ```
 
-실행해보면 data 변수를 통해 주입된 값이 표시됨을 확인할 수 있습니다.<br/>
-`BComponent`의 `@Input()`은 이런 형태도 잘 주입 된다는 것을 테스트 해보기 위해 작성한 것이며, 의미는 없습니다.
+Upon execution, you'll observe the injected values displayed via the `data` variable. The `@Input()` in `BComponent` serves to demonstrate compatibility with this injection method.
 
+## Cases Where Value Injection Fails
 
-## 값 주입이 안되는 경우
+If you attempt to inject values more than once, subsequent injections via the instance may not reflect changes. While `afterViewInit` might show the value being received, a `changeDetection` cycle is required to render the updated value on the screen.
 
-만일 값을 2회 이상 주입한다면 instance 통해 주입하더라도 값이 변경되지 않습니다.<br/>
-`afterViewInit`에서 확인해보면 값이 들어오고 있음을 확인할 수 있는데 이 때 `changeDetection`을 통해 랜더링 시켜주어야 비로소 화면에 적용됩니다.
+### Container Component
 
-### container component
 ```tsx
 ...
 export class ContainerComponent implements AfterViewInit {
@@ -163,13 +157,11 @@ export class ContainerComponent implements AfterViewInit {
   }
 ```
 
-## Subject를 활용한 값 주입
+## Value Injection using Subjects
 
-`changeDetection` 사용이 꺼려진다면 Subject를 활용하는 것도 좋은 방안이 될 수 있습니다.<br/>
-초기값을 가질 수 있는 `BahaviorSubject`를 활용한다면 보다 쉽게 값을 주입할 수 있습니다.
+If you're hesitant to use `changeDetection`, employing a Subject can be a viable alternative. Utilizing `BehaviorSubject`, which can hold an initial value, simplifies value injection.
 
-
-### container component
+### Container Component
 
 ```tsx
 @Component({
@@ -187,24 +179,24 @@ export class ContainerComponent {
 
   callAComponent() {
     const resolve = this.resolver.resolveComponentFactory(AComponent);
-    const componentRef = this.viewContainerRef.crateComponent(resolve);
+    const componentRef = this.viewContainerRef.createComponent(resolve);
     componentRef.instance.data$.next('hello world');
   }
   callBComponent() {
     const resolve = this.resolver.resolveComponentFactory(BComponent);
-    const componentRef = this.viewContainerRef.crateComponent(resolve);
+    const componentRef = this.viewContainerRef.createComponent(resolve);
     componentRef.instance.data.next('good bye');
   }
 }
 ```
 
-### dynamic components
+### Dynamic Components
 
 ```tsx
 @Component({
   selector: 'a-component',
   template: `
-    <p><% raw %>{{data$ | async}}<% endraw %></p>`
+    <p>{{data$ | async}}</p>`
 })
 export class AComponent {
   data$ = new BehaviorSubject<any>('');
@@ -213,19 +205,18 @@ export class AComponent {
 @Component({
   selector: 'b-component',
   template: `
-    <p><% raw %>{{data$ | async}}<% endraw %></p>`
+    <p>{{data$ | async}}</p>`
 })
 export class BComponent {
   data$ = new BehaviorSubject<any>('');
 }
 ```
 
+# Removing Components
 
-# Component 제거하기
+Component removal is straightforward: simply call the `clear` function of the container component's `viewContainerRef`.
 
-제거는 매우 간단하게 container component의 `viewContainerRef`의 `clear` 함수를 호출하면 됩니다.
-
-### container component
+### Container Component
 
 ```tsx
 @Component({
@@ -244,12 +235,12 @@ export class ContainerComponent {
 
   callAComponent() {
     const resolve = this.resolver.resolveComponentFactory(AComponent);
-    const componentRef = this.viewContainerRef.crateComponent(resolve);
+    const componentRef = this.viewContainerRef.createComponent(resolve);
     componentRef.instance.data$.next('hello world');
   }
   callBComponent() {
     const resolve = this.resolver.resolveComponentFactory(BComponent);
-    const componentRef = this.viewContainerRef.crateComponent(resolve);
+    const componentRef = this.viewContainerRef.createComponent(resolve);
     componentRef.instance.data.next('good bye');
   }
   removeAll() {
@@ -258,16 +249,15 @@ export class ContainerComponent {
 }
 ```
 
+# Additional Notes
 
-# 기타
-## v13 이후 개선사항
+## Improvements since v13
 
-v13부터는 기존의 `createComponent` 함수가 deprecated 되고, 새로 작성된 `createComponent` 함수를 사용해야 합니다.<br/>
-기존에는 `componentFactory`를 통해 component에 접근해야 했는데 새로운 버전에서는 component에 직접 접근할 수 있게 되어 더욱 간결한 코딩이 가능해졌습니다.<br/>
-<br/>
-위의 container component를 v13 버전으로 작성하면 다음과 같습니다.
+Since v13, the original `createComponent` function has been deprecated, and a newly written `createComponent` function must be used. Previously, you had to access the component through `componentFactory`, but the new version allows you to directly access the component, enabling more concise coding.
 
-### container component
+Rewriting the above container component in v13 would look like this:
+
+### Container Component
 
 ```tsx
 @Component({
@@ -283,16 +273,105 @@ export class ContainerComponent {
   ) {}
 
   callAComponent() {
-    const componentRef = this.viewContainerRef.crateComponent(AComponent);
+    const componentRef = this.viewContainerRef.createComponent(AComponent);
     componentRef.instance.data$.next('hello world');
   }
   callBComponent() {
-    const componentRef = this.viewContainerRef.crateComponent(BComponent);
+    const componentRef = this.viewContainerRef.createComponent(BComponent);
     componentRef.instance.data.next('good bye');
   }
 }
 ```
 
+## Improvements with Modern Angular (v17+)
+with v17+, Standalone Components and Signals have become the standard. In modern Angular, creating dynamic components is much more concise and powerful.<br/>
+Below is an updated example using Standalone Components, Signals, and @ViewChild.
 
-# 참고 사이트
-- [Angular 공식 사이트 dynamic-component-loader](https://angular.io/guide/dynamic-component-loader)
+### 1. The Dynamic Components (A & B Components)
+- Declare them as standalone: true.
+- Use @Input combined with signal to receive data. The signal is a WritableSignal, which can be modified from the outside.
+
+```Ts
+// a.component.ts
+import { Component, Input, signal, WritableSignal } from '@angular/core';
+
+@Component({
+  standalone: true,
+  selector: 'a-component',
+  template: `<p>A Component says: {{ data() }}</p>`
+})
+export class AComponent {
+  @Input() data: WritableSignal<string> = signal('');
+}
+```
+
+
+```Ts
+// b.component.ts
+import { Component, Input, signal, WritableSignal } from '@angular/core';
+
+@Component({
+  standalone: true,
+  selector: 'b-component',
+  template: `<p>B Component says: {{ data() }}</p>`
+})
+export class BComponent {
+  @Input() data: WritableSignal<string> = signal('');
+}
+```
+
+### 2. The Container Component
+- Use an ng-container with a template reference variable (#container) in the template to mark the insertion point.
+- Access the ViewContainerRef using @ViewChild.
+- Pass the component class directly to createComponent to create an instance.
+- Inject data by calling the .set() method on the component instance's data signal.
+
+```Ts
+// container.component.ts
+import { Component, ViewChild, ViewContainerRef } from '@angular/core';
+import { AComponent } from './a.component';
+import { BComponent } from './b.component';
+
+@Component({
+  selector: 'app-container',
+  standalone: true,
+  imports: [AComponent, BComponent], // Dynamic components must also be imported
+  template: `
+    <button (click)="callAComponent()">Show A-Component</button>
+    <button (click)="callBComponent()">Show B-Component</button>
+    <button (click)="removeAll()">Remove All</button>
+    
+    <!-- The location where dynamic components will be rendered -->
+    <ng-container #container></ng-container>
+  `
+})
+export class ContainerComponent {
+  // Read the #container element as a ViewContainerRef
+  @ViewChild('container', { read: ViewContainerRef, static: true })
+  private viewContainerRef!: ViewContainerRef;
+
+  callAComponent() {
+    this.viewContainerRef.clear(); // Clear previous components
+    const componentRef = this.viewContainerRef.createComponent(AComponent);
+    // Set the value of the signal
+    componentRef.instance.data.set('Hello from Container!');
+  }
+
+  callBComponent() {
+    this.viewContainerRef.clear(); // Clear previous components
+    const componentRef = this.viewContainerRef.createComponent(BComponent);
+    // Set the value of the signal
+    componentRef.instance.data.set('Goodbye from Container!');
+  }
+
+  removeAll() {
+    this.viewContainerRef.clear();
+  }
+}
+```
+
+As you can see, modern Angular allows you to create dynamic components with type safety without ComponentFactoryResolver, and you can easily inject reactive data using Signals.
+
+# References
+
+- [Angular Official Site dynamic-component-loader](https://angular.io/guide/dynamic-component-loader)

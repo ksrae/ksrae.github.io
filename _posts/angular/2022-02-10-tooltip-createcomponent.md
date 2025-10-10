@@ -1,128 +1,148 @@
 ---
-title: "createComponent로 툴팁 만들기 (Create Tooltip with createComponent)"
+title: "Create Tooltip with createComponent"
 date: 2022-02-10 17:46:00 +0900
 comments: true
 categories: angular
 tags: [dynamic, component, createcomponent, tooltip]
 ---
 
-dynamic component 기능인 `createComponent`를 활용하여 Tooltip을 만들어 봅시다.<br/>
-<br/>
-# 기본 동작
+Let's build a dynamic tooltip that appears on hover, leveraging Angular's powerful createComponent API for dynamic component rendering.
 
-div 2개와 tooltip 2개를 만들어 각각을 `mouseenter`, `mouseleave` 했을 때 서로 다른 툴팁이 표시되었다가 제거되는 코드를 작성합니다.<br/>
+# Basic Operation
+- Create two tooltip components (ATooltipComponent, BTooltipComponent) as standalone.
+- Create a container component to host the elements that will trigger the tooltips, also as standalone.
+- Create a standalone directive that listens for mouseenter and mouseleave events, then dynamically creates and destroys the appropriate tooltip component using createComponent.
 
-1. `tooltip component`를 2개 생성합니다.
-2. `tooltip component`를 호출할 `container component`를 생성합니다.
-3. `createComponent`를 통해 `tooltip component`를 호출할 `directive`를 생성합니다.
+# Creating the Components
+## The Container Component
+We'll create a host for our tooltips and apply our custom tooltip directive to trigger them.
 
-<br/>
+```Ts
+// src/app/container.component.ts
+import { Component } from '@angular/core';
+import { TooltipDirective } from './tooltip.directive';
 
-# component 생성하기
-
-
-## container component
-
-{% raw %}<div>{% endraw %} 2개를 만들고 `directive`를 호출하는 형태로 구성합니다.
-
-```tsx
 @Component({
   selector: 'app-container',
+  standalone: true,
+  imports: [TooltipDirective], // Import the directive to use it in the template
   template: `
-  <div [tooltip]="1">Show A-Tooltip</div>
-  <div [tooltip]="2">Show B-Tooltip</div>
+    <h2>Hover over these elements</h2>
+    <div class="box" [tooltip]="'A'">Show Tooltip A</div>
+    <div class="box" [tooltip]="'B'">Show Tooltip B</div>
+  `,
+  styles: `
+    .box {
+      border: 1px solid #ccc;
+      padding: 20px;
+      margin: 20px;
+      cursor: pointer;
+      width: 200px;
+      text-align: center;
+    }
   `
 })
 export class ContainerComponent {}
 ```
 
-<br/>
+## The Dynamic Tooltip Components
+These are the simple components that will be dynamically rendered as tooltips.
 
-## dynamic components
+```Ts
+// src/app/a-tooltip.component.ts
+import { Component } from '@angular/core';
 
-호출할 두개의 tooltip component를 작성해봅시다.
-
-```tsx
 @Component({
   selector: 'a-tooltip',
-  template: `
-    <p>Hello World</p>`
+  standalone: true,
+  template: `<div class="tooltip">Tooltip A: Hello World</div>`,
+  styles: `.tooltip { background-color: lightblue; padding: 10px; border-radius: 5px; }`
 })
 export class ATooltipComponent {}
+```
+
+
+```Ts
+// src/app/b-tooltip.component.ts
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'b-tooltip',
-  template: `
-    <p>Good bye</p>`
+  standalone: true,
+  template: `<div class="tooltip">Tooltip B: Goodbye</div>`,
+  styles: `.tooltip { background-color: lightcoral; color: white; padding: 10px; border-radius: 5px; }`
 })
 export class BTooltipComponent {}
 ```
 
-<br/>
+## Creating the Directive
+This is the core logic of our example. The directive detects events and, based on its input ('A' or 'B'), dynamically creates and destroys the correct tooltip component.
 
-# directive 생성하기
+```Ts
+// src/app/tooltip.directive.ts
+import {
+  Directive,
+  Input,
+  HostListener,
+  ComponentRef,
+  ViewContainerRef,
+  inject,
+  Type
+} from '@angular/core';
+import { ATooltipComponent } from './a-tooltip.component';
+import { BTooltipComponent } from './b-tooltip.component';
 
-directive에 이벤트를 정의하고 타입에 따라 각기 다른 Tooltip을 연결해 줍니다. <br/>
-
-## tooltip directive
-
-```tsx
-@Directive({ selector: '[tooltip]' })
+@Directive({
+  selector: '[tooltip]',
+  standalone: true,
+})
 export class TooltipDirective {
-  @Input() tooltip!: number;
+  @Input('tooltip') type: 'A' | 'B' | string = '';
 
-  componentRef!: ComponentRef<any>;
-
-  constructor(
-    private viewContainerRef: ViewContainerRef,
-    private resolver: ComponentFactoryResolver // do not need if angular version is 13 or above
-  ) {
-
-  }
+  private componentRef?: ComponentRef<any>;
+  // Inject ViewContainerRef using the inject function
+  private viewContainerRef = inject(ViewContainerRef);
 
   @HostListener('mouseenter')
-  load() {
-    if(!this.tooltip) return;
+  onMouseEnter(): void {
+    if (this.componentRef) return; // Don't create if a tooltip already exists
 
-    const componentInfo = this.getComponentInfo();
+    const componentToCreate = this.getComponentType(this.type);
+    if (!componentToCreate) return;
 
-    // under Angular 13
-    const componentRef = this.resolver.resolveComponentFactory(componentInfo?.component as Type<unknown>);
-    this.componentRef = this.viewContainerRef.createComponent<any>(componentRef);
-
-    // Angular 13 or above, createComponent with componentInfo directly.
-    // this.componentRef = this.viewContainerRef.createComponent<any>(componentInfo);
-    
+    // Pass the component class directly, no ComponentFactoryResolver needed
+    this.componentRef = this.viewContainerRef.createComponent(componentToCreate);
   }
 
-  @HostListener('mouseleave', ['$event'])
-  unload(event: any) {
-    componentRef?.destroy();
-  }
-
-  private getComponentInfo(type?: number) {
-    let component;
-
-    switch(type) {
-      case 1:
-        component = ATooltipComponent;
-        break;
-      case 2:
-        component = BTooltipComponent;
-        break;
-      default:
-        return;
+  @HostListener('mouseleave')
+  onMouseLeave(): void {
+    if (this.componentRef) {
+      this.componentRef.destroy();
+      this.componentRef = undefined;
     }
-    return component;
+  }
+
+  private getComponentType(type: string): Type<any> | null {
+    switch (type) {
+      case 'A':
+        return ATooltipComponent;
+      case 'B':
+        return BTooltipComponent;
+      default:
+        return null;
+    }
   }
 }
 ```
 
-실행해서 마우스를 움직여보면 올바르게 동작하는 것을 확인할 수 있습니다.<br/>
+- inject(ViewContainerRef): This is the modern, constructor-less way to handle dependency injection.
+- createComponent(componentToCreate): Since Angular v13, you can pass the component class directly to create an instance, which makes the code much cleaner and removes the need for ComponentFactoryResolver.
+- componentRef.destroy(): This safely removes the created component instance from the DOM and helps prevent memory leaks.
 
+# Note: Configuration in a Standalone Environment
+Unlike the old NgModule approach, in a standalone world, each component and directive must explicitly declare its dependencies in its imports array.
 
-# 주의사항
+- The ContainerComponent uses the TooltipDirective in its template, so it must add TooltipDirective to its imports array.
+- The TooltipDirective programmatically creates ATooltipComponent and BTooltipComponent. Since it doesn't use them in a template, it doesn't need to add them to an imports array. The standard TypeScript import statement is sufficient to get their class types.
 
-`module`에 `directive`와 `TooltipComponent` 들이 모두 정의되어야 합니다. <br/>
-특히 위 예제의 경우 `directive`가 `component` 정보를 담고 있으므로 한 `module`에 모두 정의 되어야 합니다.
-
+Now, when you run this example and hover over each div, you'll see the corresponding tooltip dynamically created and destroyed.
