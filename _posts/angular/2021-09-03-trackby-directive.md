@@ -11,7 +11,7 @@ When rendering lists in Angular, any change to the data array can cause Angular 
 ## The Modern Angular Solution: @for and track
 Starting from Angular v17, the new Control Flow syntax, @for, solves this problem very elegantly. It allows you to specify a unique property for tracking each item directly using the track keyword.
 
-```Html
+```html
 <!-- app.component.html -->
 <ul>
   @for (item of data(); track item.id) {

@@ -58,7 +58,7 @@ There are two primary ways to use track with @for<br/>
 1. Tracking by a Unique Property (Recommended & Simplest)
 The most common and readable method is to track an item directly by its unique property. You no longer need a separate function in your component for this simple case.
 
-```Html
+```html
 <!-- New way with @for block -->
 @for (item of items; track item.id) {
   <div>{{ item.name }}</div>
@@ -69,7 +69,7 @@ Here, track item.id tells Angular to use the id property of each item as its uni
 2. Tracking with a Function
 If your tracking logic is more complex (e.g., combining multiple properties), you can still use a function. The syntax is slightly different from *ngFor.
 
-```Html
+```html
 <!-- Using the same trackByItem function from before -->
 @for (item of items; track trackByItem) {
   <div>{{ item.name }}</div>

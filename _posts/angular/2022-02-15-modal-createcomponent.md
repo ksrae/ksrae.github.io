@@ -23,7 +23,7 @@ Unlike a simple tooltip, a modal system has several requirements:
 ## 1. Creating the ModalService
 This is the heart of our system. It manages the creation, destruction, and result handling of all modals.
 
-```Ts
+```ts
 // src/app/modal.service.ts
 import { Injectable, ViewContainerRef, ComponentRef, Type } from '@angular/core';
 import { Subject, Observable } from 'rxjs';
@@ -79,7 +79,7 @@ export class ModalService {
 ### AppComponent (Setting up the Modal Host)
 At the top level of our application, we tell the ModalService where it should render modals.
 
-```Ts
+```ts
 // src/app/app.component.ts
 import { Component, ViewChild, ViewContainerRef, AfterViewInit, inject } from '@angular/core';
 import { ContainerComponent } from './container.component'; // Our example calling component
@@ -111,7 +111,7 @@ export class AppComponent implements AfterViewInit {
 ### Dynamic Modal Components (AModalComponent, BModalComponent)
 These components implement the ModalComponent interface, giving them a result$ property.
 
-```Ts
+```ts
 // src/app/a-modal.component.ts
 import { Component } from '@angular/core';
 import { Subject } from 'rxjs';
@@ -146,7 +146,7 @@ export class AModalComponent implements ModalComponent<boolean> {
 ### Container Component (The Modal Caller)
 Now, any component that needs to open a modal only needs to inject the ModalService.
 
-```Ts
+```ts
 // src/app/container.component.ts
 import { Component, inject, signal } from '@angular/core';
 import { ModalService } from './modal.service';
