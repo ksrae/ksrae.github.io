@@ -20,19 +20,19 @@ value = value !== undefined || value !== null ? value : '';
 
 ## Nullish Coalescing Operator
 
-To reduce the verbosity of repeatedly checking for `undefined` and `null`, TypeScript provides the "||" operator, commonly referred to as the Nullish Coalescing Operator.
+To reduce the verbosity of repeatedly checking for `undefined` and `null`, TypeScript provides the "\|\|" operator, commonly referred to as the Nullish Coalescing Operator.
 
 ```tsx
 value = value || '';
 ```
 
-However, using "||" can sometimes lead to unexpected behavior that deviates from the developer's intent. Let's explore the potential issues.
+However, using "\|\|" can sometimes lead to unexpected behavior that deviates from the developer's intent. Let's explore the potential issues.
 
 ## Problems with "||"
 
-Typically, developers use "||" to check if a variable's value is neither `undefined` nor `null`.<br/>
+Typically, developers use "\|\|" to check if a variable's value is neither `undefined` nor `null`.<br/>
 
-However, "||" doesn't always fulfill this intention, as it evaluates based on falsy values.<br/>
+However, "\|\|" doesn't always fulfill this intention, as it evaluates based on falsy values.<br/>
 
 The conditions for a falsy value are as follows:
 - undefined
@@ -43,7 +43,7 @@ The conditions for a falsy value are as follows:
 
 <br/><br/>
 
-In essence, "||" treats `undefined` and `null`, along with other values, as false. This can yield results that differ from what the developer expects. To address this, TypeScript introduced a new operator.
+In essence, "\|\|" treats `undefined` and `null`, along with other values, as false. This can yield results that differ from what the developer expects. To address this, TypeScript introduced a new operator.
 
 ## The New Operator "??"
 
@@ -120,15 +120,15 @@ The results are as follows:
 
 As of TypeScript version 3.9, the "??" operator isn't yet supported in templates.<br/>
 
-Therefore, you must still use "||" in templates.
+Therefore, you must still use "\|\|" in templates.
 
 ## Conclusion
 
-For enhanced code readability, it's generally recommended to avoid using "||" when possible.<br/>
+For enhanced code readability, it's generally recommended to avoid using "\|\|" when possible.<br/>
 
-Since "||" considers a broader range of values as false compared to "??" , it should be used with a clear and specific purpose.<br/>
+Since "\|\|" considers a broader range of values as false compared to "??" , it should be used with a clear and specific purpose.<br/>
 
-When using "||", other developers might not immediately understand your intent. Therefore, it's best to use "??" for nullish checks and explicitly compare falsy values separately for clarity.
+When using "\|\|", other developers might not immediately understand your intent. Therefore, it's best to use "??" for nullish checks and explicitly compare falsy values separately for clarity.
 
 ## References
 
