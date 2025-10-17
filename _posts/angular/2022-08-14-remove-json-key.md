@@ -1,16 +1,12 @@
 ---
-title: "JSON에서 가변적인 특정 항목 제거하기 (Remove a Specific Key Value in JSON Dynamically)"
+title: "Remove a Specific Key Value in JSON Dynamically"
 date: 2022-08-14 18:14:00 +0900
 comments: true
 categories: javascript
 tags: [json]
 ---
 
-우리는 개발하면서 Array의 특정 항목을 제거할 때가 있습니다.<br/>
-그럴 때 filter()를 사용하면 간단하게 원하는 항목을 제거할 수 있습니다.<br/>
-<br/>
-그런데 JSON에서는 `filter()`를 제공하지 않으므로 골치 아픈 경우가 많습니다.<br/>
-때로는 이를 위해 아래와 같이 새로운 json 변수를 생성하여 새로 작성하기도 합니다.<br/>
+Removing specific entries from an array during development is a common task, and the `filter()` method provides a straightforward solution. However, when dealing with JSON objects, the absence of a built-in `filter()` equivalent often presents a challenge. A common, but suboptimal, approach involves creating a new JSON variable and manually reconstructing the object, excluding the desired entries.
 
 ```tsx
 let origin = {
@@ -28,14 +24,13 @@ let filtered = {
 ...
 ```
 
-위의 방법은 불 필요한 변수를 생성하고 있으며, 매우 많은 값을 가진 Json의 경우에는 일일이 작성하여야 하므로 대응하기가 어렵습니다.<br/>
+This method introduces unnecessary variable creation and becomes unwieldy when dealing with JSON objects containing a large number of properties, requiring manual entry for each property.<br/>
 
-그래서, 이번 시간에는 Array의 filter와 같이 특정 항목을 제거할 수 있는 방법을 알아보겠습니다.<br/>
-또한 가변적으로 원하는 항목을 제거할 수 있는 방법도 함께 알아보겠습니다.<br/>
+Therefore, this article explores alternative techniques for removing specific items from JSON objects, mirroring the functionality of the `filter` method in arrays. We will also delve into methods for dynamically removing desired items.
 
-## delete 제거
+## Delete Removal
 
-가장 흔한 방법으로는 delete를 활용하는 방법입니다.
+A frequently encountered approach involves utilizing the `delete` operator.
 
 ```tsx
 let origin = {
@@ -47,13 +42,11 @@ let origin = {
 delete origin['birth'];
 ```
 
-그러나 특정 항목에 직접 접근하여 제거하는 방식은 좋은 방법이 아니며, JSON 변수를 배열처럼 접근하는 방식도 추천할 수 없는 방식입니다.<br/>
-특히 delete의 경우 메모리에 할당된 object값을 실제로 제거하는 것이므로 메모리 접근 시간으로 인해 처리 속도가 느립니다. <br/>
-<br/>
+However, directly accessing and removing specific properties using this method is generally discouraged. Furthermore, treating JSON variables as arrays is not a recommended practice. The `delete` operator actually removes the object value allocated in memory, leading to slower processing times due to memory access overhead.
 
-## const를 활용한 제거
+## Removal Using `const`
 
-우리는 JSON객체의 각 항목을 const 변수에 포함할 수 있습니다. 이를 활용하여 특정 항목을 분리하여 추출한 후 포함시키지 않는 방법입니다.
+A more efficient approach leverages the ability to assign individual properties of a JSON object to `const` variables. By extracting the properties to be removed into separate `const` variables, we can reconstruct the JSON object without including those properties.
 
 ```tsx
 let origin = {
@@ -66,17 +59,13 @@ const {birth, ...obj} = origin;
 origin = obj;
 ```
 
-const 변수에 특정항목 (여기서는 birth)을 별도로 정의한 후 기존 JSON 변수에 해당 항목을 제외한 범위의 값 (여기서는 obj) 만 재주입 하는 방법입니다.<br/>
-delete를 사용하지 않으므로 더 빠르고 간결하게 해결할 수 있는 장점이 있습니다.<br/>
-<br/>
+This method defines specific properties (in this case, `birth`) as separate `const` variables. It then reassigns the original JSON variable with only the remaining properties (represented by `obj`). This approach avoids the use of `delete`, resulting in faster and more concise code.
 
-## const를 활용한 가변적인 값 제거
+## Dynamically Removing Values Using `const`
 
-위에서는 고정된 값을 제거하는 방법에 대해 알아보았으니,
-이번에는 const를 활용하여 filter 함수를 제작해보겠습니다.<br/>
-<br/>
-그 전에 우리는 interface를 정의할 때 키가 가변적인 경우에 대해 알아봅시다.
-아래의 interface 정의와 같이 key를 대괄호에 묶어서 정의할 수 있습니다.<br/>
+Having explored methods for removing fixed values, let's examine how to create a filter function using `const` to remove values dynamically.<br/>
+
+Before proceeding, it's essential to understand how to define an interface with dynamic keys. As demonstrated in the interface definition below, keys can be defined within brackets.
 
 ```tsx
 export interface IData {
@@ -84,7 +73,7 @@ export interface IData {
 }
 ```
 
-가변적인 object값의 제거도 위의 interface와 유사한 방법을 활용하면 쉽게 구현할 수 있습니다.<br/>
+Removing dynamic object values can be easily implemented using a similar approach to the interface described above.
 
 ```tsx
 let origin = {
@@ -102,8 +91,7 @@ function filter(key: string): unknown {
 
 ```
 
-위의 예제에서 `filter`함수를 보면 key값을 받아 origin 변수로부터 해당 값만을 제거하고 리턴하는 것을 볼 수 있습니다.<br/>
-<br/>
+In the `filter` function above, the `key` value is received, and the corresponding value is removed from the `origin` variable before returning the modified object.
 
 
 

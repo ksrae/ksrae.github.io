@@ -1,17 +1,18 @@
 ---
-title: "interface에서 getter, setter 생성하기(How to create getter and setter in interface?)"
+title: "How to create getter and setter in interface?"
 date: 2022-04-29 13:13:00 +0900
 comments: true
 categories: angular
 tags: [class, interface, getter, setter]
 ---
 
-class의 getter와 setter에 대해 알아보고, 이를 interface에서 구현합니다. <br/>
+Let's delve into understanding getters and setters in classes and how to implement them with interfaces.
 
-## getter와 setter의 정의
-일반적으로 class는 변수를 private으로 지정하고, 함수를 통해 변수의 값을 설정하거나 가져오는데, 이 때, 해당 함수의 앞에 get과 set을 선언하며 이를 getter와 setter라고 합니다.<br/>
-<br/>
-코드로 보면 다음과 같습니다.<br/>
+## Defining Getters and Setters
+
+In object-oriented programming, classes often encapsulate data by declaring variables as `private`. Access to these variables is then controlled through methods, commonly known as getters and setters. Getters retrieve the value of a private variable, while setters modify it. The `get` and `set` keywords are used to define these special methods.<br/><br/>
+
+Here's a TypeScript example demonstrating this concept:
 
 ```tsx
 class Person {
@@ -31,10 +32,11 @@ class Person {
 
 ```
 
-Person class의 _name 변수의 값을 설정하거나 가져오려면 get name과 set name을 사용합니다.<br/>
+In this `Person` class, the `_name` variable is private. To access or modify its value, we use the `getName` and `setName` getters and setters.
 
-## 일반함수로 getter, setter를 구현할 수 있지 않을까?
-여기에서 의문이 드는 것은 일반 함수로도 다음과 같이 getter와 setter를 구현할 수 있지 않을까 하는 점입니다.<br/>
+## The Question: Can We Use Regular Functions Instead?
+
+One might wonder if regular functions can achieve the same result as getters and setters:
 
 ```tsx
 class Person {
@@ -54,16 +56,15 @@ class Person {
 
 ```
 
-위의 클래스는 getter와 setter 대신 일반 함수인 getName()과 setName()을 작성하여 변수에 접근하는 것을 볼 수 있으며, 아무런 문제 없이 동작합니다.<br/>
-그러면 과연 일반 함수와 getter, setter의 차이는 무엇일까요?<br/>
-<br/>
+The above code functions correctly. So, what differentiates regular functions from getters and setters?
 
-### 1. getter와 setter는 동일한 함수이 름을 사용할 수 있다.
-가장 큰 특징은 getter와 setter는 같은 함수 이름을 사용할 수 있다는 것입니다. <br/>
-사실 함수의 이름은 어떤 것이든 상관없지만, 일반적으로는 변수의 이름과 같은 것을 사용합니다.<br/>
+### 1. Shared Name: Getters and Setters Can Share the Same Name
 
-### 2. getter와 setter는 규칙을 반드시 따라야 한다.
-일반 함수로 구현했을 때 다음과 같이 작성하여도 문제가 없습니다.<br/>
+A key characteristic is that getters and setters can share the same name. While the function name is arbitrary, it's conventional to use the name of the variable.
+
+### 2. Strict Rules: Getters and Setters Must Adhere to Specific Rules
+
+With regular functions, you might implement something like this without issue:
 
 ```tsx
 class Person {
@@ -82,10 +83,10 @@ class Person {
   }
 }
 
-// 문제 없이 작동합니다.
+// It works.
 ```
 
-만일 getter와 setter에서 위와 같이 구현하면 어떻게 될까요?<br/>
+However, if you tried to do the same with getters and setters:
 
 ```tsx
 class Person {
@@ -104,20 +105,20 @@ class Person {
   }
 }
 
-// error가 발생합니다.
+// error occurs.
 
 ```
 
-getter와 setter는 반드시 규칙을 따라야 하며, 이를 지키지 않을 경우 에러를 발생시킵니다. <br/>
-즉, 휴먼 에러를 방지하며 목적에 맞는 정확한 구현을 요구합니다.<br/>
-규칙은 다음과 같습니다.<br/>
-- getter는 함수의 인자를 받을 수 없고, 반드시 리턴 값을 가져야 합니다.
-- setter는 반드시 함수의 인자를 받아야 하며, 리턴 값을 가질 수 없습니다.
+Getters and setters *must* follow specific rules, and violating these rules will result in errors. This helps prevent mistakes and enforces accurate implementation. The rules are as follows:
 
+- Getters cannot accept arguments and must return a value.
+- Setters must accept one argument and cannot return a value.
 
-### 3. getter와 setter는 호출 시 ()를 생략할 수 있다.
-외부에서 클래스의 getter와 setter에 접근할 때 함수의 형태를 생략할 수 있습니다. <br/>
-만일 위와 같은 Person class가 존재한다고 할 때, Person 함수의 getter와 setter를 사용하는 코드를 작성하면 다음과 같습니다.<br/>
+### 3. Concise Syntax: Getters and Setters Allow Omission of Parentheses
+
+When accessing getters and setters from outside the class, you can omit the parentheses.<br/>
+
+Consider the following usage example:
 
 ``` tsx
   class Main() {
@@ -131,14 +132,15 @@ getter와 setter는 반드시 규칙을 따라야 하며, 이를 지키지 않�
   }
 ```
 
-위의 예제를 보면 마치 Person class의 name 변수에 접근하는 것처럼 사용할 수 있는데 이는 getter와 setter으로만 가능하며, 일반 변수는 이와 같이 사용할 수 없습니다.<br/>
+In this example, accessing `person.name` looks like accessing a variable directly, which is only possible with getters and setters. Regular functions do not offer this syntactic sugar.
 
+## Implementing Variables and Functions in Interfaces
 
-## interface에서 변수와 함수 구현하기
-최종 목표인 interface에서 getter와 setter 구현하는 방법을 알아보기전에 변수와 함수를 어떻게 구현하는지를 먼저 알아보겠습니다.<br/>
+Before tackling getter and setter implementation in interfaces, let's review how to implement variables and functions within interfaces.
 
-### 변수 구현하기
-변수를 구현하는 방법은 다음과 같습니다.<br/>
+### Variable Implementation
+
+To implement variables in an interface, you can define their names and types:
 
 ```tsx
 interface Person {
@@ -147,8 +149,9 @@ interface Person {
 }
 ```
 
-### 함수 구현하기
-함수를 구현하는 방법은 다음과 같습니다.
+### Function Implementation
+
+Function implementation involves defining the function signature, including parameters and return type:
 
 ```tsx
 interface IPerson {
@@ -157,8 +160,9 @@ interface IPerson {
 }
 ```
 
-### getter와 setter 구현하기
-사실 interface는 getter와 setter를 지원하지 않으므로, 다음의 코드는 에러가 발생합니다.
+### Getter and Setter Implementation
+
+Interestingly, interfaces do *not* directly support getter and setter definitions. The following code will result in an error:
 
 ```tsx
 interface IPerson {
@@ -167,18 +171,18 @@ interface IPerson {
 }
 
 
-// 이를 클래스에 적용하면 다음과 같은 에러가 발생합니다.
+// Applying this to a class will produce an error:
 // src/app/app.component.ts: - error TS1131: Property or signature expected.
 // get name(): string;
 ```
 
-그러면 어떻게 적용할 수 있을까요?<br/>
-정답은 아닐 수 있으나 getter와 setter에 대한 이해의 폭을 넓히면 쉽게 적용할 수 있습니다.<br/>
-<br/>
-getter와 setter의 목적은 결국 private 함수에 접근하기 위해서 사용하는 함수이며, 이를 반대로 생각하면 public 변수인 경우에는 getter와 setter가 필요하지 않습니다.<br/>
-따라서, interface에서 public 변수를 선언해두면 getter와 setter 기능을 모두 포함한 private 변수를 구현하는 것과 동일한 효과가 있으며, 컴파일러도 이를 이해하여 에러를 발생히키지 않습니다.<br/>
-<br/>
-즉, Person 클래스는 다음과 같이 구현할 수 있습니다. <br/>
+How can we achieve a similar effect?<br/>
+
+The key lies in understanding the *purpose* of getters and setters: controlling access to private variables. Conversely, public variables don't necessarily *require* getters and setters.<br/><br/>
+
+Therefore, by declaring a public variable in an interface, we can achieve the same effect as implementing a private variable with associated getters and setters. The compiler will not raise an error.<br/>
+
+Here's how the `Person` interface can be defined:
 
 ```tsx
 interface IPerson {
@@ -186,7 +190,7 @@ interface IPerson {
 }
 ```
 
-맞는지 검증하기 위해 Person 클래스에 interface를 적용해 봅시다.<br/>
+To verify this, let's implement the `IPerson` interface in the `Person` class:
 
 ```tsx
 class Person implements IPerson {
@@ -206,8 +210,7 @@ class Person implements IPerson {
 }
 ```
 
-실행하면 interface에서 선언한 name 변수가 getter와 setter를 대신하고 있음을 확인할 수 있습니다.<br/>
-<br/>
-<br/>
-이 방법은 하나의 방안으로, 더 정확하고, 좋은 방법이 있다면 제보 부탁 드립니다.<br/>
+Running this code confirms that the `name` variable declared in the interface effectively acts as a substitute for getter and setter methods.<br/><br/>
+
+This approach provides a workaround for the absence of direct getter/setter support in interfaces. There might be even better solutions, so feel free to provide feedback if you have suggestions!
 

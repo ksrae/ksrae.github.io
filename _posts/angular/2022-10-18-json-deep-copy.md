@@ -5,15 +5,14 @@ comments: true
 categories: javascript
 tags: [json]
 ---
-## Deep Copy
 
-deep copy에 대한 내용은 검색을 통해 쉽게 찾아볼 수 있습니다만, 그럼에도 여기에 다시 정리하는 이유는 Deep Copy의 목적에 따라 한계가 있음이 명확히 정리되지 않은 글이 많기 때문입니다.<br/>
+## Deep Copy Explained for Developers
 
-이번 글에서는 Deep Copy란 무엇인지 간단히 알아보고, 여러 방법들을 나열하고, 가장 빠르고 정확한 방법 순서대로 정리해보려고 합니다.<br/>
+While numerous resources detail deep copying, many lack a clear articulation of its limitations relative to its intended purpose. This post aims to clarify deep copying, outline various methods, and present them in order of speed and accuracy.
 
-## Json Deep Copy의 목적
+## The Purpose of JSON Deep Copy
 
-일반적으로 Json 값을 다른 변수에 할당할 때 아래와 같이 부등호를 활용합니다.
+When assigning a JSON value to another variable, the assignment operator (=) is often used:
 
 ```
 const jsonValue = {
@@ -23,9 +22,7 @@ const jsonValue = {
 const copyValue = jsonValue;
 ```
 
-위의 예시와 같이 Json 값을 가진 jsonValue 변수를 다른 변수인 copyValue에 할당하였을 때,  값이 object인 경우 javascript는 해당 값을 별도의 메모리에 복사하지 않고, 기존 값의 주소를 참조하도록 합니다. <br/>
-그렇기 때문에 만일 복사된 copyValue 변수의 값을 변경하는 경우 이전 변수인 jsonValue의 값을 변경하게 되어 두 변수의 값이 모두 변경되는 현상이 발생합니다. <br/>
-이와 같은 방식을 Shallow Copy라고 합니다.
+In the above example, when assigning `jsonValue` to `copyValue`, JavaScript, for object values, creates a reference to the original memory location rather than copying the value to a new memory location. Consequently, modifying `copyValue` also modifies `jsonValue`, resulting in both variables reflecting the change. This behavior is known as a *Shallow Copy*.
 
 ```
 copyValue.key = 'is this a shallow copy?'
@@ -41,18 +38,15 @@ copyValue
 
 ```
 
-위의 Shallow Copy와는 반대로 복사한 object 값을 별도의 메모리에 할당하여 각각 독립적인 값으로 활용하는 방식을 Deep Copy라고 합니다. <br/>
-javascript에서는 이러한 방식을 내장함수로 제공하고 있지 않으므로 여러가지 대안들이 인터넷에 제시되어 있습니다. <br/>
-대표적으로 아래의 4가지 방법이 제시되어 있는데 각각을 알아보고 추천 여부를 정리해보려고 합니다.
+Deep Copy, conversely, allocates a new memory space for the copied object, ensuring that modifications to the copy do not affect the original. JavaScript doesn't provide a built-in deep copy function, leading to several alternative approaches. We'll examine four common methods and assess their suitability.
 
-## Json Deep Copy 의 4가지 방법
+## Four Methods for JSON Deep Copy
 
-### Json Stringify and Parsing (추천)
+### JSON Stringify and Parsing (Recommended)
 
-가장 기본적인 방법으로 json을 string으로 변경한 뒤 다시 json으로 parsing 하는 방법 입니다.
+This fundamental technique involves converting the JSON to a string and then parsing it back into JSON.<br/>
 
-가장 확실한 방법이며, [mdn에서는 javascript의 deep copy](https://developer.mozilla.org/en-US/docs/Glossary/Deep_copy)에 대해 이 방법만 소개하고 있습니다. <br/>
-아래에 소개할 재귀보다는 처리속도가 느리지만 json의 복잡도가 올라갈수록 서드파티보다 좋은 성능을 발휘하므로 처리 속도에 민감하지 않은 작업은 이 방법을 사용하시는 것을 추천합니다.
+It's a reliable method, and [MDN recommends it for JavaScript deep copying](https://developer.mozilla.org/en-US/docs/Glossary/Deep_copy). While it might be slower than recursion for simple objects, it scales well with JSON complexity, often outperforming third-party libraries. We recommend this approach for operations that are not extremely sensitive to speed.
 
 ```
 const jsonValue = {
@@ -78,9 +72,9 @@ const jsonValue = {
 const deepCopy = JSON.parse(JSON.stringify(jsonValue));
 ```
 
-### 재귀 함수 (추천)
+### Recursive Function (Recommended)
 
-재귀 함수를 작성하여 모든 키를 옮기는 방법 입니다. 복잡도와 관계 없이 처리속도가 빠르며, 배열과 같은 형태도 문제 없이 복사합니다.
+This method involves creating a recursive function that iterates through all keys and copies them. It’s generally fast, regardless of complexity, and handles arrays effectively.
 
 ```
 function cloneObject(obj) {
@@ -97,9 +91,9 @@ function cloneObject(obj) {
 };
 ```
 
-### ... 활용 (비추천)
+### Spread Operator (...) (Not Recommended)
 
-...을 통해서도 복사가 가능합니다.
+The spread operator can also be used for copying.
 
 ```
 const test = {
@@ -110,9 +104,7 @@ const test = {
 const testDeepCopy = {...test};
 ```
 
-...를 활용해도 deep copy가 가능합니다. 처리속도는 차치하고라도 가장 작성이 쉽다는 장점이 있기에 많이 선호하는 방식입니다.<br/>
-<br/>
-그러나, 이 방식은 치명적인 단점이 있습니다. 바로 ***하위 1단계만 deep copy가 가능하다***는 점입니다.  보다 더 하위 단계를 deep copy하려면 다음과 같이 진행해야 합니다.<br/>
+While the spread operator is easy to use, offering a concise syntax, it has a critical limitation: ***it only performs a deep copy for the first level of the object***. Deep copying deeper levels requires manual spreading at each level:
 
 ```
 const test = {
@@ -136,24 +128,20 @@ const testDeepCopy = {
 };
 ```
 
-이 방법은 json의 모든 구성을 알아하며, 공통으로 활용할 수 없으므로 오히려 위의 두 가지 방법보다 더 불편합니다.<br/>
-<br/>
-따라서 이 방법은 추천하지 않습니다. 혹시 타 사이트에서 이런 내용을 검색하셔서 사용하셨다면 유의하여야 합니다.
+This approach necessitates knowledge of the entire JSON structure and is not reusable, making it less convenient than the previous two methods.<br/>
 
+Therefore, we do not recommend using the spread operator for deep copying. Exercise caution if you've encountered this suggestion on other sites.
 
-
-
-### lodash의 cloneDeep 함수 활용 (비추천)
+### Using lodash's cloneDeep Function (Not Recommended)
 
 ```
 let deepCopy = _.cloneDeep(test);
 ```
 
-이 방법은 서드파티를 활용하므로 추천하지 않습니다. 또한, json의 복잡도가 올라가면 parsing 방식보다도 처리속도가 느리므로 추천하지 않습니다.<br/>
+We advise against using third-party libraries for this purpose. Furthermore, `cloneDeep`'s performance degrades with increasing JSON complexity, often being slower than the `JSON.parse(JSON.stringify())` method.<br/>
 
-해당 서드파티를 이미 사용 중이더라도 위의 추천하는 방식을 활용하시는 것을 권장 드립니다.
+Even if you're already using lodash, consider using the recommended methods above.
 
+## Conclusion
 
-## 결론
-
-매 프로젝트마다 작성해야 하는데 머리에서 즉시 떠올리며 바로 작성할 수 있는 코드는 재귀 함수 보다는 parsing 방식이 더 쉽기 때문에, 일반적으로 parsing 방식을 추천하며, 속도를 중요시 한다면 재귀함수를 사용하실 것을 추천합니다.
+For most projects, the parsing method is generally recommended because it is easier to recall and implement than the recursive approach. However, if speed is a primary concern, consider using the recursive function.
