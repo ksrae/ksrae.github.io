@@ -9,7 +9,7 @@ tags: [dynamic, component, ngcomponentoutlet]
 ## Displaying Components Conditionally with @if
 Traditionally, dynamically swapping components in a template based on a condition can be tricky. A common approach was to list multiple components in the template and use conditional rendering directives like @if or @switch to display only the desired one.
 
-```Html
+```html
 @switch (type()) {
   @case (TYPEA) { <component-a /> }
   @case (TYPEB) { <component-b /> }
@@ -24,7 +24,7 @@ While this approach is intuitive and readable in the template, it can lead to cl
 ngComponentOutlet is a powerful directive that allows you to dynamically select and render a component in your template from within your component's class (the TS file).
 Using it is straightforward: declare *ngComponentOutlet on an element where the component should be rendered and bind it to a component class.
 
-```Ts
+```ts
 // app.component.ts
 import { Component, signal, Type } from '@angular/core';
 import { CommonModule } from '@angular/common'; // For NgComponentOutlet
@@ -50,7 +50,7 @@ In this code, AppComponent's component Signal holds a reference to AComponent, s
 ## Choosing Among Multiple Components
 With ngComponentOutlet, you can easily switch the rendered component based on user interactions, like a button click.
 
-```Ts
+```ts
 // app.component.ts
 import { Component, signal, Type } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -86,7 +86,7 @@ One of the most powerful features of ngComponentOutlet is its ability to inject 
 ### Using the Injector
 The injector allows you to provide values to the dynamically created child component without using @Input. Using an InjectionToken is a common pattern.
 
-```Ts
+```ts
 // title.token.ts
 import { InjectionToken } from '@angular/core';
 export const TITLE = new InjectionToken<string>('app.title');
@@ -138,7 +138,7 @@ The content option lets you project DOM nodes into the <ng-content> slots of the
 
 Note: The value passed to content must be a 2D array (Node[][]).
 
-```Ts
+```ts
 // child.component.ts (with ng-content)
 @Component({
   standalone: true,
@@ -175,7 +175,7 @@ This allows you to pass DOM elements created and controlled by the parent compon
 ## Removing a Rendered Component
 You can remove a rendered component by simply assigning null to the component variable bound to ngComponentOutlet.
 
-```Ts
+```ts
 // app.component.ts
 // ... imports
 export class AppComponent {

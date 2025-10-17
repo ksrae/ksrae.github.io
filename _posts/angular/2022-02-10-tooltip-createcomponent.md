@@ -17,7 +17,7 @@ Let's build a dynamic tooltip that appears on hover, leveraging Angular's powerf
 ## The Container Component
 We'll create a host for our tooltips and apply our custom tooltip directive to trigger them.
 
-```Ts
+```ts
 // src/app/container.component.ts
 import { Component } from '@angular/core';
 import { TooltipDirective } from './tooltip.directive';
@@ -48,7 +48,7 @@ export class ContainerComponent {}
 ## The Dynamic Tooltip Components
 These are the simple components that will be dynamically rendered as tooltips.
 
-```Ts
+```ts
 // src/app/a-tooltip.component.ts
 import { Component } from '@angular/core';
 
@@ -62,7 +62,7 @@ export class ATooltipComponent {}
 ```
 
 
-```Ts
+```ts
 // src/app/b-tooltip.component.ts
 import { Component } from '@angular/core';
 
@@ -78,7 +78,7 @@ export class BTooltipComponent {}
 ## Creating the Directive
 This is the core logic of our example. The directive detects events and, based on its input ('A' or 'B'), dynamically creates and destroys the correct tooltip component.
 
-```Ts
+```ts
 // src/app/tooltip.directive.ts
 import {
   Directive,
