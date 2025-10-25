@@ -1,18 +1,18 @@
 ---
-title: "Highcharts-angular oneToOne 옵션으로 쉽게 데이터 업데이트 하기 - easy update with oneToOne Option"
+title: "easy update with oneToOne Option"
 date: 2022-11-28 18:11:00 +0900
 comments: true
 categories: angular
 tags: [highcharts]
 ---
 
-Highchart는 데이터를 수정하기 위한 다양한 옵션을 가지고 있고, 관련 api 문서도 잘 구성되어 있기 때문에 highcharts-angular를 사용함에 있어서도 큰 어려움이 없습니다.<br/>
-다만 모든 상황에서 모든 명령을 일일이 찾기란 번거로운 일이며, 아마도 값을 주입하는대로 적용되는 것이 가장 쉽고 빠른 방법일 것입니다.<br/>
-<br/>
-이 글에서는 options을 변경하는 즉시 적용하는 방법으로 차트를 구성하는 방법을 알아보겠습니다. <br/>
+Highcharts offers a comprehensive set of options for data manipulation and boasts well-documented APIs, facilitating a smooth experience when using `highcharts-angular`. While the extensive documentation is valuable, locating specific commands for every scenario can be cumbersome. Often, the most straightforward and efficient approach is to directly inject values for immediate application.
 
-## 일반적인 Chart 구현 방식
-일반적으로 우리는 차트를 다음과 같이 구현합니다.<br/>
+This post will explore a method for configuring charts by immediately applying changes to the `options` object.
+
+## Conventional Chart Implementation
+
+Typically, charts are implemented as follows:
 
 ```html
 <highcharts-chart 
@@ -20,6 +20,7 @@ Highchart는 데이터를 수정하기 위한 다양한 옵션을 가지고 있�
   [options]="chartOptions">
 </highcharts-chart>
 ```
+
 ```tsx
 export class HighchartsComponent implements OnInit {
   Highcharts = Highcharts;
@@ -40,20 +41,19 @@ export class HighchartsComponent implements OnInit {
 }
 ```
 
-여기에 series를 추가하고 싶다면, api 문서를 통해 이를 확인하고 해당 함수를 아래와 같이 적용할 수 있습니다.<br/>
+To add a new series to this chart, one would typically consult the API documentation to identify the appropriate function and apply it as shown below:
 
 ```tsx
 this.Highcharts.addSeries({
   data: [1,2,3,4,5,6,7,8,9,0]
 });
-
 ```
 
-이는 모든 api를 알아야하는 불편함이 있습니다. 따라서 이를 개선하기 위해 options을 직접 수정하는 방법을 알아보겠습니다.<br/>
+This approach requires familiarity with the entire API, which can be inconvenient. To mitigate this, we will explore a method for directly modifying the `options` object.
 
+## Enhanced Chart Implementation
 
-## 개선된 Chart 구현 방식
-놀랍게도 chartOptions을 직접 수정해도 chart에 적용됩니다. 만일 chart의 type을 bar로 변경하고 싶다면, 간단하게 다음과 같이 수정하면 됩니다.<br/>
+Remarkably, direct modifications to the `chartOptions` object are reflected in the chart. For instance, to change the chart type to a bar chart, the following modification suffices:
 
 ```tsx
 this.chartOptions = {
@@ -65,9 +65,9 @@ this.chartOptions = {
 }
 ```
 
-하지만 위의 예시과 같이 series를 변경하면 적용되지 않습니다. 이는 바로 옵션 onetoOne의 default값이 false이기 때문입니다. ([이전 글 참조](/highcharts-angular)) <br/>
-<br/>
-하지만, 아래와 같이 <b>onetoOne을 true로 설정하고, series를 변경하면 적용됨을 확인</b>할 수 있습니다.<br/>
+However, changes to the `series` property, as demonstrated above, will not be applied by default. This behavior stems from the `onetoOne` option's default value being set to `false`. (Refer to the [previous article](/highcharts-angular) for more details).
+
+However, by setting `onetoOne` to `true` and modifying the `series`, the changes are applied.
 
 ```html
 <highcharts-chart 
@@ -91,10 +91,4 @@ this.chartOptions = {
 
 ```
 
-이 방식의 장점은 api를 매번 확인하지 않아도 된다는 점입니다. 따라서 여러 옵션들을 빠르고 쉽게 변경할 수 있습니다.
-
-
-
-
-
-
+The primary advantage of this approach lies in bypassing the need to consult the API for every modification. This allows for quick and easy modification of various chart options, streamlining the development process.

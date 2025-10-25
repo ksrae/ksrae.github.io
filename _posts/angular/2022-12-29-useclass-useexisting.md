@@ -1,50 +1,72 @@
 ---
-title: "useClass와 useExisting의 비교 - different between useClass and useExisting"
+title: "different between useClass and useExisting"
 date: 2022-12-29 11:52:00 +0900
 comments: true
 categories: angular
 tags: [provider, useexisting, useclass]
 ---
 
-> 이번 시간은 module에서 providers를 설정 시 useClass와 useExisting 의 차이를 알아보겠습니다.
+In this post, we'll explore the difference between useClass and useExisting when configuring providers in Angular's Dependency Injection (DI) system. This concept applies equally to both NgModules and Standalone Components.
 
+## useClass
+The useClass provider recipe tells the injector to return a new instance of a specified class when a particular token is requested. In other words, when you ask for token A, the injector creates and provides a fresh instance of class B.
+Here's how to use it. You can configure this in the providers array of either a Standalone Component or an NgModule.
 
-# useClass
-Injectable class의 이름을 변경하여 사용할 수 있습니다.<br/>
-이 때, 이름은 반드시 존재하는 다른 Injectable class의 명이여야 합니다.<br/>
-<br/>
-사용법은 다음과 같습니다.<br/>
-<br/>
-```tsx
-providers: [
-  { provide: ProductService, useClass: fakeProductService }
-]
+```ts
+// In a Standalone Component's providers array
+@Component({
+  ...
+  standalone: true,
+  providers: [
+    { provide: ProductService, useClass: FakeProductService }
+  ]
+})
+
+// In an NgModule's providers array
+@NgModule({
+  ...
+  providers: [
+    { provide: ProductService, useClass: FakeProductService }
+  ]
+})
 ```
-<br/>
 
-# useExisting
-기존 토큰을 참조하되 별칭을 지정합니다.<br/>
-반드시 두 injectable class가 존재해야 합니다.<br/>
-<br/>
-```tsx
-providers: [
-   NewProductService,
-   { provide: ProductService, useExisting: NewProductService },
-];
+## useExisting
+The useExisting provider recipe creates an alias for an existing token. When you ask for token A, the injector returns the existing instance that was already created for another token (B).
+To use this approach, the token you are referencing (B) must already be registered in the providers array.
+
+```ts
+// In a Standalone Component's providers array
+@Component({
+  ...
+  standalone: true,
+  providers: [
+     NewProductService,
+     { provide: ProductService, useExisting: NewProductService },
+  ]
+})
+
+// In an NgModule's providers array
+@NgModule({
+  ...
+  providers: [
+     NewProductService,
+     { provide: ProductService, useExisting: NewProductService },
+  ]
+})
 ```
-<br/>
 
-# different between useClass and useExisting
-얼핏 보면 useClass와 useExisting은 유사해 보이는데 왜 다른 옵션을 제공하고 있을까요?<br/>
-이 두 차이를 예제를 통해 자세히 알아봅시다.<br/>
-<br/>
+## Difference between useClass and useExisting
+At first glance, useClass and useExisting may seem similar, but there's a critical difference: whether a new instance is created or an existing one is shared.
+Let's dive into an example to understand this difference clearly.
+Setting Up Services for the Example
+Let's assume we have two services. They have a similar shape, but their add methods behave differently so we can easily tell them apart.
 
-## Setting Default Services for Testing
-예를 들어 두 가지 service가 존재한다고 합시다. 두 service는 형태는 유사하지만 값이 다른 모양으로 쉽게 구분할 수 있게 구성하였습니다.<br/>
-<br/>
+```ts
+// test.service.ts
+import { Injectable } from '@angular/core';
 
-```tsx
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class TestService {
   index = 0;
 
@@ -53,10 +75,13 @@ export class TestService {
   }
 }
 ```
-<br/>
 
-```tsx
-@Injectable()
+
+```ts
+// new-test.service.ts
+import { Injectable } from '@angular/core';
+
+@Injectable({ providedIn: 'root' })
 export class NewTestService {
   index = 0;
 
@@ -67,139 +92,138 @@ export class NewTestService {
 }
 ```
 
-component에서 두 service를 매 초 호출한다고 가정합시다.<br/>
-<br/>
+Now, let's create a Standalone Component that injects these two services and calls their methods every second.
+code
 
-```tsx
+```ts
+// app.component.ts
+import { Component } from '@angular/core';
+import { TestService } from './test.service';
+import { NewTestService } from './new-test.service';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  template: `<h1>useClass vs useExisting</h1>`,
+  // The providers configuration will change in the following scenarios.
+})
 export class AppComponent {
    constructor(
       private testService: TestService,
       private newTestService: NewTestService
-} {
-   setInterval(() => {
-      console.log('test', this.testService.add());
-      console.log('newTest', this.newTestService.add());
-   }, 1000)
+   ) {
+     setInterval(() => {
+        console.log('test     ->', this.testService.add());
+        console.log('newTest  ->', this.newTestService.add());
+        console.log('---');
+     }, 1000);
+   }
 }
 ```
 
-그리고 각각의 모듈의 다른 설정의 예제를 통해 왜 이런 기능을 구분하게 되었는지 알아보겠습니다.<br/>
-<br/>
+We will now change the providers configuration in AppComponent to see how the behavior changes.
 
-## 기본 provider 설정
-일반적인 방법으로 providers에 service를 직접 설정해보고 결과를 확인해봅시다.<br/>
-<br/>
+### 1. Default Provider Configuration
+First, let's use the most common approach where each service is provided individually. Since both services are registered globally with providedIn: 'root', the result is the same even if the component's providers array is empty.
 
-```tsx
-// app.module
-...
-providers: [
-   TestService,
-   NewTestService
-]
-```
-
-결과는 예상과 같이 두 service가 각각 다르게 동작함을 확인할 수 있습니다.<br/>
-```
-// result
-test: 1
-newTest: 10
-test: 2
-newTest: 20
-test: 3
-newTest: 30
-test: 4
-newTest: 40
-```
-<br/>
-
-## useClass 활용
-useClass를 활용하여 TestService를 NewTestClassService로 명명해봅시다.<br/>
-<br/>
-
-```tsx
-// app.module
-providers: [
-   TestService,
-   {provide: NewTestService, useClass: TestService },
-]
-```
-
-결과는 NewTestService가 TestService로 전환되었으며, 기존 TestService와는 다른 Service인 것처럼 각각 다르게 동작함을 확인할 수 있습니다.<br/>
-```
-// result
-test: 1
-newTest: 1
-test: 2
-newTest: 2
-test: 3
-newTest: 3
-test: 4
-newTest: 4
-```
-<br/>
-
-## useExisting 활용
-위의 useClass와 동일한 조건에서 useClass만 useExisting으로 변경해보고 결과를 확인해봅시다.<br/>
-<br/>
-
-```tsx
-// module
-providers: [
-   TestService,
-   {provide: NewTestService, useExisting: TestService },
-]
-```
-
-결과는 NewTestService가 TestService로 전환되었으며, 기존 TestService와 마치 하나의 Service인 것처럼 데이터를 공유하고 있음을 확인할 수 있습니다. <br/>
-
-```
-// result
-test: 1
-newTest: 2
-test: 3
-newTest: 4
-test: 5
-newTest: 6
-test: 7
-newTest: 8
-``` 
-
-
-## Angular Standalone에서 useClass와 useExisting 활용
-standalone에서는 module을 사용하지 않으므로 위의 예제를 활용하려면 service에서 직접 선언해야 합니다. <br/>
-Injectable의 파라미터에서 useClass와 useExisting을 제공하므로 이를 활용할 수 있습니다.<br/>
-위의 예제를 수정해봅시다.<br/>
-
-### useClass
-```tsx
-@Injectable({
-   providedIn: 'root',
-   useClass: TestService
+```ts
+// app.component.ts
+@Component({
+  ...
+  // If the providers array is empty, dependencies are resolved from the root injector.
+  // To be explicit, the configuration would look like this:
+  providers: [TestService, NewTestService] 
 })
-export class NewTestService {
-  index = 0;
-
-  add(): number {
-    this.index += 10;
-    return this.index;
-  }
-}
+export class AppComponent { ... }
 ```
 
+#### Result:
+As expected, two separate instances are created, and each service operates independently.
 
-### useExisting
-```tsx
-@Injectable({
-   providedIn: 'root',
-   useExisting: TestService
+```
+// result
+test     -> 1
+newTest  -> 10
+---
+test     -> 2
+newTest  -> 20
+---
+test     -> 3
+newTest  -> 30
+---
+```
+
+### 2. Using useClass
+Now, let's use useClass to provide an instance of TestService whenever the NewTestService token is requested.
+
+```ts
+// app.component.ts
+@Component({
+  ...
+  providers: [
+    TestService,
+    { provide: NewTestService, useClass: TestService },
+  ]
 })
-export class NewTestService {
-  index = 0;
-
-  add(): number {
-    this.index += 10;
-    return this.index;
-  }
-}
+export class AppComponent { ... }
 ```
+
+When testService is injected: An instance of TestService is created.
+When newTestService is injected: The provider is configured with { provide: NewTestService, useClass: TestService }, so a new instance of TestService is created.
+
+#### Result:
+newTestService behaves like TestService, but it is a different instance from testService. Therefore, they do not share state.
+
+``
+// result
+test     -> 1
+newTest  -> 1
+---
+test     -> 2
+newTest  -> 2
+---
+test     -> 3
+newTest  -> 3
+---
+```
+
+### 3. Using useExisting
+Finally, let's replace useClass with useExisting under the same conditions.
+
+```ts
+// app.component.ts
+@Component({
+  ...
+  providers: [
+    TestService,
+    { provide: NewTestService, useExisting: TestService },
+  ]
+})
+export class AppComponent { ... }
+```
+
+When testService is injected: An instance of TestService is created.
+When newTestService is injected: The provider is configured with { provide: NewTestService, useExisting: TestService }, so the injector returns the already existing instance that was created for the TestService token.
+
+#### Result:
+newTestService and testService point to the exact same instance. As a result, they share their state (the index value).
+
+```
+// result
+test     -> 1
+newTest  -> 2
+---
+test     -> 3
+newTest  -> 4
+---
+test     -> 5
+newTest  -> 6
+---
+```
+
+## Conclusion
+- useClass: "When this token is requested, create a new instance of that class."
+Even if two tokens use the same class, they will get separate instances.
+- useExisting: "When this token is requested, give me the existing instance that is already associated with that other token."
+This allows two tokens to share a single instance, acting as an alias.
+Understanding this distinction allows you to leverage Angular's Dependency Injection system with greater flexibility and power.

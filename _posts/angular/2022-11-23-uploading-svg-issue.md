@@ -1,22 +1,21 @@
 ---
-title: "svg 적용 실패 해결 - How to solve svg unsafe"
+title: "How to solve svg unsafe"
 date: 2022-11-23 14:17:00 +0900
 comments: true
 categories: angular
 tags: [svg, domaanitizer]
 ---
-이미지 파일을 업로드하기 위해서는 `<input type="file">`을 사용해야하며, 이 결과를 base64 string으로 변환하면 `<img>`에 표시할 수 있습니다.
 
+To upload image files, the `<input type="file">` element must be used. After converting the result to a Base64 string, it can be displayed in an `<img>` tag.
 
+## Adding a Standard Image
 
-## 일반 image의 추가
-
-```
+```html
 <input type="file" (change)="addImage($event)">
 <img [src]="imageSrc">
 ```
 
-```
+```tsx
 addImage(file: FileList) {
    const reader = new FileReader();
    reader.readAsDataURL(file);
@@ -26,29 +25,25 @@ addImage(file: FileList) {
 }
 ```
 
-그런데 만일 svg 파일을 추가하면 다음과 같은 에러가 발생하며, 깨진 이미지를 볼 수 있습니다.
+However, if you try to add an SVG file, the following error occurs, and a broken image is displayed:
 
 ```
  unsafe:data:image/svg+xml;base64,~~~
 ```
 
+## Why Does an "Unsafe" Issue Occur When Attaching an SVG File?
 
+Because SVG files can contain JavaScript, scripts can be injected externally. Therefore, browsers determine that this is a very insecure "unsafe" state and do not display the SVG image on the screen.
 
-## 왜 svg 파일을 첨부하면 unsafe 문제가 발생하는가?
+## Solution
 
-svg 파일은 javascript를 포함할 수 있기 때문에 외부에서 파일을 통해 스크립트를 주입할 수 있습니다. 그래서 브라우저는 이를 보안에 매우 취약한 unsafe 상태로 판단하고, 화면에 svg 이미지를 표시하지 않습니다.
+You can resolve this issue by ensuring that the developer guarantees the safety of the SVG. Angular provides a built-in class called `DomSanitizer` to support this.
 
+`DomSanitizer` provides various functions. To resolve the "unsafe" issue with SVGs, you must use `bypassSecurityTrustUrl()`.
 
-## 해결방법
+```tsx
+domSanitizer = inject(DomSanitizer);
 
-unsafe를 개발자가 보장하면 이를 해결할 수 있습니다. angular에서는 이를 지원하기 위해 DomSanitizer 라고 하는 내장 클래스를 제공합니다.
-
-DomSanitizer는 다양한 함수를 제공하는데 svg의 unsafe를 해결하기 위해서는 `bypassSecurityTrustUrl()` 를 활용해야 합니다.
-
-```
-constructor(
-   private domSanitizer: DomSanitizer
-)
 addImage(file: FileList) {
    const reader = new FileReader();
    reader.readAsDataURL(file);
@@ -57,8 +52,6 @@ addImage(file: FileList) {
    }
 }
 ```
-
-
 
 ## Reference
 

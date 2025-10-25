@@ -6,56 +6,53 @@ categories: angular
 tags: [highcharts]
 ---
 
-Highcharts에서는 chart 변수에 직접 options을 주입하기 때문에 api 의 활용은 물론, 값의 수정도 쉽게 적용할 수 있습니다.<br/>
-하지만 highcharts-angular에서는 chart 변수에 직접 적용하려고 하면 다른 상황을 겪게 됩니다.<br/>
-<br/>
-이 글에서는 highcharts-angular에서 highcharts와 같이 charts 변수에 접근하는 방법을 알아보겠습니다.<br/>
+In Highcharts, you can directly inject options into the `chart` variable, making it easy to utilize the API and modify values. However, in highcharts-angular, attempting to apply options directly to the `chart` variable leads to a different outcome.
 
-## Highcharts 에서 chart 변수 접근하기
+This article explores how to access the `charts` variable in highcharts-angular, similar to how it's done in Highcharts.
 
-Highcharts에서는 아래와 같이 chart 변수에 직접 `Highchart.chart`를 주입합니다. <br/>
+## Accessing the Chart Variable in Highcharts
+
+In Highcharts, you directly inject `Highcharts.chart` into the `chart` variable, as shown below:
 
 ```tsx
 export HighchartsComponent implements OnInit {
   chart: any;
 
   ngOnInit() {
-    this.chart = Highchart.chart({
+    this.chart = Highcharts.chart({
       ...
     })
   }
 }
 ```
 
-따라서 chart 변수를 직접 접근하면 되므로 어렵지 않습니다.<br/>
+Therefore, accessing the `chart` variable directly is straightforward.
 
 ```tsx
 const series = this.chart.series;
 ```
 
+## Accessing the Chart Variable in Highcharts-angular
 
-## Highcharts-angular 에서 chart 변수 접근하기
+In Highcharts-angular, accessing options from the `chart` variable appears complex because the `chart` variable's structure differs from that of Highcharts. Additionally, directly accessing the visible `Chart` variable is restricted and inconvenient.
 
-Highcharts-angular에서는 chart 변수에서 options에 접근하려면 chart 변수값이 Highcharts와는 다른 구조로 되어 있어 매우 복잡해 보입니다. 또한 눈에 보이는 Chart 변수에 직접 접근을 시도하면 제약이 많아 불편합니다.<br/>
+## Solution 1 - Highcharts.charts[0]
 
-## 해결 방안 1 - Highcharts.charts[0]
+The solution is to access the `charts[]` variable, which is an array, instead of the directly visible `Chart` variable. If there's only one chart, you can access it via `charts[0]`. This will give you a value equivalent to the `chart` variable in Highcharts.
 
-답은 바로 눈에 보이는 Chart 변수가 아닌 배열로 구성된 charts[] 변수에 접근 하는 것입니다. 차트가 하나라면 chart[0]에 접근할 수 있으며, 이제 비로소 highcharts에서의 chart 변수값과 같은 값을 가짐을 확인할 수 있습니다.<br/>
-<br/>
-즉, highcharts의 this.chart 는 highcharts-angular의 `this.Highcharts.charts[0]`과 같다고 할 수 있습니다.<br/>
+In essence, `this.chart` in Highcharts is equivalent to `this.Highcharts.charts[0]` in highcharts-angular.
 
 ```tsx
 const series = this.Highcharts.chart[0].series;
 ```
 
+## Solution 2 - callbackFunction
 
-## 해결 방안 2 - callbackFunction
+The disadvantage of the previous method is that you need to know the chart's index. If the index is incorrect, you might inadvertently issue commands to the wrong chart. In contrast, `callbackFunction` is easier to use because the parameter value *is* the chart.
 
-위의 방법의 단점은 chart의 index를 알아야한다는 점 입니다. 즉, index를 모르면 잘못된 chart에 명령을 내릴 수 있는 여지가 있습니다. 반면에 callbackFunction은 파라미터 값이 곧 chart 이므로 사용하기 쉽다는 장점이 있습니다.<br/>
-<br/>
-callbackFunction은 chart 생성 시 자신의 chart 변수를 전달해줍니다. 이는 반드시 컨트롤하는 chart를 의미하므로 실수할 여지가 없고, chart 생성 시점에 값을 받으므로 명령이 생성 이전에 주입될 걱정도 덜 수 있습니다.<br/>
-<br/>
-작성 방법은 다음과 같습니다. 이 예제에서는 callback을 받아 상위로 전달하는 코드를 작성해보았습니다.<br/>
+The `callbackFunction` provides its own `chart` variable during chart creation. Since this variable always represents the chart being controlled, there's less room for error, and because the value is received at chart creation, there's less concern about commands being injected before creation.
+
+The implementation is as follows. This example demonstrates creating code that receives the callback and passes it up.
 
 ```html
 <highcharts-chart>
@@ -76,15 +73,15 @@ export class HighchartsComponent {
 }
 ```
 
-주의:
-이 방식의 가장 큰 문제점은 chart 명령어를 통해 print 기능이나 또는 export image 기능을 활용할 경우 1회만 실행이 가능하다는 것입니다. 여러번 이상 실행할 경우 chart값이 undefined 라는 오류를 일으키며, 동작하지 않습니다.
+**Caution:**
 
+The biggest issue with this method is that print or export image functionalities using the chart command can only be executed once. Executing them multiple times results in a "chart value is undefined" error, and the functions will not work.
 
-## 해결 방안 3 - chartInstance
+## Solution 3 - chartInstance
 
-highchart-angular는 생성 시 chartInstance를 만듭니다. 이 값을 output을 활용해 외부로 전달하여 사용하는 방식입니다.
-이 방식은 위의 callback과 동일한 기능을 제공하지만 callback에서 발견된 문제점도 해결할 수 있습니다.
-즉, print나 export 기능을 중복 실행해도 문제없이 수행이 가능하다는 점입니다.
+highchart-angular creates a `chartInstance` upon creation. This method uses output to pass this value externally for use.
+This method provides the same functionality as the callback above, but it also resolves the issue discovered in the callback.
+In other words, print and export functionalities can be executed multiple times without issue.
 
 ```html
 <highcharts-chart>
@@ -115,4 +112,3 @@ export class HighchartsContainerComponent {
 
 }
 ```
-

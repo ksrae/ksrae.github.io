@@ -1,64 +1,63 @@
 ---
-title: "브라우저 닫을 때 이벤트 정리 - How to handle browser close (unload event)"
+title: "How to handle browser close (unload event)"
 date: 2022-12-01 10:47:00 +0900
 comments: true
 categories: angular
 tags: [unload, beforeunload]
 ---
 
-> 이번 시간은 Browser를 닫을 때 이벤트를 처리하는 방법에 대해 정리해보고 예제를 통해 알아보겠습니다.
+> This article explores how to handle browser close events, providing examples and a structured overview of the relevant events.
+> 
 
 <br/>
 
-# Beforeunload & Unload Event
+# Beforeunload & Unload Events
 
-browser를 닫을 경우 beforeunload와 unload 두 가지 이벤트가 발생합니다.
-
-우선 각각의 이벤트에 대해 알아봅시다.
+When a browser is closed, two events are triggered: `beforeunload` and `unload`. Let's examine each of these events in detail.
 
 <br/>
 
 ## beforeunload
 
-document unload를 진행하기 전에 이벤트가 발생합니다. document는 여전히 visible 상태이며 이 이벤트는 취소 가능합니다.
+The `beforeunload` event is fired before the document unloads. At this point, the document is still visible and the event can be cancelled.
 
-이 이벤트가 발생하면 confirm 이벤트가 발생하며, 이 때 unload를 진행하거나 또는 취소 할 수 있습니다.
+When this event occurs, a confirmation event is triggered, allowing you to either proceed with the unload or cancel it.
 
-단, confirm 이벤트를 발생시키려면 `preventDefault()` 또는 `return false` 를 구현해야 합니다.
+Note that to trigger the confirmation event, you must implement `preventDefault()` or `return false`.
 
 <br/>
 
 ## unload
 
-beforeunload 이후에 발생하는 이벤트 입니다. 일반적으로 document가 unload 될 때 발생하는 이벤트로,
+The `unload` event fires after the `beforeunload` event. It is generally triggered when the document is being unloaded. Key characteristics include:
 
-- 모든 리소스가 아직 존재합니다.
-- 존재하지만 user는 더이상 리소스를 볼 수 없습니다.
-- UI 이벤트는 동작하지 않습니다. (open, alert, confirm 등)
-- unload 이벤트는 어떠한 상황에도 취소할 수 없습니다.
+- All resources still exist.
+- Resources exist but are no longer visible to the user.
+- UI events (e.g., `open`, `alert`, `confirm`) do not function.
+- The `unload` event cannot be cancelled under any circumstances.
 
 <br/>
 
 # Angular Example
 
-angular에서는 `@Hostlistener` 를 통해 이벤트를 받아 처리합니다.
+In Angular, you can handle these events using the `@HostListener` decorator.
 
 <br/>
 
 ## beforeunload
 
-### 별도의 함수에서 처리하는 방법
+### Handling in a Separate Function
 
-```
-  @HostListener(`window:beforeunload`, [ `$event` ])
+```tsx
+  @HostListener('window:beforeunload', ['$event'])
   beforeunload(e: any) {
     return false;
   }
 ```
 
-### OnDestroy에서 처리하는 방법
+### Handling in OnDestroy
 
-```
+```tsx
   @HostListener('window:beforeunload')
   ngOnDestroy() {
     console.log('destroy');
@@ -68,51 +67,51 @@ angular에서는 `@Hostlistener` 를 통해 이벤트를 받아 처리합니다.
 
 <br/>
 
-# Avoid unload Event
+# Avoiding the unload Event
 
-unload 이벤트는 더이상 사용하지 않을 것을 권장합니다. 이유는 다음과 같습니다.
+It is generally recommended to avoid using the `unload` event due to the following reasons:
 
-- 모바일 유저가 접속한 뒤 다른 앱으로 전환한 뒤 app manager를 통해 browser를 닫을 경우 unload 이벤트가 동작하지 않습니다.
-- unload event 이후에는 bfcache는 발생하지 않습니다.
-- 일부 페이지에서는 unload 이벤트가 있는 페이지의 경우 bfcache를 적용하지 않으며 이는 매우 좋지 않은 performance를 유발합니다.
-- 일부 브라우저는 bfcache 이슈로 unload 이벤트를 금지합니다.
-
-<br/>
-
-# Why Alert, Confirm not working?
-
-HTML 규약에 따르면 window.alert, window.confirm, window.prompt 이벤트는 무시됩니다.
-
-또한 최신 브라우저의 대부분은 더 강화된 보안에 따라 browser의 confirm message를 더이상 customize할 수 없습니다.
+- On mobile, if a user switches to another app and then closes the browser through the app manager, the `unload` event may not be triggered.
+- The `bfcache` is not triggered after an `unload` event.
+- Some pages with `unload` events will not have `bfcache` applied, resulting in poor performance.
+- Some browsers disable the `unload` event due to `bfcache` issues.
 
 <br/>
 
-# Why Not Fire Such Events?
+# Why Alert, Confirm Are Not Working?
 
-beforeunload 또는 unload event는 다음의 현상에 동작합니다.
+According to HTML specifications, `window.alert`, `window.confirm`, and `window.prompt` events are ignored within `unload` handlers.
 
-- browser를 닫음
-- 해당 tab을 닫음
-- 해당 tab에서 refresh를 시도함 (f5 또는 브라우저의 refresh button 또는 스크립트에서 강제 실행 등)
-- back 또는 forward (브라우저의 버튼 또는 스크립트에서 강제 실행)
-
-그런데 막상 구현하여 테스트를 해보면 이벤트가 전혀 동작하지 않는 것을 확인할 수 있습니다.
-
-최신 브라우저들은 페이지 내에서 유저의 동작이 없는 경우 탭 또는 브라우저를 닫을 때 beforeunload 또는 unload 이벤트를 발생시키지 않고 즉시 닫아버리기 때문입니다.
-
-따라서 해당 이벤트를 적용하려면 닫기 전에 반드시 페이지 내에서 활동을 (최소한 화면 drag라도) 해야 적용됩니다.
+Furthermore, most modern browsers have enhanced security measures in place, and you can no longer customize the browser's confirmation message.
 
 <br/>
 
-# 대안 Event
+# Why Events Might Not Fire
+
+The `beforeunload` or `unload` events should be triggered under the following circumstances:
+
+- Closing the browser
+- Closing the tab
+- Refreshing the tab (using F5, the browser's refresh button, or script-initiated refresh)
+- Navigating back or forward (using the browser's buttons or script-initiated navigation)
+
+However, you might find that these events do not always work as expected during implementation and testing.
+
+This is because modern browsers will immediately close a tab or browser without firing the `beforeunload` or `unload` events if there has been no user activity on the page.
+
+Therefore, to ensure these events are triggered, users must interact with the page (even just dragging the screen) before closing it.
+
+<br/>
+
+# Alternative Events
 
 ## visibilitychange
 
-browser의 모든 변화를 감지하고 이를 알려줍니다.
+The `visibilitychange` event detects and reports all changes in the browser's visibility state.
 
-다만, 최소화 여부 일 때만 감지가 가능하며, (최소화 = hidden, 최소화가 아닐 때 = visible) close는 감지할 수 없으므로, 이 Event는 unload에는 적합하지 않습니다.
+However, it can only detect minimization (i.e., hidden) and visibility changes. It cannot detect when the browser is closed. Therefore, this event is not suitable as a direct replacement for `unload`.
 
-```
+```tsx
   @HostListener('document:visibilitychange', ['$event'])
   visibilitychanges() {
     console.log(document.visibilityState);
@@ -124,16 +123,16 @@ browser의 모든 변화를 감지하고 이를 알려줍니다.
 
 ## pagehide
 
-unload 이벤트의 대안으로 추천하는 방법입니다.
+The `pagehide` event is a recommended alternative to the `unload` event.
 
-그 이유는 바로 bfcache의 적용 때문인데 pagehide를 활용할 경우 bfcache의 영향을 받지 않아 페이지의 performance에 영향을 주지 않기 때문입니다.
+The primary reason for this recommendation is the behavior of the `bfcache`. Using `pagehide` does not affect `bfcache` and, therefore, does not negatively impact page performance.
 
-따라서 많은 블로그들이 이 Event를 대안으로 내세우고 있습니다. 이와 반대로 load 이벤트의 대안으로 pageshow Event가 있습니다.
+Many developers recommend this event as an alternative. The `pageshow` event is the recommended alternative to the `load` event.
 
-참고로 이 이벤트는 unload의 대안이므로 취소가 불가능합니다.
+Note that this event, as an alternative to `unload`, cannot be cancelled.
 
-```
-  @HostListener(`window:pagehide`, [ `$event` ])
+```tsx
+  @HostListener('window:pagehide', ['$event'])
   pageHide(e: any) {
     e.preventDefault();
   }
@@ -141,21 +140,21 @@ unload 이벤트의 대안으로 추천하는 방법입니다.
 
 <br/>
 
-# beforeunload 와 pagehide 함께 사용하기
+# Using beforeunload and pagehide Together
 
-일반적으로 beforeunload 이벤트가 동작하면 pagehide는 동작하지 않습니다.
+Typically, when the `beforeunload` event is triggered, the `pagehide` event is not.
 
-그러나 refresh 일 때는 beforeunload 이후 pagehide가 동작합니다. (이는 unload 이벤트가 동작하는 방식과 같습니다.)
+However, during a refresh, the `pagehide` event is triggered *after* the `beforeunload` event (similar to how the `unload` event behaves).
 
-따라서 만일 refresh 시에만 처리해야할 로직이 있는 경우 함께 사용할 수 있습니다.
+Therefore, you can use these events together if you have logic that should only be executed during a refresh.
 
-```
-  @HostListener(`window:pagehide`, [ `$event` ])
+```tsx
+  @HostListener('window:pagehide', ['$event'])
   pageHide(e: any) {
     console.log('pagehide');
   }
 
-  @HostListener(`window:beforeunload`, [ `$event` ])
+  @HostListener('window:beforeunload', ['$event'])
   beforeunload(e: any) {
     console.log('beforeunload')
     return false;
@@ -168,6 +167,6 @@ unload 이벤트의 대안으로 추천하는 방법입니다.
 
 [unload event](https://developer.mozilla.org/en-US/docs/Web/API/Window/unload_event)
 
-[becache](https://web.dev/bfcache/#only-add-beforeunload-listeners-conditionally)
+[bfcache](https://web.dev/bfcache/#only-add-beforeunload-listeners-conditionally)
 
 [custom confirmation message is not working](https://stackoverflow.com/questions/38879742/is-it-possible-to-display-a-custom-message-in-the-beforeunload-popup)

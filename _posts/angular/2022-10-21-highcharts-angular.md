@@ -6,15 +6,15 @@ categories: angular
 tags: [chart, highcharts]
 ---
 
-Highcharts-Angular는 Highcharts를 Angular에서 사용하기 쉽도록 작성된 library 입니다.<br/>
-<br/>
-이 글에서는 Highcharts와 Highcharts-Angular를 설치하는 방법을 알아보고,<br/>
-Highchart-Angular에서 제공하는 기본 Input에 대하여 정리하겠습니다.<br/>
-<br/>
+Highcharts-Angular is a library designed to simplify the integration of Highcharts into Angular applications.
 
-## 왜 Highcharts-Angular를 사용하는가?
-Highcharts는 사실 다른 library를 추가로 설치하지 않아도 Angular 환경에서 충분히 사용할 수 있습니다.<br/>
-예를 들어 Angular에서 다음과 같이 작성하면 highcharts-angular의 도움 없이도 충분히 사용이 가능합니다.<br/>
+This guide will cover the installation of Highcharts and Highcharts-Angular, followed by an overview of the essential input properties provided by Highcharts-Angular.
+
+## Rationale for Using Highcharts-Angular
+
+While Highcharts can be utilized in Angular without additional libraries, as demonstrated below, Highcharts-Angular offers significant advantages.
+
+For instance, you can directly render a Highcharts chart in Angular like this:
 
 ```html
 <div id="chart-line"></div>
@@ -22,7 +22,9 @@ Highcharts는 사실 다른 library를 추가로 설치하지 않아도 Angular 
 
 ```tsx
 import * as Highcharts from 'highcharts';
-
+@Component({
+  ...
+})
 export class HighchartsComponent implements OnInit {
   chart: any;
 
@@ -40,37 +42,48 @@ export class HighchartsComponent implements OnInit {
 }
 ```
 
-### 그러면 왜 highcharts-angular를 활용하는 것이 좋을까요?
-- zone.js의 이벤트를 handling할 수 있습니다. zone의 도움 없이 강제로 이벤트를 fire 하거나 또는 로직을 수행하고 angular outside에 태워 이벤트를 강제로 태우지 않을 수도 있습니다.<br/>
-- option만 주입하는 간단한 형태로 코드를 구성할 수 있습니다. 즉, 이전에는 Highcharts.chart를 통해 인스턴스를 생성하고, 이를 컨트롤했다면 highcharts-angular는 옵션만 해당 component에 주입하면 적용되는 형태로 간단해졌습니다. 만일 기존 코드를 동일하게 구성하려면 observable 패턴을 구성해야 하는 번거로움이 있습니다.<br/>
-- 원한다면 highcharts-angular에서 chart 인스턴스를 output하여 활용할 수도 있습니다. 차트를 작성하는 코드 구성은 간단해지면서도 모든 기능을 다룰 수 있는 형태를 갖추고 있습니다.<br/>
-- chart의 명령을 몰라도 옵션을 컨트롤하여 chart의 대부분의 기능을 사용할 수 있습니다. 관련해서는 다음에 보다 더 자세히 다룰 예정입니다.<br/>
+### Benefits of Highcharts-Angular
 
+Consider using Highcharts-Angular for the following reasons:
 
-## How to Set-up
+- **Zone.js Integration:** Simplifies handling zone.js events. Avoid manual event triggering or executing logic outside Angular zones.
+- **Simplified Component Structure:** Reduces code complexity by injecting options directly into the component, eliminating the need to create Highcharts instances via `Highcharts.chart` and manage them manually. Implementing the equivalent functionality with vanilla Highcharts requires an observable pattern, adding unnecessary complexity.
+- **Chart Instance Access:** Provides the option to output and utilize the chart instance from Highcharts-Angular, offering flexibility without sacrificing code simplicity.
+- **Declarative Configuration:** Enables chart customization through options, minimizing the need for direct manipulation of chart commands. (A detailed discussion on this will follow in a future post.)
 
-당연한 말이겠지만 highcarts-angular를 사용하기 위해서는 반드시 highcharts를 install 해야 합니다.<br/>
-또한 highcharts-angular는 module을 반드시 import 해야 합니다.<br/>
+## Setup Instructions
+To begin, ensure that Highcharts and the Highcharts-Angular wrapper are installed.
 
-```
+```bash
 npm i highcharts
-npm i highcharts-anguilar
+npm i highcharts-angular
 ```
+
+In modern Angular applications using standalone components, you no longer need to declare HighchartsChartModule in an NgModule. Instead, you import it directly into the component that will use the chart.
+Import HighchartsChartModule into the imports array of your standalone component's decorator like this:
 
 ```tsx
-import { HighchartsChartModule } from 'highcharts-angular'
-...
-@NgModule({
-   imports: [
-      HighchartsChartModule
-   ]
+import { Component } from '@angular/core';
+import { HighchartsChartModule } from 'highcharts-angular';
+
+@Component({
+  selector: 'app-your-chart-component',
+  standalone: true,
+  imports: [
+    HighchartsChartModule // Import the module here
+  ],
+  template: `<!-- Your highcharts-chart component will go here -->`
 })
+export class YourChartComponent {
+  // Component logic
+}
 ```
 
-## How to Use
+## Usage Guide
 
-### Template
-highcharts-angular에서 제공하는 기본 옵션은 다음과 같습니다.<br/>
+### Template Configuration
+
+Highcharts-Angular provides the following essential options:
 
 ```html
 <highcharts-chart 
@@ -82,24 +95,21 @@ highcharts-angular에서 제공하는 기본 옵션은 다음과 같습니다.<b
   [oneToOne]="oneToOneFlag"
   [runOutsideAngular]="runOutsideAngularFlag">
 </highcharts-chart>
-
 ```
 
-Attribute를 살펴 보면 다음과 같습니다.<br/>
-- `highcharts: typeof Highcharts // required`, highcharts 변수를 전달해야 합니다.<br/>
-- `chartConstructor: string = 'chart'; // optional`, chart의 종류를 정의 합니다. 가능한 옵션은 'chart', 'stockChart', 'mapChart', 'ganttChart' 입니다.<br/>
-- `chartOptions: Highcharts.Options = { ... }; // required`, 차트를 구성하는 값을 전달해야 합니다.<br/>
-- `chartCallback: Highcharts.ChartCallbackFunction = function (chart) { ... } // optional`, 생성된 차트의 callback 함수입니다.<br/>
-- `updateFlag: boolean = false; // optional`, chart 생성 후 조작할 때 update를 true로 주면 강제로 trigger 할 수 있습니다. true 값은 trigger가 적용되면 false로 변경됩니다.<br/>
-- `oneToOneFlag: boolean = true; // optional`, seires, xAxis, yAxis를 추가 또는 제거할 때 사용합니다. update와는 다르게 기존 값을 입력된 값으로 교체하지 않고, 주입된 값을 기존 값에 추가 또는 제거하는 방식으로 적용합니다.<br/>
-- `runOutsideAngular: boolean = false; // optional`, 강제로 not trigger 됩니다. 이후 updateFlag를 통해 한꺼번에 trigger를 시도하면 좋은 효율을 가질 수 있습니다. <br/>
+Attribute Details:
 
+- `highcharts: typeof Highcharts // required`: Pass the Highcharts variable.
+- `chartConstructor: string = 'chart'; // optional`: Defines the chart type. Available options include 'chart', 'stockChart', 'mapChart', 'ganttChart'.
+- `chartOptions: Highcharts.Options = { ... }; // required`: Specifies chart configuration values.
+- `chartCallback: Highcharts.ChartCallbackFunction = function (chart) { ... } // optional`: Callback function executed after chart creation.
+- `updateFlag: boolean = false; // optional`: Forces an update after chart creation. Set to true to trigger an update; it automatically resets to false after the update.
+- `oneToOneFlag: boolean = true; // optional`: Controls the addition or removal of series, xAxis, and yAxis. Unlike `updateFlag`, this appends or removes values instead of replacing existing ones.
+- `runOutsideAngular: boolean = false; // optional`: Prevents change detection. Use in conjunction with `updateFlag` for improved performance.
 
-### Component
+### Component Implementation
 
-위에서 required로 전달할 값을 정의하는 법을 알아보고, highcharts를 import 하는 방법을 알아봅시다.<br/>
-highcharts는 별도의 d.ts를 제공하지 않으므로 declare된 모든 값을 import 해야 합니다.<br/>
-
+Let's examine how to define the required properties mentioned above and import Highcharts. Note that Highcharts does not provide a dedicated d.ts file; therefore, all declared values must be imported.
 
 ```tsx
 import * as Highcharts from 'highcharts';
@@ -119,23 +129,24 @@ export class HighchartsComponent {
   oneToOneFlag = false;
   runOutsideAngularFlag = false;
 }
-
 ```
 
-## Loading Module / Plugin
-highcharts는 추가 모듈을 제공하는데 이를 typescript 또는 angular 에서 import하려면 일반적이지 않은 방법을 적용해야 합니다. 해당 module을 import한 뒤 import한 모듈에 정의한 chart 변수를 주입해야 합니다. <br/>
-Plugin도 방식은 동일합니다.<br/>
+## Module/Plugin Loading
 
+Loading additional Highcharts modules in TypeScript/Angular requires a specific approach: Import the module and then inject the Highcharts variable defined in the imported module.
+
+The same applies to plugins.
 
 ```tsx
 import HC_exporting from 'highcharts/modules/exporting';
 HC_exporting(Highcharts);
 ```
 
+## Server-Side Rendering (SSR)
 
-## SSR
-ssr에서는 highchart가 로드되기 전에 호출되는 것을 방지하기 위해 chart 변수에 값이 정의되기 전에 화면에 노출되지 않도록 ngIf를 추가해야 합니다. <br/>
-그렇지 않으면 아직 값이 적용되지 않은 변수를 highcharts-angular에 주입을 시도하므로 에러가 발생합니다.
+When using SSR, prevent errors by ensuring that the chart variable is defined before rendering the component. Use `ngIf` to conditionally render the `highcharts-chart` component.
+
+Otherwise, Highcharts-Angular might attempt to use an undefined variable.
 
 ```html
 <highcharts-chart 
