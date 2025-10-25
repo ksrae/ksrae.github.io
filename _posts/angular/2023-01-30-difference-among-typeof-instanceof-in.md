@@ -1,65 +1,67 @@
 ---
-title: "typeof, instanceof, keyof and in의 차이점(difference among typeof, instanceof, keyof and in)"
+title: "difference among typeof, instanceof, keyof and in"
 date: 2023-01-30 11:07:00 +0900
 comments: true
 categories: angular
 tags: [typescript, instanceof, typeof, keyof, in]
 ---
 
-> TypeScript에서 typeof, instanceof, keyof, in 연산자는 각각 다음과 같은 역할을 합니다.
+> In TypeScript, the `typeof`, `instanceof`, `keyof`, and `in` operators each serve distinct roles in type manipulation and object inspection. This post will delve into each of these operators, providing clear examples and use cases.
+> 
 
-## typeof 연산자
-typeof 연산자는 변수 또는 값의 타입을 반환하는 데 사용됩니다.
+## `typeof` Operator
 
-```javascript
+The `typeof` operator is used to determine the type of a variable or value at runtime. It returns a string indicating the type.
+
+```jsx
 let myNumber = 123;
-console.log(typeof myNumber); // 출력: number
+console.log(typeof myNumber); // Output: number
 
 let myString = "hello";
-console.log(typeof myString); // 출력: string
+console.log(typeof myString); // Output: string
 ```
 
-위 예제에서 myNumber 변수의 타입은 number이므로 number가 출력됩니다. 또한 myString 변수의 타입은 string이므로 string이 출력됩니다.
+In the example above, `typeof myNumber` returns `"number"` because `myNumber` is a number. Similarly, `typeof myString` returns `"string"` because `myString` is a string.
 
-### 확인 가능한 자료형
-확인 가능한 자료형은 다음과 같습니다.
+### Returnable Types
 
-- "undefined": undefined
-- "boolean": boolean
-- "number": 일반적인 숫자형 Number
-- "bigint": Number보다 큰 숫자형
-- "string": string
-- "symbol": Symbol (ECMAScript 2015에서 추가됨)
-- "function": 함수형
-- "object": 다른 모든 객체
+The following types can be returned by the `typeof` operator:
 
-> number는 64비트 부동소수점 포멧입니다. 자세한 내용은 [링크](https://en.wikipedia.org/wiki/Double-precision_floating-point_format)를 확인하세요.
+- `"undefined"`: For `undefined` values.
+- `"boolean"`: For boolean values.
+- `"number"`: For numeric values (Number).
+- `"bigint"`: For numbers larger than the Number type.
+- `"string"`: For string values.
+- `"symbol"`: For Symbol values (introduced in ECMAScript 2015).
+- `"function"`: For functions.
+- `"object"`: For all other objects, including arrays and null.
 
-> bigint는 [Arbitrary-precision arithmetic](https://en.wikipedia.org/wiki/Arbitrary-precision_arithmetic) 를 참고하세요.
+> Note that number is a 64-bit floating point format. See [Double-precision floating-point format](https://en.wikipedia.org/wiki/Double-precision_floating-point_format) for more details.
+> 
 
-## instanceof 연산자
-instanceof 연산자는 객체가 특정 클래스의 인스턴스인지 확인하는 데 사용됩니다.<br/>
-<br/>
-javascript에서는 함수의 prototype이 존재하는지 여부를 확인하며, <br/>
-typescript에서는 class의 데이터 형인지 여부를 확인합니다.<br/>
-<br/>
-boolean 형을 리턴합니다.<br/>
+> `bigint` is for [Arbitrary-precision arithmetic](https://en.wikipedia.org/wiki/Arbitrary-precision_arithmetic).
+> 
 
-```js
+## `instanceof` Operator
+
+The `instanceof` operator checks if an object is an instance of a particular class or constructor function.
+
+In JavaScript, it verifies the existence of a function's `prototype`. In TypeScript, it confirms whether a variable conforms to the datatype of a class. It returns a boolean value.
+
+```jsx
 function Car(make, model, year) {
-this.make = make;
-this.model = model;
-this.year = year;
+  this.make = make;
+  this.model = model;
+  this.year = year;
 }
 
 const auto = new Car('Honda', 'Accord', 1998);
-console.log(auto instanceof Car);
+console.log(auto instanceof Car); // true
 Car.prototype = {};
-console.log(auto instanceof Car);
+console.log(auto instanceof Car); // false
 ```
 
-auto가 Car의 prototype을 가졌으므로 첫번째 console.log의 값은 true가 됩니다.<br/>
-그러나 만일 두번째 console.log의 케이스와 같이 auto를 선언한 후에 Car를 다른 값으로 변경했으므로, 값은 false가 됩니다. <br/>
+In the first `console.log`, `auto` is an instance of `Car`, so it returns `true`. However, after changing `Car.prototype`, the second `console.log` returns `false` because `auto` is no longer considered an instance of the modified `Car` constructor.
 
 ```tsx
 class User {
@@ -70,95 +72,83 @@ class User {
 }
 
 const person = new User('username');
-console.log(person instanceof User);
+console.log(person instanceof User); // true
 ```
 
-person은 User Class 형을 가지므로 true가 됩니다.
+`person` is an instance of the `User` class, so the expression returns `true`.
 
+### Type Guard
 
-### type guard
-
-두 가지 이상의 class에 동일한 interface가 존재할 때 instanceof 를 통해 이 interface가 정확히 어떠한 class의 것인지를 지정해줍니다.
+When multiple classes implement the same interface, `instanceof` helps to determine the specific class of an object, implementing a type guard.
 
 ```tsx
-class Foo{}
-class Bar extends Foo{}
-class Bas{}
+class Foo {}
+class Bar extends Foo {}
+class Bas {}
 
 var bar = new Bar();
 console.log(bar instanceof Bar); // true
 console.log(bar instanceof Foo); // true
 console.log(bar instanceof Object); // true
 console.log(bar instanceof Bas); // false
-
 ```
 
-위의 코드에서 bar는 Bar 형으로 선언되어 있으며, Bar는 Foo를 상속하고 있습니다.<br/>
-이 때 bar는 console.log를 통해 Foo 또는 Bar일 때 true값을 리턴합니다.<br/><br/>
-type guard는 여기에서 하나 더 나아가 bar가 Foo타입인지 Bar타입인지 조건을 보고 그에 맞는 행동만을 수행하도록 합니다.<br/><br/>
-특히 generic 타입의 경우 이렇게 하지 않으면 타입 오류가 발생하여 에러가 나므로 함수를 수행하기 전에 반드시 type guard를 통해 타입을 명확히 하도록 해야 합니다.
+Here, `bar` is declared as type `Bar`, inheriting from `Foo`. The `console.log` statements return `true` when checking against `Foo` or `Bar`. A type guard goes further, ensuring that actions are performed based on the specific type (Foo or Bar) of `bar`. Especially with generic types, this prevents type errors by ensuring clarity before function execution.
 
+## `keyof` Operator
 
-## keyof 연산자
-keyof 키워드는 객체 타입의 프로퍼티 이름의 타입을 정의할 때 사용합니다.
+The `keyof` operator is used to create a union of keys from an object type.
 
-### Json
+### JSON
 
-```javascript
+```jsx
 let myObject = { name: "John", age: 30 };
-let myObjectKey: keyof typeof myObject; // name, age
+let myObjectKey: keyof typeof myObject; // 'name' | 'age'
 myObjectKey = 'name';
-
 ```
 
-위 예제에서 myObjectKey 변수는 myObject 객체의 프로퍼티 이름(name과 age)의 타입을 나타냅니다.<br/>
-keyof 키워드를 사용하면 객체 타입의 프로퍼티 이름을 타입으로 지정하여 객체 타입의 프로퍼티 이름에 대한 타입 안정성을 높일 수 있습니다.<br/><br/>
-이 때, 유의할 점은 typeof와 함께 사용해야 원하는 값을 얻을 수 있다는 점입니다.<br/>
-type 변수에서는 조금 더 간단하게 작성할 수 있습니다.<br/>
-
+In this example, `myObjectKey` can be either `"name"` or `"age"` because `keyof typeof myObject` creates a union of the keys of `myObject`. Using `keyof` enhances type safety by restricting the possible values of `myObjectKey` to the existing keys of `myObject`. Note the necessity of combining with `typeof` to achieve the desired result. Type variables offer a simpler approach.
 
 ### Type
-keyof 키워드를 Type 변수에서도 사용할 수 있습니다.
 
-```typescript
+The `keyof` operator can also be used with Type variables.
+
+```tsx
 type User = { name: string, age: number, address: string };
 let userKey: keyof User;
-// name, age, address
+// 'name' | 'age' | 'address'
 ```
 
-위 예제에서 userKey 변수는 User 객체의 프로퍼티 이름(name, age, address)의 타입을 나타냅니다.<br/>
-keyof 키워드를 사용하면 Type 변수의 프로퍼티 이름을 타입으로 지정하여 객체 타입의 프로퍼티 이름에 대한 타입 안정성을 높일 수 있습니다.<br/>
+In this example, `userKey` can be `"name"`, `"age"`, or `"address"` because `keyof User` creates a union of the keys defined in the `User` type.
 
+## `in` Operator
 
-## in 연산자
-in 연산자는 Object 또는 Array가 특정 프로퍼티를 가지고 있는지 확인하는 데 사용됩니다.<br/>
-일반적으로 json값에서 해당 키가 존재하는지 또는 enum 값에서 존재하는 값인지를 확인하기 위해 사용합니다.<br/>
+The `in` operator checks if an object or array has a specific property. Commonly used to verify the existence of keys in JSON objects or values in enums.
 
-```javascript
+```jsx
 let myObject = { name: "John", age: 30 };
-console.log("name" in myObject); // 출력: true
-console.log("email" in myObject); // 출력: false
+console.log("name" in myObject); // Output: true
+console.log("email" in myObject); // Output: false
 ```
 
-위 예제에서 myObject 객체는 name 프로퍼티를 가지고 있으므로 true가 출력됩니다. <br/>
-그러나 email 프로퍼티는 가지고 있지 않으므로 false가 출력됩니다.
+The `in` operator returns `true` because `myObject` has a `"name"` property and `false` because it does not have an `"email"` property.
 
+### Index in Array
 
-### index in Array
-배열에서도 사용할 수 있으나 배열에서는 값을 찾을 수 없고, index만 확인할 수 있습니다.<br/>
-다음의 예를 참고하세요.<br/>
+In arrays, `in` checks for index existence, not value existence.
 
 ```tsx
 let count = ['one', 'two', 'three', 'four'];
-0 in count         // true
-(1 + 2) in count   // true
-6 in count         // false
-"one" in count     // false, 배열의 내용이 아닌, 인덱스 값이 들어가야 합니다.
-"length" in count  // true, length는 배열의 속성이기 때문입니다.
+0 in count          // true
+(1 + 2) in count    // true
+6 in count          // false
+"one" in count      // false, should be index value, not content.
+"length" in count   // true, because length is a property of the array.
 ```
 
-### key in Json
-json에서는 key가 존재하는지 확인할 때 사용합니다.<br/>
+### Key in JSON
+
+In JSON, `in` verifies key existence.
 
 ```tsx
 let user = {
@@ -168,30 +158,30 @@ let user = {
 console.log('name' in user) // true
 ```
 
-### dynamic key in Type
-json에서 제한된 가변 키를 갖도록 정의할 수 있습니다.<br/>
-'제한된'이라는 의미를 사용한 이유는 정의된 json 또는 type의 key 값만 활용할 수 있기 때문입니다.<br/>
+### Dynamic Key in Type
 
-```ts
-  let myObject = { name: "John", age: 30 };
-  type ObjType = {
-    [key in keyof typeof myObjectKey]: number // name or age
-  }
+You can define restricted, variable keys in JSON, utilizing only the key values from defined JSON or types.
+
+```tsx
+let myObject = { name: "John", age: 30 };
+type ObjType = {
+  [key in keyof typeof myObject]: number // 'name' | 'age'
+}
 ```
 
-type을 활용하면 조금 더 간단하게 표현된다.
+Types can simplify this further:
 
-```ts
-  type AllowedKeys = 'name' | 'age';
+```tsx
+type AllowedKeys = 'name' | 'age';
 
-  type ObjType1 = {
-    [key in AllowedKeys]: number // name or age
-  }
+type ObjType1 = {
+  [key in AllowedKeys]: number // 'name' | 'age'
+}
 ```
 
-### not working in Interface
-interface 로 선언한 경우 interface에 존재하는 객체인지 확인하려고 시도하면 에러가 발생합니다.<br/>
-이는 interface는 변수에 형식만 참조하도록 제공하는 역할을 할 뿐이고 실제 값을 가지고 있지는 않기 때문입니다.<br/>
+### Not Working in Interface
+
+Using `in` with an interface results in an error because interfaces only define the *shape* of an object, not its actual contents.
 
 ```tsx
 interface User {
@@ -208,11 +198,10 @@ console.log('name' in User) // error
 console.log('name' in anotherUser) // true
 ```
 
-정리하자면, TypeScript에서 typeof, instanceof, in 연산자는 각각 변수 또는 값의 타입, 객체의 인스턴스 여부, 객체의 프로퍼티 여부를 확인하는 데 사용됩니다. <br/>
-이 연산자들을 적절히 사용하면 프로그램의 타입 체크와 객체의 프로퍼티 여부를 효율적으로 확인할 수 있습니다.<br/>
+In summary, `typeof`, `instanceof`, `keyof`, and `in` operators serve specific purposes in TypeScript for type and property checking. Proper usage enhances code reliability and enables efficient type manipulation.
 
-## 참고 사이트
+## References
 
 - [MDN-instanceof](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Operators/instanceof)
 - [typescript MyObject.instanceOf()](https://stackoverflow.com/questions/24705631/typescript-myobject-instanceof)
-- [TypeScript 핸드북 10 - 고급 타입](https://infoscis.github.io/2017/06/19/TypeScript-handbook-advanced-types/)
+- [TypeScript Handbook 10 - Advanced Types](https://infoscis.github.io/2017/06/19/TypeScript-handbook-advanced-types/)

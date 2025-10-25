@@ -1,14 +1,16 @@
 ---
-title: "Template에서 타입 검사 우회하기(Bypass type checking on Template)"
+title: "Bypass type checking on Template"
 date: 2023-01-31 10:00:00 +0900
 comments: true
 categories: angular
 tags: [casting]
 ---
 
-> Typescript는 Javascript와 다르게 Type을 검사하고, 알맞은 Type이 아닌 경우 에러를 발생시키며, 올바른 타입을 지정할 것을 요구합니다. 이번 시간은 때때로 변수의 정확한 타입을 알 수 없을 경우 타입 검사를 무시하는 방법에 대해 알아봅시다.
+> TypeScript, unlike JavaScript, rigorously checks types, generates errors for type mismatches, and enforces correct type specifications. In this guide, we'll explore methods for bypassing type checking when the exact type of a variable is uncertain.
+> 
 
-한 json 값이 있다고 가정합시다.
+Let's consider a sample JSON object:
+
 ```tsx
 person = {
   name: 'John Doe',
@@ -16,21 +18,18 @@ person = {
 };
 ```
 
-만일, 아래와 같이 person 객체에 존재하지 않는 값을 호출하면 에러가 발생합니다.
+Accessing a non-existent property on the `person` object, as shown below, will typically result in a TypeScript error:
 
 ```tsx
 console.log(this.person['firstname'])
 ```
 
-이 에러를 무시하고 진행하려면 타입 검사 우회방법을 활용해야 합니다. 
-다시 말해 this.person의 타입을 임시로 any형으로 변경하여 에러를 피하는 방법입니다.
-이 때 결과는 존재하지 않는 값이므로 undefined가 출력됩니다.
+To circumvent this error and proceed, we can employ type assertion techniques. This involves temporarily casting `this.person` to the `any` type to bypass the type checker. Note that the result will be `undefined` since the property doesn't exist.
 
+## Casting in TypeScript
 
-## Typescript에서 캐스팅하기
+There are two primary ways to perform type casting in TypeScript: using `<any>` or `as any`. Ensure you enclose the expression in parentheses to avoid syntax errors.
 
-두 가지 방법이 있는데 `<any>` 또는 `as any`로 캐스팅할 수 있습니다.
-이 때 괄호로 감싸주어야 에러가 발생하지 않습니다.
 ```tsx
 console.log(
   (<any>this.person)['firstname']
@@ -40,9 +39,9 @@ console.log(
 );
 ```
 
-## Template에서 캐스팅하기
-만일 template에서 component와 같은 방법으로 캐스팅을 시도하면 에러가 발생합니다.
-즉, 다음은 에러가 발생합니다.
+## Casting in Templates
+
+Attempting to cast directly in a template (e.g., within an Angular component's template) using the `as` keyword, similar to component code, will result in an error. For instance, the following snippet will fail:
 
 ```html
 <p>
@@ -52,8 +51,9 @@ console.log(
 <!-- not working -->
 ```
 
-### $any로 캐스팅하기
-Template에서는 $any로 캐스팅해야 합니다.
+### Casting with `$any`
+
+Within templates, you must use the `$any` helper function for casting:
 
 ```html
 <p>
@@ -63,5 +63,4 @@ Template에서는 $any로 캐스팅해야 합니다.
 <!-- working, but empty value -->
 ```
 
-이럴 경우 존재하지 않으므로 값은 출력되지 않지만 에러가 발생하지 않아 정상적으로 처리되는 것을 확인할 수 있습니다.
-(대부분의 경우 타입 검사 우회는 추천하지 않습니다. 보다 정확한 타입을 선언하여 사용하는 것을 추천합니다.)
+In this scenario, although the property doesn't exist and no value is displayed, the absence of a TypeScript error ensures smooth processing. (It's important to note that bypassing type checking is generally discouraged. Defining more accurate types is typically the preferred approach.)

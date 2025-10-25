@@ -1,18 +1,17 @@
 ---
-title: "Highcharts 선택한 모든 Points 가져오기 - Getting All Selected Points by .getSelectedPoints()"
+title: "Getting All Selected Points by .getSelectedPoints()"
 date: 2023-01-02 18:46:00 +0900
 comments: true
 categories: angular
 tags: [highcharts]
 ---
 
-> 이 글에서는 Highchart에서 유저가 선택한 모든 point의 정보를 가져오는 방법을 알아봅시다.
+> This article explores how to retrieve information about all user-selected points in Highcharts.
+> 
 
+## Setting the Series Option: allowPointSelect
 
-
-## Set Series Option - allowPointSelect
-각 point를 클릭하려면 반드시 allowPointSelect 옵션이 true로 설정되어야 합니다.<br/>
-이 옵션은 각 series에서 설정할 수도 있으나 모든 series에서 설정하려면 간단히 plotOpions에서 설정할 수도 있습니다.<br/>
+To enable point selection via clicking, the `allowPointSelect` option must be set to `true`. This option can be configured for each series individually. Alternatively, to apply it across all series, configure it globally within the `plotOptions`.
 
 ```tsx
 ...
@@ -23,19 +22,18 @@ tags: [highcharts]
   }
 ...
 ```
-<br/>
 
-## How to Select Multi Points
-Highchart 에서는 유저가 여러 개의 포인트를 선택하는 방법으로 Ctrl + click (Windows) 을 제공합니다.<br/>
-아쉽게도 Drag로 여러 개의 포인트를 선택하는 방법은 일반적으로 Highchart가 제공하지 않으므로 Ctrl + click (Windows) 이 유일한 Multi Points Selection의 방법입니다.<br/>
-<br/>
-Drag를 활용하는 방법은 [다음 글](https://ksrae.github.io/angular/highcharts-select-by-draging)에서 알아봅시다.<br/>
-<br/>
+## Selecting Multiple Points
 
-## getSelectedPoints()
-.getSelectedPoints() 는 선택한 여러 개의 포인트의 정보를 제공해줍니다.<br/>
-<br/>
-만일 어떠한 버튼을 클릭했을 때 정보를 가져온다고 합시다.<br/>
+Highcharts provides Ctrl + click (on Windows) as a standard method for selecting multiple points. Unfortunately, Highcharts doesn't natively support selecting multiple points using a drag gesture. Therefore, Ctrl + click remains the primary multi-point selection method.
+
+For those interested in implementing drag-based selection, refer to [this article](https://ksrae.github.io/angular/highcharts-select-by-draging) which explores that approach.
+
+## Utilizing getSelectedPoints()
+
+The `.getSelectedPoints()` method returns an array containing information about all currently selected points.
+
+Consider a scenario where you want to retrieve this information upon a button click.
 
 ```tsx
     this.chart = Highcharts.chart({
@@ -81,7 +79,7 @@ Drag를 활용하는 방법은 [다음 글](https://ksrae.github.io/angular/high
   }
 ```
 
-아래는 제가 테스트 한 결과입니다. 설정에 따라 값들은 달라질 수 있으므로 참고만 하시기 바랍니다.<br/>
+Below is an example of the data structure returned.  Note that values may vary based on your specific chart configuration. Use this as a reference.
 
 ```
 {
@@ -120,9 +118,7 @@ Drag를 활용하는 방법은 [다음 글](https://ksrae.github.io/angular/high
   zone: undefined
 }
 ```
-<br/>
-중요한 포인트는 이 값을 통해 단순히 point의 정보만 알 수 있는 것이 아니라 이 point가 포함된 series의 값을 알 수 있다는 점과
-series에서 몇 번째 포인트를 클릭했는지 정보를 알 수 있다는 점 입니다.<br/>
-<br/>
-이를 활용하여 해당 포인트의 위치에 label을 보여주거나 또는 해당 point 또는 point가 속한 series의 정보를 노출하는 등 다양한 방법으로 활용할 수 있습니다.<br/>
-<br/>
+
+Crucially, this data provides not only information about the point itself, but also the series to which the point belongs and the index of the point within that series.
+
+Leveraging this information, you can implement a variety of features, such as displaying labels at the point's location or exposing details about the point or its associated series.

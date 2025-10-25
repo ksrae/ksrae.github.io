@@ -1,26 +1,23 @@
 ---
-title: "Highcharts Drag로 다중 포인트 선택하기 - Multiple Point Selection by Draging"
+title: "Multiple Point Selection by Draging"
 date: 2023-01-02 18:46:00 +0900
 comments: true
 categories: angular
 tags: [highcharts]
 ---
 
-> 이 글에서는 Highchart에서 지원하지 않는 마우스 drag로 point를 선택하는 방법을 알아봅시다.
-<br/>
+> This article explores how to implement point selection via mouse drag in Highcharts, a feature not natively supported by the library.
+> 
 
-## How to Drag - Zoom
-Highchart의 기본 기능에는 chart의 background를 drag 하는 기능이 없습니다. <br/>
-이를 구현하려면 drag를 지원하는 다른 기능을 변형하여 사용하여야 하는데<br/>
-`Zoom` 의 기능과 `selection event` 가 우리가 원하는 multi selection을 기능을 구현하는데 가장 적합합니다.<br/>
-<br/>
+## Implementing Drag-to-Zoom for Point Selection
 
-## Zoom 설정
+Highcharts does not provide built-in functionality for dragging the chart background. To achieve this behavior, we need to repurpose existing features. The `Zoom` functionality combined with the `selection event` offers the most suitable approach for implementing multi-selection.
 
-우선 ZoomType을 'xy'로 설정합니다. 이를 통해 x,y 축 영역을 다 활용하여 drag 를 적용할 수 있습니다.<br/>
-또한 chart event의 selection 이벤트를 정의 합니다.<br/>
-<br/>
-구현하면 다음과 같습니다.<br/>
+## Configuring Zoom Settings
+
+First, set the `zoomType` to 'xy'. This enables drag functionality across both the x and y axes. Additionally, define the `selection` event within the chart's event configuration.
+
+Here's a code example illustrating this setup:
 
 ```tsx
   this.chart = Highcharts.chart({
@@ -37,13 +34,14 @@ Highchart의 기본 기능에는 chart의 background를 drag 하는 기능이 �
     ]
   });
 ```
-<br/>
 
-## Selection Event
-이제 함수를 구현해 봅시다. 구현 방식은 다음과 같습니다.<br/>
-- selection 이벤트는 drag가 끝나는 시점에 실행됩니다.
-- selection 이벤트의 파라미터 값은 선택한 영역의 좌표를 가지고 있습니다.
-- 따라서 모든 series의 데이터를 검사하여 파라미터의 좌표 내에 있는 항목만 걸러냅니다.
+## Handling the Selection Event
+
+Now, let's delve into the implementation of the `selectPointsByDrag` function. The logic is as follows:
+
+- The `selection` event triggers upon the completion of the drag operation.
+- The event's parameter contains the coordinates of the selected area.
+- We iterate through the data of each series, filtering points that fall within the coordinates specified by the parameter.
 
 ```tsx
 selecPointsByDrag(e: any) {
@@ -64,23 +62,19 @@ selecPointsByDrag(e: any) {
   }
 
   /* 
-  * 여기에 select 한 이후에 처리할 코드가 들어가야 함
+  *  Insert code to handle the selection result here.
   */
 
   return false;
 }
 ```
-<br/>
 
-## Return false
-만일 `return false;` 항목을 제거하고 실행하면 selection이 실행되자마자 곧바로 zoom이 실행되는 것을 볼 수 있습니다.<br/>
-즉, `return false;` 는 zoom 기능을 동작하지 않도록 막아주는 중요한 역할을 합니다.<br/>
-<br/>
+## The Significance of `return false`
 
-## 결론
-Highchart는 기본에 충실한 차트입니다. 이 말은 차트가 지원하는 기본 기능은 매우 안정적으로 동작한다는 의미이기도 하지만, 많은 기능이 구현되어 있지 않고 커스텀하기에 쉽지 않다는 의미이기도 합니다.<br/>
-<br/>
-하지만, 여러 커뮤니티를 통해 많은 개발자들이 구현한 내용이 있으므로 이를 잘 활용하면 확장된 좋은 차트를 구현할 수 있을 것입니다.<br/>
+Removing the `return false;` line will cause an immediate zoom action after the selection is complete. The `return false;` statement effectively prevents the default zoom behavior, which is crucial for isolating the selection functionality.
 
+## Conclusion
 
+Highcharts provides a solid foundation for charting. While its core functionalities are reliable, it may lack certain features and present challenges for extensive customization.
 
+However, the active community has contributed numerous implementations and extensions. Leveraging these resources can enable the creation of highly customized and powerful charts using Highcharts.
