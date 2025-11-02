@@ -6,21 +6,19 @@ categories: angular
 tags: [highcharts]
 ---
 
-> 이 글에서는 Highchart에서 label을 사용할 때 style을 변경하는 방법에 대해 알아보겠습니다.
+In this article, we'll explore how to modify the style of labels in Highcharts.
 
+## Analysis
 
-## 분석
-label의 attribute를 변경하는 것은 일반적인 방법으로는 중간에 값을 변경하기 어려습니다.
+Modifying the attributes of a label directly can be challenging.<br/>
 
-이를 확인하기 위해 label의 html 구조를 보면 label은 {% raw %}<g>{% endraw %}태그와, 별도의 {% raw %}<div>{% endraw %}가 조합된 것을 볼 수 있습니다.
+To understand why, examining the HTML structure of a label reveals that it's a combination of a `<g>` tag and a separate `<div>`.<br/>
 
-만일 component에서 label의 이벤트를 세팅하여 lable을 표시하는 dom을 가져오려고 시도하면 {% raw %}<g>{% endraw %} 태그가 잡히게 되는데
-문제는 우리가 원하는 attribute의 설정은 {% raw %}<div>{% endraw %} 태그와 관련이 있다는 점 입니다.
+When attempting to set up label events in a component and retrieve the DOM element displaying the label, the `<g>` tag is typically captured. The issue is that the desired attribute settings are associated with the `<div>` tag.<br/>
 
-이러한 문제를 해결하고자 몇가지 편법을 사용하려고 합니다.
+To address this, we'll employ some workarounds.<br/>
 
-먼저 지난 시간에 사용했던 customized tooltip을 예제로 참고하여 확장해봅시다.
-기존 customized tooltip 은 아래와 같습니다.
+Let's start by extending a customized tooltip example from a previous discussion. The original customized tooltip looked like this:
 
 ```tsx
   this.chart = Highcharts.chart({
@@ -56,20 +54,23 @@ label의 attribute를 변경하는 것은 일반적인 방법으로는 중간에
   });
 ```
 
-## Set Attributes on Label at the Beginning
-label에 style 넣으려면 html 형태의 데이터가 들어가야 합니다.
-따라서 text를 html로 변경해야 합니다.
+## Setting Attributes on Labels at Initialization
 
-### Set useHTML
-또한, html을 사용가능 상태로 설정해야 합니다. 이 옵션은 renderer.label의 옵션에서 제공됩니다.
+To apply styles to a label, it needs to accept HTML-formatted data. Therefore, the text needs to be converted to HTML.
+
+### Utilizing `useHTML`
+
+It's also necessary to enable HTML usage. This option is provided in the `renderer.label` options.
+
 ```
 SVGRenderer.label(str: string, x: number, y?: number, shape?: string, anchorX?: number, anchorY?: number,
 useHTML?: boolean, baseline?: boolean, className?: string): Highcharts.SVGElement
 ```
-label 전체에 class를 적용하려면 className 옵션을 설정하고, label의 각 항목에 class 또는 style을 적용하려면 useHTML을 설정합니다.
-여기에서는 useHTML을 활용해보겠습니다.
 
-위의 예제를 다음과 같이 변경할 수 있습니다.
+To apply a class to the entire label, set the `className` option. To apply classes or styles to individual elements within the label, use `useHTML`. We'll utilize `useHTML` here.
+
+The example above can be modified as follows:
+
 ```tsx
   ...
   this.chart.renderer.label(
@@ -79,12 +80,13 @@ label 전체에 class를 적용하려면 className 옵션을 설정하고, label
     null, null, null, true
   )
   ...
-
 ```
 
-### Store to the Variable
-설정한 label을 변수에 저장해야 합니다.
-변수에 저장하는 이유는 dom 의 접근 때문인데 이후에 다시 알아보도록 합시다.
+### Storing the Label in a Variable
+
+The configured label must be stored in a variable.<br/>
+
+The reason for storing it in a variable is for DOM access, which we'll discuss further later.
 
 ```tsx
 let label =   
@@ -96,22 +98,23 @@ let label =
   );
 ```
 
-### Set Event
-만일 label에 event가 필요하다면 on 함수를 사용하여 정의할 수 있습니다.
-만일, label을 click하였을 때 label의 class를 변경한다고 가정한다면, click event를 정의해야 합니다.
+### Defining Events
 
-label을 click하면 class명을 추가하는 코드를 작성해 봅시다.
+If an event is required for the label, it can be defined using the `on` function.<br/>
 
-click event는 다음과 같이 설정할 수 있습니다.
+For instance, if we want to change the class of the label when it's clicked, we need to define a click event.<br/>
+
+Let's create code that adds a class name when the label is clicked.<br/>
+
+The click event can be set as follows:
+
 ```tsx
 label.on('click', (event: any) => {
 
 });
 ```
 
-이 때 주의해야할 점은 event가 target으로 삼는 dom은 {% raw %}<g>{% endraw %} 라는 점입니다. 
-우리가 활용할 값은 바로 변수 label의 element 입니다. 이 값은 {% raw %}<div>{% endraw %}에 속해 있는데 이 값을 통해 class를 변경할 수 있습니다.
-또한 div 안의 버튼이나 기타 dom에도 접근할 수 있습니다.
+It's important to note that the DOM targeted by the event is the `<g>` tag. The value we'll use is the `element` property of the `label` variable. This belongs to the `<div>` and can be used to change the class. Access to buttons or other DOM elements within the `<div>` is also possible.
 
 ```tsx
 label.on('click', (event: any) => {
@@ -119,9 +122,3 @@ label.on('click', (event: any) => {
   label.element['div'].children[0].childNodes[0].style.color = 'red'; // example of setting firstNode style
 });
 ```
-
-
-
-
-
-
