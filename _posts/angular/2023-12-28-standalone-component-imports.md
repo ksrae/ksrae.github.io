@@ -1,19 +1,20 @@
 ---
-title: "Standalone Component에서 imports 방법 (Managing Imports in Standalone Angular Components)"
+title: "Managing Imports in Standalone Angular Components"
 date: 2023-12-28 10:20:00 +0900
 comments: true
 categories: angular
 tags: [standalone, update]
 ---
 
-## 소개
-Standalone Component에서 Component, Pipe, Directive 의 적절한 Imports 관리는 깨끗하고 최적화된 코드 구조를 유지하는 데 필수적입니다. <br/>이 글에서는 Template에서의 Component, Pipe, Directive 다루기, CommonModule 최적화 하기, createComponent을 사용한 동적 Component 다루기, 그리고 Standalone Component 에서 non-standalone Component 다루는  방법에 대해 살펴보겠습니다.
+## Introduction
 
+Proper management of imports for Components, Pipes, and Directives within Angular Standalone Components is essential for maintaining a clean and optimized codebase. This post will explore how to handle Components, Pipes, and Directives in templates, optimize the use of `CommonModule`, manage dynamic Components using `createComponent`, and integrate non-standalone Components within standalone architectures.
 
-## 1. Template에서의 Component, Pipe, Directive
-Standalone Component의 Template에서 사용 중인 모든 Component, Pipe, Directive는 반드시 imports에 추가되어야 합니다. <br/>이는 Angular가 참조된 엔터티를 올바르게 인식하고 렌더링할 수 있도록 보장합니다.<br/>Pipe와 Directive 가 CommonModule에 속한 경우에 대하여는 2번 항목을 참조하세요. <br/> 아래의 예제는 일반적인 상황(Pipe와 Directive가 CommonModule 에 속하지 않은 경우) 에서 imports 하는 방법을 보여줍니다.
+## 1. Components, Pipes, and Directives in Templates
 
-```ts
+Within a Standalone Component's template, every Component, Pipe, and Directive used must be explicitly added to the `imports` array. This ensures that Angular can correctly recognize and render the referenced entities. For Pipes and Directives belonging to `CommonModule`, refer to section 2 for optimization strategies. The following example illustrates importing dependencies in a standard scenario (where Pipes and Directives are *not* part of `CommonModule`):
+
+```tsx
 // app.component.ts
 
 @Component({
@@ -32,46 +33,44 @@ Standalone Component의 Template에서 사용 중인 모든 Component, Pipe, Dir
 export class AppComponent {}
 ```
 
+## 2. Optimizing `CommonModule` Usage
 
-## 2. CommonModule
-Template에서 CommonModule에 속한 Pipe 또는 Directive를 사용하는 경우, 최적화를 위해 각 항목을 개별적으로 imports 하는 것이 좋습니다. <br/>예를 들어 자주 사용하는 ngIf, ngFor나 async pipe의 경우 CommonModule을 imports 하거나 또는 CommonModule에 속한 해당 항목을 imports 합니다. <br/>가급적이면 성능 최적화를 위해 CommonModule을 직접 imports 하지말고, 정확하게 필요한 항목만 imports 하는 것을 추천합니다. <br/> 아래는 CommonModule에 포함된 Directive와 Pipe의 목록 입니다.
+When using Pipes or Directives from `CommonModule` in your templates, it's generally more efficient to import specific items individually instead of importing the entire `CommonModule`. For instance, with frequently used features like `ngIf`, `ngFor`, or the `async` pipe, directly import these specific functionalities rather than the complete module. To optimize performance, avoid importing `CommonModule` directly; instead, import only the precisely required items. Below is a list of Directives and Pipes included in `CommonModule`:
 
-#### Directive
+**Directive**
 
-- NgClass
-- NgComponentOutlet
-- NgFor
-- NgForOf
-- NgIf
-- NgPlural
-- NgPluralCase
-- NgStyle
-- NgSwitch
-- NgSwitchCase
-- NgSwitchDefault
-- NgTemplateOutlet
+- `NgClass`
+- `NgComponentOutlet`
+- `NgFor`
+- `NgForOf`
+- `NgIf`
+- `NgPlural`
+- `NgPluralCase`
+- `NgStyle`
+- `NgSwitch`
+- `NgSwitchCase`
+- `NgSwitchDefault`
+- `NgTemplateOutlet`
 
+**Pipe**
 
-#### Pipe
-- AsyncPipe
-- CurrencyPipe
-- DatePipe
-- DecimalPipe
-- JsonPipe
-- KeyValuePipe
-- LowerCasePipe
-- UpperCasePipe
-- TitleCasePipe
-- PercentPipe
-- SlicePipe
+- `AsyncPipe`
+- `CurrencyPipe`
+- `DatePipe`
+- `DecimalPipe`
+- `JsonPipe`
+- `KeyValuePipe`
+- `LowerCasePipe`
+- `UpperCasePipe`
+- `TitleCasePipe`
+- `PercentPipe`
+- `SlicePipe`
 
+## 3. Managing Components Created with `createComponent`
 
+Components dynamically created using `createComponent` do not need to be added to the `imports` array. The Angular framework automatically manages instances of Components created in this manner.
 
-## 3. createComponent로 생성된 Component
-createComponent를 사용하여 동적으로 생성된 Component는 imports에 추가할 필요가 없습니다. <br/>Angular 프레임워크가 이 방식으로 생성된 Component의 인스턴스를 자동으로 관리합니다.
-
-
-```ts
+```tsx
 // app.component.ts
 
 @Component({
@@ -85,21 +84,22 @@ export class AppComponent {
 }
 ```
 
-## 4. Non-standalone Component
-Standalone Component 내에서 non-standalone Component를 다루기 위해서는 조심스러운 접근이 필요합니다. <br/>Standalone Component에서 non-standalone Component를 직접적으로 imports에 추가할 수 없기 때문에 다음 단계를 따를 수 있습니다.
+## 4. Integrating Non-standalone Components
 
-- Module을 생성합니다.
-- Module의 declarations에 non-standalone Component를 추가합니다.
-- Module의 exports에 non-standalone Component를 추가합니다.
-- Standalone Component의 imports에 Module을 추가합니다.
+Handling non-standalone Components within a standalone Component requires a careful approach. Since you cannot directly add a non-standalone Component to the `imports` of a standalone Component, follow these steps:
 
+- Create an NgModule.
+- Add the non-standalone Component to the `declarations` array of the NgModule.
+- Add the non-standalone Component to the `exports` array of the NgModule.
+- Import the NgModule into the `imports` array of the standalone Component.
 
-### 예시
-더 자세한 내용을 알아보기 위해 다음의 예시를 살펴봅시다.
+### Example
 
-#### Non Standalone Component
+To illustrate this process further, consider the following example:
 
-```ts
+**Non-Standalone Component**
+
+```tsx
 // shared.component.ts
 
 @Component({
@@ -109,9 +109,9 @@ Standalone Component 내에서 non-standalone Component를 다루기 위해서�
 export class SharedComponent {}
 ```
 
-#### Module
+**NgModule**
 
-```ts
+```tsx
 // shared.module.ts
 
 @NgModule({
@@ -125,9 +125,9 @@ export class SharedComponent {}
 export class SharedModule {}
 ```
 
-#### Standalone Component
+**Standalone Component**
 
-```ts
+```tsx
 // app.component.ts
 
 @Component({
@@ -141,9 +141,10 @@ export class SharedModule {}
 export class AppComponent
 ```
 
+## Conclusion
 
-## 결론
-Standalone Component에서 Imports를 효율적으로 관리하는 것은 깨끗하고 최적화된 코드베이스를 유지하는 데 중요합니다. <br/>이러한 방법을 신중하게 적용하면 견고한 코드 및 효율적인 성능을 보장할 수 있습니다.
+Managing imports effectively within standalone Components is crucial for maintaining a clean, optimized, and modular codebase. Applying these practices diligently ensures robust code and efficient performance.
 
 ## Reference
+
 [Common Module](https://angular.io/api/common/CommonModule)

@@ -1,19 +1,18 @@
 ---
-title: "outlet name attribute으로 생성한 route 제거하기 - How to clear route made with outlet name attribute"
+title: "How to clear route made with outlet name attribute"
 date: 2023-12-26 20:03:00 +0900
 comments: true
 categories: angular
 tags: [routing]
 ---
 
-Angular 애플리케이션에서 Route Outlet Name을 활용하여 동적으로 삽입된 컴포넌트에 대한 Route를 관리하는 것은 효율적인 UI 구성을 위한 강력한 수단입니다. <br/>그러나 동시에 현재 Route를 Outlet에서 제거하는 것은 일반적인 Route 제거 방법과는 다른 접근이 필요합니다. <br/>이 글에서는 Outlet의 Name attribute로 생성된 Route를 제거하는 세 가지 방법에 대해 논의하고자 합니다.
+Managing routes for dynamically injected components using Route Outlet Names in Angular applications is a powerful method for efficient UI construction. However, removing the current route from the outlet requires a different approach than standard route removal. This article discusses three methods for removing a route created with the Outlet's Name attribute.
 
+## Setting the Outlet's Name Attribute Value to Null
 
+Setting the Outlet's Name attribute value to null is a simple and intuitive method. To remove the current route from the outlet, you can simply set the Outlet's Name attribute value to null, without creating a new route in the browser's address bar.
 
-## Outlet의 Name Attribute 값 null로 설정하기
-Outlet의 Name attribute 값을 null로 설정하는 방법은 간단하면서도 직관적입니다. <br/>현재 Route를 Outlet에서 제거하기 위해 브라우저의 주소 표시줄에 새로운 Route를 생성하지 않고도 Outlet의 Name attribute 값을 null로 설정함으로써 현재 Route를 간단히 제거할 수 있습니다.
-
-```ts
+```tsx
 // app-popup.component.ts
 
 @Component({
@@ -31,15 +30,15 @@ Outlet의 Name attribute 값을 null로 설정하는 방법은 간단하면서�
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PopupComponent {}
-
 ```
 
+This approach leverages the Angular Router's ability to interpret a `null` value in the `outlets` configuration as a signal to clear the specified outlet. This allows for a clean and direct way to remove the component associated with that route.
 
-## Route Navigate로 제거하기
-Router.navigate를 활용하여 현재 Route를 Outlet에서 제거하는 방법은 다소 복잡할 수 있지만, 더 세밀한 제어를 가능하게 합니다. <br/>이 방법을 통해 현재 Route를 특정 시점에 제거할 수 있습니다.
+## Removing with Route Navigation
 
+Using `Router.navigate` to remove the current route from the outlet can be more complex, but it allows for more granular control. This method allows you to remove the current route at a specific time.
 
-```ts
+```tsx
 // app-popup.component.ts
 
 @Component({
@@ -66,15 +65,15 @@ export class PopupComponent {
     });
   }
 }
-
 ```
 
+By injecting the `Router` and `ActivatedRoute` services, the component can programmatically trigger a navigation event that clears the `popupType` outlet. The `relativeTo: this.route.parent` option ensures that the navigation is performed relative to the parent route, maintaining the application's navigation context.
 
+## Removing with Location
 
-## Location으로 제거하기
-Location.back() 메서드를 활용하여 현재 Route를 제거하는 방법은 브라우저의 뒤로가기 동작과 유사한 방식으로 동작합니다.<br/> 이를 통해 브라우저의 기본 네비게이션 동작과 일관성을 유지할 수 있습니다.
+Using the `Location.back()` method to remove the current route operates similarly to the browser's back button behavior. This allows you to maintain consistency with the browser's basic navigation behavior.
 
-```ts
+```tsx
 // app-popup.component.ts
 
 @Component({
@@ -98,20 +97,19 @@ export class PopupComponent {
     this.location.back();
   }
 }
-
 ```
 
-## 결론
-Angular 애플리케이션에서 Route Outlet Name을 활용한 동적 컴포넌트 관리는 풍부한 사용성을 제공하지만, 현재 Route를 Outlet에서 효과적으로 제거하는 것은 일반적인 Route 제거와는 다른 고려 사항을 필요로 합니다. <br/>
-상황에 적절한 방법을 선택하여 적용함으로써 안정적이고 효율적인 UI 관리를 실현해 봅시다.
+The `Location` service from `@angular/common` provides an abstraction over the browser's history. Calling `location.back()` effectively navigates the user back to the previous route in the history stack, removing the current component from the outlet.
 
+## Conclusion
 
+Managing dynamic components using Route Outlet Names in Angular applications offers rich usability, but effectively removing the current route from the outlet requires different considerations than standard route removal. Choose and apply the appropriate method for your situation to achieve stable and efficient UI management.
 
-## 전체 샘플
+## Complete Sample
 
-먼저 route를 호출하는 component를 작성합니다.
+First, create a component that calls the route.
 
-```ts
+```tsx
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
@@ -132,10 +130,9 @@ export class AppComponent {
 }
 ```
 
+Next, create a popup to expose via this route.
 
-이 route를 통해 노출할 popup을 작성합니다.
-
-```ts
+```tsx
 @Component({
   selector: 'app-popup',
   standalone: true,

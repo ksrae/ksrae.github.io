@@ -6,117 +6,155 @@ categories: angular
 tags: [webworker]
 ---
 
-# Angular에서 Worker 활용하기
+# Leveraging Workers in Angular Applications
 
-Worker는 JavaScript 코드를 백그라운드 스레드에서 실행할 수 있게 해주는 기술입니다. Angular 애플리케이션에서 Worker를 통해 백그라운드에서 작업을 처리하면 메인 스레드의 블로킹을 피하고 성능을 향상시킬 수 있습니다. 이번 글에서는 Angular에서 Worker를 만들고 사용하는 방법에 대해 알아보겠습니다.
+Workers provide a mechanism to execute JavaScript code in background threads, thereby preventing blocking of the main thread and enhancing performance in Angular applications. This article explores the creation and utilization of workers within an Angular context.
 
+## 1. Generating a Worker
 
-## 1. Worker 생성
-아래의 명령을 사용하면 worker를 자동으로 생성해주어 편리합니다. 특히 nx를 사용하는 경우  tsconfig.webworker.ts를 자동으로 생성해주므로 반드시 ng generate 또는 ng g를 사용해서 생성하는 것을 권장합니다.<br/>
-
-```
-ng generate web-worker [경로]
+For convenience, the Angular CLI provides a command to automatically generate worker files. Particularly, when utilizing Nx, it's highly recommended to use `ng generate` or `ng g`, as this automatically creates the `tsconfig.webworker.ts` file.
 
 ```
-다만 자동으로 만드는 코드는 component에서 직접 worker에 접근하는 코드이며, 아래에서 설명할 instance 를 통한 방법은 아니기 때문에 아래 코드를 적용하기 위해서는 생성 후 일부 코드를 수정해야 합니다.
+ng generate web-worker [path]
+# example: ng generate web-worker core/workers/calculation
+```
 
-보다 자세한 내용은 문서 가장 하단의 "nx환경에서 수동으로 worker 설정" 을 참고하세요.
+Note, however, that the auto-generated code directly accesses the worker from a component, differing from the instance-based approach described below. To align with the demonstrated code, some modification of the generated code is necessary.
 
+Refer to "Manually Configuring Workers in an Nx Environment" at the end of this document for detailed instructions.
 
-## 2. Worker File 작성
+## 2. Crafting a Worker File
 
-먼저, Angular 프로젝트 내에서 Worker 파일을 생성합니다. 일반적으로 `.worker.ts` 확장자를 사용합니다. 아래는 간단한 예제입니다.
+Begin by creating a dedicated worker file within your Angular project, typically using the `.worker.ts` extension. Here's a basic example:
 
-```typescript
-// app.worker.ts
-self.addEventListener('message', ({ data }) => {
-  // Do some work in the background
+```tsx
+// calculation.worker.ts
+addEventListener('message', ({ data }) => {
+  console.log('Worker: message received->', data);
+  
+  // complex calculation in background
   const result = data * data;
 
-  // Send the result back to the main thread
+  // return result to main thread
   postMessage(result);
 });
 ```
 
-## 3. Worker Service 작성
-이제 Angular 서비스를 생성하여 Worker를 사용합니다. <br/>
-일반적으로 Service에는 Injectable을 주입하지만, Worker는 Component가 별도의 Worker를 갖도록 하여 재활용 시 Worker가 공유되는 문제를 막기 위해서 Injectable을 주입하지 말고, 각 Component에서 Instance를 각각 생성하는 것이 좋습니다.<br/>
+## 3. Developing a Worker Service
 
-```typescript
+Next, create an Angular service to manage the worker.
+
+Typically, Angular services utilize `@Injectable` for dependency injection. However, to prevent worker sharing issues when the service is reused across components, it's advisable to instantiate a separate `Worker` instance for each component instead of injecting the service.
+
+```tsx
 // worker.service.ts
+import { signal, WritableSignal } from '@angular/core';
+
 export class WorkerService {
   private worker: Worker;
-  worker$ = new Subject();
 
-  constructor() {
-    this.worker = new Worker('./app.worker', { type: 'module' });
+  // state management
+  public readonly result: WritableSignal<number | undefined> = signal(undefined);
+  public readonly isLoading: WritableSignal<boolean> = signal(false);
+  public readonly error: WritableSignal<any | undefined> = signal(undefined);
+
+  constructor(workerPath: string) {
+    this.worker = new Worker(new URL(workerPath, import.meta.url), { type: 'module' });
+
+    this.worker.onmessage = ({ data }) => {
+      this.result.set(data);
+      this.isLoading.set(false);
+    };
+
+    this.worker.onerror = (err) => {
+      this.error.set(err);
+      this.isLoading.set(false);
+      console.error('Worker error:', err);
+    };
   }
 
-  runWorker(input: number) {
-    this.worker.onmessage = ({ data }) => {
-      this.worker$.next(data);
-    };
-
-    this.worker.onerror = (error) => {
-      console.error(error);
-    };
-
-      // Start the worker task
+  runWorker(input: number): void {
+    // initialize
+    this.result.set(undefined);
+    this.error.set(undefined);
+    this.isLoading.set(true);
+    
+    // send start message to the Worker
     this.worker.postMessage(input);
+  }
+
+  // terminate worker when component is removed
+  terminate(): void {
+    this.worker.terminate();
+    console.log('Worker is terminated.');
   }
 }
 ```
 
-## 4. Component 에서 Worker 연결
-마지막으로, Angular 컴포넌트에서 위에서 만든 서비스를 사용하여 웹 워커를 호출합니다.
+## 4. Integrating the Worker in a Component
 
-```typescript
+Finally, utilize the service created above within an Angular component to interact with the web worker.
+
+```tsx
 // app.component.ts
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { WorkerService } from './worker.service';
 
 @Component({
   selector: 'app-root',
+  standalone: true,
   template: `
-    <button (click)="runWorker()">Run Worker</button>
-    <p *ngIf="result !== undefined">Result: {{ result }}</p>
+    <h2>Angular Worker with Signals</h2>
+    <input #inputField type="number" value="10" />
+    <button (click)="runWorker(inputField.valueAsNumber)">Run Worker</button>
+
+    @if (worker.isLoading()) {
+      <p>processing...</p>
+    }
+
+    @if (worker.result(); as result) {
+      <p class="result">Result: {{ result }}</p>
+    }
+
+    @if (worker.error(); as error) {
+      <p class="error">Error: {{ error.message }}</p>
+    }
   `,
+  styles: [`
+    .result { color: green; font-weight: bold; }
+    .error { color: red; }
+  `]
 })
-export class AppComponent {
-  result: number | undefined;
-  worker = new WorkerController();
+export class AppComponent implements OnDestroy {
+  readonly worker = new WorkerService('./calculation.worker.ts');
+  
   constructor() {}
 
-  ngOnInit(): void {
-    this.worker.worker$.pipe(
-      tap((response: any) => {
-        result = response;
-        // set change detection if template is not updated.
-      }),
-      takeUntil(this.worker$) // subscription
-    ).subscribe();
+  runWorker(value: number) {
+    if (isNaN(value)) {
+      alert('inter any valid number.');
+      return;
+    }
+    this.worker.runWorker(value);
   }
 
-  runWorker() {
-    this.worker.runWorker();
-  }
-
-  ngOnDestroy() {
-    this.worker$.next(); // unsubscription
-    this.worker$.complete();
+  ngOnDestroy(): void {
+    this.worker.terminate();
   }
 }
 ```
 
-## 결론
+## Conclusion
 
-이제 Worker를 통해 백그라운드에서 작업을 처리하고 결과를 메인 스레드에 전달할 수 있습니다. 이를 통해 애플리케이션의 성능을 향상시킬 수 있습니다.
+You can now offload tasks to background threads using workers and transmit the results back to the main thread, leading to improved application responsiveness and overall performance.
 
 
-## nx환경에서 수동으로 worker 설정
+## Optional: Manually Configuring Workers in an Nx Environment
 
-### 수동으로 worker용 tsconfig 생성
-tsconfig.worker.json 파일을 tsconfig.json과 같은 위치에 생성하고 아래의 코드를 입력 합니다.
+### Manually Creating a `tsconfig` for Workers
+
+Create a `tsconfig.worker.json` file in the same directory as your `tsconfig.json` file and insert the following code:
+
 ```json
 /* To learn more about this file see: https://angular.io/config/tsconfig. */
 {
@@ -135,17 +173,21 @@ tsconfig.worker.json 파일을 tsconfig.json과 같은 위치에 생성하고 �
 }
 ```
 
-### angular.json에 tsconfig.webworker.json 등록
-위에서 작성한 tsconfig.webworker.json 파일을 angular.json에 반드시 등록해주어야 합니다.
-자동으로 생성했을 때 기본적으로 두 군데에 생성이 되며,
-- architect > build > obtions
-- test > obtions
-추가 되는 값은 다음과 같습니다.
+### Registering `tsconfig.webworker.json` in `angular.json`
+
+You must register the `tsconfig.webworker.json` file created above in the `angular.json` file. When generated automatically, it is typically added to two locations:
+
+- `architect > build > options`
+- `test > options`
+
+The value to add is:
+
 ```
 "webWorkerTsConfig": "tsconfig.worker.json"
 ```
 
-자동으로 생성했을 때의 angular.json의 전체 코드는 다음과 같습니다.
+The complete `angular.json` code after automatic generation is as follows:
+
 ```json
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
@@ -215,7 +257,11 @@ tsconfig.worker.json 파일을 tsconfig.json과 같은 위치에 생성하고 �
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "webworker:build:production"
+              "bro
+```
+
+```json
+wserTarget": "webworker:build:production"
             },
             "development": {
               "browserTarget": "webworker:build:development"
@@ -254,4 +300,3 @@ tsconfig.worker.json 파일을 tsconfig.json과 같은 위치에 생성하고 �
   }
 }
 ```
-

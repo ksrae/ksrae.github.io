@@ -6,149 +6,161 @@ categories: angular
 tags: [webworker]
 ---
 
-# 소개
-
-웹 워커(worker)는 복잡한 계산과 다양한 작업을 동시에 처리하는 성능을 향상 시키기 위한 강력한 도구 중 하나로, 별도의 스레드에서 스크립트를 실행하여 메인 스레드의 부하를 줄일 수 있습니다.
+# Introduction
+Web Workers are a powerful tool for improving application performance by offloading complex computations and heavy tasks to a separate thread. This prevents the main UI thread from blocking, ensuring a smooth and responsive user experience.<br/>
 <br/>
-그러나 메인 스레드와 워커 간 데이터 전송은 여전히 성능 문제를 야기할 수 있습니다. 이때 Transferable Objects가 강력한 도움을 줄 수 있습니다.
+However, a significant performance bottleneck can arise when transferring large amounts of data between the main thread and a worker. The default behavior is to copy the data, which can be slow and memory-intensive. This is where Transferable Objects provide an effective solution.
 
-# Transferable Objects란?
+# What are Transferable Objects?
+Transferable Objects offer a high-performance mechanism for passing data between threads. Instead of copying data, they transfer ownership of it from one context to another. Once transferred, the object is no longer accessible in its original thread, resulting in a near-instantaneous transfer with minimal memory overhead.<br/>
+<br/>
+The most common types of Transferable Objects include:
+- ArrayBuffer: Used to represent a generic, fixed-length raw binary data buffer. It's the foundation for transferring structured data efficiently.
+- MessagePort: Represents one of the two ports of a MessageChannel, allowing for direct communication between different workers.
+- ImageBitmap: Provides a way to handle image data efficiently for rendering in different contexts, like a <canvas>.
 
-Transferable Objects는 메인 스레드와 워커 사이에서 데이터를 효율적으로 전송하기 위한 방법 입니다. 이를 통해 데이터를 복사하는 대신 소유권을 전송함으로써 성능을 향상시킬 수 있습니다.
+# Example Implementation
+Let's explore a practical example of using ArrayBuffer as a Transferable Object to communicate with a Web Worker in a modern Angular application.
+## 1. The Worker Script (app.worker.ts)
+This is the code that will run in the background thread. It listens for messages, decodes the incoming ArrayBuffer, performs a calculation, encodes the result back into an ArrayBuffer, and transfers its ownership back to the main thread.
 
-주로 사용되는 Transferable Objects는 다음과 같습니다.
-
-- ArrayBuffer: 바이너리 데이터를 효율적으로 다룰 수 있는 객체로, 메모리를 공유하는 데에 적합합니다.
-
-- MessagePort: 워커 간 메시지를 전송하는 데 사용되며, 데이터를 복사하지 않고도 전송할 수 있습니다.
-
-- ImageBitmap: 이미지 데이터를 처리할 때 유용하게 활용됩니다.
-
-# Transferable Objects의 활용 예시
-
-## component
-먼저, Angular 애플리케이션에서 Transferable Objects를 사용하는 예시 코드를 살펴봅시다. <br/>
-AppComponent는 웹 워커를 통해 병렬 처리를 수행하고, Transferable Objects를 사용하여 데이터를 주고받습니다.
-
-```tsx
-export class AppComponent implements OnInit, OnDestroy {
-  worker = new WorkerController();
-  readonly worker$ = new Subject<void>(); // subscription
-
-  ngOnInit(): void {
-    this.worker.worker$.pipe(
-      tap((response: any) => {
-        console.log({response});
-      }),
-      takeUntil(this.worker$) // subscription
-    ).subscribe();
-  }
-
-  calculate() {
-    this.worker.calculate();
-  }
-
-  ngOnDestroy() {
-    this.worker$.next(); // unsubscription
-    this.worker$.complete();
-  }
-}
-
-```
-
-## worker instance
-instance는 웹 워커를 생성하고 데이터를 주고받는 역할을 합니다. 데이터를 ArrayBuffer 형태로 encoding하여 전송하고, 수신한 데이터를 json으로 decoding하여 Component에 전달합니다.
-
-
-```tsx
-import { Subject } from 'rxjs';
-
-export class WorkerController {
-  worker: any;
-  worker$ = new Subject();
-
-  constructor() {
-    if (typeof Worker !== 'undefined') {
-      // creating web worker
-      this.worker = new Worker(new URL('./app.worker', import.meta.url));
-
-      // receive
-      this.worker.onmessage = ({ data }: any) => {
-        // transferable object 형태
-        const resultBuffer = new Uint8Array(data);
-        const resultString = new TextDecoder().decode(resultBuffer);
-        this.worker$.next(resultString ? JSON.parse(resultString) : '');
-      };
-
-
-
-
-    } else {
-      console.error('this environment does not support web worker');
-    }
-  }
-  calculate(min: number = 1, max: number = 100) {
-    // send
-    this.postMessage({
-      {
-        min,
-        max,
-      }
-    });
-  }
-
-  private postMessage(data: any) {
-    // json -> string -> buffer 형태로 변환
-    const jsonBuffer = this.convertToBuffer(data);
-    this.worker.postMessage(jsonBuffer, [jsonBuffer]);
-  }
-  private convertToBuffer(jsonData: any) {
-    return new TextEncoder().encode(JSON.stringify(jsonData)).buffer;
-  }
-  destroy() {
-    this.worker.terminate();
-  }
-}
-
-```
-
-
-## worker
-worker 에서는 수신한 ArrayBuffer 데이터를 다시 json으로 decoding하여 처리한 뒤 다시 encoding하여 메인 스레드에 전달합니다.
-
-
-```tsx
+```ts
 /// <reference lib="webworker" />
 
-addEventListener('message', ({data}) => {
-  console.log('getmessage', data);
+// Listen for messages from the main thread.
+addEventListener('message', ({ data }) => {
+  // Decode the received ArrayBuffer into a JSON object.
+  const obj = decodeBuffer(data);
 
-  // data를 받아 decode 하고 처리한 뒤 다시 encode
-  // buffer -> string -> json으로 변환 후 postMessage
-    const obj = decodeBuffer(data);
+  // Perform a complex calculation (e.g., sum of squares).
+  let sum = 0;
+  for (let i = obj.min; i <= obj.max; i++) {
+    sum += Math.pow(i, 2);
+  }
 
-    let sum = 0;
-    for(let i=obj.min; i<=obj.max;i++) {
-      sum+=(Math.pow(i, 2));
-    }
+  // Encode the result back into an ArrayBuffer.
+  const resultBuffer = convertToBuffer(sum);
 
-    postMessage(encodeString(sum));
-  
+  // Post the result back, transferring ownership of the ArrayBuffer.
+  // The second argument is a list of objects to transfer.
+  postMessage(resultBuffer, [resultBuffer]);
 });
 
-
-function decodeBuffer(data: any) {
-  const jsonBuffer = new Uint8Array(data);
-  const jsonString = new TextDecoder().decode(jsonBuffer);
+// Helper function to decode an ArrayBuffer into a JSON object.
+function decodeBuffer(buffer: ArrayBuffer): any {
+  const jsonString = new TextDecoder().decode(buffer);
   return JSON.parse(jsonString);
 }
 
-function encodeString(data: any) {
-  const resultString = JSON.stringify(data);
-  return new TextEncoder().encode(resultString);
+// Helper function to convert any JavaScript value into an ArrayBuffer.
+function convertToBuffer(data: any): ArrayBuffer {
+  const jsonString = JSON.stringify(data);
+  return new TextEncoder().encode(jsonString).buffer;
 }
-
 ```
 
-# 결론
-Transferable Objects를 통해 메인 스레드와 워커 간의 데이터 전송 성능을 향상시킬 수 있습니다. 특히 대용량의 데이터를 다루거나 병렬 처리가 필요한 웹 애플리케이션에서는 이를 적극적으로 활용하여 성능 최적화를 달성할 수 있습니다. Transferable Objects의 활용은 데이터 복사 비용을 최소화하고 메모리를 효율적으로 활용하는 데에 큰 도움이 됩니다.
+## 2. The Worker Management Service (transferable-worker.service.ts)
+This service class encapsulates the logic for creating the worker and managing communication. We will create an instance of this service directly within our component. It uses Angular Signals to manage the worker's state reactively.
+
+```ts
+// transferable-worker.service.ts
+import { signal, WritableSignal } from '@angular/core';
+
+export class TransferableWorkerService {
+  private worker: Worker;
+
+  // Use Signals to manage the worker's state.
+  public readonly result: WritableSignal<any> = signal(undefined);
+  public readonly isLoading: WritableSignal<boolean> = signal(false);
+  public readonly error: WritableSignal<any> = signal(undefined);
+
+  constructor() {
+    if (typeof Worker !== 'undefined') {
+      this.worker = new Worker(new URL('./app.worker', import.meta.url));
+
+      this.worker.onmessage = ({ data }: MessageEvent<ArrayBuffer>) => {
+        const resultString = new TextDecoder().decode(data);
+        this.result.set(JSON.parse(resultString));
+        this.isLoading.set(false);
+      };
+
+      this.worker.onerror = (err) => {
+        this.error.set(err);
+        this.isLoading.set(false);
+        console.error('Worker error:', err);
+      };
+    } else {
+      console.error('Web Workers are not supported in this environment.');
+    }
+  }
+
+  public calculate(min: number = 1, max: number = 10000000): void {
+    // Reset state before starting the task.
+    this.isLoading.set(true);
+    this.result.set(undefined);
+    this.error.set(undefined);
+
+    const data = { min, max };
+    const dataBuffer = this.convertToBuffer(data);
+
+    // Post the message and transfer ownership of the ArrayBuffer.
+    this.worker.postMessage(dataBuffer, [dataBuffer]);
+  }
+
+  private convertToBuffer(jsonData: any): ArrayBuffer {
+    return new TextEncoder().encode(JSON.stringify(jsonData)).buffer;
+  }
+
+  public destroy(): void {
+    if (this.worker) {
+      this.worker.terminate();
+    }
+  }
+}
+```
+
+## 3. The Component (app.component.ts)
+Finally, our standalone component uses the TransferableWorkerService to initiate the background task. The template uses the built-in control flow (@if) to reactively display the state managed by the service's signals.
+
+```ts
+// app.component.ts
+import { Component, OnDestroy } from '@angular/core';
+import { TransferableWorkerService } from './transferable-worker.service';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  template: `
+    <h2>Transferable Objects Worker Example</h2>
+    <button (click)="runCalculation()">Run Heavy Calculation</button>
+
+    @if (worker.isLoading()) {
+      <p>Calculating...</p>
+    }
+
+    @if (worker.result(); as result) {
+      <p>Result: {{ result }}</p>
+    }
+
+    @if (worker.error(); as error) {
+      <p>An error occurred: {{ error.message }}</p>
+    }
+  `,
+})
+export class AppComponent implements OnDestroy {
+  // Create an independent instance of the worker service.
+  readonly worker = new TransferableWorkerService();
+
+  runCalculation(): void {
+    this.worker.calculate();
+  }
+
+  ngOnDestroy(): void {
+    // It's crucial to terminate the worker to free up resources.
+    this.worker.destroy();
+  }
+}
+```
+
+# Conclusion
+By leveraging Transferable Objects, you can dramatically improve the performance of data exchange between the main thread and Web Workers, especially when dealing with large datasets. This technique minimizes copy overhead and promotes efficient memory usage, making it an essential tool for building high-performance, parallelized web applications in Angular.
