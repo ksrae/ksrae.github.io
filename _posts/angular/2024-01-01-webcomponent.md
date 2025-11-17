@@ -1,44 +1,49 @@
 ---
-title: "Angular Standalone 환경에서 Web Component 만들기 (Creating Web Component in Angular: Standalone Based)"
+title: "Creating Web Component in Angular: Standalone Based"
 date: 2024-01-01 14:46:00 +0900
 comments: true
 categories: angular
 tags: [standalone, webcomponent]
 ---
 
-이 글에서는 Angular에서 Web Component를 만드는 과정을 살펴보겠습니다. <br/>
-많은 글들이 Module 방식에 중점을 두고 있으므로 Module 방식은 다른 문서를 확인하시고,<br/>
-여기에서는 Angular Standalone 환경일 때 Web Component를 만드는 방법에 대해 정리하였습니다.<br/>
- 
+# Creating Web Components in Angular Standalone Environments: A Comprehensive Guide
 
+This article explores the process of creating Web Components within Angular. While numerous resources focus on Module-based approaches, this guide specifically addresses the creation of Web Components in Angular Standalone environments. For information on Module-based implementations, please refer to alternative documentation.
 
-## Workspace 설정
-쉬운 관리를 위해 먼저 workspace를 생성합니다.
+## Workspace Configuration
 
-```ng new workspace --no-create-application```
+To facilitate organized management, we'll begin by establishing a workspace:
 
-그런 다음, Web Component 의 소스가 될 Library와 이를 감싸 Web Component로 변환할 Application을 추가합니다.
+```bash
+ng new workspace --no-create-application
+```
 
-```ng g library web-component-lib``` <br/>
-```ng g application web-component-app```
+Next, we'll add both a Library, serving as the source of our Web Component, and an Application to encapsulate and transform it into a Web Component:
 
+```bash
+ng g library web-component-lib
+```
 
+```bash
+ng g application web-component-app
+```
 
+## Library Implementation
 
+Within the library code, implement your desired functionality. You can leverage Angular features such as `@Input` and `@Output` as needed.
 
-## library 구현
+Optionally, configure the Shadow DOM for encapsulation.
 
-라이브러리 코드에 원하는 기능을 작성합니다. 필요한 경우 Angular의 기능 (예: @Input 및 @Output)을 포함시켜도 됩니다.<br/>
-필요한 경우 Shadow DOM을 설정합니다.
+```tsx
+import { Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
 
-```ts
 @Component({
   selector: 'lib-web-component-lib',
   standalone: true,
   imports: [],
   template: `
-  {% raw %} {{ setValue }} {% endraw %}
-  <button (click)="onClick($event)">Emit</button>
+    {{ setValue }}
+    <button (click)="onClick($event)">Emit</button>
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.ShadowDom // optional
@@ -53,21 +58,19 @@ export class WebComponentLibComponent {
 }
 ```
 
+## Application Implementation
 
+Since our objective is to invoke the library rather than a conventional web page, several adjustments to the default configuration are necessary.
 
-## application 구현
+### Removing the `app` Folder
 
-웹 페이지를 호출하는 것이 목적이 아닌 library를 호출하는 것이 목적이므로 몇가지 기존 설정의 변경이 필요합니다.
+The `app` folder is redundant, as we'll be directly invoking the library instead of the `AppComponent`. Consequently, it can be safely removed.
 
-### app folder 제거
-이 application에서는 appComponent가 아닌 library를 직접 호출하여야 하므로 불필요한 app 폴더를 제거합니다.
+### Adding `main.config.ts`
 
+Create a `main.config.ts` file within the `src` directory and populate it with the following code:
 
-### main.config.ts 추가
-src 폴더에 `main.config.ts` 파일을 추가하여 다음의 코드를 추가합니다. 
-- 필요한 경우 provider를 추가 합니다.
-
-```ts
+```tsx
 import { ApplicationConfig } from '@angular/core';
 
 export const appConfig: ApplicationConfig = {
@@ -77,22 +80,21 @@ export const appConfig: ApplicationConfig = {
 };
 ```
 
+Add any necessary providers within this file.
 
-## @angular/elements 설치
-library를 webcomponent로 만들기 위해 @angular/elements의 createCustomElement() 함수가 반드시 필요합니다. <br/>
-이를 사용하기 위해 @angular/elements를 install 해야 합니다.
+## Installing `@angular/elements`
 
-```
+The `createCustomElement()` function from `@angular/elements` is essential for transforming the library into a Web Component.  Install `@angular/elements` to gain access to this function.
+
+```bash
 npm i @angular/elements
 ```
 
+### Modifying `main.ts`
 
+Replace the entire contents of the existing `main.ts` file with the code below:
 
-### main.ts 수정
-
-기존 `main.ts` 파일의 내용을 모두 제거하고 다음의 코드로 대체합니다.
-
-```ts
+```tsx
 import {createApplication} from '@angular/platform-browser';
 import {appConfig} from './main.config';
 import {createCustomElement} from '@angular/elements';
@@ -107,13 +109,12 @@ import { ApplicationRef } from '@angular/core';
   customElements.define('web-component-lib', webComponentLibComponent);
 })();
 ```
-customElements.define의 첫 번째 매개변수는 외부에서 이 library를 호출하는 이름이 됩니다.
 
+The first parameter of `customElements.define` dictates the name used to invoke the library externally.
 
-### index.html 수정
+### Modifying `index.html`
 
-기존 app-root를 제거하고 호출할 라이브러리의 이름을 추가합니다.<br/>
-라이브러리의 이름은 customElements.define의 첫 번째 매개변수와 동일해야 합니다.
+Remove the default `app-root` element and insert the name of the library to be invoked. Ensure this name matches the first parameter provided to `customElements.define`.
 
 ```html
 <!DOCTYPE html>
@@ -132,12 +133,11 @@ customElements.define의 첫 번째 매개변수는 외부에서 이 library를 
 </html>
 ```
 
-#### input, output 작성
-만일 library에 input과 output이 있을 경우 webcomponent에서도 사용할 수 있습니다. <br/>
-input의 경우 attribute와 유사한 방식으로 사용할 수 있으며, (단, 대문자가 들어간 경우 ```하이픈(-)소문자``` 로 표시해야 합니다. ) <br/>
-output의 경우 addEventListener로 이벤트를 가져와야 합니다. <br/><br/>
+#### Input and Output Handling
 
-index.html을 다음과 같이 고쳐봅시다.
+If your library incorporates `@Input` and `@Output` properties, these can be utilized within the Web Component. Inputs are employed in a manner analogous to HTML attributes (note that camelCase input names should be represented in kebab-case). Outputs can be accessed by attaching event listeners.
+
+Modify `index.html` as follows to illustrate input and output handling:
 
 ```html
 <!DOCTYPE html>
@@ -163,37 +163,34 @@ index.html을 다음과 같이 고쳐봅시다.
 </html>
 ```
 
+### Modifying `angular.json`
 
-### angular.json 수정
+Remove `"outputHashing": "all"` or set it to `"none"`. If `"outputHashing"` is set to `"all"`, the file names (e.g., `main-[hash].js`) will include a hash that changes with each build, which needs to be prevented.
 
-"outputHashing": "all" 을 제거하거나 "none"으로 수정합니다. 만일 "outputHashing" 값이 "all"로 설정되어 있으면 빌드 할 때마다 main-[hash].js 와 같이 파일명에 hash가 붙어 빌드할 때마다 파일명이 변경되기 때문에 이를 방지하기 위함 입니다.
+## Build Process
 
-
-## build
-
-library와 application을 각각 build 합니다.
-package.json에 등록해두면 편리합니다.
+Build both the library and the application separately.  Defining scripts in `package.json` can streamline this process.
 
 ```json
     "build:lib": "ng build web-component-lib --configuration production",
     "build:app": "ng build web-component-app --configuration production",
 ```
 
+## Execution
 
-## 실행
-빌드된 app이 정상적으로 작동하는지 확인하기 위해 dist 폴더에서 app을 찾아 http-server에 올려 보세요. (단순히 파일을 실행해서는 동작하지 않습니다.) <br/><br/>
+To verify the proper functionality of the built application, locate the app within the `dist` folder and serve it using a local HTTP server (e.g., `http-server`). Simply opening the file directly will not work.
 
-http-server가 없다면 크롬의 확장 프로그램 (예: [Simple WebServer](https://simplewebserver.org/download.html) )을 활용할 수도 있습니다.
- 
+If `http-server` is unavailable, you can use a browser extension such as [Simple WebServer](https://simplewebserver.org/download.html).
 
-## 개선 
-dist 폴더에서 app 폴더의 파일 중 index.html 파일을 보면 main.js와 polyfills.js를 script로 호출하고 있는 것을 볼 수 있습니다.<br/>
-여러 library가 있을 경우 파일명이 모두 동일하므로 사용이 불편할 수 있으므로 이를 개선해봅시다.
+## Optimization
 
-#### script 파일 추가
-scripts 폴더를 생성하고 postbuild-bundler.js 을 생성합니다.
+Examine the `index.html` file within the app folder in the `dist` directory. Notice that it references `main.js` and `polyfills.js` as scripts.  If you have multiple libraries, this can lead to naming conflicts and inconvenience. Let's improve this.
 
-```js
+### Adding a Script File
+
+Create a `scripts` folder and add a file named `postbuild-bundler.js`.
+
+```jsx
 async function loadModules() {
     await import('./polyfills.js');
     await import('./main.js');
@@ -202,8 +199,9 @@ async function loadModules() {
   loadModules();
 ```
 
-#### angular.json 수정
-angular.json 파일을 수정합니다.
+### Modifying `angular.json`
+
+Update the `angular.json` file:
 
 ```json
 // angular.json
@@ -216,52 +214,46 @@ angular.json 파일을 수정합니다.
 ]
 ```
 
-#### package.json 수정
+### Modifying `package.json`
 
-빌드할 때 script 파일도 동시에 실행되도록 package.json에 script를 하나 더 추가합니다.
+Add another script to `package.json` to execute the script file concurrently with the build process:
 
 ```json
 "build:all": "npm run build:lib && npm run build:app",
 ```
 
-### 빌드
+### Build
 
-아래의 명령을 실행하여 빌드와 동시에 script 파일도 생성되도록 합니다.
-<br/>
-```npm run build:all```
+Execute the following command to build the application and simultaneously generate the script file:
 
+```bash
+npm run build:all
+```
 
-#### index.html 수정
+### Modifying `index.html`
 
-이제 dist 파일의 app 폴더의 index.html 에서 두개의 스크립트를 호출하는 코드를 제거하고 bundle.js 만 호출하도록 수정합니다.
-
+Now, remove the script tags referencing `main.js` and `polyfills.js` from the `index.html` file within the app folder of the `dist` directory, and include only `bundle.js`.
 
 ```html
 ...
 <script src="bundle.js" type="module"></script>
 <!-- remove those codes
   <script src="./main.js" type="module"></script>
-  <script src="./polyfills.js" type="module"></script> 
+  <script src="./polyfills.js" type="module"></script>
 -->
 ...
-
 ```
 
+## Packaging
 
-## package
-library를 별도로 package화 할 수 있으므로 환경에 따라 다양하게 구성할 수 있습니다.
+The library can be packaged separately, allowing for flexible configurations tailored to your environment.
 
+## Import Methods
 
-## import 방법
+For information on consuming Web Components within Angular applications, refer to the [Web Components In Angular](https://coryrylan.com/blog/using-web-components-in-angular) article. Additional documentation may be provided separately as required.
 
-webcomponent를 사용하는 방법에 대해서는 [Web Components In Angular](https://coryrylan.com/blog/using-web-components-in-angular) 문서를 참고하고, 필요한 경우 관련 문서를 별도로 작성할 예정입니다.
+## Considerations
 
+To utilize the built Web Component, the `main.js`, `polyfills.js`, and `bundle.js` files must be included. Combining these into a single file would be more convenient, but a suitable solution has not yet been identified.
 
-## 고려사항
-
-빌드된 웹 컴포넌트를 사용하려면 main.js, polyfills.js, bundle.js 파일을 꼭 포함해야 합니다. <br/>
-이를 하나의 파일로 결합하면 더 편리할 것 같지만 마땅한 해결책을 찾을 수 없습니다.<br/><br/>
-
-fs-extra와 concat을 install 하여 main.js와 polyfills.js를 하나의 파일로 합치는 방법을 제시하는 문서를 참고하였으나 실행하였을 경우 중복된 변수에 대한 에러가 발생하여 사용할 수 없습니다.
-
-
+Referencing documentation suggesting the use of `fs-extra` and `concat` to merge `main.js` and `polyfills.js` into a single file resulted in errors due to duplicated variables, rendering it unusable.

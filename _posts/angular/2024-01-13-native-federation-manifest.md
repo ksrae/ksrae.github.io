@@ -1,73 +1,82 @@
 ---
-title: "Angular 프로젝트에 Native Federation의 manifest를 활용한 Micro Frontend 구축(Micro Frotend with Native Federation by Manifest)"
+title: "Micro Frotend with Native Federation by Manifest"
 date: 2024-01-13 14:11:00 +0900
 comments: true
 categories: angular
 tags: [nativefederation, manifest]
 ---
 
-이 글에서는 Native Federation을 활용하여 Micro Frontend를 구축하는 과정을 예제를 통해 살펴보겠습니다.
+In this article, we will explore the process of building a Micro Frontend using Native Federation, with practical examples.
 
-## Native Federation 정의
-Native Federation은 module federation을 esbuild 등 다양한 번들로 Micro Frontend 환경을 구축할 수 있도록 지원하는 라이브러리입니다.<br/>
-<br/>
-Angular에서는 Micro Frontend 환경을 구축하기 위해 module federation을 사용합니다. [관련 링크](https://www.npmjs.com/package/@angular-architects/module-federation).<br/>
-현재 module federation은 Angular 12에서 16까지 지원되며, 그 이상의 버전에서도 webpack 환경인 경우 사용 가능합니다.<br/>
-그런데 만일 Angular 16 이상을 사용하는 프로젝트에서 esbuild 번들러를 사용한다면 module federation의 활용이 어려울 수 있으므로, native Federation를 활용하여 micro frotend 환경을 구축하는 것을 추천합니다.[관련 링크](https://www.npmjs.com/package/@angular-architects/native-federation)<br/>
-<br/>
-<br/>
+## Native Federation Definition
 
+Native Federation is a library that supports building Micro Frontend environments using various bundlers such as esbuild, leveraging module federation.
 
-## 개요
-Micro Frontend는 기본적으로 두 개 이상의 프로젝트를 연결하는 개념입니다. <br/>
-따라서 이 글에서는 두 개의 프로젝트를 생성하고, 하나는 호스트로, 다른 하나는 원격 프로젝트로 구성하여 호스트가 원격 컴포넌트를 가져오는 코드를 작성할 것입니다.
+In Angular, module federation is used to construct Micro Frontend environments. [Related Link](https://www.npmjs.com/package/@angular-architects/module-federation). Currently, module federation supports Angular versions 12 to 16, and can be used in webpack environments beyond those versions.
 
-## Host(Shell) 프로젝트 설정 
-### project 생성
-먼저 호스트 프로젝트를 생성합니다. 이 예제에서는 Angular 17로 esbuild를 기반으로 하는 프로젝트를 생성하며, 프로젝트명은 `native-federation-shell` 로 정했습니다.
-```ng new native-federation-shell```
+However, if you are using Angular 16 or higher and employing the esbuild bundler, utilizing module federation may be challenging. Therefore, we recommend constructing a micro frontend environment using Native Federation. [Related Link](https://www.npmjs.com/package/@angular-architects/native-federation)
 
-### native federation 설치
-```npm i @angular-architects/native-federation -D```
+## Overview
 
-### native federation 설정
-다양한 방식에 대응할 수 있도록 `type`을 `dynamic-host` 로 설정합니다.
-```ng g @angular-architects/native-federation:init --type dynamic-host```
+Micro Frontend fundamentally involves connecting two or more projects. Therefore, in this article, we will create two projects: one as the host and the other as a remote project. We will then write code that allows the host to import components from the remote project.
 
-설정이 완료되면 `federation.config.js` 파일이 생성되고, `angular.json` 의 설정이 변경되어 있음을 확인할 수 있습니다.
-<br/>
-또한 `package.json` 의 `dependencies`에 `es-module-shims`가 추가되어 있는 것을 확인할 수 있습니다. (^1.5.12 or higher)
+## Host (Shell) Project Setup
 
+### Project Creation
 
-### manifest 설정
-assets에 federation.manifest.json 파일을 생성합니다.<br/>
-여기서 key는 원격 프로젝트명이고, value는 원격 프로젝트의 URL을 입력합니다.
+First, create the host project. In this example, we are creating a project based on Angular 17 with esbuild, and naming the project `native-federation-shell`.
 
-```json
+```
+
+### Native Federation Installation
+
+```
+
+### Native Federation Configuration
+
+Set the `type` to `dynamic-host` to accommodate various scenarios.
+
+```
+
+Once the configuration is complete, you can see that the `federation.config.js` file has been created and the settings in `angular.json` have been modified.
+
+Also, you can verify that `es-module-shims` has been added to the `dependencies` in `package.json` (^1.5.12 or higher).
+
+### Manifest Configuration
+
+Create a `federation.manifest.json` file in the `assets` directory. Here, the key is the remote project name, and the value is the URL of the remote project.
+
+```
+
 {
 	"native-federation-remote-manifest": "http://localhost:4201/remoteEntry.json"
 }
+
 ```
 
-### main.ts 설정
-`bootstrap.ts`` 파일을 호출하기 전 `initFederation`을 호출해야 합니다.<br/> 
-또한 `initFederation`의 파라미터로 `manifest` 파일을 연결합니다.
-```ts
+### main.ts Configuration
+
+`initFederation` must be called before calling the `bootstrap.ts` file. Additionally, connect the `manifest` file as a parameter to `initFederation`.
+
+```
+
 import { initFederation } from '@angular-architects/native-federation';
 
 initFederation('/assets/federation.manifest.json')
   .catch(err => console.error(err))
   .then(_ => import('./bootstrap'))
   .catch(err => console.error(err));
+
 ```
 
+### Calling a Remote Component from a Route
 
-### route 에서 remote component 호출
-이 글에서는 라우트에서 원격 프로젝트의 컴포넌트를 호출합니다. 이때 반드시 원격의 federation.config.js에 해당 컴포넌트가 노출되었는지 확인해야 합니다.<br/>
-<br/>
+In this article, we will call a component from the remote project in a route. At this time, you must verify that the component has been exposed in the remote project's `federation.config.js`.
 
-이 예제에서는 두 개의 원격 컴포넌트를 연결합니다.
-```ts
+In this example, we are connecting two remote components.
+
+```
+
 // app.routes.ts
 import { loadRemoteModule } from '@angular-architects/native-federation';
 import { Routes } from '@angular/router';
@@ -80,22 +89,30 @@ export const routes: Routes = [
     loadRemoteModule('native-federation-remote-manifest', './SampleComponent').then((m) => m.SampleComponent),
   }
 ];
+
 ```
 
-#### route에서 remote route 호출
-remote의 route를 호출할 수도 있습니다. 이 때는 loadComponent가 아닌 loadChildren을 사용해야 합니다.
-```ts
+#### Calling a Remote Route from a Route
+
+You can also call a remote route. In this case, you should use `loadChildren` instead of `loadComponent`.
+
+```
+
 {
     path: 'remote-routes',
     // loadChildreas instead of loadComponent !!!
     loadChildren: () =>
       loadRemoteModule('native-federation-remote-manifest', './routes').then((m) => m.APP_ROUTES),
   },
+
 ```
 
-### template 작성
-이제 a 태그로 해당 route를 호출합니다.
-```html
+### Template Creation
+
+Now, call the route using an `<a>` tag.
+
+```
+
 <a [routerLink]="['/remote-app']" routerLinkActive="router-link-active" >REMOTEAPP</a>
 <br/>
 <br/>
@@ -104,33 +121,36 @@ remote의 route를 호출할 수도 있습니다. 이 때는 loadComponent가 �
 <br/>
 
 <router-outlet></router-outlet>
+
 ```
 
-여기까지 host 설정이 완료되었습니다.
+The host setup is now complete.
 
+## Remote Project Setup
 
+Now, create the remote project and connect it to the host.
 
-## Remote 프로젝트 설정
-이제 remote 프로젝트를 생성하고 host와 연결합니다.
+### Project Creation
 
-### project 생성
-```ng new native-federation-remote-manifest```
+```
 
-### native federation 설치
-```npm i @angular-architects/native-federation -D```
+### Native Federation Installation
 
-### native federation 설정
-host와는 달리 `type`을 `remote`로 설정합니다.
-```ng g @angular-architects/native-federation:init --type remote```
+```
 
-설정이 완료되면 host와 마찬가지로 `federation.config.js` `angular.json` `package.json` 이 추가 또는 변경됩니다.
+### Native Federation Configuration
 
-### federation.config.js 수정
-호스트의 설정과 유사하지만 원격에서는 호스트에 노출할 컴포넌트를 작성해야 합니다.<br/>
-여기에서는 호스트의 라우트에서 정의한 두 개의 컴포넌트를 정의합니다. 또한 호스트 manifest와 동일한 name을 작성합니다.
+Unlike the host, set the `type` to `remote`.
 
+```
 
-```js
+Once the configuration is complete, `federation.config.js`, `angular.json`, and `package.json` will be added or modified, similar to the host.
+
+### federation.config.js Modification
+
+Similar to the host's configuration, but in the remote, you must write the components to expose to the host. Here, we define the two components defined in the host's route. Also, write the same name as the host manifest.
+
+```jsx
 const { withNativeFederation, shareAll } = require('@angular-architects/native-federation/config');
 
 module.exports = withNativeFederation({
@@ -157,9 +177,11 @@ module.exports = withNativeFederation({
 });
 ```
 
-### main.ts 작성
-remote에는 manifest가 없으므로 파라미터가 없는 initFederation을 정의합니다.
-```ts
+### main.ts Creation
+
+Since the remote does not have a manifest, define `initFederation` with no parameters.
+
+```tsx
 import { initFederation } from '@angular-architects/native-federation';
 
 initFederation()
@@ -168,13 +190,14 @@ initFederation()
   .catch(err => console.error(err));
 ```
 
+### sample.component.ts Creation
 
-### sample.component.ts 작성
-노출할 component를 임의로 작성합니다.
+Create a component to expose arbitrarily.
 
+### .ts Error Case
 
-### .ts 에러인 경우
-만일 appComponent가 아닌 다른 component를 노출하려고 할 때 ts 파일 에러가 발생하는 경우 tsconfig.app.json에 ts 파일을 include 합니다.
+If a TS file error occurs when trying to expose a component other than `appComponent`, include the TS file in `tsconfig.app.json`.
+
 ```json
 {
   ...
@@ -185,17 +208,16 @@ initFederation()
 }
 ```
 
-## 실행
-host와 remote 두 프로젝트 모두를 실행하고, host에서 링크를 클릭하여 remote component가 제대로 호출되는지 확인 합니다.
+## Execution
 
+Run both the host and remote projects, and click the link on the host to verify that the remote component is being called correctly.
 
-## 결론
-두 개의 독립된 프로젝트가 마치 하나의 프로젝트인 것처럼 host에서 remote의 component를 사용하는 micro frontend방식에 대해서 native-federation으로 구축해 보았습니다.<br/>
-이를 통해 하나의 프로젝트를 다른 여러 프로젝트를 통해 구축할 수 있다는 것을 확인할 수 있었고 또한 native federation을 통해 webpack이 아닌 esbuild 번들러를 사용하는 프로젝트에서도 micro frontend 환경을 구축할 수 있다는 것을 확인할 수 있습니다.<br/>
-<br/>
-module federation도 일부 설정의 차이만 있을 뿐 방식은 유사하므로 참고하시기 바랍니다.<br/>
-아래 참고 사이트를 통해 더 자세하고 정확한 정보를 확인하십시오.
+## Conclusion
 
+We have built a micro frontend where the host uses the remote's component as if they were a single project, using native-federation. This confirmed that a single project can be built through several different projects, and also confirmed that native federation allows building a micro frontend environment in projects that use the esbuild bundler instead of webpack.
 
-## 참고 사이트
+The method is similar to module federation, with only some differences in settings, so please refer to it. See the reference sites below for more detailed and accurate information.
+
+## Reference Sites
+
 [micro-frontends-with-modern-angular-part-1-standalone-and-esbuild](https://www.angulararchitects.io/blog/micro-frontends-with-modern-angular-part-1-standalone-and-esbuild/)
