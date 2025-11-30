@@ -6,60 +6,60 @@ categories: angular
 tags: [controlflow, ngif, ngfor, async]
 ---
 
-이번 시간에는 Control folw에서 async pipe를 사용하는 방법과 alias 설정하는 방법을 알아보겠습니다.
+Let's explore how to leverage the async pipe with alias configurations within Angular's Control Flow for managing asynchronous data streams.
 
-# html에서 Observable 변수에 async pipe 사용하기
-html에서 Observable 변수를 사용할 때 async pipe를 사용하면 Observable이 발행하는 값을 구독할 수 있습니다.
+# Utilizing the Async Pipe with Observables in HTML
+
+When working with Observable variables directly within HTML templates, the async pipe provides a convenient mechanism to subscribe to the values emitted by the Observable.
+
 ```html
-
 <div>
-	{% raw %}{{ observable$ | async }}{% endraw %}
+    {{ observable$ | async }}
 </div>
 ```
 
-하지만 Observable 변수를 사용할 때마다 async pipe를 사용해야 하므로 사용이 불편하고 코드가 반복되는 단점이 있습니다.
+However, repeatedly applying the async pipe to the same Observable variable can lead to verbose and repetitive code, reducing maintainability.
 
 ```html
-<div>{% raw %}{{ observable$ | async }}{% endraw %}</div>
-<div>{% raw %}{{ observable$ | async }}{% endraw %}</div>
-<div>{% raw %}{{ observable$ | async }}{% endraw %}</div>
+<div>{{ observable$ | async }}</div>
+<div>{{ observable$ | async }}</div>
+<div>{{ observable$ | async }}</div>
 ```
 
-# CommonModule에서 async에 alias 활용하기
-반복을 줄이는 가장 좋은 방법은 ngIf에 async pipe를 사용하고 alias를 설정하는 것입니다.
+# Leveraging Async with Aliases in CommonModule
 
+A superior approach to minimize repetition involves employing the `ngIf` directive in conjunction with the async pipe and alias assignment.
 
 ```html
 <ng-container *ngIf="observable$ | async as data">
-	<div>{% raw %}{{ data }}{% endraw %}</div>
-	<div>{% raw %}{{ data }}{% endraw %}</div>
-	<div>{% raw %}{{ data }}{% endraw %}</div>
+    <div>{{ data }}</div>
+    <div>{{ data }}</div>
+    <div>{{ data }}</div>
 </ng-container>
 ```
 
-ngFor에서도 async pipe를 사용하고 alias를 설정할 수 있습니다.
+Similarly, the `ngFor` directive can benefit from async pipe usage and alias declarations for iterating over asynchronous collections.
+
 ```html
 <ng-container *ngFor="let item of observable$ | async as data">
-	<div>{% raw %}{{ item }}{% endraw %}</div>
+    <div>{{ item }}</div>
 </ng-container>
 ```
 
-이렇게 Observable 변수를 CommonModule을 통해 async pipe를 연결하고 alias를 정의하면, 해당 scope 내에서는 일반 변수처럼 활용할 수 있으며, 반복되는 코드를 줄일 수 있습니다.
+By connecting Observable variables through the async pipe and defining aliases within the CommonModule's directives, we gain the ability to treat the emitted values as regular variables within the component's scope, thereby reducing redundant code.
 
+# Utilizing Async with Aliases in Control Flow
 
-
-# Control flow에서 async에 alias 사용하기
-CommonModule 대신 Control flow를 사용할 수 있는데 Control flow에서도 async pipe에 alias를 설정할 수 있습니다.
-단, CommonModule과는 다르게 괄호로 감싸지 않고, 세미콜론(;)을 사용하여 구분합니다.
+Angular's Control Flow offers an alternative to CommonModule directives. Control Flow also supports alias declarations for async pipes.  A key distinction is the syntax: Control Flow employs parentheses and semicolon separators.
 
 ```html
 @if (observable$ | async; as data) {
-	<div>{% raw %}{{ data }}{% endraw %}</div>
-	<div>{% raw %}{{ data }}{% endraw %}</div>
-	<div>{% raw %}{{ data }}{% endraw %}</div>
+    <div>{{ data }}</div>
+    <div>{{ data }}</div>
+    <div>{{ data }}</div>
 }
 ```
 
-
 # Reference
+
 [Control flow for with async pipe](https://stackoverflow.com/questions/78549745/angular-new-control-flow-for-with-async-pipe-and-aliasing-variable-with-as)
