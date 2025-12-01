@@ -23,7 +23,7 @@ The interface defines four key methods:
 ## The Limitation of the Traditional Approach (@Input / @Output)
 Before using ControlValueAccessor, let's highlight the issues with the typical @Input/@Output method.
 
-```TypeScript
+```ts
 // Parent Component TS (standalone)
 import { Component } from '@angular/core';
 import { ColorPickerTraditionalComponent } from './color-picker-traditional.component';
@@ -63,7 +63,7 @@ Now, let's build the ColorPicker component using ControlValueAccessor. The goal 
 ### tep 1: Basic Component Setup
 First, we need to register the component as a ControlValueAccessor in its providers. We use the NG_VALUE_ACCESSOR token and forwardRef for this.
 
-```TypeScript
+```ts
 // color-picker.component.ts
 import { Component, forwardRef, Input, signal } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
@@ -125,7 +125,7 @@ export class ColorPickerComponent implements ControlValueAccessor {
 
 ### Step 2: Creating the Component Template
 
-```Html
+```html
 <!-- color-picker.component.html -->
 <div class="color-palette">
   @for (color of colors; track color) {
@@ -143,7 +143,7 @@ export class ColorPickerComponent implements ControlValueAccessor {
 ### Step 3: Using it in the Parent Component
 The parent component will also be standalone, importing ReactiveFormsModule and our ColorPickerComponent into its imports array.
 
-```TypeScript
+```ts
 // app.component.ts
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
@@ -166,7 +166,7 @@ export class AppComponent {
 ```
 
 
-```Html
+```html
 <!-- app.component.html -->
 <form [formGroup]="colorForm">
   <h3>Choose your favorite color:</h3>
