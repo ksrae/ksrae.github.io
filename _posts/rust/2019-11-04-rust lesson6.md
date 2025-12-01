@@ -1,187 +1,172 @@
 ---
-title: "강좌06-제어문과 반복문"
+title: "Lesson 06-control and loop"
 date: 2019-11-08 18:41:00 +0900
 comments: true
 categories: rust
 tags: [lesson-rust]
 ---
 
+[한국어(Korean) Page](https://velog.io/@ksrae/%EA%B0%95%EC%A2%8C06-%EC%A0%9C%EC%96%B4%EB%AC%B8%EA%B3%BC-%EB%B0%98%EB%B3%B5%EB%AC%B8)
+<br/>
 
-일반적으로 모든 언어에는 if와 switch 같은 제어문과<br>
-for나 while과 같은 반복문이 있습니다.<br><br>
+Generally, every language has control statements like `if` and `switch`, and loops like `for` and `while`.
 
-rust에도 이와 같은 명령어가 있는데 간단히 알아보겠습니다.<br><br>
+Rust also has these commands, which we will briefly explore.
 
-rust의 제어문과 반복문의 특징은 조건을 () 내에 포함하지 않으며,<br>
-for문은 for..in..을 사용한다는 것입니다.<br><br>
+The characteristics of Rust's control statements and loops are that the conditions are not included in `()`, and the `for` statement uses `for..in..`.
 
-기본적인 명령어들이므로 예제를 위주로 정리해보겠습니다.<br>
+Since these are basic commands, we will focus on examples.
 
-
-
-### if
+## if
 
 ```rust
-  if number < 5 {
-  } else if {
-  }
-  }else {
-  }
+if number < 5 {
+} else if {
+} else {
+}
 ```
 
-
-
-- int형을 bool 형으로 쓸 수 없습니다.
+- You cannot use an `int` type as a `bool` type.
 
 ```rust
-  let number = 1;
-  if number {
-  } else {
-  }
-  // error 
+let number = 1;
+if number {
+} else {
+}
+// error
 ```
 
-
-아래와 같은 방식으로 써야 합니다.
+You should write it in the following way:
 
 ```rust
-  fn main() {
-      let number = 3;
+fn main() {
+    let number = 3;
 
-      if number != 0 {
-          println!("number was something other than zero");
-      }
-  }
+    if number != 0 {
+        println!("number was something other than zero");
+    }
+}
 ```
 
-
-
-- 결과를 변수에 넣을 수 있습니다.
+- You can put the result into a variable.
 
 ```rust
-  let condition = if number {
+let condition = if number > 0 {
     5
-  } else {
+} else {
     6
-  };
+};
 ```
 
-        
-- 이 때, if와 else if, else에서 리턴하는 값은 반드시 같은 형이어야 합니다.
-  
+- At this time, the values returned from `if`, `else if`, and `else` must be of the same type.
+
 ```rust
-  let condition = if number < 0 {
+let condition = if number < 0 {
     5
-  } else if number == 0 {
+} else if number == 0 {
     false
-  }
-  } else {
+} else {
     "Positive"
-  };
-  // 각각 int, bool, string 형이므로 안된다. 
-```
-        
-
-### loop: 조건없이 무제한 반복
-  
-```rust
-  loop {
-  }
+};
+// Each are int, bool, and string types, so it doesn't work.
 ```
 
-        
-#### break
+## loop: Unlimited loop without condition
 
- - break에 수식을 넣어 리턴값으로 활용할 수 있습니다.
- 
 ```rust
-  let mut counter = 0;
-  let result = loop {
-  counter += 1;
+loop {
+}
+```
+
+**break**
+
+- You can put a formula into `break` and use it as a return value.
+
+```rust
+let mut counter = 0;
+let result = loop {
+    counter += 1;
 
     if counter == 10 {
         break counter * 2;
     }
-  };
+};
 ```
-   
-   
-### while: 조건이 있는 loop
+
+## while: loop with condition
 
 ```rust
-  while index < 5 {
-    println!("the value is: {}", a[index]);
+let mut index = 0;
+while index < 5 {
+  println!("the value is: {}", a[index]);
 
-    index += 1;
-  }
-  ```
+  index += 1;
+}
+```
 
-### for
+## for
 
-javascript의 for in만 가능합니다. <br>in 뒤에 범위를 지정하면 in 앞에 선언된 변수에 담겨 for문에서 활용할 수 있습니다.
+Only `for...in` from javascript is possible. If you specify a range after `in`, it can be stored in a variable declared before `in` and used in the `for` statement.
 
 ```rust
-  for element in a.iter() {
-      println!("the value is: {}", element);
-  }
+let a = [10, 20, 30, 40, 50];
+for element in a.iter() {
+    println!("the value is: {}", element);
+}
 
-  const MAX = 10;
-  for number in (1..MAX) {
-    println!("{}!", number);
-  }
+const MAX = 10;
+for number in (1..MAX) {
+  println!("{}!", number);
+}
 
-  for number in (1..4).rev() {
-    println!("{}!", number);
-  }
-  ```
-    
-fn five() -> i32에서 i32가 리턴형을 의미합니다.<br>
+for number in (1..4).rev() {
+  println!("{}!", number);
+}
+```
 
+`i32` in `fn five() -> i32` means the return type.
 
+## Attribute
 
- 
-  
-### Attribute
+- Conditional Execution
 
-- 조건부 실행
-
-#[cfg(조건)] 을 사용하면 조건이 허용될 때만 함수가 실행됩니다.<br>
-아래 예시는 windows 일 때만 실행되며, 아닐 경우 에러가 발생하는 코드입니다.
-
+If you use `#[cfg(condition)]`, the function will only be executed when the condition is allowed.
+The example below is code that is executed only when it is windows, and an error occurs otherwise.
 
 ```rust
 fn main() {
- on_windows();
+    on_windows();
 }
 
 #[cfg(target_os = "windows")]
 fn on_windows() {
- println!("This OS is windows.")
+    println!("This OS is windows.")
 }
 
-// 결과 - os가 windows 일 때,
-This OS is windows.
+// Result - When the OS is windows,
+// This OS is windows.
 
-// 결과 - os가 linux 일 때,
-   |
-2 |  on_windows();
-   |  ^^^^^^^^^^ not found in this scope
+// Result - When the OS is linux,
+//error[E0425]: cannot find function `on_windows` in this scope
+// --> src/main.rs:2:5
+//   |
+// 2 |     on_windows();
+//   |     ^^^^^^^^^^ not found in this scope
 ```
 
+**Testing**
 
-#### Testing
-#[test] 로 사용하며 함수가 수행 가능한지 테스트합니다.<br>
-rustc나 cargo로 다음과 같이 테스트할 수 있습니다.
+It is used as `#[test]` and tests whether the function can be performed.
+You can test with `rustc` or `cargo` as follows.
 
 ```bash
-rustc --test [파일명]
+rustc --test [file name]
 ```
 
-또는
+Or
 
 ```bash
 cargo test
 ```
 
-
-#[] 문법에 대해서는 나중에 더 자세히 다루도록 하겠습니다.
+We will cover the `#[...]` syntax in more detail later.

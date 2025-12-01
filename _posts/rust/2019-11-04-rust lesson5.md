@@ -1,103 +1,97 @@
 ---
-title: "강좌05-함수"
+title: "Lesson 05-function"
 date: 2019-11-06 18:22:00 +0900
 comments: true
 categories: rust
 tags: [lesson-rust]
 ---
 
+[한국어(Korean) Page](https://velog.io/@ksrae/%EA%B0%95%EC%A2%8C05-%ED%95%A8%EC%88%98)
+<br/>
 
-함수의 기본 사용법은 javascript와 유사하나 rust에서는 function 대신 fn을 사용합니다.<br>
-
-```rust
-  fn main() {
-  }
-```
-
-    
-### 1. 파라미터
+The basic usage of functions is similar to JavaScript, but in Rust, `fn` is used instead of `function`.
 
 ```rust
-  fn main() {
-      another_function(5);
-  }
-
-  fn another_function(x: i32) {
-      println!("The value of x is: {}", x);
-  }
+fn main() {}
 ```
 
-    
-반드시 파라미터에 형을 정의하여야 합니다.<br> 그렇지 않으면 에러가 발생하므로 javascript 개발자는 유의하여야 합니다.<br>
-
-
-### 2. 리턴
-
-rust에서 리턴은 javascript와 달리 return을 생략하고 세미콜론(;)도 빼야 합니다. <br>
-
-```rust
-  fn five() -> i32 {
-      5
-  }
-
-  fn plus_one(x: i32) -> i32 {
-      x + 1
-  }
-
-  fn main() {
-      let x = five();
-
-      println!("The value of x is: {}", x);
-  }
-```
-    
-fn five() -> i32에서 i32가 리턴형을 의미합니다.<br>
-
-
-
- 
-  
-### 3. Attribute
-
-- 조건부 실행
-
-#[cfg(조건)] 을 사용하면 조건이 허용될 때만 함수가 실행됩니다.<br>
-아래 예시는 windows 일 때만 실행되며, 아닐 경우 에러가 발생하는 코드입니다.
-
+## 1. Parameters
 
 ```rust
 fn main() {
- on_windows();
+    another_function(5);
+}
+
+fn another_function(x: i32) {
+    println!("The value of x is: {}", x);
+}
+```
+
+In Rust, it is mandatory to define the type of parameters. Failure to do so will result in an error, a point that JavaScript developers should note carefully. Type annotations are crucial for Rust's strong typing system.
+
+## 2. Return Values
+
+In Rust, returning values differs from JavaScript. The `return` keyword can be omitted, and the semicolon (`;`) should also be removed. This creates an expression-based return.
+
+```rust
+fn five() -> i32 {
+    5
+}
+
+fn plus_one(x: i32) -> i32 {
+    x + 1
+}
+
+fn main() {
+    let x = five();
+
+    println!("The value of x is: {}", x);
+}
+```
+
+In `fn five() -> i32`, `i32` indicates the return type of the function. Defining return types enables compile-time checks for type consistency, enhancing code reliability.
+
+## 3. Attributes
+
+- Conditional Execution
+
+Using `#[cfg(condition)]` allows a function to be executed only when the specified condition is met.
+
+The example below is executed only on Windows; otherwise, an error occurs.
+
+```rust
+fn main() {
+    on_windows();
 }
 
 #[cfg(target_os = "windows")]
 fn on_windows() {
- println!("This OS is windows.")
+    println!("This OS is windows.")
 }
 
-// 결과 - os가 windows 일 때,
-This OS is windows.
+// Result - when the OS is Windows:
+// This OS is windows.
 
-// 결과 - os가 linux 일 때,
-   |
-2 |  on_windows();
-   |  ^^^^^^^^^^ not found in this scope
+// Result - when the OS is Linux:
+// |
+// 2 |  on_windows();
+// |  ^^^^^^^^^^ not found in this scope
 ```
-
 
 - Testing
-#[test] 로 사용하며 함수가 수행 가능한지 테스트합니다.<br>
-rustc나 cargo로 다음과 같이 테스트할 수 있습니다.
+
+Used with `#[test]`, this attribute tests whether a function can be executed.
+
+You can test with `rustc` or `cargo` as follows:
 
 ```bash
-rustc --test [파일명]
+rustc --test [filename]
 ```
 
-또는
+Or:
 
 ```bash
 cargo test
 ```
 
-
-#[] 문법에 대해서는 나중에 더 자세히 다루도록 하겠습니다.
+We will cover the `#[...]` syntax in more detail later. Attributes provide powerful mechanisms for conditional compilation and testing in Rust.

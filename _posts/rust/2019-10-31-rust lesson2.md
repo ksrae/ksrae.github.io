@@ -1,48 +1,45 @@
 ---
-title: "강좌02-주석과 변수 타입"
+title: "Lesson 02-Comments and Variables types"
 date: 2019-10-31 18:38:00 +0900
 comments: true
 categories: rust
 tags: [lesson-rust]
 ---
 
+[한국어(Korean) Page](https://velog.io/@ksrae/%EA%B0%95%EC%A2%8C02-%EC%A3%BC%EC%84%9D%EA%B3%BC-%EB%B3%80%EC%88%98-%ED%83%80%EC%9E%85)
+<br/>
 
-### 1. 주석
+## 1. Comments
 
-주석달기는 javascript의 주석과 같습니다. <br>
+Commenting in Rust mirrors the style found in JavaScript.
 
 ```rust
-// 한줄 주석
+// Single-line comment
 /*
-여러줄 주석
+Multi-line comment
 */
-/// 문서화에 사용할 주석
+/// Documentation comment
 ```
 
-Rust에서는 여러줄이라도 한줄 주석으로 만들 것을 추천하며,<br>
-문서화에 필요한 주석은 /// 을 사용 합니다.<br>
+While multi-line comments are supported, using single-line comments (`//`) is generally recommended for clarity.  For documentation purposes, utilize the `///` style comments, which are processed by Rust's documentation generator.
 
+## 2. Global Variables
 
-## 2. 전역 변수
-
-전역 변수는 static을 사용하며 변수명은 대문자로 작성해야 합니다.
+Global variables in Rust are declared using the `static` keyword. By convention, their names are written in all capital letters.
 
 ```rust
 static MAX: i32 = 100;
 ```
 
-문자열은 &str 형을 사용하는데
+String literals are typically represented using the `&str` type.
 
 ```rust
 static NAME: &str = "GLOBAL VALUE";
 ```
 
-<del>문자형 전역 변수의 lifetime 유지를 위해 &'static str 형을 사용하여야 합니다.</del><br>
-<del>이는 lifetime 때문인데 'static 형은 가장 긴 lifetime을 가지므로 적합하다 볼 수 있습니다.</del><br><br>
+Using `&str` directly is perfectly acceptable.  When a global variable is declared, it implicitly possesses the longest possible lifetime, ensuring its availability throughout the program's execution.
 
-&str 형을 그대로 사용하여도 됩니다. 전역 변수로 선언하면 가장 긴 lifetime을 갖게 됩니다.<br><br>
-
-위의 변수를 선언하여 이를 출력하면 정상적으로 출력됨을 볼 수 있습니다.
+Demonstrating the declaration and usage of a global variable:
 
 ```rust
 static NAME: &str = "GLOBAL VALUE";
@@ -51,29 +48,26 @@ fn main() {
     println!("{}", NAME);
 }
 
-//결과
-GLOBAL VALUE
+// Output
+// GLOBAL VALUE
 ```
 
+## 3. Constants
 
-
-### 3. 상수
-
-상수는 const를 사용하며 변수명은 대문자로 작성합니다.
+Constants are defined using the `const` keyword and, like global variables, are conventionally named using all capital letters.
 
 ```rust
-const PI: i32 = 3.14;
+const PI: f32 = 3.14;
 
 fn main() {
   println!("{}", PI);
 }
 
-//결과
-3.14
+// Output
+// 3.14
 ```
 
-Rust에 내장된 상수를 use를 통해 사용할 수도 있습니다.<br>
-예를 들어 내장된 PI 상수를 사용하려면 std::f32::consts를 use 해야합니다.<br>
+Rust provides built-in constants that can be accessed via the `use` keyword. For instance, to use the built-in PI constant, import it from the `std::f32::consts` module.
 
 ```rust
 use std::f32::consts;
@@ -82,79 +76,89 @@ fn main() {
   println!("{}", consts::PI);
 }
 
-//결과
-3.1415927
+// Output
+// 3.1415927
 ```
 
+## 4. Values
 
-### 4. 값
+- **Number Literals:**
 
-- 진수 
-> 16진수: 0x  (0x46 = 70) <br>
-> 8진수: 0o (0o106 = 70) <br>
-> 2진수: 0b (0b1000110) <br>
+> Hexadecimal: `0x` (e.g., `0x46` = 70)
+> 
 
-- 언더스코어 (_)
-> 가독성을 위해 숫자 사이에 _를 넣을 수 있습니다. <br>
-> 예: 1_000_000 <br>
- 
-- 정수
-> i8, i16, i32, i64 : default i32 <br>
+>
 
-- 실수
-> f8, f16, f32, f64: default f64 <br>
+> Octal: `0o` (e.g., `0o106` = 70)
+> 
 
-** 실수 변수는 반드시 소수점을 포함해야 합니다.
+>
 
-- boolean
+> Binary: `0b` (e.g., `0b1000110`)
+> 
+- **Underscores:**
+
+> Underscores can be inserted between digits for improved readability.
+> 
+
+>
+
+> Example: `1_000_000`
+> 
+- **Integers:**
+
+> `i8`, `i16`, `i32`, `i64`: The default integer type is `i32`.
+> 
+- **Floating-Point Numbers:**
+
+> `f32`, `f64`: The default floating-point type is `f64`.
+> 
+
+**Important:** Floating-point variables *must* include a decimal point.
+
+- **Boolean:**
 
 ```rust
 let t = true;
 let f: bool = false; // with explicit type annotation
 ```
 
-
-- char
-
-```rust
-    let c = 'z';
-    let z = 'ℤ';
-    let heart_eyed_cat = '😻';
-```
-
-> 싱글 따옴표를 사용하며 문자 하나만 선언하면 char 형으로 인식합니다.
-
-
-- Tuple
+- **Character:**
 
 ```rust
-    let tup: (i32,i32, i16) = (500, 6.4, 1);
-    let (x, y, z) = tup;
-    println!("All Values: {} {} {}", tup.0, tup.1, tup.2);
-    println!("The value of y is: {}", y);
+let c = 'z';
+let z = 'ℤ';
+let heart_eyed_cat = '😻';
 ```
 
-> 여러 값을 묶어서 선언할 수 있습니다. 타입스크립트의 방식과 유사합니다.<br>
-> tup에서 직접 값을 가져오려면 tup.0, tup.1, tup.2 로 각각 가져올 수 있습니다.
-
-
-- Array
+> Characters are enclosed in single quotes. Declaring a single character infers the `char` type.
+> 
+- **Tuple:**
 
 ```rust
-    let a = [1, 2, 3, 4, 5];
-    let b: [i32; 5] = [1, 2, 3, 4, 5]; // i32형 5개 선언 정의
-    let c = [3; 5]; // 3값을 5개. 즉, [3,3,3,3,3]과 동일
-    println!("{}", a[0]);
+let tup: (i32, f64, i16) = (500, 6.4, 1);
+let (x, y, z) = tup;
+println!("All Values: {} {} {}", tup.0, tup.1, tup.2);
+println!("The value of y is: {}", y);
 ```
 
+> Tuples allow you to group multiple values of potentially different types together. This is similar to the concept in TypeScript.
+To access elements directly, use dot notation with the index (e.g., `tup.0`, `tup.1`, `tup.2`).
+> 
+- **Array:**
 
-### 5. 타입 체크
+```rust
+let a = [1, 2, 3, 4, 5];
+let b: [i32; 5] = [1, 2, 3, 4, 5]; // Explicit declaration: array of 5 i32 elements
+let c = [3; 5]; // Creates an array of 5 elements, all initialized to 3 (equivalent to [3, 3, 3, 3, 3])
+println!("{}", a[0]);
+```
 
+## 5. Type Checking
 
-- 변수의 복사
+- **Variable Copying:**
 
-문자열의 경우 javascript와 같이 변수명을 직접 적용해도 되나,
-숫자형이나 기타 다른 형의 경우 &로 가져와야 합니다.
+While string literals can be assigned directly (similar to JavaScript), numeric and other types require borrowing using the `&` operator.
 
 ```rust
 fn main() {
@@ -167,10 +171,9 @@ fn main() {
 }
 ```
 
+- **String Concatenation:**
 
-- string 합치기
-
-Rust에서는 string을 합칠 때 + 를 사용할 수 없습니다.
+Rust does not allow direct string concatenation using the `+` operator with `&str` types.
 
 ```rust
 fn main() {
@@ -178,14 +181,12 @@ fn main() {
     let a2 = "Lee";
     let _a3 = a1 + a2;
  }
- 
- //결과
-  |
-4 | let a3 = a1 + a2;
-  |               ^^^^^^^^^^^^^^^^^ `+` can't be used to concatenate two `&str` strings
+
+ // Error:
+ // `+` can't be used to concatenate two `&str` strings
 ```
 
-한쪽 변수를 to_string() 형태로 변경하면 가능합니다.
+One solution is to convert one of the strings to a `String` type using the `to_string()` method.
 
 ```rust
 fn main() {
@@ -196,8 +197,7 @@ fn main() {
  }
 ```
 
-
-또는 format!을 활용할 수도 있습니다. 사용법은 println!과 같습니다.
+Alternatively, you can use the `format!` macro, which functions similarly to `println!`.
 
 ```rust
 fn main() {
@@ -207,28 +207,24 @@ fn main() {
  }
 ```
 
+- **Type Mismatches:**
 
-- 다른 형은 서로 복제할 수 없습니다.
-
-javascript와는 달리 형을 강하게 따지므로 형이 다르면 값을 복사할 수 없습니다. <br>이는 형의 범위나 메모리 할당의 크기와 관계 없습니다.
+Rust is strongly typed, meaning that variables of different types cannot be directly assigned to each other, regardless of the underlying memory representation.
 
 ```rust
 fn main() {
  let num: i32 = 10;
  let mut mutable_num: u32 = 0;
- mutable_num = num; // error !
+ mutable_num = num; // Error!
 }
 
-//결과
-  |
-4 |  mutable_num = num; // error !
-  |                ^^^ expected u32, found i32
+// Error:
+// expected u32, found i32
 ```
 
-as를 활용하면 유사한 형 (int, float 등)은 서로 인식이 가능합니다.<br>
-그러나, 유사하지 않은 형 (int, &str)은 여전히 인식 불가합니다.<br><br>
+The `as` keyword can be used to perform type conversions between compatible types (e.g., integer to float). However, it cannot be used to convert between unrelated types (e.g., integer to `&str`).
 
-// 유사한 형 변환 (i32  -> u32)
+// Similar Type Conversion (i32 -> u32)
 
 ```rust
 fn main() {
@@ -240,20 +236,15 @@ fn main() {
  println!("{}", mutable_num);
 }
 
-// 결과
-  |
-3 |  let mut mutable_num: u32 = 0;
-  |          ^^^^^^^^^^^
-  |
-  = note: #[warn(unused_assignments)] on by default
-  = help: maybe it is overwritten before being read?
-  
-10
+// Result
+// warning: unused assignment
+// help: maybe it is overwritten before being read?
+// 10
 ```
 
-유사항 형을 as로 강제로 복사했더니 결과값은 나오지만 형 변환에 따른 경고 메시지가 나옵니다.<br><br>
+While the code compiles and executes, the compiler issues a warning about the type conversion.
 
-// 유사하지 않은 형 변환 (i32 -> &str)
+// Dissimilar Type Conversion (i32 -> &str)
 
 ```rust
 fn main() {
@@ -265,20 +256,16 @@ fn main() {
  println!("{}", mutable_num);
 }
 
-//결과
-  |
-5 |  mutable_num = num as &str;
-  |                ^^^^^^^^^^^
-  |
-  = note: an `as` expression can only be used to convert between primitive types. Consider using the `From` trait
+// Result
+// Error:
+// an `as` expression can only be used to convert between primitive types. Consider using the `From` trait
 ```
 
-유사하지 않은 경우 에러가 발생하고 진행되지 않습니다.
+An error occurs when attempting to convert between incompatible types.
 
+- **Custom Type Definitions:**
 
-- Custom 형 정의
-
-기본형을 활용한 Custom 형을 정의하여 이를 활용할 수 있습니다.
+Rust allows you to define custom types based on existing primitive types using the `type` keyword.
 
 ```rust
 type Custom = i64;
@@ -287,4 +274,3 @@ fn main() {
  let run: Custom = 100;
 }
 ```
-

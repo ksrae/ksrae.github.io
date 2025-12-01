@@ -1,134 +1,119 @@
 ---
-title: "강좌03-변수"
+title: "Lesson 03-Variables"
 date: 2019-11-01 11:00:00 +0900
 comments: true
 categories: rust
 tags: [lesson-rust]
 ---
 
+[한국어(Korean) Page](https://velog.io/@ksrae/%EA%B0%95%EC%A2%8C03-%EB%B3%80%EC%88%98)
+<br/>
 
-### 1. immutable과 mutable 선언
-
-```rust
-  let x: i32 = 1;
-  // 형선언은 생략 가능. 생략하면 컴파일러가 판단하여 적용.
-```
-
-    
-기본 변수 선언 방식인 let으로 x를 정의하면 x는 immutable (변경할 수 없는 값) 이 되므로, <br>선언한 이후에 x = 2; 와 같이 값을 변경할 수 없습니다.<br><br>
-
-다시말해 기본 선언이 readonly가 된다고 보면 쉬울 것 같습니다.
+## 1. Immutable vs. Mutable Declarations
 
 ```rust
-  let x = 1; 
-  x = 2;
-  // error
+let x: i32 = 1;
+// Type declaration can be omitted. If omitted, the compiler infers and applies the type.
 ```
 
+By default, when you define `x` using `let`, the standard variable declaration method in Rust, `x` becomes immutable (a value that cannot be changed). Consequently, you cannot modify its value after declaration, such as `x = 2;`.
 
-수정 가능한 변수로 만들기 위해 mut로 선언해야 합니다. <br>let 다음에 mut를 붙이면 mutable 상태로 만들 수 있으며 말 그대로 변수가 됩니다.
+In essence, the default declaration behaves as if it's `readonly`.
 
 ```rust
-  let mut x = 1; 
-  x = 2;
-  // x = 2
+let x = 1;
+x = 2;
+// error: cannot assign twice to immutable variable `x`
 ```
 
-
-그러나, 다른 형으로 바꾸것은 불가능합니다.<br><br>
-즉, mut는 단순히 readonly를 해제하는 것이지 변수의 형까지 변경하는 것을 허용하지는 않습니다.
+To create a mutable variable, you must declare it with `mut`. Adding `mut` after `let` makes the variable mutable, allowing you to change its value.
 
 ```rust
-  // 가능
-  let spaces = "   ";
-  let spaces = spaces.len();
-
-  //불가능
-  let mut spaces = "   ";
-  spaces = spaces.len();
+let mut x = 1;
+x = 2;
+// x is now 2
 ```
 
-
-#### 예외
- 
-예외 적으로 mut 없이도 값을 변경할 수 있는 케이스가 있는데 <br>같은 형을 가진 상태로 재선언 하는 것 입니다. (같은 주소에 값이 재설정 됩니다.)
+However, you cannot change the variable's type. `mut` only removes the `readonly` restriction; it does not allow changing the variable's type.
 
 ```rust
-  let x = 1;
-  let x = x+1; 
-  let y = y+1;
-  let y = x+2;
+// Valid: Shadowing (re-declaration with the same name)
+let spaces = "   ";
+let spaces = spaces.len(); // spaces is now a usize (integer)
+
+// Invalid: Type mismatch
+let mut spaces = "   ";
+spaces = spaces.len(); // error: mismatched types
 ```
 
+### Exception: Shadowing
 
+An exception exists where you can "change" a value without `mut` by re-declaring it with the same name (shadowing), provided the new declaration has the same type. This effectively re-assigns the value in the same memory location (or a new location depending on compiler optimizations).
 
-    
-### 2. Scope
+```rust
+let x = 1;
+let x = x + 1;
+let y = 5;
+let y = x + 2;
+```
 
-javascript와 유사하게 변수의 범위가 제한됩니다.<br>
-immutable 변수라도 scope 위치가 다르면 다른 변수로 인식하여 선언할 수 있습니다. 
+## 2. Scope
+
+Similar to JavaScript, variable scope is restricted. Even for immutable variables, if the scope differs, you can declare another variable with the same name.
 
 ```rust
 fn main() {
-  let outer = 1;
-  {
-    let outer = 2;
-    let inner = 3;
-    println!("{} {}", outer, inner);
-  }
-  println!("{}", outer);
+    let outer = 1;
+    {
+        let outer = 2;
+        let inner = 3;
+        println!("{} {}", outer, inner); // Output: 2 3
+    }
+    println!("{}", outer); // Output: 1
+}
+```
+
+In this case, unlike the re-declaration mentioned above, Rust recognizes these as entirely different variables stored in different memory locations. (According to Ownership, which we will cover later, variables go out of scope and are dropped, removing them from memory.)
+
+## 3. Important Considerations
+
+Unlike JavaScript, assignment expressions do not cascade from left to right. It is recommended to declare one variable per line for clarity and to avoid potential errors.
+
+```rust
+// Invalid: Assignment within an assignment is not allowed.
+// let x = (let y = 5);  // Error
+
+// Suggested: Separate declarations for clarity.
+let y = 5;
+let x = y;
+```
+
+## 4. Values and Addresses
+
+If you want a variable to share the same memory address as another variable, similar to pointers in C, you should use a reference (`&`) when assigning the value.
+
+```rust
+fn main() {
+    let t1 = 10;
+    let t2 = &t1; // t2 is a reference to t1
+    println!("{:p} {:p}", &t1, t2);
 }
 
-//결과
-2 3
-1
+// Output (Addresses will vary)
+// 0x77114ff5f4 0x77114ff5f4
 ```
 
-이 때는 위의 재선언과 달리 다른 주소에 저장된 완전히 다른 변수로 인식합니다. <br>
-(뒤에 나올 Ownership에 따라 Scope을 벗어나면 Drop 되므로 메모리에서 제거 됩니다.)
-
-
-### 3. 유의사항
-
-자바스크립트처럼 equal 연산이 좌->우로 흐르지 않습니다. <br>한줄에 하나의 변수를 선언하는 것을 추천합니다.<br>
-
-```rust
-  let x = (let y = 5);  // Error
-
-  //suggest
-  let y = 5;
-  let x = y;
-```
-
-
-### 4. 값과 주소
-
-만일 변수를 c의 포인터와 같이 다른 변수와 같은 주소를 공유하는 용도로 활용하려면 값에 &를 붙여야 합니다.
+If you declare a variable as a copy (without `&`), a copy of the value is created, and the variables do not share the same memory address.
 
 ```rust
 fn main() {
     let t1 = 10;
-    let t2 = &t1;
-    println!("{:p} {:p}", &t1, t2);
- }
- 
- //결과
- 0x77114ff5f4 0x77114ff5f4
- ```
- 
-  
- 만일 일반 변수 복사하듯 선언하면 copy가 발생하며 같은 주소를 공유하지 않습니다.
- 
- ```rust
-fn main() {
-    let t1 = 10;
-    let t2 = t1;
+    let t2 = t1; // t2 is a copy of t1
     println!("{:p} {:p}", &t1, &t2);
-    
-// 결과
-0x5e368ff820 0x5e368ff824
- ```
- 
- c처럼 포인터 *를 사용하지 않아도 출력 옵션에 따라 값과 주소를 모두 표현할 수 있습니다.
- 
- 
+}
+
+// Output (Addresses will vary)
+// 0x5e368ff820 0x5e368ff824
+```
+
+Rust allows you to express both the value and the address based on the output formatting options, without requiring pointer dereferencing using `*` like in C. You can use format specifiers like `{:p}` to display memory addresses.
