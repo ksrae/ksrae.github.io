@@ -6,6 +6,8 @@ categories: angular
 tags: [bubbling, changedetection, ngzone]
 ---
 
+[한국어(Korean) Page](https://velog.io/@ksrae/ngZoneEventCoalescing%EC%9C%BC%EB%A1%9C-%EC%9D%B4%EB%B2%A4%ED%8A%B8-%EB%B2%84%EB%B8%94%EB%A7%81-%ED%95%B4%EA%B2%B0)
+<br/>
 
 ## Root Cause
 

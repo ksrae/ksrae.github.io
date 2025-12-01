@@ -6,6 +6,9 @@ categories: angular
 tags: [controlflow, defer]
 ---
 
+[한국어(Korean) Page](https://velog.io/@ksrae/Control-flow-defer-%EC%97%90-%EB%8C%80%ED%95%98%EC%97%AC)
+<br/>
+
 Deferred views, implemented via the `@defer` block, reduce an application's initial bundle size by delaying the loading of code that isn't strictly necessary for the page's initial render. This commonly results in faster initial load times and improvements to Core Web Vitals (CWV), particularly Largest Contentful Paint (LCP) and Time to First Byte (TTFB).
 
 ### Key Concepts

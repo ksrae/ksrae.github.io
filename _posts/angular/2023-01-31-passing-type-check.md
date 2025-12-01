@@ -6,8 +6,10 @@ categories: angular
 tags: [casting]
 ---
 
+[한국어(Korean) Page](https://velog.io/@ksrae/Template%EC%97%90%EC%84%9C-%ED%83%80%EC%9E%85-%EA%B2%80%EC%82%AC-%EC%9A%B0%ED%9A%8C%ED%95%98%EA%B8%B0)
+<br/>
+
 > TypeScript, unlike JavaScript, rigorously checks types, generates errors for type mismatches, and enforces correct type specifications. In this guide, we'll explore methods for bypassing type checking when the exact type of a variable is uncertain.
-> 
 
 Let's consider a sample JSON object:
 

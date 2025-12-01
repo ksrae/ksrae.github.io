@@ -6,6 +6,9 @@ categories: angular
 tags: [module]
 ---
 
+[한국어(Korean) Page](https://velog.io/@ksrae/Angular-Shared-Module)
+<br/>
+
 # Sharing Duplicate Modules Using a Shared Module
 
 ## 1. When Using a Component in Multiple Modules

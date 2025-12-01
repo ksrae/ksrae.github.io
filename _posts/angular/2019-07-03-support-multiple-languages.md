@@ -6,6 +6,8 @@ tags: [language, translate]
 date: 2019-07-03 12:20:00 +0900
 ---
 
+[한국어(Korean) Page](https://velog.io/@ksrae/Angular%EC%97%90%EC%84%9C-ngx-translate%EB%A5%BC-%ED%99%9C%EC%9A%A9%ED%95%9C-%EB%8B%A4%EA%B5%AD%EC%96%B4-%EC%B2%98%EB%A6%AC-%EA%B5%AC%ED%98%84-%EA%B0%80%EC%9D%B4%EB%93%9C)
+<br/>
 
 Apply multiple languages instantly using ngx-translate without server requests or reloading.<br>
 

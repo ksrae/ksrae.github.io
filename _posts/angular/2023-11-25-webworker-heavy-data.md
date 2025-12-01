@@ -6,6 +6,9 @@ categories: angular
 tags: [webworker]
 ---
 
+[한국어(Korean) Page](https://velog.io/@ksrae/Angular%EC%97%90%EC%84%9C-Transferable-Objects%EB%A1%9C-Worker-%EC%84%B1%EB%8A%A5-%EC%B5%9C%EC%A0%81%ED%99%94%ED%95%98%EA%B8%B0)
+<br/>
+
 # Introduction
 Web Workers are a powerful tool for improving application performance by offloading complex computations and heavy tasks to a separate thread. This prevents the main UI thread from blocking, ensuring a smooth and responsive user experience.<br/>
 <br/>

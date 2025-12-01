@@ -6,6 +6,9 @@ categories: angular
 tags: [chart, highcharts]
 ---
 
+[한국어(Korean) Page](https://velog.io/@ksrae/Highcharts%EB%A5%BC-Angular%EC%97%90%EC%84%9C-%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0)
+<br/>
+
 Highcharts-Angular is a library designed to simplify the integration of Highcharts into Angular applications.
 
 This guide will cover the installation of Highcharts and Highcharts-Angular, followed by an overview of the essential input properties provided by Highcharts-Angular.

@@ -6,6 +6,9 @@ categories: angular
 tags: [controlflow, ngif, ngfor]
 ---
 
+[한국어(Korean) Page](https://velog.io/@ksrae/Control-flow-%EC%83%88%EB%A1%9C%EC%9A%B4-If-Switch-%EA%B7%B8%EB%A6%AC%EA%B3%A0-For)
+<br/>
+
 Angular is a powerful framework that offers various features to help developers build web applications efficiently. One of these features is Control Flow. In this article, we'll delve into what Control Flow is, how it's used, and the benefits it brings to Angular development.
 
 # Understanding Angular Control Flow

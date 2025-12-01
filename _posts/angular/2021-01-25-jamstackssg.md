@@ -6,6 +6,8 @@ categories: javascript
 tags: [ssg]
 ---
 
+[한국어(Korean) Page](https://velog.io/@ksrae/JAMStack%EA%B3%BC-SSG)
+<br/>
 
 ## 1. Overview
 

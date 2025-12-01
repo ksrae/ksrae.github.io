@@ -6,6 +6,9 @@ categories: javascript
 tags: [nodejs, githubmodels, gpt]
 ---
 
+[한국어(Korean) Page](https://velog.io/@ksrae/Github-AI-models%EB%A1%9C-%ED%94%84%EB%A1%9C%ED%86%A0%ED%83%80%EC%9E%85-%EB%A7%8C%EB%93%A4%EA%B8%B0)
+<br/>
+
 GitHub Models offer a streamlined approach to managing and deploying AI and machine learning models directly within the GitHub ecosystem. Developers can leverage GitHub's model repository and API to manage their own models or utilize pre-existing ones. These models facilitate a wide range of AI tasks, benefiting from GitHub's robust version control and collaboration features.
 
 This exploration shifts the focus from creating AI models to prototyping with readily available AI models hosted on GitHub Models. Specifically, GitHub Models provides access to cutting-edge models like GPT-4o and Llama 3.3, enabling rapid experimentation. The following sections outline how to invoke these AI models and process their responses through code.

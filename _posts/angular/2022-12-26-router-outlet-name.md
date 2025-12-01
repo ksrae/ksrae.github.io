@@ -6,8 +6,11 @@ categories: angular
 tags: [routing, routeroutlet]
 ---
 
+[한국어(Korean) Page](https://velog.io/@ksrae/router-outlet%EC%97%90%EC%84%9C-name-attr-%EC%82%AC%EC%9A%A9-%EB%B0%A9%EB%B2%95)
+<br/>
+
 > In this session, we will explore the usage of the `router-outlet` tag's `name` attribute within the Angular framework.
-> 
+
 
 # Understanding the `name` Attribute
 

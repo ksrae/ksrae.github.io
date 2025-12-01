@@ -6,6 +6,9 @@ categories: angular
 tags: [controlflow, ngif, ngfor, async]
 ---
 
+[한국어(Korean) Page](https://velog.io/@ksrae/Control-flow-async-pipe%EB%A5%BC-%EC%82%AC%EC%9A%A9%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95%EA%B3%BC-alias-%EC%84%A4%EC%A0%95%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95)
+<br/>
+
 Let's explore how to leverage the async pipe with alias configurations within Angular's Control Flow for managing asynchronous data streams.
 
 # Utilizing the Async Pipe with Observables in HTML

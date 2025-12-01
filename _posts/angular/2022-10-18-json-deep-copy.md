@@ -6,6 +6,9 @@ categories: javascript
 tags: [json]
 ---
 
+[한국어(Korean) Page](https://velog.io/@ksrae/Json-Deep-Copy)
+<br/>
+
 ## Deep Copy Explained for Developers
 
 While numerous resources detail deep copying, many lack a clear articulation of its limitations relative to its intended purpose. This post aims to clarify deep copying, outline various methods, and present them in order of speed and accuracy.

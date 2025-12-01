@@ -6,6 +6,9 @@ categories: angular
 tags: [storage, window]
 ---
 
+[한국어(Korean) Page](https://velog.io/@ksrae/js%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%EC%97%90%EC%84%9C-Angular-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%EC%9D%98-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EC%A0%91%EA%B7%BC)
+<br/>
+
 ## Analysis: Accessing Angular from JavaScript
 
 In Angular, accessing JavaScript files typically involves utilizing declaration files (`.d.ts`) or employing `import` statements. However, the question arises: how do we achieve the reverse – accessing Angular components or variables from within JavaScript?

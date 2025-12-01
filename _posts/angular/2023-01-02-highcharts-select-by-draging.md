@@ -6,8 +6,10 @@ categories: angular
 tags: [highcharts]
 ---
 
+[한국어(Korean) Page](https://velog.io/@ksrae/Highcharts-Drag%EB%A1%9C-%EB%8B%A4%EC%A4%91-%ED%8F%AC%EC%9D%B8%ED%8A%B8-%EC%84%A0%ED%83%9D%ED%95%98%EA%B8%B0)
+<br/>
+
 > This article explores how to implement point selection via mouse drag in Highcharts, a feature not natively supported by the library.
-> 
 
 ## Implementing Drag-to-Zoom for Point Selection
 

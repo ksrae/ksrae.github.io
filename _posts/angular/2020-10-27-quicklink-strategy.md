@@ -6,6 +6,8 @@ categories: angular
 tags: [lazyloading]
 ---
 
+[한국어(Korean) Page](https://velog.io/@ksrae/%EB%B9%A0%EB%A5%B8-Lazy-Loading-%EB%B0%A9%EB%B2%95)
+<br/>
 
 ## Analysis
 

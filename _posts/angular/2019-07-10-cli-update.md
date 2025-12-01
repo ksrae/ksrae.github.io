@@ -6,6 +6,8 @@ categories: angular
 tags: [update]
 ---
 
+[한국어(Korean) Page](https://velog.io/@ksrae/Angular-cli-%EC%97%90%EB%9F%AC-%ED%95%B4%EA%B2%B0)
+<br/>
 
 Describing the version update process. Here, we will explain updating from version 7 to version 8. Since all version updates follow the same method, you can proceed with other versions as follows.
 

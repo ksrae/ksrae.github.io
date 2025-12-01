@@ -6,6 +6,8 @@ categories: angular
 tags: [error]
 ---
 
+[한국어(Korean) Page](https://velog.io/@ksrae/ng-%EC%9A%A9%EC%96%B4%EA%B0%80-cmdlet-%ED%95%A8%EC%88%98-%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8-%ED%8C%8C%EC%9D%BC-%EB%98%90%EB%8A%94-%EC%8B%A4%ED%96%89%ED%95%A0-%EC%88%98-%EC%9E%88%EB%8A%94-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%A8-%EC%9D%B4%EB%A6%84%EC%9C%BC%EB%A1%9C-%EC%9D%B8%EC%8B%9D%EB%90%98%EC%A7%80-%EC%95%8A%EC%8A%B5%EB%8B%88%EB%8B%A4)
+<br/>
 
 ## Issue Description
 

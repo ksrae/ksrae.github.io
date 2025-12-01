@@ -6,6 +6,8 @@ categories: angular
 tags: [ngfor, trackby]
 ---
 
+[한국어(Korean) Page](https://velog.io/@ksrae/ngFor-with-TrackBy)
+<br/>
 
 `ngFor` is a structural directive in Angular that iterates over a collection and renders a template for each item. While powerful, it has a potential performance drawback: by default, any change within the loop triggers a refresh of *all* DOM elements rendered by `ngFor`. This can lead to unnecessary re-renders and performance degradation, especially with large datasets.
 

@@ -6,6 +6,8 @@ categories: angular
 tags: [initializer, factory]
 ---
 
+[한국어(Korean) Page](https://velog.io/@ksrae/%EC%95%B1-%EC%8B%A4%ED%96%89-%EC%8B%9C%EC%A0%90%EC%97%90-%ED%95%A8%EC%88%98-%ED%98%B8%EC%B6%9C-App-Initializer)
+<br/>
 
 I aim to create a function that executes faster than a component at the point when an app is executed.
 

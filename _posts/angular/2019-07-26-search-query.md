@@ -6,6 +6,8 @@ categories: mongodb
 tags: [query]
 ---
 
+[한국어(Korean) Page](https://velog.io/@ksrae/2%EB%B0%94%EC%9D%B4%ED%8A%B8-%EA%B8%80%EC%9E%90%EB%A1%9C-%EA%B2%80%EC%83%89)
+<br/>
 
 # Implementing Full-Text and Range Queries in MongoDB
 

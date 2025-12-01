@@ -6,7 +6,8 @@ categories: angular
 tags: [universal, location]
 ---
 
-
+[한국어(Korean) Page](https://velog.io/@ksrae/Angular-Universal%EC%97%90%EC%84%9C-window.location-%EB%AA%85%EB%A0%B9-%EC%82%AC%EC%9A%A9)
+<br/>
 
 How to Use `window.location` in Angular Universal Projects on the Server Platform
 

@@ -6,7 +6,6 @@ categories: angular
 tags: [svg, webworker, viewchild, formgroup]
 ---
 
-
 Angular8에서는 기대하던 Ivy Rendering이 추가되고, 그 외에 많은 개선 및 추가 기능들이 포함되었습니다.<br>
 그 중에서 Angular를 제대로 활용하기 위해 반드시 알아야 할 새 기능과 변경된 기능을 추려서 정리해보겠습니다.<br>
 이해하지 못해 빠진 부분도 있으므로 댓글로 알려주시면 감사하겠습니다.

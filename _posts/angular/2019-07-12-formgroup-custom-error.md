@@ -6,6 +6,8 @@ categories: angular
 tags: [form, formcontrol, formgroup, error, custom]
 ---
 
+[한국어(Korean) Page](https://velog.io/@ksrae/%ED%8F%BC-%EA%B7%B8%EB%A3%B9-%EC%97%90%EB%9F%AC%EC%B2%98%EB%A6%AC-%EC%BB%A4%EC%8A%A4%ED%84%B0%EB%A7%88%EC%9D%B4%EC%A7%95)
+<br/>
 
 When working with Angular's `FormControl` or `FormGroup` in conjunction with Angular Material, customizing error handling often becomes necessary. For instance, you might need to display an error message if a mandatory agreement checkbox is not checked.
 

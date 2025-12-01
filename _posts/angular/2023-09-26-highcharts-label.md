@@ -6,6 +6,9 @@ categories: angular
 tags: [highcharts]
 ---
 
+[한국어(Korean) Page](https://velog.io/@ksrae/highcharts-%EC%9D%98-label-style-%EB%B3%80%EA%B2%BD)
+<br/>
+
 In this article, we'll explore how to modify the style of labels in Highcharts.
 
 ## Analysis

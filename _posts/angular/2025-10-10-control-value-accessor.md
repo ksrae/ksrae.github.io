@@ -6,6 +6,9 @@ categories: angular
 tags: [controlvalueaccessor, forms, reactiveforms]
 ---
 
+[한국어(Korean) Page](https://velog.io/@ksrae/Angular-%EC%BB%A4%EC%8A%A4%ED%85%80-%ED%8F%BC-%EC%BB%A8%ED%8A%B8%EB%A1%A4%EC%9D%84-%EC%9C%84%ED%95%9C-ControlValueAccessor-%ED%99%9C%EC%9A%A9-%EA%B0%80%EC%9D%B4%EB%93%9C)
+<br/>
+
 When developing large-scale, complex applications with Angular, it's common to build a shared library of UI components to maintain consistent design standards. Form controls like input and select are core elements that are reused throughout the application.<br/>
 However, the traditional approach of creating custom form controls using only @Input and @Output decorators can lead to several issues. For instance, it becomes cumbersome for the parent component to track the control's state (touched, dirty, valid, etc.) or to seamlessly integrate with Angular's form validation features.<br/>
 To solve these problems, Angular provides a powerful interface called ControlValueAccessor. It acts as a bridge that allows our custom form controls to interact naturally with Angular's FormControl.<br/>

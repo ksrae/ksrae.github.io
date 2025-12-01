@@ -6,7 +6,8 @@ categories: angular
 tags: [universal, platform]
 ---
 
-
+[한국어(Korean) Page](https://velog.io/@ksrae/Angular-Universal%EC%97%90%EC%84%9C-%ED%94%8C%EB%9E%AB%ED%8F%BC%EB%B8%8C%EB%9D%BC%EC%9A%B0%EC%A0%80-%EC%97%AC%EB%B6%80-%EC%B2%B4%ED%81%AC)
+<br/>
 
 Checking whether the platform Angular is running on is a browser or a server.
 

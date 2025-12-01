@@ -6,6 +6,8 @@ categories: angular
 tags: [highcharts]
 ---
 
+[한국어(Korean) Page](https://velog.io/@ksrae/Highcharts-tooltip-%EC%BB%A4%EC%8A%A4%ED%85%80%ED%95%98%EA%B8%B0)
+<br/>
 
 ## Tooltip Configuration in Highcharts
 

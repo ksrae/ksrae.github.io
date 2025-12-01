@@ -6,6 +6,9 @@ categories: angular
 tags: [standalone, update]
 ---
 
+[한국어(Korean) Page](https://velog.io/@ksrae/Standalone-Component%EC%97%90%EC%84%9C-imports-%EB%B0%A9%EB%B2%95)
+<br/>
+
 ## Introduction
 
 Proper management of imports for Components, Pipes, and Directives within Angular Standalone Components is essential for maintaining a clean and optimized codebase. This post will explore how to handle Components, Pipes, and Directives in templates, optimize the use of `CommonModule`, manage dynamic Components using `createComponent`, and integrate non-standalone Components within standalone architectures.

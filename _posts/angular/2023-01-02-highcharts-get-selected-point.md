@@ -6,8 +6,10 @@ categories: angular
 tags: [highcharts]
 ---
 
+[한국어(Korean) Page](https://velog.io/@ksrae/Highcharts-%EC%84%A0%ED%83%9D%ED%95%9C-%EB%AA%A8%EB%93%A0-Points-%EA%B0%80%EC%A0%B8%EC%98%A4%EA%B8%B0)
+<br/>
+
 > This article explores how to retrieve information about all user-selected points in Highcharts.
-> 
 
 ## Setting the Series Option: allowPointSelect
 

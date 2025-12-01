@@ -6,6 +6,9 @@ categories: angular
 tags: [universal]
 ---
 
+[한국어(Korean) Page](https://velog.io/@ksrae/ng-toolkituniversal-ERROR-Cannot-read-property-unshift-of-undefined-%EC%97%90%EB%9F%AC)
+<br/>
+
 Let's investigate the `@ng-toolkit/universal ERROR: Cannot read property 'unshift' of undefined` error.
 
 To utilize the `window` object within an Angular Universal application, the `@ng-toolkit/universal` package is typically installed.

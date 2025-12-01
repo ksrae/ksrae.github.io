@@ -6,6 +6,8 @@ categories: angular
 tags: [rxjs, subscribe]
 ---
 
+[한국어(Korean) Page](https://velog.io/@ksrae/Rxjs%EC%9D%98-pipe-%EC%A3%BC%EC%9A%94-%EB%AA%85%EB%A0%B9%EC%96%B4)
+<br/>
 
 ## `take(n)`
 

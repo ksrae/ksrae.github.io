@@ -6,6 +6,9 @@ categories: angular
 tags: [routing]
 ---
 
+[한국어(Korean) Page](https://velog.io/@ksrae/%EC%84%9C%EB%B2%84%EC%99%80-%ED%81%B4%EB%9D%BC%EC%9D%B4%EC%96%B8%ED%8A%B8%EC%97%90%EC%84%9C-%EA%B5%AC%EC%84%B1%ED%95%98%EB%8A%94-%EB%9D%BC%EC%9A%B0%ED%8C%85%EC%9D%98-%EB%B9%84%EA%B5%90-kwx2z2sz)
+<br/>
+
 This post compares routing implementations between server-side and client-side approaches.
 
 ## Key Differences

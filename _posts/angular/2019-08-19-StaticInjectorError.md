@@ -6,6 +6,8 @@ categories: angular
 tags: [universal]
 ---
 
+[한국어(Korean) Page](https://velog.io/@ksrae/StaticInjectorErrorAppServerModuleInjectionToken-ng-toolkit-window-%EC%97%90%EB%9F%AC)
+<br/>
 
 Let's investigate the `@ng-toolkit/universal ERROR: Cannot read property 'unshift' of undefined` error.
 

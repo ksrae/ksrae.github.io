@@ -6,6 +6,9 @@ categories: angular
 tags: [highcharts]
 ---
 
+[한국어(Korean) Page](https://velog.io/@ksrae/Highcharts-%EC%97%90%EC%84%9C-chart-%EB%B3%80%EC%88%98-%EC%A0%91%EA%B7%BC%ED%95%98%EA%B8%B0)
+<br/>
+
 In Highcharts, you can directly inject options into the `chart` variable, making it easy to utilize the API and modify values. However, in highcharts-angular, attempting to apply options directly to the `chart` variable leads to a different outcome.
 
 This article explores how to access the `charts` variable in highcharts-angular, similar to how it's done in Highcharts.

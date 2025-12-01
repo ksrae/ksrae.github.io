@@ -6,6 +6,8 @@ categories: angular
 tags: [highcharts, contextmenu]
 ---
 
+[한국어(Korean) Page](https://velog.io/@ksrae/highcharts%EC%97%90-contextmenu-%EA%B8%B0%EB%8A%A5-%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0)
+<br/>
 
 Highcharts does not natively provide a `contextmenu` event for data points. While installing the `highcharts-custom-events` package from npm is a common solution, this blog post explores how to implement context menu events on Highcharts data points without relying on third-party libraries.
 

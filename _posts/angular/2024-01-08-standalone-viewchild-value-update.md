@@ -6,6 +6,9 @@ categories: angular
 tags: [viewchild, template]
 ---
 
+[한국어(Korean) Page](https://velog.io/@ksrae/Angular%EC%97%90%EC%84%9C-%EC%A7%80%EC%97%B0%EB%90%9C-%ED%85%9C%ED%94%8C%EB%A6%BF-%EC%97%85%EB%8D%B0%EC%9D%B4%ED%8A%B8-%ED%95%B4%EA%B2%B0)
+<br/>
+
 ## Introduction
 
 This article explores how to address the issue of values not immediately reflecting in the template of an Angular application. While typically, declared variables are instantly reflected, certain situations, such as using `OnPush` change detection, can prevent this behavior. This article will not delve into an extensive explanation of change detection but rather directs you to the official Angular documentation: [Angular Change Detection and Optimization](https://angular.io/guide/change-detection).

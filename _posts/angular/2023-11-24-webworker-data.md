@@ -6,6 +6,9 @@ categories: angular
 tags: [webworker]
 ---
 
+[한국어(Korean) Page](https://velog.io/@ksrae/Angular%EC%97%90%EC%84%9C-Worker-%ED%99%9C%EC%9A%A9%ED%95%98%EA%B8%B0)
+<br/>
+
 # Leveraging Workers in Angular Applications
 
 Workers provide a mechanism to execute JavaScript code in background threads, thereby preventing blocking of the main thread and enhancing performance in Angular applications. This article explores the creation and utilization of workers within an Angular context.

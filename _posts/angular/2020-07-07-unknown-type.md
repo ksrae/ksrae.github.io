@@ -2,10 +2,12 @@
 title: "Unknown Type"
 date: 2020-07-07 18:03:00 +0900
 comments: true
-categories: angular
-tags: [types]
+categories: javascript
+tags: [typescript, types]
 ---
 
+[한국어(Korean) Page](https://velog.io/@ksrae/Unknown-%ED%83%80%EC%9E%85)
+<br/>
 
 The `unknown` type was introduced in TypeScript 3.0.
 

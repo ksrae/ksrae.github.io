@@ -6,7 +6,8 @@ categories: angular
 tags: [ssr, seo, universal]
 ---
 
-
+[한국어(Korean) Page](https://velog.io/@ksrae/Angular-Universal)
+<br/>
 
 # Implementing Server-Side Rendering (SSR) in Angular
 

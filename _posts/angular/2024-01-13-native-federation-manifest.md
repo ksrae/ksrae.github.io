@@ -6,6 +6,9 @@ categories: angular
 tags: [nativefederation, manifest]
 ---
 
+[한국어(Korean) Page](https://velog.io/@ksrae/Angular-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%EC%97%90-Native-Federation%EC%9D%98-manifest%EB%A5%BC-%ED%99%9C%EC%9A%A9%ED%95%9C-Micro-Frontend-%EA%B5%AC%EC%B6%95)
+<br/>
+
 In this article, we will explore the process of building a Micro Frontend using Native Federation, with practical examples.
 
 ## Native Federation Definition

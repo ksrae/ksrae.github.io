@@ -6,6 +6,9 @@ categories: angular
 tags: [class, interface, getter, setter]
 ---
 
+[한국어(Korean) Page](https://velog.io/@ksrae/interface%EC%97%90%EC%84%9C-getter-setter-%EC%83%9D%EC%84%B1%ED%95%98%EA%B8%B0)
+<br/>
+
 Let's delve into understanding getters and setters in classes and how to implement them with interfaces.
 
 ## Defining Getters and Setters

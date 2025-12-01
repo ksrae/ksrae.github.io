@@ -6,6 +6,9 @@ categories: angular
 tags: [chrome, tool]
 ---
 
+[한국어(Korean) Page](https://velog.io/@ksrae/Chrome-DevTools%EC%97%90-Angular-DevTool-%EC%A0%81%EC%9A%A9%ED%95%98%EA%B8%B0)
+<br/>
+
 This article explores how to add and utilize the Angular tab within Chrome's Developer Tools (DevTools).
 
 ## Adding the Angular Tab to Chrome DevTools

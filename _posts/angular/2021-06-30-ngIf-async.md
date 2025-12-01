@@ -6,6 +6,8 @@ categories: angular
 tags: [ngif, observable]
 ---
 
+[한국어(Korean) Page](https://velog.io/@ksrae/Control-Flow%EC%97%90%EC%84%9C-%EC%97%AC%EB%9F%AC-Observable-%EB%8B%A4%EB%A3%A8%EA%B8%B0)
+<br/>
 
 ## Plan
 

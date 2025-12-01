@@ -6,6 +6,9 @@ categories: angular
 tags: [dynamic, component, createcomponent, tooltip]
 ---
 
+[한국어(Korean) Page](https://velog.io/@ksrae/createComponent%EB%A1%9C-%ED%88%B4%ED%8C%81-%EB%A7%8C%EB%93%A4%EA%B8%B0)
+<br/>
+
 Let's build a dynamic tooltip that appears on hover, leveraging Angular's powerful createComponent API for dynamic component rendering.
 
 # Basic Operation

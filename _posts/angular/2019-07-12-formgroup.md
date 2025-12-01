@@ -6,6 +6,8 @@ categories: angular
 tags: [form, formgroup]
 ---
 
+[한국어(Korean) Page](https://velog.io/@ksrae/%ED%8F%BC-%EA%B7%B8%EB%A3%B9)
+<br/>
 
 ## Implementing Angular Forms: A Comprehensive Guide
 

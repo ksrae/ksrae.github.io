@@ -2,12 +2,15 @@
 title: "difference among typeof, instanceof, keyof and in"
 date: 2023-01-30 11:07:00 +0900
 comments: true
-categories: angular
+categories: javascript
 tags: [typescript, instanceof, typeof, keyof, in]
 ---
 
+[한국어(Korean) Page](https://velog.io/@ksrae/typeof-instanceof-keyof-and-in%EC%9D%98-%EC%B0%A8%EC%9D%B4%EC%A0%90)
+<br/>
+
 > In TypeScript, the `typeof`, `instanceof`, `keyof`, and `in` operators each serve distinct roles in type manipulation and object inspection. This post will delve into each of these operators, providing clear examples and use cases.
-> 
+ 
 
 ## `typeof` Operator
 

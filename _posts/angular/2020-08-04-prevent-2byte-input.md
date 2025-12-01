@@ -6,6 +6,8 @@ categories: angular
 tags: [input, form]
 ---
 
+[한국어(Korean) Page](https://velog.io/@ksrae/Input%EC%97%90%EC%84%9C-2%EB%B0%94%EC%9D%B4%ED%8A%B8-%EA%B8%80%EC%9E%90-%EB%A7%89%EA%B8%B0)
+<br/>
 
 # Implementing a Digit-Only Directive in Angular: Addressing Korean Input Issues
 

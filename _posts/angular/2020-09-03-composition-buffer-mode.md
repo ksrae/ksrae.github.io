@@ -6,7 +6,8 @@ categories: angular
 tags: [input, form]
 ---
 
-
+[한국어(Korean) Page](https://velog.io/@ksrae/2%EB%B0%94%EC%9D%B4%ED%8A%B8-%EB%AC%B8%EC%9E%90-%EC%9E%85%EB%A0%A5-%EC%8B%9C-%EB%A7%88%EC%A7%80%EB%A7%89-%EA%B8%80%EC%9E%90-%EB%B0%98%EC%98%81%EB%90%98%EC%A7%80-%EC%95%8A%EB%8A%94-%EB%AC%B8%EC%A0%9C)
+<br/>
 
 ## Cause
 

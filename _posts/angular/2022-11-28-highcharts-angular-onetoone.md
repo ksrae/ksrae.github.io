@@ -6,6 +6,9 @@ categories: angular
 tags: [highcharts]
 ---
 
+[한국어(Korean) Page](https://velog.io/@ksrae/Highcharts-angular-oneToOne-%EC%98%B5%EC%85%98%EC%9C%BC%EB%A1%9C-%EC%89%BD%EA%B2%8C-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EC%97%85%EB%8D%B0%EC%9D%B4%ED%8A%B8-%ED%95%98%EA%B8%B0)
+<br/>
+
 Highcharts offers a comprehensive set of options for data manipulation and boasts well-documented APIs, facilitating a smooth experience when using `highcharts-angular`. While the extensive documentation is valuable, locating specific commands for every scenario can be cumbersome. Often, the most straightforward and efficient approach is to directly inject values for immediate application.
 
 This post will explore a method for configuring charts by immediately applying changes to the `options` object.

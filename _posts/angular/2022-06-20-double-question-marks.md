@@ -2,7 +2,7 @@
 title: "How To Use Double Question Marks: ??"
 date: 2022-06-20 11:06:00 +0900
 comments: true
-categories: typescript
+categories: javascript
 tags: [nullish, coalescing, operator]
 ---
 

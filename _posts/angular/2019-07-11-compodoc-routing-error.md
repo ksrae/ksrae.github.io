@@ -6,6 +6,8 @@ categories: angular
 tags: [compodoc, error]
 ---
 
+[한국어(Korean) Page](https://velog.io/@ksrae/compodoc-%EC%83%88-%EB%9D%BC%EC%9A%B0%ED%8C%85-%EB%B0%A9%EC%8B%9D-%EC%9D%B8%EC%8B%9D-%EC%8B%A4%ED%8C%A8)
+<br/>
 
 When attempting documentation with Compodoc, an issue arises where it fails to recognize the routing method introduced in Angular 8 ( `import().then(m => m.Module)`).
 

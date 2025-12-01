@@ -6,6 +6,9 @@ categories: angular
 tags: [dynamic, component, createcomponent, modal]
 ---
 
+[한국어(Korean) Page](https://velog.io/@ksrae/createComponent%EB%A1%9C-%EB%AA%A8%EB%8B%AC-%EB%A7%8C%EB%93%A4%EA%B8%B0)
+<br/>
+
 createComponent provides lower-level control over dynamic components than ngComponentOutlet, making it ideal for building complex features like a full-fledged Modal system.
 
 # Defining a Modal

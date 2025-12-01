@@ -6,7 +6,8 @@ categories: angular
 tags: [routing]
 ---
 
-
+[한국어(Korean) Page](https://velog.io/@ksrae/Routing-Options)
+<br/>
 
 A comprehensive list of options for applying routing in Angular components.
 

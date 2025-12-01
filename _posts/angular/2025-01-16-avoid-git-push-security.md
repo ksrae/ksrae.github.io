@@ -6,6 +6,10 @@ categories: javascript
 tags: [github]
 ---
 
+[한국어(Korean) Page](https://velog.io/@ksrae/git-push%ED%95%A0-%EB%95%8C-security%EB%A1%9C-%EC%9D%B8%ED%95%9C-%EC%97%90%EB%9F%AC-%EC%9A%B0%ED%9A%8C)
+<br/>
+
+
 Have you ever encountered a situation where your code push was blocked by GitHub Push Protection during the `git push` process? This feature is a security system by GitHub designed to prevent sensitive security information (e.g., Access Keys, Tokens, etc.) from being pushed to the repository.
 
 In this post, I'll share my experience with a blocked push and provide a step-by-step guide to how I resolved the issue.

@@ -6,6 +6,8 @@ categories: angular
 tags: [form, validation, custom]
 ---
 
+[한국어(Korean) Page](https://velog.io/@ksrae/%ED%8F%BC-validation-Customizing)
+<br/>
 
 Let's explore how to implement custom validations beyond the default offerings. This demonstration will leverage a simple login form to illustrate applying regular expressions and creating new validators.
 

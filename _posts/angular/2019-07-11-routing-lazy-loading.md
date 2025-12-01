@@ -6,6 +6,8 @@ categories: angular
 tags: [routing, lazyloading]
 ---
 
+[한국어(Korean) Page](https://velog.io/@ksrae/Lazy-Loading-Routing)
+<br/>
 
 Angular's lazy loading routing method has been updated.
 
