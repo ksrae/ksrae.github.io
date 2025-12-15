@@ -54,8 +54,8 @@ function testFactory(setDefault: boolean) {
 }
 ```
 
-In the example above, it is determined whether to specify a value when creating a class depending on the parameter value of `test01Factory`.
-If the value is `true`, the class has the values `name = 'SM6', price = 10000, color = 'black'` as soon as it is called.
+In the example above, it is determined whether to specify a value when creating a class depending on the parameter value of `testFactory`. <br/>
+If the value is `true`, the class has the values `name = 'SM6', price = 10000, color = 'black'` as soon as it is called.<br/>
 If the value is `false`, the class has the values `name = '', price = 0, color = 'white'` when it is created.
 
 ## Method Decorator
