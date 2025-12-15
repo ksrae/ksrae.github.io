@@ -3,7 +3,7 @@ title: "Getting Started with IndexedDB in TypeScript (vs. LocalStorage)"
 date: 2025-10-11 12:00:00 +0900
 comments: true
 categories: javascript
-tags: [typescript, indexeddb, localstorage, storage, async, promise, crud]
+tags: [typescript, indexeddb, localstorage, storage, async, promise]
 ---
 
 [한국어(Korean) Page](https://velog.io/@ksrae/TypeScript%EB%A1%9C-IndexedDB-%EC%8B%9C%EC%9E%91%ED%95%98%EA%B8%B0-feat.-LocalStorage%EC%99%80-%EB%B9%84%EA%B5%90)
