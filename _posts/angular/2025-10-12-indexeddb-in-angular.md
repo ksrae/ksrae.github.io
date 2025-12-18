@@ -27,66 +27,67 @@ This article will guide you through a complete CRUD example of integrating a Pro
 First, we'll write a pure TypeScript DBService that has no Angular dependencies. All CRUD operations return Promises.
 
 ```jsx
-// src/db.service.ts (Framework-agnostic)
+// src/app/db.service.ts
 import { User } from './user.model';
-
-const DB_NAME = 'MyUserDB';
-const STORE_NAME = 'users';
-const DB_VERSION = 1;
 
 export class DBService {
   private db: IDBDatabase | null = null;
 
-  public async openDB(): Promise<void> {
+  // 1. Open Database
+  async openDB(): Promise<void> {
     return new Promise((resolve, reject) => {
-      if (this.db) return resolve();
-      const request = indexedDB.open(DB_NAME, DB_VERSION);
-      request.onerror = () => reject('Error opening database');
-      request.onsuccess = () => { this.db = request.result; resolve(); };
-      request.onupgradeneeded = (event) => {
-        const db = (event.target as IDBOpenDBRequest).result;
-        if (!db.objectStoreNames.contains(STORE_NAME)) {
-          db.createObjectStore(STORE_NAME, { keyPath: 'id', autoIncrement: true });
+      const request = indexedDB.open('MyUserDB', 1);
+
+      request.onerror = () => reject('Error opening DB');
+      
+      request.onsuccess = () => {
+        this.db = request.result;
+        resolve();
+      };
+
+      request.onupgradeneeded = (event: any) => {
+        const db = event.target.result;
+        if (!db.objectStoreNames.contains('users')) {
+          db.createObjectStore('users', { keyPath: 'id', autoIncrement: true });
         }
       };
     });
   }
 
-  private getStore(mode: IDBTransactionMode): IDBObjectStore {
-    if (!this.db) throw new Error('Database not initialized!');
-    return this.db.transaction(STORE_NAME, mode).objectStore(STORE_NAME);
-  }
-
-  public async getAllUsers(): Promise<User[]> {
-    const request = this.getStore('readonly').getAll();
+  // 2. Helper to convert IDBRequest to Promise 
+  private requestToPromise<T>(request: IDBRequest<T>): Promise<T> {
     return new Promise((resolve, reject) => {
       request.onsuccess = () => resolve(request.result);
       request.onerror = () => reject(request.error);
     });
   }
 
-  public async addUser(user: Omit<User, 'id'>): Promise<User> {
-    const request = this.getStore('readwrite').add(user);
-    return new Promise((resolve, reject) => {
-      request.onsuccess = () => resolve({ ...user, id: request.result as number });
-      request.onerror = () => reject(request.error);
-    });
-  }
-  
-  public async updateUser(user: User): Promise<User> {
-    const request = this.getStore('readwrite').put(user);
-    return new Promise((resolve, reject) => {
-      request.onsuccess = () => resolve(user);
-      request.onerror = () => reject(request.error);
-    });
+  // 3. Get Store Helper
+  private getStore(mode: IDBTransactionMode) {
+    if (!this.db) throw new Error('DB not initialized');
+    return this.db.transaction('users', mode).objectStore('users');
   }
 
-  public async deleteUser(id: number): Promise<void> {
-    const request = this.getStore('readwrite').delete(id);
-    return new Promise((resolve, reject) => {
-      request.onsuccess = () => resolve();
-      request.onerror = () => reject(request.error);
-    });
+  // --- CRUD Operations ---
+
+  async getAllUsers(): Promise<User[]> {
+    const store = this.getStore('readonly');
+    return this.requestToPromise(store.getAll());
+  }
+
+  async addUser(user: Omit<User, 'id'>): Promise<number> {
+    const store = this.getStore('readwrite');
+    return this.requestToPromise(store.add(user) as IDBRequest<number>);
+  }
+
+  async updateUser(user: User): Promise<void> {
+    const store = this.getStore('readwrite');
+    await this.requestToPromise(store.put(user));
+  }
+
+  async deleteUser(id: number): Promise<void> {
+    const store = this.getStore('readwrite');
+    await this.requestToPromise(store.delete(id));
   }
 }
 ```
@@ -96,31 +97,37 @@ export class DBService {
 Now, let's create an Angular Injectable service that converts the Promises from DBService into Observables.
 
 ```jsx
-// src/app/user-db.service.ts (Angular Service)
+// src/app/user-db.service.ts
 import { Injectable } from '@angular/core';
-import { from, Observable, switchMap, shareReplay } from 'rxjs';
-import { DBService } from '../db.service';
-import { User } from '../user.model';
+import { from, Observable } from 'rxjs';
+import { DBService } from './db.service';
+import { User } from './user.model';
 
 @Injectable({ providedIn: 'root' })
 export class UserDbService {
   private dbService = new DBService();
-  private dbReady$ = from(this.dbService.openDB()).pipe(shareReplay(1));
+  private dbReady = this.dbService.openDB(); // Promise that resolves when DB is open
+
+  // Helper: Wait for DB, then run action
+  private async perform<T>(action: () => Promise<T>): Promise<T> {
+    await this.dbReady;
+    return action();
+  }
 
   getAllUsers(): Observable<User[]> {
-    return this.dbReady$.pipe(switchMap(() => from(this.dbService.getAllUsers())));
+    return from(this.perform(() => this.dbService.getAllUsers()));
   }
 
-  addUser(user: Omit<User, 'id'>): Observable<User> {
-    return this.dbReady$.pipe(switchMap(() => from(this.dbService.addUser(user))));
+  addUser(user: Omit<User, 'id'>): Observable<number> {
+    return from(this.perform(() => this.dbService.addUser(user)));
   }
 
-  updateUser(user: User): Observable<User> {
-    return this.dbReady$.pipe(switchMap(() => from(this.dbService.updateUser(user))));
+  updateUser(user: User): Observable<void> {
+    return from(this.perform(() => this.dbService.updateUser(user)));
   }
 
   deleteUser(id: number): Observable<void> {
-    return this.dbReady$.pipe(switchMap(() => from(this.dbService.deleteUser(id))));
+    return from(this.perform(() => this.dbService.deleteUser(id)));
   }
 }
 ```
@@ -133,65 +140,50 @@ In our component, we inject UserDbService to manage data. The state of the dat
 // src/app/app.component.ts
 import { Component, OnInit, inject, signal } from '@angular/core';
 import { UserDbService } from './user-db.service';
-import { User } from '../user.model';
+import { User } from './user.model';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [],
   templateUrl: './app.component.html',
 })
 export class AppComponent implements OnInit {
-  private userDbService = inject(UserDbService);
+  private userDb = inject(UserDbService);
+  
+  // Signal for UI state
   users = signal<User[]>([]);
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.loadUsers();
   }
 
-  loadUsers(): void {
-    this.userDbService.getAllUsers().subscribe({
-      next: (users) => this.users.set(users),
-      error: (err) => console.error('Failed to load users', err),
+  loadUsers() {
+    this.userDb.getAllUsers().subscribe(data => {
+      this.users.set(data);
     });
   }
 
-  addUser(): void {
-    const name = prompt("Enter user name:");
-    const email = prompt("Enter user email:");
+  // Now receives data from HTML inputs
+  addUser(name: string, email: string) {
     if (!name || !email) return;
 
-    this.userDbService.addUser({ name, email }).subscribe({
-      next: (addedUser) => {
-        this.users.update((currentUsers) => [...currentUsers, addedUser]);
-      },
-      error: (err) => console.error('Failed to add user', err),
+    this.userDb.addUser({ name, email }).subscribe(() => {
+      this.loadUsers();
     });
   }
 
-  updateUser(user: User): void {
-    const newName = prompt("Enter new name:", user.name);
-    if (!newName) return;
-
-    const updatedUser = { ...user, name: newName };
-    this.userDbService.updateUser(updatedUser).subscribe({
-      next: (returnedUser) => {
-        this.users.update((users) =>
-          users.map((u) => (u.id === returnedUser.id ? returnedUser : u))
-        );
-      },
-      error: (err) => console.error('Failed to update user', err),
+  // Simple update logic (e.g., appends ' (Edited)')
+  updateUser(user: User) {
+    const updatedUser = { ...user, name: user.name + ' (Edited)' };
+    
+    this.userDb.updateUser(updatedUser).subscribe(() => {
+      this.loadUsers();
     });
   }
 
-  deleteUser(id: number): void {
-    if (!confirm('Are you sure you want to delete this user?')) return;
-
-    this.userDbService.deleteUser(id).subscribe({
-      next: () => {
-        this.users.update((users) => users.filter((u) => u.id !== id));
-      },
-      error: (err) => console.error('Failed to delete user', err),
+  deleteUser(id: number) {
+    this.userDb.deleteUser(id).subscribe(() => {
+      this.loadUsers();
     });
   }
 }
@@ -203,24 +195,33 @@ We use @for to iterate over the users Signal and render the UI.
 
 ```jsx
 <!-- src/app/app.component.html -->
-<main>
-  <h1>Angular IndexedDB with Signals & Observables</h1>
-  <button (click)="addUser()">Add User</button>
+<h1>Angular IndexedDB Simple Example</h1>
+<div>
+  <input #nameInput placeholder="Name">
+  <input #emailInput placeholder="Email">
   
-  <ul>
-    @for (user of users(); track user.id) {
-      <li>
-        <span>ID: {{ user.id }} | Name: {{ user.name }} | Email: {{ user.email }}</span>
-        <div>
-          <button (click)="updateUser(user)">Update Name</button>
-          <button (click)="deleteUser(user.id)">Delete</button>
-        </div>
-      </li>
-    } @empty {
-      <p>No users found in IndexedDB. Add one!</p>
-    }
-  </ul>
-</main>
+  <button (click)="addUser(nameInput.value, emailInput.value); nameInput.value=''; emailInput.value=''">
+    Add User
+  </button>
+</div>
+
+<hr>
+
+<ul>
+  @for (user of users(); track user.id) {
+    <li>
+      <strong>{{ user.name }}</strong> ({{ user.email }})
+      
+      <button (click)="updateUser(user)">Mark Edited</button>
+      
+      @if (user.id; as id) {
+        <button (click)="deleteUser(id)">Delete</button>
+      }
+    </li>
+  } @empty {
+    <p>No users found.</p>
+  }
+</ul>
 ```
 
 ### Conclusion

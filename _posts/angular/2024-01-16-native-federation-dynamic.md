@@ -1,5 +1,5 @@
 ---
-title: "Micro Frotend with Native Federation without Manifest"
+title: "Micro Frontend with Native Federation without Manifest"
 date: 2024-01-16 13:06:00 +0900
 comments: true
 categories: angular

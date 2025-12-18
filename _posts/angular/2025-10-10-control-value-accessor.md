@@ -63,7 +63,7 @@ While this approach works for simple value passing, it requires the parent compo
 ## Improving with ControlValueAccessor
 Now, let's build the ColorPicker component using ControlValueAccessor. The goal is to allow the parent component to manage its state and value using a formControl, just like a standard input element.
 
-### tep 1: Basic Component Setup
+### Step 1: Basic Component Setup
 First, we need to register the component as a ControlValueAccessor in its providers. We use the NG_VALUE_ACCESSOR token and forwardRef for this.
 
 ```ts
@@ -194,4 +194,4 @@ ControlValueAccessor is the standard and powerful way to create reusable custom 
 If you need to build complex form controls, it is highly recommended to use ControlValueAccessor instead of the @Input/@Output combination.
 
 # Reference
-[ontrol Value Accessor](https://medium.com/@tapaswim/control-value-accessor-f0b85062d79)
+[Control Value Accessor](https://medium.com/@tapaswim/control-value-accessor-f0b85062d79)

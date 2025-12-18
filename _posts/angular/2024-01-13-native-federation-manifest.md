@@ -1,5 +1,5 @@
 ---
-title: "Micro Frotend with Native Federation by Manifest"
+title: "Micro Frontend with Native Federation by Manifest"
 date: 2024-01-13 14:11:00 +0900
 comments: true
 categories: angular
@@ -103,7 +103,7 @@ You can also call a remote route. In this case, you should use `loadChildren` in
 
 {
     path: 'remote-routes',
-    // loadChildreas instead of loadComponent !!!
+    // loadChildren instead of loadComponent !!!
     loadChildren: () =>
       loadRemoteModule('native-federation-remote-manifest', './routes').then((m) => m.APP_ROUTES),
   },

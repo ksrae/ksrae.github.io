@@ -21,7 +21,7 @@ The [GitHub Marketplace](https://github.com/marketplace/models) provides a user 
 
 A GitHub Access Token is required to interact with the models programmatically. You can either generate a new token or use an existing one. Clicking the "Get API Key" button in the marketplace provides guidance on token generation and code setup.
 
-The following examples primarily focus on the Javascript SDK, utilizing the OpenAI SDK as a baseline.
+The following examples primarily focus on the JavaScript SDK, utilizing the OpenAI SDK as a baseline.
 
 While Azure AI provides a paid alternative, the free tier is sufficient for initial testing. Consequently, Azure AI will not be covered in this guide.
 
