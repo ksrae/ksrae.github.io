@@ -82,7 +82,7 @@ Configure both XSRF settings and the interceptor at once in the app.config.ts fi
 - XSRF Configuration: Use the withXsrfConfiguration feature.
 - withCredentials Configuration: Use the withInterceptors feature to register a functional interceptor.
 
-```TypeScript
+```tsx
 // src/app/app.config.ts
 
 import { ApplicationConfig } from '@angular/core';

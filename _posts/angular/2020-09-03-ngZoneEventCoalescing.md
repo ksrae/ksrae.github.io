@@ -49,7 +49,7 @@ The ngZoneEventCoalescing setting is a configuration option for NgZone. It is no
 ### Solution (Standalone API-based - Angular 17+)
 In your app.config.ts file, add provideZoneChangeDetection to the providers array and pass the option eventCoalescing: true.
 
-```TypeScript
+```tsx
 // src/app/app.config.ts
 
 import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
@@ -71,7 +71,7 @@ export const appConfig: ApplicationConfig = {
 This appConfig is then passed to the bootstrapApplication function in main.ts, applying the configuration to the entire application.
 
 
-```TypeScript
+```tsx
 // src/main.ts (for reference)
 
 import { bootstrapApplication } from '@angular/platform-browser';

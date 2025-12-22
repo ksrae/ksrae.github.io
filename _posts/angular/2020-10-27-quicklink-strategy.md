@@ -88,7 +88,7 @@ In the modern Standalone API environment, routing is configured in app.config.ts
 
 ### PreloadingAllModules Usage (Standalone API)
 
-```TypeScript
+```tsx
 // src/app/app.config.ts
 import { ApplicationConfig } from '@angular/core';
 import { provideRouter, withPreloading, PreloadAllModules } from '@angular/router';
@@ -106,7 +106,7 @@ export const appConfig: ApplicationConfig = {
 ### QuicklinkStrategy Usage (Standalone API)
 The ngx-quicklink library provides a provideQuicklink function for Standalone APIs.
 
-```TypeScript
+```tsx
 // src/app/app.config.ts
 import { ApplicationConfig } from '@angular/core';
 import { provideRouter, withPreloading } from '@angular/router';
