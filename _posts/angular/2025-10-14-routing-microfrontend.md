@@ -17,11 +17,11 @@ In this article, we'll explore a fascinating problem and its solution: how to di
 
 ## What's the Problem? Two Homes, One Address
 
-Here's the situation we faced: A user is on the main application (http://my-app.com/dashboard) and clicks a button to open a popup for filling out a simple form. This popup is, in fact, a separate Micro-Frontend app built as its own Angular project.
+Here's the situation we faced: A user is on the main application (`http://my-app.com/dashboard`) and clicks a button to open a popup for filling out a simple form. This popup is, in fact, a separate Micro-Frontend app built as its own Angular project.
 
-The challenge arises because this popup app also contains multiple pages (/form/step1, /form/step2) and needs to navigate between them freely.
+The challenge arises because this popup app also contains multiple pages (`/form/step1, /form/step2`) and needs to navigate between them freely.
 
-What would happen if the popup app's router behaved as usual? Every time the user navigates within the popup, the browser's main URL would change to something like http://my-app.com/form/step2. This triggers an unwanted full-page navigation, causing the main app's dashboard page behind it to disappear.
+What would happen if the popup app's router behaved as usual? Every time the user navigates within the popup, the browser's main URL would change to something like `http://my-app.com/form/step2`. This triggers an unwanted full-page navigation, causing the main app's dashboard page behind it to disappear.
 
 **Our Goal:** To allow the popup app to navigate internally as if its URL is changing, while keeping the main app's browser URL completely unchanged!
 
@@ -33,7 +33,7 @@ To solve this, we need to understand how the Angular Router communicates with th
 - **Location / LocationStrategy**: The Driver (Takes instructions from the navigation app to actually turn the wheel and press the pedals)
 - **Browser APIs**: The actual Car and Road (The car moves and the street address changes based on the driver's actions)
 
-Normally, when the Router issues a command like "Go to /form/step2!", the LocationStrategy takes that instruction and directly changes the browser's address bar. Our task is to replace this "driver" with one who operates a simulator (a virtual environment) instead of driving the real car.
+Normally, when the Router issues a command like "Go to `/form/step2`!", the LocationStrategy takes that instruction and directly changes the browser's address bar. Our task is to replace this "driver" with one who operates a simulator (a virtual environment) instead of driving the real car.
 
 ## The Core Tools: Rediscovering Angular's Testing Library
 
@@ -43,11 +43,11 @@ Surprisingly, the solution to this problem was hiding within Angular's testing u
 
 As its name suggests, this is a "mock" LocationStrategy. It's originally intended for use in test environments to verify that routing logic works correctly without actually changing the browser's state.
 
-This "fake driver" receives the command "Go to /form/step2!" from the Router but **never touches the browser's steering wheel**. Instead, it simply records in its own memory, "My current location is /form/step2." The browser's URL remains completely unaffected.
+This "fake driver" receives the command "Go to `/form/step2`!" from the Router but **never touches the browser's steering wheel**. Instead, it simply records in its own memory, "My current location is `/form/step2`." The browser's URL remains completely unaffected.
 
 ### 2. What is SpyLocation?
 
-This acts like a "spy" that listens for location changes. When MockLocationStrategy changes its internal path, SpyLocation can detect that change and emit an event, effectively announcing, "Hey, the internal path just changed to /form/step2!" This allows the main application to be aware of what's happening inside the popup app if needed.
+This acts like a "spy" that listens for location changes. When MockLocationStrategy changes its internal path, SpyLocation can detect that change and emit an event, effectively announcing, "Hey, the internal path just changed to `/form/step2`!" This allows the main application to be aware of what's happening inside the popup app if needed.
 
 ## The Implementation: Swapping Out the "Driver" in Our Popup App
 
@@ -77,18 +77,18 @@ bootstrapApplication(AppComponent, {
 
 ### How does this providers configuration work?
 
-- { provide: LocationStrategy, useClass: MockLocationStrategy }: This line tells Angular's DI system: "Whenever any part of this application asks for the LocationStrategy (the default driver), give it our MockLocationStrategy (the fake driver) instead."
-- { provide: Location, useClass: SpyLocation }: Similarly, when the Location service is requested, we provide SpyLocation to enable detection of internal path changes.
+- `{ provide: LocationStrategy, useClass: MockLocationStrategy }`: This line tells Angular's DI system: "Whenever any part of this application asks for the LocationStrategy (the default driver), give it our MockLocationStrategy (the fake driver) instead."
+- `{ provide: Location, useClass: SpyLocation }`: Similarly, when the Location service is requested, we provide SpyLocation to enable detection of internal path changes.
 
 With this setup, the popup application now has its own virtual routing world, completely decoupled from the browser's address bar.
 
 ## Putting It All Together: The Step-by-Step Flow
 
-1. A user clicks a link inside the popup app, such as <a routerLink="/form/step2">.
+1. A user clicks a link inside the popup app, such as `<a routerLink="/form/step2">`.
 2. The popup app's Router requests a path change from its LocationStrategy.
 3. Because we've configured MockLocationStrategy as the "driver," this request is handled entirely in memory and is **not** passed on to the browser.
 4. SpyLocation detects this internal path change.
-5. **Result:** The browser's URL remains http://my-app.com/dashboard, while the popup app successfully renders the /form/step2 component on screen.
+5. **Result:** The browser's URL remains `http://my-app.com/dashboard`, while the popup app successfully renders the `/form/step2` component on screen.
 
 ## Conclusion
 
