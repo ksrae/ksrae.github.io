@@ -122,5 +122,5 @@ Starting with a single line (withViewTransitions()), you can use view-transitio
 
 This enables developers to easily build modern web apps that enhance user engagement without writing complex animation logic.
 
-## 참고 사이트
+## Reference
 [**View Transitions API in Angular 17**](https://medium.com/ngconf/view-transitions-api-in-angular-17-1d1ea8bb2703)
