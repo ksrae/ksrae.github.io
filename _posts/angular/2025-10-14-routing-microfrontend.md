@@ -1,5 +1,5 @@
 ---
-title: Taming the Router in Angular Micro-Frontends"
+title: Taming the Router in Angular Micro-Frontends
 date: 2025-10-14 12:00:00 +0900
 comments: true
 categories: angular
