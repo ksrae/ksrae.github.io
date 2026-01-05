@@ -1,5 +1,5 @@
 ---
-title: What is View Transitions API?"
+title: What is View Transitions API?
 date: 2025-10-13 12:00:00 +0900
 comments: true
 categories: javascript
