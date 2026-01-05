@@ -17,8 +17,8 @@ In this article, we'll explore how to use a lesser-known feature, exportAs, to 
 
 Let's consider two common scenarios:
 
-1. **A Window Component with Dynamic Menus:** You have a <app-window> component that can contain various child components. The menu items at the top of the window should be determined by the type or state of the child component inside it.
-2. **A List with Item-Specific Action Buttons:** An <app-list> component renders several <app-list-item>s. Each item, based on its own state (e.g., 'editing', 'pending approval'), should have different action buttons like 'Save', 'Delete', or 'Approve', and these buttons need to appear in a common area of the list, like a header or footer.
+1. **A Window Component with Dynamic Menus:** You have a `<app-window>` component that can contain various child components. The menu items at the top of the window should be determined by the type or state of the child component inside it.
+2. **A List with Item-Specific Action Buttons:** An `<app-list>` component renders several `<app-list-item>` s. Each item, based on its own state (e.g., 'editing', 'pending approval'), should have different action buttons like 'Save', 'Delete', or 'Approve', and these buttons need to appear in a common area of the list, like a header or footer.
 
 In both cases, the component that best knows *what* to render is the **child**, but the location where it needs to be rendered belongs to the **parent's** DOM structure. How can we connect these two naturally?
 
@@ -28,7 +28,7 @@ The key to solving this lies in the exportAs property of the @Component deco
 
 ### 1. Setting Up the Child Component
 
-First, the child component defines the template it wants to provide to the parent using <ng-template> and exposes it as a public property on its class via @ViewChild.
+First, the child component defines the template it wants to provide to the parent using `<ng-template>` and exposes it as a public property on its class via @ViewChild.
 
 ```jsx
 // child.component.ts
@@ -57,8 +57,8 @@ export class ChildComponent {
 
 **Key Points:**
 
-- exportAs: 'smartChild': This allows any parent template using this component to get a reference to this component's instance using the syntax #variable="smartChild".
-- @ViewChild('menuItems') menuItems: This assigns the template reference #menuItems from the template to the menuItems class property. Since this property is public, it's accessible from the outside (the parent).
+- exportAs: 'smartChild': This allows any parent template using this component to get a reference to this component's instance using the syntax `#variable="smartChild"` .
+- `@ViewChild('menuItems') menuItems` : This assigns the template reference #menuItems from the template to the menuItems class property. Since this property is public, it's accessible from the outside (the parent).
 
 ### 2. Rendering the Template in the Parent Component
 
@@ -96,9 +96,9 @@ export class ParentComponent {}
 
 **How It Works, Step-by-Step:**
 
-1. `<app-child #child="smartChild"></app-child>`: This creates the <app-child> component. Crucially, by using the nickname defined in exportAs (smartChild), it **captures the entire instance of ChildComponent into a template variable named child**.
+1. `<app-child #child="smartChild"></app-child>`: This creates the `<app-child>` component. Crucially, by using the nickname defined in exportAs (smartChild), it **captures the entire instance of ChildComponent into a template variable named child**.
 2. `<ng-container [ngTemplateOutlet]="child.menuItems"></ng-container>`: Elsewhere in the parent's template, we use the ngTemplateOutlet directive.
-3. `[ngTemplateOutlet]="child.menuItems"`: We tell ngTemplateOutlet to render the template provided by the menuItems property of our child variable (which is the child component instance). This menuItems property is the exact <ng-template> we captured with @ViewChild in the child component.
+3. `[ngTemplateOutlet]="child.menuItems"`: We tell ngTemplateOutlet to render the template provided by the menuItems property of our child variable (which is the child component instance). This menuItems property is the exact `<ng-template>` we captured with @ViewChild in the child component.
 
 ## Conclusion
 
