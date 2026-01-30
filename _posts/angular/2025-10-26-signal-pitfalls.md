@@ -107,7 +107,7 @@ Angular Signals are not a replacement for RxJS. They are a **new paradigm for m
 - Signals **work in concert with** Angular's change detection system.
 - Changes are only detected when you **replace the reference**, enforcing immutability.
 
-Just as we solved the complex router problem in a micro-frontend architecture, we can leverage these principles to build more predictable and stable applications with Signals. They are not a silver bullet, but when used in the right context, they are one of the most powerful tools in your Angular toolbox.
+We can leverage these principles to build more predictable and stable applications with Signals. When used in the right context, they are one of the most powerful tools in your Angular toolbox.
 
 ## Reference
 [The Most Misunderstood Concept in Angular Signals](https://medium.com/@julias3/the-most-misunderstood-concept-in-angular-signals-1929f5c27c13)
