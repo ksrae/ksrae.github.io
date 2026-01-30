@@ -1,5 +1,5 @@
 ---
-title: tsconfig setting in Angular
+title: Signal Pitfalls
 date: 2025-10-26 12:00:00 +0900
 comments: true
 categories: angular
