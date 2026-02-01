@@ -1,5 +1,5 @@
 ---
-title: Service Worker Patterns in Angular: Caching & Push Notifications
+title: Service Worker Patterns in Angular - Caching & Push Notifications
 date: 2025-12-15 12:00:00 +0900
 comments: true
 categories: angular
