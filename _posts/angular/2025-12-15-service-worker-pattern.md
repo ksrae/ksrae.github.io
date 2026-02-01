@@ -3,7 +3,7 @@ title: Service Worker Patterns in Angular - Caching & Push Notifications
 date: 2025-12-15 12:00:00 +0900
 comments: true
 categories: angular
-tags: [signal]
+tags: [serviceworker]
 ---
 
 [한국어(Korean) Page](https://velog.io/@ksrae/Angular-Service-Worker-%EC%8B%AC%ED%99%94-%EC%BA%90%EC%8B%B1-%EC%A0%84%EB%9E%B5%EA%B3%BC-%ED%91%B8%EC%8B%9C-%EC%95%8C%EB%A6%BC-%EA%B5%AC%ED%98%84)
