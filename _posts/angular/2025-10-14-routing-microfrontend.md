@@ -6,9 +6,6 @@ categories: angular
 tags: [microfrontend, location, routing]
 ---
 
-[한국어(Korean) Page](https://velog.io/@ksrae/%EB%A7%88%EC%9D%B4%ED%81%AC%EB%A1%9C-%ED%94%84%EB%A1%A0%ED%8A%B8%EC%97%94%EB%93%9C%EC%97%90%EC%84%9C-%EB%9D%BC%EC%9A%B0%ED%8C%85-%EA%B4%80%EB%A6%AC)
-<br/>
-
 ## Taming the Router in Angular Micro-Frontends: A Guide to Independent Popup Navigation
 
 When managing multiple applications in an Angular Micro-Frontend (MFE) environment, you can often run into unexpected challenges. One of the most common is **Router Management**.
@@ -99,3 +96,7 @@ This approach can be a powerful solution for maintaining a seamless user experie
 Of course, using a testing library in a production environment warrants some consideration regarding long-term maintenance, but it stands as an excellent example of Angular's flexibility and extensibility.
 
 Use Arrow Up and Arrow Down to select a turn, Enter to jump to it, and Escape to return to the chat.
+
+## Link
+[한국어(Korean) Page](https://velog.io/@ksrae/%EB%A7%88%EC%9D%B4%ED%81%AC%EB%A1%9C-%ED%94%84%EB%A1%A0%ED%8A%B8%EC%97%94%EB%93%9C%EC%97%90%EC%84%9C-%EB%9D%BC%EC%9A%B0%ED%8C%85-%EA%B4%80%EB%A6%AC)
+<br/>

@@ -6,9 +6,6 @@ categories: angular
 tags: [dynamic, component, createcomponent, modal]
 ---
 
-[한국어(Korean) Page](https://velog.io/@ksrae/createComponent%EB%A1%9C-%EB%AA%A8%EB%8B%AC-%EB%A7%8C%EB%93%A4%EA%B8%B0)
-<br/>
-
 createComponent provides lower-level control over dynamic components than ngComponentOutlet, making it ideal for building complex features like a full-fledged Modal system.
 
 # Defining a Modal
@@ -185,3 +182,7 @@ This architecture provides a clean and reusable foundation for a modal system by
 - Separation of Concerns: The component opening a modal doesn't need to know where or how it's rendered. It only needs to know about the ModalService.
 - Type Safety: Generics ensure that the type of the opened component and its return value are clearly defined.
 - Extensibility: This structure can be easily extended to handle features like modal stacking, animations, or centralized state management.
+
+## Link
+[한국어(Korean) Page](https://velog.io/@ksrae/createComponent%EB%A1%9C-%EB%AA%A8%EB%8B%AC-%EB%A7%8C%EB%93%A4%EA%B8%B0)
+<br/>

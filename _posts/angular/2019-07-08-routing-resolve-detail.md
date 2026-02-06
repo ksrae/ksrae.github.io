@@ -6,9 +6,6 @@ categories: angular
 tags: [routing, resolve, component]
 ---
 
-[한국어(Korean) Page](https://velog.io/@ksrae/%EB%8D%94-%EC%83%81%EC%84%B8%ED%95%98%EA%B2%8C-%EC%A0%95%EB%A6%AC%ED%95%9C-Routing-Resolve)
-<br/>
-
 When a component attempts to apply a value fetched from a service within its `onInit` lifecycle hook to its template, an error can arise if the template tries to access the variable before the value has been assigned. This is a common issue in asynchronous data binding. A simple workaround involves using the safe navigation operator (`?.`) to allow for nullable values, preventing errors when the template initially renders.
 
 ```html
@@ -81,3 +78,7 @@ export class PageComponent implements OnInit {
 ```
 
 In summary, using route resolvers provides a clean and efficient way to ensure that components have the necessary data before they are initialized, preventing potential errors related to asynchronous data loading. This approach enhances the robustness and user experience of your application.
+
+## Link
+[한국어(Korean) Page](https://velog.io/@ksrae/%EB%8D%94-%EC%83%81%EC%84%B8%ED%95%98%EA%B2%8C-%EC%A0%95%EB%A6%AC%ED%95%9C-Routing-Resolve)
+<br/>

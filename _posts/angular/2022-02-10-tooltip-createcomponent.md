@@ -6,9 +6,6 @@ categories: angular
 tags: [dynamic, component, createcomponent, tooltip]
 ---
 
-[한국어(Korean) Page](https://velog.io/@ksrae/createComponent%EB%A1%9C-%ED%88%B4%ED%8C%81-%EB%A7%8C%EB%93%A4%EA%B8%B0)
-<br/>
-
 Let's build a dynamic tooltip that appears on hover, leveraging Angular's powerful createComponent API for dynamic component rendering.
 
 # Basic Operation
@@ -149,3 +146,7 @@ Unlike the old NgModule approach, in a standalone world, each component and dire
 - The TooltipDirective programmatically creates ATooltipComponent and BTooltipComponent. Since it doesn't use them in a template, it doesn't need to add them to an imports array. The standard TypeScript import statement is sufficient to get their class types.
 
 Now, when you run this example and hover over each div, you'll see the corresponding tooltip dynamically created and destroyed.
+
+## Link
+[한국어(Korean) Page](https://velog.io/@ksrae/createComponent%EB%A1%9C-%ED%88%B4%ED%8C%81-%EB%A7%8C%EB%93%A4%EA%B8%B0)
+<br/>

@@ -6,9 +6,6 @@ categories: angular
 tags: [rxjs]
 ---
 
-[한국어(Korean) Page](https://velog.io/@ksrae/%EC%9E%AC%EC%82%AC%EC%9A%A9-%EA%B0%80%EB%8A%A5%ED%95%9C-RxJS-%ED%8C%A8%ED%84%B4-%EB%A7%8C%EB%93%A4%EA%B8%B0)
-<br/>
-
 ## Creating Reusable RxJS Operators for Angular Applications
 
 When working with state management in RxJS, we often find ourselves using the same operator combinations repeatedly. In Angular projects particularly, patterns like loading state management, API error handling, and form validation keep appearing over and over.
@@ -377,3 +374,7 @@ When creating custom operators, always consider:
 - **Reusability**: Make them generic enough to use throughout your project
 
 By leveraging these custom operators effectively, you can create cleaner and more maintainable Angular applications.
+
+## Link
+[한국어(Korean) Page](https://velog.io/@ksrae/%EC%9E%AC%EC%82%AC%EC%9A%A9-%EA%B0%80%EB%8A%A5%ED%95%9C-RxJS-%ED%8C%A8%ED%84%B4-%EB%A7%8C%EB%93%A4%EA%B8%B0)
+<br/>

@@ -6,9 +6,6 @@ categories: javascript
 tags: [transition]
 ---
 
-[한국어(Korean) Page](https://velog.io/@ksrae/View-Translations-API%EB%9E%80)
-<br/>
-
 Angular 17 introduced several groundbreaking features that elevate the web development experience. Among them, one of the most exciting is the native support for the View Transitions API.<br/>
 
 In this article, we'll explore what the View Transitions API is, how to use it in Angular, and how it can significantly enhance the user experience.
@@ -124,3 +121,7 @@ This enables developers to easily build modern web apps that enhance user engage
 
 ## Reference
 [**View Transitions API in Angular 17**](https://medium.com/ngconf/view-transitions-api-in-angular-17-1d1ea8bb2703)
+
+## Link
+[한국어(Korean) Page](https://velog.io/@ksrae/View-Translations-API%EB%9E%80)
+<br/>

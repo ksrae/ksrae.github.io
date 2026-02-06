@@ -6,9 +6,6 @@ categories: javascript
 tags: [console, time]
 ---
 
-[한국어(Korean) Page](https://velog.io/@ksrae/%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8-%EC%88%98%ED%96%89-%EC%8B%9C%EA%B0%84-%EC%B8%A1%EC%A0%95-%EB%B0%A9%EB%B2%95)
-<br/>
-
 Let's explore methods for measuring JavaScript execution time.
 
 The conventional approach involves using the `getTime()` method of the `Date` object to calculate time differences. The resulting value represents milliseconds.
@@ -35,6 +32,9 @@ console.timeEnd(timerName);
 ```
 
 ## References
-
 - [JavaScript Execution Time Measurement - Zeta Wiki](https://zetawiki.com/wiki/%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8_%EC%88%98%ED%96%89%EC%8B%9C%EA%B0%84_%EC%B8%A1%EC%A0%95)
 - [NodeJS Program Execution Time Measurement : Naver Blog](http://blog.naver.com/PostView.nhn?blogId=deepplin&logNo=60203067634)
+
+## Link
+[한국어(Korean) Page](https://velog.io/@ksrae/%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8-%EC%88%98%ED%96%89-%EC%8B%9C%EA%B0%84-%EC%B8%A1%EC%A0%95-%EB%B0%A9%EB%B2%95)
+<br/>

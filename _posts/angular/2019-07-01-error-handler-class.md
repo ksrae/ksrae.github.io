@@ -6,9 +6,6 @@ tags: [error, module]
 date: 2019-07-01 17:37:00 +0900
 ---
 
-[한국어(Korean) Page](https://velog.io/write?id=3b38cdfa-61ad-4ed3-a28e-cec6740d357e)
-<br/>
-
 Catch All Angular Errors with a Custom Error Handler
 
 ## 1. How to Use
@@ -77,3 +74,7 @@ export class MyStandaloneComponent {
 ```
 
 And that's it! Whether you’re using a Module-based or Standalone approach, you can now handle all Angular errors with ease.
+
+## Link
+[한국어(Korean) Page](https://velog.io/write?id=3b38cdfa-61ad-4ed3-a28e-cec6740d357e)
+<br/>

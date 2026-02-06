@@ -6,9 +6,6 @@ categories: javascript
 tags: [ssg]
 ---
 
-[한국어(Korean) Page](https://velog.io/@ksrae/JAMStack%EA%B3%BC-SSG)
-<br/>
-
 ## 1. Overview
 
 The JAMstack is a modern web development architecture, similar to terms like 'LAMP Stack (Linux, Apache, MySQL, PHP)' or 'MEAN Stack (MongoDB, ExpressJS, AngularJS, NodeJS)', that describes a collection of essential elements for building modern web applications.
@@ -139,3 +136,8 @@ Scully's operation is as follows:
 > - During Angular code build, Scully's machine learning scans all routes and pre-renders the first pages of these routes as static HTML.
 > - At this point, Scully uses Chrome browser's Puppeteer to execute the Angular app, opening all pages and then using IdleMonitorService to determine whether the snapshot is complete, based on zone.js.
 > - This enables verification of the pre-rendered results and supports debugging.
+
+
+## Link
+[한국어(Korean) Page](https://velog.io/@ksrae/JAMStack%EA%B3%BC-SSG)
+<br/>

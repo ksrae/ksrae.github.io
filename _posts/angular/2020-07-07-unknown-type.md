@@ -6,9 +6,6 @@ categories: javascript
 tags: [typescript, types]
 ---
 
-[한국어(Korean) Page](https://velog.io/@ksrae/Unknown-%ED%83%80%EC%9E%85)
-<br/>
-
 The `unknown` type was introduced in TypeScript 3.0.
 
 Similar to `any`, it can be used to declare variables of any type, and it allows you to assign any value to it, just like `any`.
@@ -93,3 +90,7 @@ However, be aware that frequent use can reduce readability and result in a funct
 
 - [Announcing TypeScript 3.0 RC TypeScript](https://devblogs.microsoft.com/typescript/announcing-typescript-3-0-rc-2/#the-unknown-type)
 - ['unknown' vs. 'any'](https://stackoverflow.com/questions/51439843/unknown-vs-any)
+
+## Link
+[한국어(Korean) Page](https://velog.io/@ksrae/Unknown-%ED%83%80%EC%9E%85)
+<br/>

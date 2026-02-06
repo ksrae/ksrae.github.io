@@ -6,9 +6,6 @@ categories: angular
 tags: [input, form]
 ---
 
-[한국어(Korean) Page](https://velog.io/@ksrae/2%EB%B0%94%EC%9D%B4%ED%8A%B8-%EB%AC%B8%EC%9E%90-%EC%9E%85%EB%A0%A5-%EC%8B%9C-%EB%A7%88%EC%A7%80%EB%A7%89-%EA%B8%80%EC%9E%90-%EB%B0%98%EC%98%81%EB%90%98%EC%A7%80-%EC%95%8A%EB%8A%94-%EB%AC%B8%EC%A0%9C)
-<br/>
-
 ## Cause
 
 A common issue across various applications is the phenomenon where the last character is dropped when entering Korean or other double-byte characters in an input field.  This often occurs due to Input Method Editor (IME) composition issues.
@@ -66,3 +63,7 @@ Disabling the composition buffer mode resolves the lost character issue.
 
 - [Input Text Cut-off Issue When Typing Korean](https://gogomalibu.tistory.com/151?category=851911)
 - [COMPOSITION_BUFFER_MODE](https://angular.io/api/forms/COMPOSITION_BUFFER_MODE)
+
+## Link
+[한국어(Korean) Page](https://velog.io/@ksrae/2%EB%B0%94%EC%9D%B4%ED%8A%B8-%EB%AC%B8%EC%9E%90-%EC%9E%85%EB%A0%A5-%EC%8B%9C-%EB%A7%88%EC%A7%80%EB%A7%89-%EA%B8%80%EC%9E%90-%EB%B0%98%EC%98%81%EB%90%98%EC%A7%80-%EC%95%8A%EB%8A%94-%EB%AC%B8%EC%A0%9C)
+<br/>

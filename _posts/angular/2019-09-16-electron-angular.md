@@ -6,9 +6,6 @@ categories: angular
 tags: [electron, error]
 ---
 
-[한국어(Korean) Page](https://velog.io/@ksrae/Electron%EC%97%90%EC%84%9C-%EC%89%BD%EA%B2%8C-Angular-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EB%A1%9C%EB%93%9C)
-<br/>
-
 ## Setting up Electron
 
 Electron can be easily installed from npm.
@@ -114,6 +111,9 @@ The default is `type="module"`, so change it to `"text/javascript"`.
 > 
 
 ## References
-
-- https://www.sitepoint.com/build-a-desktop-application-with-electron-and-angular/
+- [Build Angular Desktop Apps With Electron](https://www.sitepoint.com/build-a-desktop-application-with-electron-and-angular/)
 - [Build Angular Desktop Apps With Electron \| AngularFirebase](https://angularfirebase.com/lessons/desktop-apps-with-electron-and-angular/)
+
+## Link
+[한국어(Korean) Page](https://velog.io/@ksrae/Electron%EC%97%90%EC%84%9C-%EC%89%BD%EA%B2%8C-Angular-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EB%A1%9C%EB%93%9C)
+<br/>

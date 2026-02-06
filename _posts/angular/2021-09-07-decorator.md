@@ -6,9 +6,6 @@ categories: javascript
 tags: [decorator, typescript]
 ---
 
-[한국어(Korean) Page](https://velog.io/@ksrae/Decorator-%EB%9E%80)
-<br/>
-
 A decorator is a way to implement instructions that need to be executed repeatedly before a function is executed, as a separate function, and then easily call it with a single line of code.
 
 Generally, it is called by adding `@Decorator` before it. It can be applied to classes, functions, variables, and even function parameters, but you should be careful because each has different parameters.
@@ -220,10 +217,14 @@ class Person {
 }
 ```
 
-## Reference Sites
+## Reference
 
 - [Typescript Decorators](https://www.typescriptlang.org/docs/handbook/decorators.html)
 - [Let's create a TypeScript Decorator](https://dparkjm.com/typescript-decorators)
 - [IT Mining - Typescript Decorator](https://itmining.tistory.com/88)
 - [Typescript's Decorator - 1. Class Decorator](https://partnerjun.tistory.com/61)
 - [Typescript's Decorator - 2. Property Decorator, Simple Dependency Injection](https://partnerjun.tistory.com/62?category=705423)
+
+## Link
+[한국어(Korean) Page](https://velog.io/@ksrae/Decorator-%EB%9E%80)
+<br/>

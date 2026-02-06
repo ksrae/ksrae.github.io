@@ -6,9 +6,6 @@ categories: angular
 tags: [standalone, maints]
 ---
 
-[한국어(Korean) Page](https://velog.io/@ksrae/Standalone%EC%9D%98-%EA%B0%9C%EB%85%90%EA%B3%BC-main.ts%EC%9D%98-%EC%A4%91%EC%9A%94%EC%84%B1)
-<br/>
-
 Angular has introduced several features aimed at simplifying application architecture and optimizing performance. Among these, the most significant is the Standalone component, a pivotal feature that has fundamentally altered the way Angular applications are developed. By moving away from the traditional NgModule-based architecture, it allows components to be declared and used independently, minimizing module dependencies and streamlining the application initialization process. This article explores the concept of Angular Standalone components, why you should use them, and the necessity of initial loading tasks in `main.ts`.
 
 # Understanding Standalone Components
@@ -233,3 +230,7 @@ bootstrapApplication(AppComponent, {
 Standalone components provide a more flexible and simpler development approach, moving away from the traditional NgModule-based architecture. This allows you to optimize the application structure and remove unnecessary complexity. However, when using the Standalone approach, you must carefully configure the initialization tasks in `main.ts`, especially since global settings (e.g., HTTP client, routing, internationalization, etc.) are all defined in this file.
 
 This approach allows you to develop and use components independently without relying on modules, which is especially helpful in reducing the complexity of module management in large applications. Angular's Standalone components and the `main.ts` configuration method that supports them will change the way Angular applications are developed in a more efficient and intuitive manner in the future.
+
+## Link
+[한국어(Korean) Page](https://velog.io/@ksrae/Standalone%EC%9D%98-%EA%B0%9C%EB%85%90%EA%B3%BC-main.ts%EC%9D%98-%EC%A4%91%EC%9A%94%EC%84%B1)
+<br/>

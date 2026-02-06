@@ -6,9 +6,6 @@ categories: angular
 tags: [standalone, routing]
 ---
 
-[한국어(Korean) Page](https://velog.io/@ksrae/Standalone-Routing)
-<br/>
-
 Angular Standalone components introduce significant changes, particularly in routing. They contribute to independent component management, performance optimization, and code structure simplification. This post explores Standalone routing and contrasts it with traditional module-based routing.
 
 ## Traditional Module-Based Routing in Angular
@@ -172,3 +169,7 @@ export const ROUTES: Route[] = [
 ```
 
 In this code, access to the `/admin` route is restricted using `AuthGuard`. The Guard checks conditions before accessing the route and blocks access if the conditions are not met.
+
+## Link
+[한국어(Korean) Page](https://velog.io/@ksrae/Standalone-Routing)
+<br/>

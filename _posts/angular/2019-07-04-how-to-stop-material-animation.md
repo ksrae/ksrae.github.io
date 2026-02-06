@@ -6,9 +6,6 @@ categories: angular
 tags: [material, animation]
 ---
 
-[한국어(Korean) Page](https://velog.io/@ksrae/%ED%8A%B9%EC%A0%95-Material-%EC%95%A0%EB%8B%88%EB%A9%94%EC%9D%B4%EC%85%98-%EC%A4%91%EC%A7%80)
-<br/>
-
 When you need to disable animations in Angular Material components, whether it's for all animations or specific Material elements, there are several simple control methods you can use.
 
 ## Understanding Angular Material Animations
@@ -162,3 +159,7 @@ If animations aren't being disabled as expected, check for:
 Disabling Angular Material animations is straightforward when you understand the available methods. Choose the approach that best fits your specific use case, whether it's disabling animations for individual components, implementing a global solution, or working with standalone components. Always consider the impact on user experience and accessibility when managing animations in your application.
 
 Remember to test thoroughly, especially when working with nested components, to ensure the animation settings behave as expected across your entire application.
+
+## Link
+[한국어(Korean) Page](https://velog.io/@ksrae/%ED%8A%B9%EC%A0%95-Material-%EC%95%A0%EB%8B%88%EB%A9%94%EC%9D%B4%EC%85%98-%EC%A4%91%EC%A7%80)
+<br/>

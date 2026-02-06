@@ -6,9 +6,6 @@ categories: angular
 tags: [error]
 ---
 
-[한국어(Korean) Page](https://velog.io/@ksrae/No-provider-for-ControlContainer-%EC%97%90%EB%9F%AC)
-<br/>
-
 ### Cause
 
 A 'No provider for ControlContainer' error occurred when setting formGroup in the form tag.
@@ -51,3 +48,7 @@ export const appConfig: ApplicationConfig = {
 };
 
 ```
+
+## Link
+[한국어(Korean) Page](https://velog.io/@ksrae/No-provider-for-ControlContainer-%EC%97%90%EB%9F%AC)
+<br/>

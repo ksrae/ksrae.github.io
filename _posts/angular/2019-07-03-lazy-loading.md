@@ -6,9 +6,6 @@ categories: angular
 tags: [routing]
 ---
 
-[한국어(Korean) Page](https://velog.io/@ksrae/Module%EC%9D%B4%EB%82%98-Component%EB%A5%BC-Lazy-Loading-%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95)
-<br/>
-
 # Angular Lazy Loading: A Comprehensive Guide to Module and Component Implementation
 
 Lazy loading is a crucial performance optimization technique in Angular applications that can significantly improve initial load times and overall application efficiency. In this comprehensive guide, we'll explore different approaches to implementing lazy loading at both the module and component levels, including modern standalone components.
@@ -230,3 +227,7 @@ Lazy loading is an essential technique in modern Angular applications, offering 
 When implementing lazy loading, consider your application's specific needs, user patterns, and performance requirements. Use the appropriate strategy - whether it's module-based, standalone components, or component-level lazy loading with ngIf - based on your use case.
 
 By following the best practices and considering the trade-offs discussed in this guide, you can successfully implement lazy loading in your Angular applications and achieve optimal performance and maintainability.
+
+## Link
+[한국어(Korean) Page](https://velog.io/@ksrae/Module%EC%9D%B4%EB%82%98-Component%EB%A5%BC-Lazy-Loading-%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95)
+<br/>

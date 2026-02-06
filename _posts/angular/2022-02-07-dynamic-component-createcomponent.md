@@ -6,9 +6,6 @@ categories: angular
 tags: [dynamic, component, createcomponent]
 ---
 
-[한국어(Korean) Page](https://velog.io/@ksrae/createComponent%EC%9C%BC%EB%A1%9C-%EB%8F%99%EC%A0%81-%EC%BB%B4%ED%8F%AC%EB%84%8C%ED%8A%B8-%EB%A7%8C%EB%93%A4%EA%B8%B0)
-<br/>
-
 Implementing dynamic components with `createComponent` offers a flexible approach to component management, especially useful in more versatile versions.
 
 # Core Principles
@@ -378,3 +375,7 @@ As you can see, modern Angular allows you to create dynamic components with type
 # References
 
 - [Angular Official Site dynamic-component-loader](https://angular.io/guide/dynamic-component-loader)
+
+## Link
+[한국어(Korean) Page](https://velog.io/@ksrae/createComponent%EC%9C%BC%EB%A1%9C-%EB%8F%99%EC%A0%81-%EC%BB%B4%ED%8F%AC%EB%84%8C%ED%8A%B8-%EB%A7%8C%EB%93%A4%EA%B8%B0)
+<br/>

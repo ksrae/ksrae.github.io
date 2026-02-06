@@ -6,9 +6,6 @@ categories: angular
 tags: [lazyloading]
 ---
 
-[한국어(Korean) Page](https://velog.io/@ksrae/%EB%B9%A0%EB%A5%B8-Lazy-Loading-%EB%B0%A9%EB%B2%95)
-<br/>
-
 ## Analysis
 
 Lazy Loading offers the advantage of reducing initial loading time. However, it can introduce a drawback: when a lazily loaded page is accessed, the characteristic instant page transition typical of Single Page Applications (SPAs) might not occur, resulting in a perceived delay.
@@ -129,3 +126,7 @@ export const appConfig: ApplicationConfig = {
 
 - [quicklink-angular-prefetching-preloading-strategy](https://blog.mgechev.com/2018/12/24/quicklink-angular-prefetching-preloading-strategy/)
 - [route-preloading-in-angular](https://web.dev/route-preloading-in-angular/)
+
+## Link
+[한국어(Korean) Page](https://velog.io/@ksrae/%EB%B9%A0%EB%A5%B8-Lazy-Loading-%EB%B0%A9%EB%B2%95)
+<br/>

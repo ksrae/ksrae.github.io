@@ -6,9 +6,6 @@ categories: angular
 tags: [library, package]
 ---
 
-[한국어(Korean) Page](https://velog.io/@ksrae/private-%EB%9D%BC%EC%9D%B4%EB%B8%8C%EB%9F%AC%EB%A6%AC-%EB%A7%8C%EB%93%A4%EA%B8%B0)
-<br/>
-
 ## Creating and Utilizing Local Angular Libraries: A Comprehensive Guide
 
 In July 2019, I authored a document, "[Creating Library Document](https://ksrae.github.io//angular/creating-library/)," which, in retrospect, lacked clarity. I've rewritten it to enhance understanding.
@@ -197,3 +194,7 @@ Since libraries can incorporate other external libraries, development and integr
 ## Reflections
 
 My previous attempt to condense a guide encompassing both public package publishing and local library creation resulted in an unstructured and confusing document. This revision reflects the difficulty in conveying information succinctly while maintaining clarity. I am committed to producing more intuitive and accessible documentation in the future.
+
+## Link
+[한국어(Korean) Page](https://velog.io/@ksrae/private-%EB%9D%BC%EC%9D%B4%EB%B8%8C%EB%9F%AC%EB%A6%AC-%EB%A7%8C%EB%93%A4%EA%B8%B0)
+<br/>

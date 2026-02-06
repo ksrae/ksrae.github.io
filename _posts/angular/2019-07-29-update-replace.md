@@ -6,9 +6,6 @@ categories: mongodb
 tags: [update, replace]
 ---
 
-[한국어(Korean) Page](https://velog.io/@ksrae/MongoDB%EC%9D%98-update%EC%99%80-replace%EC%9D%98-%EC%B0%A8%EC%9D%B4)
-<br/>
-
 Let's compare `update` and `replace` operations in MongoDB. This explanation is based on a review of resources.
 
 ### Update Operations
@@ -126,3 +123,7 @@ This command replaces the entire document with `id: 12345` with a new document c
 ```
 
 With the introduction of `replaceOne` in version 3.2, the distinction between `update` and `replace` became more defined. Consequently, to modify specific fields within a document, the `update` operation should be used. To replace an entire document, the `replaceOne` operation should be employed.
+
+## Link
+[한국어(Korean) Page](https://velog.io/@ksrae/MongoDB%EC%9D%98-update%EC%99%80-replace%EC%9D%98-%EC%B0%A8%EC%9D%B4)
+<br/>

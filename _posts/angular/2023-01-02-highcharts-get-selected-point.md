@@ -6,9 +6,6 @@ categories: angular
 tags: [highcharts]
 ---
 
-[한국어(Korean) Page](https://velog.io/@ksrae/Highcharts-%EC%84%A0%ED%83%9D%ED%95%9C-%EB%AA%A8%EB%93%A0-Points-%EA%B0%80%EC%A0%B8%EC%98%A4%EA%B8%B0)
-<br/>
-
 > This article explores how to retrieve information about all user-selected points in Highcharts.
 
 ## Setting the Series Option: allowPointSelect
@@ -124,3 +121,7 @@ Below is an example of the data structure returned.  Note that values may vary b
 Crucially, this data provides not only information about the point itself, but also the series to which the point belongs and the index of the point within that series.
 
 Leveraging this information, you can implement a variety of features, such as displaying labels at the point's location or exposing details about the point or its associated series.
+
+## Link
+[한국어(Korean) Page](https://velog.io/@ksrae/Highcharts-%EC%84%A0%ED%83%9D%ED%95%9C-%EB%AA%A8%EB%93%A0-Points-%EA%B0%80%EC%A0%B8%EC%98%A4%EA%B8%B0)
+<br/>

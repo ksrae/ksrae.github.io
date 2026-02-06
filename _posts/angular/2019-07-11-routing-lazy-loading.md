@@ -6,9 +6,6 @@ categories: angular
 tags: [routing, lazyloading]
 ---
 
-[한국어(Korean) Page](https://velog.io/@ksrae/Lazy-Loading-Routing)
-<br/>
-
 Angular's lazy loading routing method has been updated.
 
 This change aims to implement a dynamic import approach with Ivy. While the existing method remains valid, it is anticipated that the new approach will be maintained moving forward.
@@ -42,5 +39,8 @@ Unfortunately, Ivy still has some unresolved errors, making it unsuitable for pr
 The Ivy error mentioned above has been resolved in later versions, allowing it to be used in Ivy.
 
 ## References
-
 - [Lazy Loaded Routes Angular V8 with Ivy](https://fireship.io/snippets/lazy-loaded-routes-angular-v8-ivy/)
+
+## Link
+[한국어(Korean) Page](https://velog.io/@ksrae/Lazy-Loading-Routing)
+<br/>

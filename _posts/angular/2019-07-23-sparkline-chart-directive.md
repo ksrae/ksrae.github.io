@@ -6,9 +6,6 @@ categories: angular
 tags: [sparkline, chart, directive, nvd3, ng2-nvd3]
 ---
 
-[한국어(Korean) Page](https://velog.io/@ksrae/ng2-nvd3%EB%A5%BC-%ED%99%9C%EC%9A%A9%ED%95%98%EC%97%AC-%EC%8A%A4%ED%8C%8C%ED%81%AC%EB%9D%BC%EC%9D%B8-%EC%B0%A8%ED%8A%B8-%EB%A7%8C%EB%93%A4%EA%B8%B0)
-<br/>
-
 I'm attempting to create a Sparkline Chart because most typical chart libraries don't support it, especially those compatible with Angular. I plan to build this chart myself and leverage `ng2-nvd3` since I prefer charts rendered with this library. To ensure ease of reuse, I'll implement it as an Angular Directive.
 
 ## Prerequisites
@@ -273,3 +270,8 @@ int.
 ```
 
 Complete.
+
+
+## Link
+[한국어(Korean) Page](https://velog.io/@ksrae/ng2-nvd3%EB%A5%BC-%ED%99%9C%EC%9A%A9%ED%95%98%EC%97%AC-%EC%8A%A4%ED%8C%8C%ED%81%AC%EB%9D%BC%EC%9D%B8-%EC%B0%A8%ED%8A%B8-%EB%A7%8C%EB%93%A4%EA%B8%B0)
+<br/>

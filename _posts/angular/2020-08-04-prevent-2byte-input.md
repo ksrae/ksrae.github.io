@@ -6,9 +6,6 @@ categories: angular
 tags: [input, form]
 ---
 
-[한국어(Korean) Page](https://velog.io/@ksrae/Input%EC%97%90%EC%84%9C-2%EB%B0%94%EC%9D%B4%ED%8A%B8-%EA%B8%80%EC%9E%90-%EB%A7%89%EA%B8%B0)
-<br/>
-
 # Implementing a Digit-Only Directive in Angular: Addressing Korean Input Issues
 
 I initially sought to implement a directive in Angular that restricts input to numerical characters only. I came across the following resource and attempted to apply its solution:
@@ -39,4 +36,9 @@ Applying this code prevents even the brief display of 2-byte characters during i
 
 <br/><br/>
 
+## Reference
 [angular-numbers-only-directive - StackBlitz](https://stackblitz.com/edit/angular-numbers-only-directive?file=app%2Fnumbers-only.directive.ts)
+
+## Link
+[한국어(Korean) Page](https://velog.io/@ksrae/Input%EC%97%90%EC%84%9C-2%EB%B0%94%EC%9D%B4%ED%8A%B8-%EA%B8%80%EC%9E%90-%EB%A7%89%EA%B8%B0)
+<br/>

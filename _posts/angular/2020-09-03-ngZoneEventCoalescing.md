@@ -6,9 +6,6 @@ categories: angular
 tags: [bubbling, changedetection, ngzone]
 ---
 
-[한국어(Korean) Page](https://velog.io/@ksrae/ngZoneEventCoalescing%EC%9C%BC%EB%A1%9C-%EC%9D%B4%EB%B2%A4%ED%8A%B8-%EB%B2%84%EB%B8%94%EB%A7%81-%ED%95%B4%EA%B2%B0)
-<br/>
-
 ## Root Cause
 
 JavaScript incorporates event bubbling between parent and child elements. In many scenarios, this event bubbling leads to the handling of unnecessary events, causing performance issues. Similarly, Angular experiences event bubbling, negatively impacting rendering performance.
@@ -86,3 +83,7 @@ bootstrapApplication(AppComponent, appConfig)
 
 - [how-to-prevent-event-bubbling-in-angular-9-with-setinterval](https://stackoverflow.com/questions/60854223/how-to-prevent-event-bubbling-in-angular-9-with-setinterval)
 - [change-detection-strategy-in-angular](https://dev.to/gaurangdhorda/change-detection-strategy-in-angular-25mc)
+
+## Link
+[한국어(Korean) Page](https://velog.io/@ksrae/ngZoneEventCoalescing%EC%9C%BC%EB%A1%9C-%EC%9D%B4%EB%B2%A4%ED%8A%B8-%EB%B2%84%EB%B8%94%EB%A7%81-%ED%95%B4%EA%B2%B0)
+<br/>

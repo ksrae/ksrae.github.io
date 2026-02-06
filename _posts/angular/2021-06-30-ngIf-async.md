@@ -6,9 +6,6 @@ categories: angular
 tags: [ngif, observable]
 ---
 
-[한국어(Korean) Page](https://velog.io/@ksrae/Control-Flow%EC%97%90%EC%84%9C-%EC%97%AC%EB%9F%AC-Observable-%EB%8B%A4%EB%A3%A8%EA%B8%B0)
-<br/>
-
 ## Plan
 
 1. Define a single Observable within `ngIf or @if`.
@@ -84,6 +81,10 @@ To work with multiple Observables effectively, transform them into an object. Th
 {% endraw %}
 ```
 
-## Reference Site
+## Reference
 
 - [ngx-translate-router](https://github.com/gilsdav/ngx-translate-router)
+
+## Link
+[한국어(Korean) Page](https://velog.io/@ksrae/Control-Flow%EC%97%90%EC%84%9C-%EC%97%AC%EB%9F%AC-Observable-%EB%8B%A4%EB%A3%A8%EA%B8%B0)
+<br/>

@@ -6,9 +6,6 @@ categories: angular
 tags: [highcharts]
 ---
 
-[한국어(Korean) Page](https://velog.io/@ksrae/Highcharts-tooltip-%EC%BB%A4%EC%8A%A4%ED%85%80%ED%95%98%EA%B8%B0)
-<br/>
-
 ## Tooltip Configuration in Highcharts
 
 Let's delve into the tooltip options available in Highcharts. Tooltips enhance user interaction by displaying contextual information when hovering over data points. Highcharts provides a range of options to customize tooltips for optimal data presentation.
@@ -119,3 +116,7 @@ In conclusion, this exploration of Highcharts tooltip options and customization 
 **Reference:** The examples provided are adapted from the highcharts jsfiddle code, with modifications to the typescript version.<br/>
 
 For further inquiries or assistance with code modifications, please feel free to leave a comment or send an email.
+
+## Link
+[한국어(Korean) Page](https://velog.io/@ksrae/Highcharts-tooltip-%EC%BB%A4%EC%8A%A4%ED%85%80%ED%95%98%EA%B8%B0)
+<br/>

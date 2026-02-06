@@ -6,9 +6,6 @@ categories: javascript
 tags: [indexeddb, observable, signal, rxjs, standalone]
 ---
 
-[한국어(Korean) Page](https://velog.io/@ksrae/Angular%EC%97%90%EC%84%9C-IndexedDB%EB%A1%9C-%EB%B0%98%EC%9D%91%ED%98%95-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EA%B4%80%EB%A6%AC%ED%95%98%EA%B8%B0)
-<br/>
-
 By combining **RxJS Observables** for handling data streams and **Signals** for automatic UI updates upon state changes, we can manage IndexedDB in a much more powerful and declarative way.
 
 This article will guide you through a complete CRUD example of integrating a Promise-based IndexedDB service into Angular's reactive ecosystem.
@@ -233,3 +230,7 @@ Integrating IndexedDB with Angular's reactive paradigm creates a powerful and de
 - **Signals in Components**: Manage UI state and automatically update the view in response to data changes.
 
 This layered approach enhances code reusability and testability, helping you maintain clean and robust client-side data logic.
+
+## Link
+[한국어(Korean) Page](https://velog.io/@ksrae/Angular%EC%97%90%EC%84%9C-IndexedDB%EB%A1%9C-%EB%B0%98%EC%9D%91%ED%98%95-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EA%B4%80%EB%A6%AC%ED%95%98%EA%B8%B0)
+<br/>

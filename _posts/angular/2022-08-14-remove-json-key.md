@@ -6,9 +6,6 @@ categories: javascript
 tags: [json]
 ---
 
-[한국어(Korean) Page](https://velog.io/@ksrae/JSON%EC%97%90%EC%84%9C-%EA%B0%80%EB%B3%80%EC%A0%81%EC%9D%B8-%ED%8A%B9%EC%A0%95-%ED%95%AD%EB%AA%A9-%EC%A0%9C%EA%B1%B0%ED%95%98%EA%B8%B0)
-<br/>
-
 Removing specific entries from an array during development is a common task, and the `filter()` method provides a straightforward solution. However, when dealing with JSON objects, the absence of a built-in `filter()` equivalent often presents a challenge. A common, but suboptimal, approach involves creating a new JSON variable and manually reconstructing the object, excluding the desired entries.
 
 ```tsx
@@ -97,4 +94,6 @@ function filter(key: string): unknown {
 In the `filter` function above, the `key` value is received, and the corresponding value is removed from the `origin` variable before returning the modified object.
 
 
-
+## Link
+[한국어(Korean) Page](https://velog.io/@ksrae/JSON%EC%97%90%EC%84%9C-%EA%B0%80%EB%B3%80%EC%A0%81%EC%9D%B8-%ED%8A%B9%EC%A0%95-%ED%95%AD%EB%AA%A9-%EC%A0%9C%EA%B1%B0%ED%95%98%EA%B8%B0)
+<br/>

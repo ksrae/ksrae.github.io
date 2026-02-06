@@ -6,9 +6,6 @@ categories: angular
 tags: [typescript, tsconfig]
 ---
 
-[한국어(Korean) Page](https://velog.io/@ksrae/tsconfig.json%EC%84%A4%EC%A0%95%EC%9C%BC%EB%A1%9C-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%ED%92%88%EC%A7%88-%EB%86%92%EC%9D%B4%EA%B8%B0)
-<br/>
-
 When you bootstrap a new Angular project with ng new, the CLI automatically generates several configuration files. Among them, tsconfig.json is one that many developers leave untouched, often overlooking its power. But this file is the "brain" of the TypeScript compiler, and understanding it is key to building robust, modern Angular applications.
 
 As of Angular 18, correctly configuring your tsconfig.json can significantly improve code stability, enable the latest JavaScript features, and even boost your development productivity. Today, we'll dive deep into how tsconfig.json works within an Angular project and explore which keys you can tweak to maximize your project's potential.
@@ -172,3 +169,7 @@ Unused variables and imports are code smells that clutter your codebase and can 
 Your tsconfig.json is not just a configuration file; it's a powerful safety net that guards the quality and stability of your entire project. In a modern framework like Angular 18, which is built on the foundation of TypeScript's strong type system, mastering these compiler options is more critical than ever.
 
 Take a moment to open your tsconfig.json file today. Ensure strict mode is enabled, set up some path aliases, and enforce cleaner code with noUnusedLocals. These small changes will yield massive returns in your development experience and the long-term health of your application.
+
+## Link
+[한국어(Korean) Page](https://velog.io/@ksrae/tsconfig.json%EC%84%A4%EC%A0%95%EC%9C%BC%EB%A1%9C-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%ED%92%88%EC%A7%88-%EB%86%92%EC%9D%B4%EA%B8%B0)
+<br/>

@@ -6,9 +6,6 @@ categories: angular
 tags: [module]
 ---
 
-[한국어(Korean) Page](https://velog.io/@ksrae/Angular-Shared-Module)
-<br/>
-
 # Sharing Duplicate Modules Using a Shared Module
 
 ## 1. When Using a Component in Multiple Modules
@@ -124,3 +121,7 @@ export class FeatureComponent { }
 
 While this approach does not allow bundling both components and services like a Shared Module, it provides a way to return a list of dependencies, which can be included in imports and providers.<br/>
 This method offers flexibility, making it easier to modify and extend shared dependencies dynamically.
+
+## Link
+[한국어(Korean) Page](https://velog.io/@ksrae/Angular-Shared-Module)
+<br/>

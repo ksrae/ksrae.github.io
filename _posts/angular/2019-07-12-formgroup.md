@@ -6,9 +6,6 @@ categories: angular
 tags: [form, formgroup]
 ---
 
-[한국어(Korean) Page](https://velog.io/@ksrae/%ED%8F%BC-%EA%B7%B8%EB%A3%B9)
-<br/>
-
 ## Implementing Angular Forms: A Comprehensive Guide
 
 Working with forms in HTML is a common task. However, in Angular, the implementation might not be immediately straightforward. Several configurations and setups are required to use forms effectively and conveniently. Errors can occur if these steps aren't carefully verified each time a new project is created. This guide aims to provide a consolidated reference for implementing Angular forms.
@@ -161,3 +158,7 @@ submit(e: Event) {
 ```
 
 That's it! You should now have a functional Angular form.
+
+## Link
+[한국어(Korean) Page](https://velog.io/@ksrae/%ED%8F%BC-%EA%B7%B8%EB%A3%B9)
+<br/>

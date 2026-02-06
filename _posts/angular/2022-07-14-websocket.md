@@ -6,9 +6,6 @@ categories: angular
 tags: [websocket, webworker]
 ---
 
-[한국어(Korean) Page](https://velog.io/@ksrae/Angular%EC%97%90%EC%84%9C-WebSocket)
-<br/>
-
 Let's explore how to use WebSockets with Angular. Due to the extensive nature of the topic, this guide will focus on utilizing standard WebSockets provided by JavaScript. A subsequent discussion will delve into leveraging RxJS for WebSocket implementation.<br/>
 
 A crucial consideration with WebSockets is the protocol requirement: **HTTPS sites must use `wss`, while HTTP sites should use `ws`**.
@@ -200,3 +197,7 @@ if(this.ws.readyState === WebSocket.CLOSING) { // or WebSocket.CLOSE
 
 - [Websocket Principles Learned While Implementing a Chat Service (feat. node.js)](https://hudi.blog/websocket-with-nodejs/)
 - [Simple Websocket Example with Nodejs](https://www.js-tutorials.com/nodejs-tutorial/simple-websocket-example-with-nodejs/)
+
+## Link
+[한국어(Korean) Page](https://velog.io/@ksrae/Angular%EC%97%90%EC%84%9C-WebSocket)
+<br/>

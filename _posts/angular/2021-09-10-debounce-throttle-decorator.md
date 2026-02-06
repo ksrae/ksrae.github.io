@@ -6,9 +6,6 @@ categories: javascript
 tags: [decorator, directive, debounce, throttle, rxjs, typescript]
 ---
 
-[한국어(Korean) Page](https://velog.io/@ksrae/Debounce%EC%99%80-Throttle%EC%9D%98-Directive%EC%99%80-Decorator-%EB%A7%8C%EB%93%A4%EA%B8%B0)
-<br/>
-
 After searching extensively for examples of Debounce or Throttle Decorators suitable for Angular or TypeScript, I found myself needing to craft my own. I hope this post will be helpful to others on a similar quest.
 
 Refer to my [previous post on decorators](https://ksrae.github.io/javascript/decorator/) for a detailed explanation. Here, we'll explore debounce and throttle, creating both directives and decorators and comparing their implementations.
@@ -166,3 +163,7 @@ When implemented as a directive, the code can be concise, and since it's Angular
 On the other hand, when implemented as a decorator, the code becomes longer because it's written in TS, and management can be more challenging since it's not Angular code. However, using existing commands in the template simplifies the code, and you can directly control the time in the component function that handles the click event, making it more intuitive.
 
 Ultimately, the choice depends on the developer's preference rather than one being objectively better than the other.
+
+## Link
+[한국어(Korean) Page](https://velog.io/@ksrae/Debounce%EC%99%80-Throttle%EC%9D%98-Directive%EC%99%80-Decorator-%EB%A7%8C%EB%93%A4%EA%B8%B0)
+<br/>

@@ -6,9 +6,6 @@ categories: angular
 tags: [input, ngonchange, subject, observable]
 ---
 
-[한국어(Korean) Page](https://velog.io/@ksrae/Input%EC%9D%B4-%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%A5%BC-%EC%A0%84%EB%8B%AC%ED%95%98%EC%A7%80-%EB%AA%BB%ED%95%98%EB%8A%94-%EC%9B%90%EC%9D%B8)
-<br/>
-
 This post analyzes why @Input fails to pass data.
 
 ## Situation
@@ -141,3 +138,7 @@ class ChildComponent implements OnInit {
 When passing objects or arrays, it's always good to maintain immutability.<br/>
 Consider using state management libraries like NgRx or RxJS if you need complex data flows.<br/>
 Using ChangeDetectionStrategy.OnPush improves performance but requires more attention to data change detection.<br/>
+
+## Link
+[한국어(Korean) Page](https://velog.io/@ksrae/Input%EC%9D%B4-%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%A5%BC-%EC%A0%84%EB%8B%AC%ED%95%98%EC%A7%80-%EB%AA%BB%ED%95%98%EB%8A%94-%EC%9B%90%EC%9D%B8)
+<br/>

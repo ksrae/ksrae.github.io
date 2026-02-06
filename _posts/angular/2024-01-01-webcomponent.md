@@ -6,9 +6,6 @@ categories: angular
 tags: [standalone, webcomponent]
 ---
 
-[한국어(Korean) Page](https://velog.io/@ksrae/Angular-Standalone-%ED%99%98%EA%B2%BD%EC%97%90%EC%84%9C-Web-Component-%EB%A7%8C%EB%93%A4%EA%B8%B0)
-<br/>
-
 # Creating Web Components in Angular Standalone Environments: A Comprehensive Guide
 
 This article explores the process of creating Web Components within Angular. While numerous resources focus on Module-based approaches, this guide specifically addresses the creation of Web Components in Angular Standalone environments. For information on Module-based implementations, please refer to alternative documentation.
@@ -260,3 +257,7 @@ For information on consuming Web Components within Angular applications, refer t
 To utilize the built Web Component, the `main.js`, `polyfills.js`, and `bundle.js` files must be included. Combining these into a single file would be more convenient, but a suitable solution has not yet been identified.
 
 Referencing documentation suggesting the use of `fs-extra` and `concat` to merge `main.js` and `polyfills.js` into a single file resulted in errors due to duplicated variables, rendering it unusable.
+
+## Link
+[한국어(Korean) Page](https://velog.io/@ksrae/Angular-Standalone-%ED%99%98%EA%B2%BD%EC%97%90%EC%84%9C-Web-Component-%EB%A7%8C%EB%93%A4%EA%B8%B0)
+<br/>

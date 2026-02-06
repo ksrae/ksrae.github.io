@@ -6,9 +6,6 @@ categories: mongodb
 tags: [query]
 ---
 
-[한국어(Korean) Page](https://velog.io/@ksrae/2%EB%B0%94%EC%9D%B4%ED%8A%B8-%EA%B8%80%EC%9E%90%EB%A1%9C-%EA%B2%80%EC%83%89)
-<br/>
-
 # Implementing Full-Text and Range Queries in MongoDB
 
 This document outlines techniques for constructing full-text and range-based queries within MongoDB, focusing on practical implementation for developers.
@@ -48,3 +45,7 @@ The above code snippet demonstrates a range query using `$gte` and `$lt`. It wil
 While these methods are relatively straightforward, understanding their application is crucial for efficient data retrieval in MongoDB. This exploration aimed to clarify these techniques and prevent common pitfalls.
 
 Conclusion.
+
+## Link
+[한국어(Korean) Page](https://velog.io/@ksrae/2%EB%B0%94%EC%9D%B4%ED%8A%B8-%EA%B8%80%EC%9E%90%EB%A1%9C-%EA%B2%80%EC%83%89)
+<br/>

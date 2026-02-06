@@ -6,9 +6,6 @@ categories: angular
 tags: [highcharts]
 ---
 
-[한국어(Korean) Page](https://velog.io/@ksrae/Ts%EC%97%90%EC%84%9C-Highcharts%EC%9D%98-this-%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0)
-<br/>
-
 Searching for examples, one can often find examples in JavaScript or jQuery that use `this`. However, `this` has a different meaning in TypeScript or Angular, so simply copying the code can cause errors. This article explores how to resolve such errors.
 
 ## Understanding `this` in JavaScript
@@ -44,3 +41,7 @@ formatter: (e: Highcharts.TooltipFormatterContextObject) => {
 ## Reference
 
 [Highcharts-JS API Reference](https://api.highcharts.com/highcharts/)
+
+## Link
+[한국어(Korean) Page](https://velog.io/@ksrae/Ts%EC%97%90%EC%84%9C-Highcharts%EC%9D%98-this-%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0)
+<br/>

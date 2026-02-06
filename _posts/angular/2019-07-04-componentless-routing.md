@@ -6,9 +6,6 @@ categories: angular
 tags: [routing]
 ---
 
-[한국어(Korean) Page](https://velog.io/@ksrae/%EC%BB%B4%ED%8F%AC%EB%84%8C%ED%8A%B8-%EC%97%86%EC%9D%B4-%EB%9D%BC%EC%9A%B0%ED%8C%85-%EA%B5%AC%EC%84%B1)
-<br/>
-
 # Analysis
 When setting up routing, components are typically configured as follows:
 ```js
@@ -62,3 +59,7 @@ This approach is particularly useful in:
 - Applications using micro-frontends where routing needs to be lightweight
 - Projects where you want to minimize the component tree depth
 - Situations where you need to avoid Bootstrap's double-initialization issues
+
+## Link
+[한국어(Korean) Page](https://velog.io/@ksrae/%EC%BB%B4%ED%8F%AC%EB%84%8C%ED%8A%B8-%EC%97%86%EC%9D%B4-%EB%9D%BC%EC%9A%B0%ED%8C%85-%EA%B5%AC%EC%84%B1)
+<br/>

@@ -6,9 +6,6 @@ categories: angular
 tags: [routing]
 ---
 
-[한국어(Korean) Page](https://velog.io/@ksrae/Angular-Route%EB%A5%BC-%ED%99%9C%EC%9A%A9%ED%95%9C-Modal-%EA%B4%80%EB%A6%AC)
-<br/>
-
 Opening and closing modals in Angular can be achieved through various methods. This article explores controlling modals using routes, a straightforward and effective approach where a modal opens upon navigating to a specific address and closes when navigating away.
 
 ## 1. Project Setup
@@ -103,3 +100,7 @@ For details, refer to [How to Use the Name Attribute of router-outlet](https://k
 Managing modals through Angular routes allows you to write modular and structurally clean code.
 
 This concludes the article on how to control modals using Angular routes. I hope this example helps you solve any difficulties in managing modals in future projects.
+
+## Link
+[한국어(Korean) Page](https://velog.io/@ksrae/Angular-Route%EB%A5%BC-%ED%99%9C%EC%9A%A9%ED%95%9C-Modal-%EA%B4%80%EB%A6%AC)
+<br/>

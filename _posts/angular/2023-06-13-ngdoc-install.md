@@ -6,9 +6,6 @@ categories: angular
 tags: [document, ngdoc]
 ---
 
-[한국어(Korean) Page](https://velog.io/@ksrae/ngDoc-%EC%84%A4%EC%B9%98%ED%95%98%EA%B8%B0)
-<br/>
-
 # Streamlining Angular Project Documentation with ngDoc
 
 ## Introduction
@@ -115,3 +112,7 @@ const Page: NgDocPage = {
 
 export default Page;
 ```
+
+## Link
+[한국어(Korean) Page](https://velog.io/@ksrae/ngDoc-%EC%84%A4%EC%B9%98%ED%95%98%EA%B8%B0)
+<br/>

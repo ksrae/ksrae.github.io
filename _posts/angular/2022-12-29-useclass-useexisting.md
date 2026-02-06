@@ -6,9 +6,6 @@ categories: angular
 tags: [provider, useexisting, useclass]
 ---
 
-[한국어(Korean) Page](https://velog.io/@ksrae/useClass%EC%99%80-useExisting%EC%9D%98-%EB%B9%84%EA%B5%90)
-<br/>
-
 In this post, we'll explore the difference between useClass and useExisting when configuring providers in Angular's Dependency Injection (DI) system. This concept applies equally to both NgModules and Standalone Components.
 
 ## useClass
@@ -230,3 +227,7 @@ Even if two tokens use the same class, they will get separate instances.
 - useExisting: "When this token is requested, give me the existing instance that is already associated with that other token."
 This allows two tokens to share a single instance, acting as an alias.
 Understanding this distinction allows you to leverage Angular's Dependency Injection system with greater flexibility and power.
+
+## Link
+[한국어(Korean) Page](https://velog.io/@ksrae/useClass%EC%99%80-useExisting%EC%9D%98-%EB%B9%84%EA%B5%90)
+<br/>

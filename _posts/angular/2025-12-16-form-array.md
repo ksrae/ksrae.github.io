@@ -6,9 +6,6 @@ categories: angular
 tags: [form, formarray]
 ---
 
-[한국어(Korean) Page](https://velog.io/@ksrae/Angular-FormArray-%ED%8F%BC-%EA%B5%AC%EC%A1%B0-%EB%8F%99%EC%A0%81%EC%9C%BC%EB%A1%9C-%EB%B3%80%EA%B2%BD%ED%95%98%EA%B8%B0)
-<br/>
-
 When building complex registration forms, we often encounter scenarios where the form structure must change entirely based on a user's selection. A classic example is a sign-up page distinguishing between "Locals" and "Foreigners."
 
 Locals might need to provide a Resident Registration Number, while Foreigners need to provide a Passport Number and Visa Type. Handling this with static `*ngIf` checks can lead to validation nightmares where hidden fields remain invalid.
@@ -189,3 +186,7 @@ By using `FormArray.clear()` and `push()`, we ensure that **only the controls vi
 Using `FormArray` isn't just for simple lists of identical items. It acts as a powerful container for dynamic form sections that can be swapped out entirely based on business logic.
 
 This approach ensures your form validation state always matches the UI, preventing common bugs in dynamic forms.
+
+## Link
+[한국어(Korean) Page](https://velog.io/@ksrae/Angular-FormArray-%ED%8F%BC-%EA%B5%AC%EC%A1%B0-%EB%8F%99%EC%A0%81%EC%9C%BC%EB%A1%9C-%EB%B3%80%EA%B2%BD%ED%95%98%EA%B8%B0)
+<br/>

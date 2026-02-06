@@ -6,9 +6,6 @@ categories: angular
 tags: [heroku, deploy]
 ---
 
-[한국어(Korean) Page](https://velog.io/@ksrae/Angular-Universal-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%EB%A5%BC-Github%EC%97%90%EC%84%9C-Heroku%EB%A1%9C-%EB%B0%B0%ED%8F%AC)
-<br/>
-
 Let's explore how to deploy an Angular Universal project uploaded to GitHub to Heroku.
 
 While the deployment process itself isn't overly complex, I'll address some areas where clear explanations were lacking, which prompted me to consolidate this guide.
@@ -129,6 +126,9 @@ If errors occur, you can examine the logs or execute commands directly from the 
 
 Note: Heroku's free services were phased out starting in August 2022. Information in this guide pertaining to the free tier may no longer be applicable.
 
-## Reference Material
-
+## Reference
 - [How to Deploy Angular Application to Heroku - Olutunmbi Banto - Medium](https://medium.com/@hellotunmbi/how-to-deploy-angular-application-to-heroku-1d56e09c5147)
+
+## Link
+[한국어(Korean) Page](https://velog.io/@ksrae/Angular-Universal-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%EB%A5%BC-Github%EC%97%90%EC%84%9C-Heroku%EB%A1%9C-%EB%B0%B0%ED%8F%AC)
+<br/>

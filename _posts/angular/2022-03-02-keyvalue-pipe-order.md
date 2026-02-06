@@ -6,9 +6,6 @@ categories: angular
 tags: [keyvalue, pipe]
 ---
 
-[한국어(Korean) Page](https://velog.io/@ksrae/keyvalue-pipe%EB%A1%9C-data-%EC%A0%95%EB%A0%AC%ED%95%98%EA%B8%B0)
-<br/>
-
 Customizing Sort Order with the KeyValue Pipe in Angular Templates
 
 Leveraging the built-in `keyvalue` pipe simplifies the process of accessing an object's keys and values within Angular templates. This article explores how to customize the sorting order when using this pipe.
@@ -155,4 +152,8 @@ In this scenario, the `original` function, which returns 0, effectively disables
 
 - [Angular Official Documentation for KeyValuePipe](https://angular.io/api/common/KeyValuePipe)
 - [Stack Overflow: angular-keyvalue-pipe-sort-properties-iterate-in-order](https://stackoverflow.com/questions/52793944/angular-keyvalue-pipe-sort-properties-iterate-in-order)
+
+## Link
+[한국어(Korean) Page](https://velog.io/@ksrae/keyvalue-pipe%EB%A1%9C-data-%EC%A0%95%EB%A0%AC%ED%95%98%EA%B8%B0)
+<br/>
 

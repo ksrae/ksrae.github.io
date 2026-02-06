@@ -6,9 +6,6 @@ categories: angular
 tags: [svg, domaanitizer]
 ---
 
-[한국어(Korean) Page](https://velog.io/@ksrae/Angular%EC%97%90-svg-%EC%A0%81%EC%9A%A9%ED%95%98%EA%B8%B0)
-<br/>
-
 To upload image files, the `<input type="file">` element must be used. After converting the result to a Base64 string, it can be displayed in an `<img>` tag.
 
 ## Adding a Standard Image
@@ -59,3 +56,7 @@ addImage(file: FileList) {
 ## Reference
 
 [Unsafe SVG Issue](https://news.ycombinator.com/item?id=10626575)
+
+## Link
+[한국어(Korean) Page](https://velog.io/@ksrae/Angular%EC%97%90-svg-%EC%A0%81%EC%9A%A9%ED%95%98%EA%B8%B0)
+<br/>

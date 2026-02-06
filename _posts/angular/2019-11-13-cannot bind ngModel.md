@@ -6,9 +6,6 @@ categories: angular
 tags: [error]
 ---
 
-[한국어(Korean) Page](https://velog.io/@ksrae/Cannot-bind-to-ngModel-since-it-isnt-a-known-property-of-input-%EC%97%90%EB%9F%AC)
-<br/>
-
 ### Cause
 
 The error "Cannot bind to 'ngModel' since it isn't a known property of 'input'" occurs when using `ngModel` within a form tag without importing the necessary Angular FormsModule.
@@ -55,3 +52,7 @@ export const appConfig: ApplicationConfig = {
   ]
 };
 ```
+
+## Link
+[한국어(Korean) Page](https://velog.io/@ksrae/Cannot-bind-to-ngModel-since-it-isnt-a-known-property-of-input-%EC%97%90%EB%9F%AC)
+<br/>

@@ -6,9 +6,6 @@ categories: angular
 tags: [ssr, seo, universal]
 ---
 
-[한국어(Korean) Page](https://velog.io/@ksrae/Angular-Universal)
-<br/>
-
 # Implementing Server-Side Rendering (SSR) in Angular
 
 Angular, being a robust framework, provides a straightforward approach to implement Server-Side Rendering (SSR). This guide outlines the steps to integrate SSR into your Angular application, enabling improved performance and SEO.
@@ -351,5 +348,8 @@ If the page looks the same as the original Angular project, the setup is success
 <br>
 
 ## Resources
-
 - [Angular Universal Guide](https://angular.io/guide/universal)
+
+## Link
+[한국어(Korean) Page](https://velog.io/@ksrae/Angular-Universal)
+<br/>

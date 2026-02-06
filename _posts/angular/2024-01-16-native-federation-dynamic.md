@@ -6,9 +6,6 @@ categories: angular
 tags: [nativefederation, dynamic]
 ---
 
-[한국어(Korean) Page](https://velog.io/@ksrae/Angular-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%EC%97%90-Native-Federation%EC%97%90%EC%84%9C-%EB%8F%99%EC%A0%81%EC%9C%BC%EB%A1%9C-Micro-Frontend-%EA%B5%AC%EC%B6%95)
-<br/>
-
 ## Building Micro Frontends Dynamically with Native Federation: An Example
 
 In a [previous article](https://ksrae.github.io/angular/native-federation-manifest/), we explored building Micro Frontends using a static approach, defining remotes using a manifest. This article demonstrates how to construct Micro Frontends in Native Federation by dynamically defining remotes without relying on a manifest. We'll illustrate this with a practical example.
@@ -168,3 +165,7 @@ export class AppComponent {
 When Native Federation is configured dynamically, the relationship between the host and remote becomes less rigid. Any project can be defined as a host or a remote, and even simultaneously as both.
 
 In essence, if a component is defined in `expose`, it becomes possible to construct projects by reconfiguring components from various projects, offering a wide range of project structuring possibilities.
+
+## Link
+[한국어(Korean) Page](https://velog.io/@ksrae/Angular-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%EC%97%90-Native-Federation%EC%97%90%EC%84%9C-%EB%8F%99%EC%A0%81%EC%9C%BC%EB%A1%9C-Micro-Frontend-%EA%B5%AC%EC%B6%95)
+<br/>

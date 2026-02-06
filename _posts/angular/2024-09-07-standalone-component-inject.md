@@ -6,9 +6,6 @@ categories: angular
 tags: [standalone, inject, ondestroy, afterrender, afternextrender]
 ---
 
-[한국어(Korean) Page](https://velog.io/@ksrae/Angular-Standalone-Component%EC%99%80-%EC%83%88%EB%A1%9C%EC%9A%B4-%EC%9D%98%EC%A1%B4%EC%84%B1-%EC%A3%BC%EC%9E%85-%EB%B0%A9%EC%8B%9D)
-<br/>
-
 Angular has introduced several features in recent versions that significantly enhance the developer experience. Among these, Standalone Components and the `inject` API are key elements transforming the structure and dependency management of Angular applications. This article explores the impact of these changes on Angular development and introduces new patterns for modern dependency injection using `inject` and component lifecycle management.
 
 ## Standalone Components: Using Components Without Module Dependencies
@@ -175,3 +172,7 @@ export class MyComponent {
   }
 }
 ```
+
+## Link
+[한국어(Korean) Page](https://velog.io/@ksrae/Angular-Standalone-Component%EC%99%80-%EC%83%88%EB%A1%9C%EC%9A%B4-%EC%9D%98%EC%A1%B4%EC%84%B1-%EC%A3%BC%EC%9E%85-%EB%B0%A9%EC%8B%9D)
+<br/>

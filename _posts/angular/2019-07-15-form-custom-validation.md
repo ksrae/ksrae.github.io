@@ -6,9 +6,6 @@ categories: angular
 tags: [form, validation, custom]
 ---
 
-[한국어(Korean) Page](https://velog.io/@ksrae/%ED%8F%BC-validation-Customizing)
-<br/>
-
 Let's explore how to implement custom validations beyond the default offerings. This demonstration will leverage a simple login form to illustrate applying regular expressions and creating new validators.
 
 First, we define the template. Employing Angular Material facilitates the display of error messages. Therefore, the following template utilizes Angular Material components.
@@ -130,3 +127,7 @@ Alternative methods exist for applying validations beyond the code presented. Va
 Choose the method that best suits your project's requirements.
 
 End.
+
+## Link
+[한국어(Korean) Page](https://velog.io/@ksrae/%ED%8F%BC-validation-Customizing)
+<br/>

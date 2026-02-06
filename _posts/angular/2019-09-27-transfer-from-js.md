@@ -6,9 +6,6 @@ categories: angular
 tags: [storage, window]
 ---
 
-[한국어(Korean) Page](https://velog.io/@ksrae/js%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%EC%97%90%EC%84%9C-Angular-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%EC%9D%98-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EC%A0%91%EA%B7%BC)
-<br/>
-
 ## Analysis: Accessing Angular from JavaScript
 
 In Angular, accessing JavaScript files typically involves utilizing declaration files (`.d.ts`) or employing `import` statements. However, the question arises: how do we achieve the reverse – accessing Angular components or variables from within JavaScript?
@@ -71,6 +68,9 @@ setTimeout(() => {
 Executing this code demonstrates a functional data transfer between JavaScript and Angular.
 
 ## References
-
 - [JavaScript Scope (scope)](https://yuddomack.tistory.com/entry/%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8-%EC%8A%A4%EC%BD%94%ED%94%84scope)
-- [Translation] JavaScript Scope and Closures](https://medium.com/@khwsc1/%EB%B2%88%EC%97%AD-%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8-%EC%8A%A4%EC%BD%94%ED%94%84%EC%99%80-%ED%81%B4%EB%A1%9C%EC%A0%80-javascript-scope-and-closures-8d402c976d19)
+- [Translation-JavaScript Scope and Closures](https://medium.com/@khwsc1/%EB%B2%88%EC%97%AD-%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8-%EC%8A%A4%EC%BD%94%ED%94%84%EC%99%80-%ED%81%B4%EB%A1%9C%EC%A0%80-javascript-scope-and-closures-8d402c976d19)
+
+## Link
+[한국어(Korean) Page](https://velog.io/@ksrae/js%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%EC%97%90%EC%84%9C-Angular-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%EC%9D%98-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EC%A0%91%EA%B7%BC)
+<br/>

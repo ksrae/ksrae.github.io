@@ -6,9 +6,6 @@ categories: angular
 tags: [ngfor, trackby]
 ---
 
-[한국어(Korean) Page](https://velog.io/@ksrae/ngFor-with-TrackBy)
-<br/>
-
 `ngFor` is a structural directive in Angular that iterates over a collection and renders a template for each item. While powerful, it has a potential performance drawback: by default, any change within the loop triggers a refresh of *all* DOM elements rendered by `ngFor`. This can lead to unnecessary re-renders and performance degradation, especially with large datasets.
 
 ```html
@@ -83,3 +80,7 @@ If your tracking logic is more complex (e.g., combining multiple properties), yo
 
 - [Angular `ngFor` Documentation](https://angular.io/guide/template-syntax#ngfor-with-trackby)
 - [Stack Overflow Discussion on `trackBy`](https://stackoverflow.com/questions/42108217/how-to-use-trackby-with-ngfor)
+
+## Link
+[한국어(Korean) Page](https://velog.io/@ksrae/ngFor-with-TrackBy)
+<br/>

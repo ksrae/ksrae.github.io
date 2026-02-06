@@ -6,9 +6,6 @@ categories: angular
 tags: [inject, di]
 ---
 
-[한국어(Korean) Page](https://velog.io/@ksrae/Angular-%EA%B3%A0%EA%B8%89-DI-%EB%A7%88%EC%8A%A4%ED%84%B0%ED%95%98%EA%B8%B0-InjectionToken%EC%9D%98-%EB%AA%85%EC%8B%9C%EC%A0%81-%EC%A3%BC%EC%9E%85%EA%B3%BC-%EC%9E%90%EB%8F%99-%EC%A3%BC%EC%9E%85-%ED%8C%A8%ED%84%B4-%EB%B9%84%EA%B5%90)
-<br/>
-
 **Title: Mastering Advanced Angular DI: Explicit vs. Automatic InjectionToken Patterns**
 
 Angular's Dependency Injection (DI) system offers capabilities far beyond the basic use of the @Injectable decorator. By leveraging InjectionToken, you can achieve the highest level of decoupling, completely separating a class's implementation from its consumption.
@@ -166,3 +163,7 @@ Both patterns are powerful ways to make a class injectable without using the @I
 - The **Self-Providing Token pattern** offers the ultimate in decoupling and reusability, making it an essential technique, especially for library authors.
 
 By choosing the appropriate pattern based on your project's architecture and requirements, you can build cleaner, more flexible, and more scalable Angular applications.
+
+## Link
+[한국어(Korean) Page](https://velog.io/@ksrae/Angular-%EA%B3%A0%EA%B8%89-DI-%EB%A7%88%EC%8A%A4%ED%84%B0%ED%95%98%EA%B8%B0-InjectionToken%EC%9D%98-%EB%AA%85%EC%8B%9C%EC%A0%81-%EC%A3%BC%EC%9E%85%EA%B3%BC-%EC%9E%90%EB%8F%99-%EC%A3%BC%EC%9E%85-%ED%8C%A8%ED%84%B4-%EB%B9%84%EA%B5%90)
+<br/>

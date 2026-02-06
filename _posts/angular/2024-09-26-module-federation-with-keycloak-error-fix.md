@@ -6,9 +6,6 @@ categories: angular
 tags: [standalone, keycloak, module-federation]
 ---
 
-[한국어(Korean) Page](https://velog.io/@ksrae/Angular-Module-Federation%EC%97%90%EC%84%9C-keycloak-%EC%97%90%EB%9F%AC-%ED%95%B4%EA%B2%B0%ED%95%98%EA%B8%B0)
-<br/>
-
 Today, we will define what Keycloak and Module Federation are and explore how to resolve encountered errors.
 
 # Keycloak
@@ -118,3 +115,7 @@ Through these steps, the "WEBPACK_IMPORTED_MODULE_5 is not a constructor" issue 
 # References
 
 [MFE WEBPACK_IMPORTED_MODULE_5 is not a constructor #465](https://github.com/mauriciovigolo/keycloak-angular/issues/465)
+
+## Link
+[한국어(Korean) Page](https://velog.io/@ksrae/Angular-Module-Federation%EC%97%90%EC%84%9C-keycloak-%EC%97%90%EB%9F%AC-%ED%95%B4%EA%B2%B0%ED%95%98%EA%B8%B0)
+<br/>

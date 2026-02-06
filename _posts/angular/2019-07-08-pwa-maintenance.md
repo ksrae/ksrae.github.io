@@ -6,9 +6,6 @@ categories: angular
 tags: [pwa, maintenance, offline]
 ---
 
-[한국어(Korean) Page](https://velog.io/@ksrae/PWA%EB%A1%9C-%EC%98%A4%ED%94%84%EB%9D%BC%EC%9D%B8-%EA%B3%B5%EC%A7%80%ED%95%98%EA%B8%B0)
-<br/>
-
 How to Implement Maintenance or Offline Notices Using a PWA
 
 ## Objective
@@ -140,3 +137,7 @@ Now, to initiate maintenance, simply update the `"maintenance"` value in `mainte
 When the application is offline, you can display a message indicating the offline status or instructions for checking the network connection.
 
 You could also enhance the `"maintenance"` property by adding a time range. The client could then process the maintenance value only during the specified time window.
+
+## Link
+[한국어(Korean) Page](https://velog.io/@ksrae/PWA%EB%A1%9C-%EC%98%A4%ED%94%84%EB%9D%BC%EC%9D%B8-%EA%B3%B5%EC%A7%80%ED%95%98%EA%B8%B0)
+<br/>

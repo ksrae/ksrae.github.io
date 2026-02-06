@@ -6,9 +6,6 @@ categories: javascript
 tags: [typescript, instanceof, typeof, keyof, in]
 ---
 
-[한국어(Korean) Page](https://velog.io/@ksrae/typeof-instanceof-keyof-and-in%EC%9D%98-%EC%B0%A8%EC%9D%B4%EC%A0%90)
-<br/>
-
 > In TypeScript, the `typeof`, `instanceof`, `keyof`, and `in` operators each serve distinct roles in type manipulation and object inspection. This post will delve into each of these operators, providing clear examples and use cases.
  
 
@@ -208,3 +205,8 @@ In summary, `typeof`, `instanceof`, `keyof`, and `in` operators serve specific p
 - [MDN-instanceof](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Operators/instanceof)
 - [typescript MyObject.instanceOf()](https://stackoverflow.com/questions/24705631/typescript-myobject-instanceof)
 - [TypeScript Handbook 10 - Advanced Types](https://infoscis.github.io/2017/06/19/TypeScript-handbook-advanced-types/)
+
+
+## Link
+[한국어(Korean) Page](https://velog.io/@ksrae/typeof-instanceof-keyof-and-in%EC%9D%98-%EC%B0%A8%EC%9D%B4%EC%A0%90)
+<br/>

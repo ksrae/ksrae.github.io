@@ -6,9 +6,6 @@ categories: angular
 tags: [routing, routeroutlet]
 ---
 
-[한국어(Korean) Page](https://velog.io/@ksrae/router-outlet%EC%97%90%EC%84%9C-name-attr-%EC%82%AC%EC%9A%A9-%EB%B0%A9%EB%B2%95)
-<br/>
-
 > In this session, we will explore the usage of the `router-outlet` tag's `name` attribute within the Angular framework.
 
 
@@ -123,3 +120,7 @@ This demonstrates that diverse outlets can be configured even for child paths th
 - [Angular Named Router Outlet + Popup Example](https://www.concretepage.com/angular-2/angular-2-4-named-router-outlet-popup-example)
 - [The Angular 10/9 Router-Outlets: Named and Multiple Outlets (Auxiliary Routes) Example](https://www.techiediaries.com/angular-router-multiple-outlets/)
 - [Multiple named router-outlet angular 2](https://stackoverflow.com/questions/38038001/multiple-named-router-outlet-angular-2)
+
+## Link
+[한국어(Korean) Page](https://velog.io/@ksrae/router-outlet%EC%97%90%EC%84%9C-name-attr-%EC%82%AC%EC%9A%A9-%EB%B0%A9%EB%B2%95)
+<br/>

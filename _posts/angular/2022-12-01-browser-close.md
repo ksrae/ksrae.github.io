@@ -6,9 +6,6 @@ categories: angular
 tags: [unload, beforeunload]
 ---
 
-[한국어(Korean) Page](https://velog.io/@ksrae/%EB%B8%8C%EB%9D%BC%EC%9A%B0%EC%A0%80-%EB%8B%AB%EC%9D%84-%EB%95%8C-%EC%9D%B4%EB%B2%A4%ED%8A%B8-%EC%A0%95%EB%A6%AC)
-<br/>
-
 > This article explores how to handle browser close events, providing examples and a structured overview of the relevant events.
 > 
 
@@ -173,3 +170,7 @@ Therefore, you can use these events together if you have logic that should only 
 [bfcache](https://web.dev/bfcache/#only-add-beforeunload-listeners-conditionally)
 
 [custom confirmation message is not working](https://stackoverflow.com/questions/38879742/is-it-possible-to-display-a-custom-message-in-the-beforeunload-popup)
+
+## Link
+[한국어(Korean) Page](https://velog.io/@ksrae/%EB%B8%8C%EB%9D%BC%EC%9A%B0%EC%A0%80-%EB%8B%AB%EC%9D%84-%EB%95%8C-%EC%9D%B4%EB%B2%A4%ED%8A%B8-%EC%A0%95%EB%A6%AC)
+<br/>

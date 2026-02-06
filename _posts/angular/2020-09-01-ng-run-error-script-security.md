@@ -6,9 +6,6 @@ categories: angular
 tags: [error]
 ---
 
-[한국어(Korean) Page](https://velog.io/@ksrae/ng-%EC%9D%B4-%EC%8B%9C%EC%8A%A4%ED%85%9C%EC%97%90%EC%84%9C-%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%EB%A5%BC-%EC%8B%A4%ED%96%89%ED%95%A0-%EC%88%98-%EC%97%86%EC%9C%BC%EB%AF%80%EB%A1%9C-)
-<br/>
-
 ## Environment Setup
 
 - Operating System: Windows
@@ -56,3 +53,7 @@ After running this command, PowerShell will be able to execute the `ng` command 
 ## References
 
 - [why-powershell-does-not-run-angular-commands](https://stackoverflow.com/questions/58032631/why-powershell-does-not-run-angular-commands)
+
+## Link
+[한국어(Korean) Page](https://velog.io/@ksrae/ng-%EC%9D%B4-%EC%8B%9C%EC%8A%A4%ED%85%9C%EC%97%90%EC%84%9C-%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%EB%A5%BC-%EC%8B%A4%ED%96%89%ED%95%A0-%EC%88%98-%EC%97%86%EC%9C%BC%EB%AF%80%EB%A1%9C-)
+<br/>

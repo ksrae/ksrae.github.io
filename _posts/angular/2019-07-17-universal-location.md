@@ -6,9 +6,6 @@ categories: angular
 tags: [universal, location]
 ---
 
-[한국어(Korean) Page](https://velog.io/@ksrae/Angular-Universal%EC%97%90%EC%84%9C-window.location-%EB%AA%85%EB%A0%B9-%EC%82%AC%EC%9A%A9)
-<br/>
-
 How to Use `window.location` in Angular Universal Projects on the Server Platform
 
 This document explains how to effectively use the `window.location` command when your Angular Universal project is running on the server platform.  We leverage the Location Service provided by `@angular/common`, eliminating the need to import external libraries.
@@ -101,7 +98,10 @@ The solution is to declare `location` as private:
   ) { }
 ```
 
-## Reference Links
-
+## Reference
 - [Angular Location API](https://angular.io/api/common/Location)
 - [Using Angular's Location Service ← Alligator.io](https://alligator.io/angular/location-service/)
+
+## Link
+[한국어(Korean) Page](https://velog.io/@ksrae/Angular-Universal%EC%97%90%EC%84%9C-window.location-%EB%AA%85%EB%A0%B9-%EC%82%AC%EC%9A%A9)
+<br/>

@@ -6,9 +6,6 @@ categories: angular
 tags: [xsrf, csrf, protection]
 ---
 
-[한국어(Korean) Page](https://velog.io/@ksrae/XSRF-%EB%B0%A9%EC%96%B4%ED%95%98%EA%B8%B0https://velog.io/@ksrae/ngZoneEventCoalescing%EC%9C%BC%EB%A1%9C-%EC%9D%B4%EB%B2%A4%ED%8A%B8-%EB%B2%84%EB%B8%94%EB%A7%81-%ED%95%B4%EA%B2%B0)
-<br/>
-
 ## Cause
 
 (If the server has enabled XSRF or CSRF)<br>
@@ -122,3 +119,7 @@ export const appConfig: ApplicationConfig = {
 
 - [XSRF protection](https://angular.io/guide/http#security-xsrf-protection)
 - [HttpRequest](https://angular.io/api/common/http/HttpRequest)
+
+## Link
+[한국어(Korean) Page](https://velog.io/@ksrae/XSRF-%EB%B0%A9%EC%96%B4%ED%95%98%EA%B8%B0https://velog.io/@ksrae/ngZoneEventCoalescing%EC%9C%BC%EB%A1%9C-%EC%9D%B4%EB%B2%A4%ED%8A%B8-%EB%B2%84%EB%B8%94%EB%A7%81-%ED%95%B4%EA%B2%B0)
+<br/>

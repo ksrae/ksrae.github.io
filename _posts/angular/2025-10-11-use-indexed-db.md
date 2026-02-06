@@ -6,9 +6,6 @@ categories: javascript
 tags: [typescript, indexeddb, localstorage, storage, async, promise]
 ---
 
-[한국어(Korean) Page](https://velog.io/@ksrae/TypeScript%EB%A1%9C-IndexedDB-%EC%8B%9C%EC%9E%91%ED%95%98%EA%B8%B0-feat.-LocalStorage%EC%99%80-%EB%B9%84%EA%B5%90)
-<br/>
-
 When it comes to client-side storage, LocalStorage and IndexedDB are the most common choices. While LocalStorage is simple to use, it has limitations when dealing with large, structured data. This is where IndexedDB shines as a powerful alternative.
 
 In this post, we'll create a simple service class to wrap IndexedDB's basic CRUD operations using TypeScript and async/await, and we'll compare it with LocalStorage to understand when to choose one over the other.
@@ -141,3 +138,7 @@ import { DBService } from './db.service';
 ### Final Thoughts
 
 LocalStorage is suitable for storing small amounts of simple data, like user settings or authentication tokens. However, when your application needs to manage large, complex datasets on the client-side efficiently, IndexedDB is the clear winner. By encapsulating its complex API with TypeScript and async/await, you can leverage its powerful features in a much more intuitive way.
+
+## Link
+[한국어(Korean) Page](https://velog.io/@ksrae/TypeScript%EB%A1%9C-IndexedDB-%EC%8B%9C%EC%9E%91%ED%95%98%EA%B8%B0-feat.-LocalStorage%EC%99%80-%EB%B9%84%EA%B5%90)
+<br/>

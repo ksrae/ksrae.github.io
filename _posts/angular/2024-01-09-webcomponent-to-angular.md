@@ -6,9 +6,6 @@ categories: angular
 tags: [webcomponent]
 ---
 
-[한국어(Korean) Page](https://velog.io/@ksrae/Angular%EC%97%90-%EC%9E%91%EC%84%B1%ED%95%9C-Web-Component-%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0)
-<br/>
-
 In this article, we'll explore how to use web components within an Angular project. We'll focus particularly on invoking web components from Angular components, rather than directly within `index.html`.
 
 ## Web Component Setup
@@ -129,3 +126,7 @@ export class AppComponent {
 ## Resources
 
 [Using Web Components in an Angular application: Joyful & Fun](https://developer.vonage.com/en/blog/using-web-components-in-an-angular-application-joyful-fun)
+
+## Link
+[한국어(Korean) Page](https://velog.io/@ksrae/Angular%EC%97%90-%EC%9E%91%EC%84%B1%ED%95%9C-Web-Component-%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0)
+<br/>

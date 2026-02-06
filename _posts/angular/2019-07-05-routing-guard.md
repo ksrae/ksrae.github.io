@@ -6,9 +6,6 @@ categories: angular
 tags: [routing, guard]
 ---
 
-[한국어(Korean) Page](https://velog.io/@ksrae/%EB%9D%BC%EC%9A%B0%ED%8C%85-%EC%98%B5%EC%85%98%EA%B3%BC-Guard)
-<br/>
-
 This article explores the use of route guards in Angular, focusing on `canActivate`, `canDeactivate`, `canActivateChild`, and `canLoad`. We'll demonstrate how to implement these guards to control route access and module loading.
 
 - `canLoad`: Prevents the loading of a module, primarily used with lazy-loaded modules. It executes only once when the module is initially loaded.
@@ -164,3 +161,7 @@ export class MainComponent implements OnInit {
   }
 }
 ```
+
+## Link
+[한국어(Korean) Page](https://velog.io/@ksrae/%EB%9D%BC%EC%9A%B0%ED%8C%85-%EC%98%B5%EC%85%98%EA%B3%BC-Guard)
+<br/>

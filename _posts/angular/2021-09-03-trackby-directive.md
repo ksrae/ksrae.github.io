@@ -6,9 +6,6 @@ categories: angular
 tags: [ngfor, trackby]
 ---
 
-[한국어(Korean) Page](https://velog.io/@ksrae/trackBy-Directive-%EB%A7%8C%EB%93%A4%EA%B8%B0)
-<br/>
-
 When rendering lists in Angular, any change to the data array can cause Angular to re-render the entire DOM for that list. This can lead to performance degradation. To solve this, Angular provides a mechanism to uniquely identify each item, ensuring that only the changed elements are updated.
 
 ## The Modern Angular Solution: @for and track
@@ -154,3 +151,7 @@ export class AppComponent {
 - [Host](https://angular.io/api/core/Host)
 - [Host Decorator in Angular](https://www.tektutorialshub.com/angular/host-decorator-in-angular/)
 - [How you can use trackBy with a property name](https://medium.com/@ingobrk/here-is-how-you-can-use-trackby-with-a-property-name-ec3bbba8fa75)
+
+## Link
+[한국어(Korean) Page](https://velog.io/@ksrae/trackBy-Directive-%EB%A7%8C%EB%93%A4%EA%B8%B0)
+<br/>

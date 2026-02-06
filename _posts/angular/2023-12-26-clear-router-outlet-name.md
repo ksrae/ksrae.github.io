@@ -6,9 +6,6 @@ categories: angular
 tags: [routing]
 ---
 
-[한국어(Korean) Page](https://velog.io/@ksrae/outlet-name-attribute%EC%9C%BC%EB%A1%9C-%EC%83%9D%EC%84%B1%ED%95%9C-route-%EC%A0%9C%EA%B1%B0%ED%95%98%EA%B8%B0)
-<br/>
-
 Managing routes for dynamically injected components using Route Outlet Names in Angular applications is a powerful method for efficient UI construction. However, removing the current route from the outlet requires a different approach than standard route removal. This article discusses three methods for removing a route created with the Outlet's Name attribute.
 
 ## Setting the Outlet's Name Attribute Value to Null
@@ -170,3 +167,7 @@ export class PopupComponent {
   }
 }
 ```
+
+## Link
+[한국어(Korean) Page](https://velog.io/@ksrae/outlet-name-attribute%EC%9C%BC%EB%A1%9C-%EC%83%9D%EC%84%B1%ED%95%9C-route-%EC%A0%9C%EA%B1%B0%ED%95%98%EA%B8%B0)
+<br/>

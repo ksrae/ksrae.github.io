@@ -6,10 +6,6 @@ categories: angular
 tags: [signal]
 ---
 
-[한국어(Korean) Page](https://velog.io/@ksrae/Signal%EC%9D%98-%EC%98%AC%EB%B0%94%EB%A5%B8-%EC%82%AC%EC%9A%A9%EB%B0%A9%EB%B2%95)
-<br/>
-
-
 ## Angular Signals: A Deep Dive into Core Principles and Common Pitfalls
 
 Since Angular 17, Signals have become the framework's core reactivity model. While many developers' first impression is that they are "easier than RxJS," they often encounter unexpected behavior when applying them in real-world projects. This is because Signals operate on a fundamentally different principle than traditional reactive programming libraries like RxJS.
@@ -111,3 +107,7 @@ We can leverage these principles to build more predictable and stable applicatio
 
 ## Reference
 [The Most Misunderstood Concept in Angular Signals](https://medium.com/@julias3/the-most-misunderstood-concept-in-angular-signals-1929f5c27c13)
+
+## Link
+[한국어(Korean) Page](https://velog.io/@ksrae/Signal%EC%9D%98-%EC%98%AC%EB%B0%94%EB%A5%B8-%EC%82%AC%EC%9A%A9%EB%B0%A9%EB%B2%95)
+<br/>

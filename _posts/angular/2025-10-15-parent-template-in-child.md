@@ -6,9 +6,6 @@ categories: angular
 tags: [exportas]
 ---
 
-[한국어(Korean) Page](https://velog.io/@ksrae/exportAs%EB%A1%9C-%EC%9E%90%EC%8B%9D-%EC%BB%B4%ED%8F%AC%EB%84%8C%ED%8A%B8%EC%9D%98-%EA%B2%B0%EA%B3%BC%EB%AC%BC%EC%9D%84-%EB%B6%80%EB%AA%A8-%EC%BB%B4%ED%8F%AC%EB%84%8C%ED%8A%B8%EC%97%90%EC%84%9C-%EB%9E%9C%EB%8D%94%EB%A7%81-%ED%95%98%EA%B8%B0)
-<br/>
-
 When designing components in Angular, we often face the challenge of separating responsibilities between parent and child components. This is especially true when "the data and logic belong to the child, but the resulting UI needs to be rendered in a specific location within the parent."<br/>
 
 In this article, we'll explore how to use a lesser-known feature, exportAs, to render a template defined by a child component within its parent in a clean, declarative way.
@@ -108,3 +105,7 @@ Instead of using @Output to emit a TemplateRef or relying on a complex share
 
 ## Reference
 [**Angular: How to Render a Template for the Parent in a Child Component**](https://medium.com/@eugeniyoz/angular-how-to-render-a-template-for-the-parent-in-a-child-component-7cf7178a6f17)
+
+## Link
+[한국어(Korean) Page](https://velog.io/@ksrae/exportAs%EB%A1%9C-%EC%9E%90%EC%8B%9D-%EC%BB%B4%ED%8F%AC%EB%84%8C%ED%8A%B8%EC%9D%98-%EA%B2%B0%EA%B3%BC%EB%AC%BC%EC%9D%84-%EB%B6%80%EB%AA%A8-%EC%BB%B4%ED%8F%AC%EB%84%8C%ED%8A%B8%EC%97%90%EC%84%9C-%EB%9E%9C%EB%8D%94%EB%A7%81-%ED%95%98%EA%B8%B0)
+<br/>

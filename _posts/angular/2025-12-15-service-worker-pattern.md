@@ -6,9 +6,6 @@ categories: angular
 tags: [serviceworker]
 ---
 
-[한국어(Korean) Page](https://velog.io/@ksrae/Angular-Service-Worker-%EC%8B%AC%ED%99%94-%EC%BA%90%EC%8B%B1-%EC%A0%84%EB%9E%B5%EA%B3%BC-%ED%91%B8%EC%8B%9C-%EC%95%8C%EB%A6%BC-%EA%B5%AC%ED%98%84)
-<br/>
-
 This post explores advanced techniques to level up your PWA: implementing **Dynamic Caching Strategies** and handling **Push Notifications**.
 
 ## Dynamic Caching Strategies
@@ -171,3 +168,7 @@ Mastering these Service Worker patterns transforms a standard web app into a rob
 
 ## Reference
 [Service Workers in Angular: Advanced Techniques (Part 2)](https://levelup.gitconnected.com/service-workers-in-angular-advanced-techniques-part-2-e359436625cb)
+
+## Link
+[한국어(Korean) Page](https://velog.io/@ksrae/Angular-Service-Worker-%EC%8B%AC%ED%99%94-%EC%BA%90%EC%8B%B1-%EC%A0%84%EB%9E%B5%EA%B3%BC-%ED%91%B8%EC%8B%9C-%EC%95%8C%EB%A6%BC-%EA%B5%AC%ED%98%84)
+<br/>

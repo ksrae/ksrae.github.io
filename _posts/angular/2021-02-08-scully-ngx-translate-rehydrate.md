@@ -6,9 +6,6 @@ categories: angular
 tags: [ngx-translate, rehydrate, scully]
 ---
 
-[한국어(Korean) Page](https://velog.io/@ksrae/Scully%EC%97%90-ngx-translate-%EC%A0%81%EC%9A%A9-%EC%8B%9C-rehydration-%EB%B0%A9%EC%A7%80https://velog.io/@ksrae/Scully%EB%A1%9C-SSG-%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0)
-<br/>
-
 ## Task
 
 This document outlines the process of applying `ngx-translate` to a Scully-based Angular application and addressing the rehydration issue that arises when refreshing the page after changing the language. Specifically, it details how to ensure that the statically generated HTML reflects the user's chosen language from the initial page load.
@@ -222,3 +219,7 @@ this.translate.use();
 ## References
 
 - [ngx-translate-router](https://github.com/gilsdav/ngx-translate-router)
+
+## Link
+[한국어(Korean) Page](https://velog.io/@ksrae/Scully%EC%97%90-ngx-translate-%EC%A0%81%EC%9A%A9-%EC%8B%9C-rehydration-%EB%B0%A9%EC%A7%80https://velog.io/@ksrae/Scully%EB%A1%9C-SSG-%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0)
+<br/>
