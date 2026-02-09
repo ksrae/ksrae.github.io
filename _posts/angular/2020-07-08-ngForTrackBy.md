@@ -60,7 +60,7 @@ The most common and readable method is to track an item directly by its unique p
 ```html
 <!-- New way with @for block -->
 @for (item of items; track item.id) {
-  <div>{{ item.name }}</div>
+  <div>{% raw %} {{ item.name }} {% endraw %}</div>
 }
 ```
 Here, track item.id tells Angular to use the id property of each item as its unique identifier.
@@ -71,7 +71,7 @@ If your tracking logic is more complex (e.g., combining multiple properties), yo
 ```html
 <!-- Using the same trackByItem function from before -->
 @for (item of items; track trackByItem) {
-  <div>{{ item.name }}</div>
+  <div>{% raw %} {{ item.name }} {% endraw %}</div>
 }
 ```
 

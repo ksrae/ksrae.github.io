@@ -42,7 +42,7 @@ import { Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angu
   standalone: true,
   imports: [],
   template: `
-    {{ setValue }}
+    {% raw %} {{ setValue }} {% endraw %}
     <button (click)="onClick($event)">Emit</button>
   `,
   styles: ``,

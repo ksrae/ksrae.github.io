@@ -46,8 +46,8 @@ export class AppComponent implements OnInit {
 ## Template
 
 ```html
-<p>isPlatformBrowser: <span>{{isBrowser}}</span></p>
-<p>isPlatformServer: <span>{{isServer}}</span></p>
+<p>isPlatformBrowser: <span>{% raw %} {{isBrowser}} {% endraw %}</span></p>
+<p>isPlatformServer: <span>{% raw %} {{isServer}} {% endraw %}</span></p>
 ```
 
 Now, running the application will show on which platform it is being executed.

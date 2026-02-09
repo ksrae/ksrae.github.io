@@ -159,7 +159,7 @@ import { BModalComponent } from './b-modal.component';
   template: `
     <button (click)="openModal('A')">Show Modal A</button>
     <button (click)="openModal('B')">Show Modal B</button>
-    <p>Last Modal Result: {{ modalResult() }}</p>
+    <p>Last Modal Result: {% raw %} {{ modalResult() }} {% endraw %}</p>
   `
 })
 export class ContainerComponent {

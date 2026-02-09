@@ -69,7 +69,7 @@ First, dynamically assign the same view-transition-name to the corresponding e
 
 **The Detail Page**
 
-```jsx
+```html
 <!-- book-detail.component.html -->
 {@if (book) {
   <div>
@@ -77,7 +77,7 @@ First, dynamically assign the same view-transition-name to the corresponding e
       [src]="book.cover" 
       [style.view-transition-name]="'book-cover-' + book.id"
     />
-    <h1>{{ book.title }}</h1>
+    <h1>{% raw %} {{ book.title }} {% endraw %}</h1>
   </div>
 }}
 ```

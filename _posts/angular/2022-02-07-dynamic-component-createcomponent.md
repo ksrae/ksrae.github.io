@@ -120,7 +120,7 @@ export class ContainerComponent {
 @Component({
   selector: 'a-component',
   template: `
-    <p>{{data}}</p>`
+    <p>{% raw %} {{data}} {% endraw %}</p>`
 })
 export class AComponent {
   data!: string;
@@ -129,7 +129,7 @@ export class AComponent {
 @Component({
   selector: 'b-component',
   template: `
-    <p>{{data}}</p>`
+    <p>{% raw %} {{data}} {% endraw %}</p>`
 })
 export class BComponent {
   @Input() data!: string;
@@ -196,7 +196,7 @@ export class ContainerComponent {
 @Component({
   selector: 'a-component',
   template: `
-    <p>{{data$ | async}}</p>`
+    <p>{% raw %} {{data$ | async}} {% endraw %}</p>`
 })
 export class AComponent {
   data$ = new BehaviorSubject<any>('');
@@ -205,7 +205,7 @@ export class AComponent {
 @Component({
   selector: 'b-component',
   template: `
-    <p>{{data$ | async}}</p>`
+    <p>{% raw %} {{data$ | async}} {% endraw %}</p>`
 })
 export class BComponent {
   data$ = new BehaviorSubject<any>('');
@@ -298,7 +298,7 @@ import { Component, Input, signal, WritableSignal } from '@angular/core';
 @Component({
   standalone: true,
   selector: 'a-component',
-  template: `<p>A Component says: {{ data() }}</p>`
+  template: `<p>A Component says: {% raw %} {{ data() }} {% endraw %}</p>`
 })
 export class AComponent {
   @Input() data: WritableSignal<string> = signal('');
@@ -313,7 +313,7 @@ import { Component, Input, signal, WritableSignal } from '@angular/core';
 @Component({
   standalone: true,
   selector: 'b-component',
-  template: `<p>B Component says: {{ data() }}</p>`
+  template: `<p>B Component says: {% raw %} {{ data() }} {% endraw %}</p>`
 })
 export class BComponent {
   @Input() data: WritableSignal<string> = signal('');

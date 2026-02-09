@@ -97,7 +97,7 @@ import { withLoading } from './operators/with-loading';
       } @else {
         <ul>
           @for (user of users(); track user.id) {
-            <li>{{ user.name }}</li>
+            <li>{% raw %} {{ user.name }} {% endraw %}</li>
           }
         </ul>
       }
@@ -199,8 +199,8 @@ export function optimizeSearch(
       <div class="results">
         @for (result of searchResults(); track result.id) {
           <div class="result-item">
-            <h3>{{ result.title }}</h3>
-            <p>{{ result.description }}</p>
+            <h3>{% raw %} {{ result.title }} {% endraw %}</h3>
+            <p>{% raw %} {{ result.description }} {% endraw %}</p>
           </div>
         } @empty {
           @if (searchControl.value && !searching()) {
@@ -291,8 +291,8 @@ Now let's combine all our operators to create a component you might use in a rea
       <div class="products">
         @for (product of filteredProducts(); track product.id) {
           <div class="product-card">
-            <h3>{{ product.name }}</h3>
-            <p>{{ product.price | currency:'USD' }}</p>
+            <h3>{% raw %} {{ product.name }} {% endraw %}</h3>
+            <p>{% raw %} {{ product.price | currency:'USD' }} {% endraw %}</p>
           </div>
         } @empty {
           @if (!loading()) {
@@ -303,7 +303,7 @@ Now let's combine all our operators to create a component you might use in a rea
 
       @if (error()) {
         <div class="error">
-          An error occurred: {{ error() }}
+          An error occurred: {% raw %} {{ error() }} {% endraw %}
           <button (click)="reload()">Try Again</button>
         </div>
       }

@@ -227,7 +227,7 @@ export class LanguageService {
 // translation file
 {
   "notifications": {
-    "welcome": "Welcome back, {{username}}!"
+    "welcome": "Welcome back, {% raw %} {{username}} {% endraw %}!"
   }
 }
 ```
@@ -242,7 +242,7 @@ export class LanguageService {
   template: `
     <select (change)="onLanguageChange($event)" [value]="currentLang$ | async">
       <option *ngFor="let lang of languageCodes" [value]="lang">
-        {{ LanguageCode[lang] }}
+        {% raw %} {{ LanguageCode[lang] }} {% endraw %}
       </option>
     </select>
   `
@@ -292,7 +292,7 @@ export class LanguageSwitcherComponent {
 1. **Nested HTML Elements**
    ```typescript
    // Incorrect
-   <div>{{ 'key.with.html' | translate }}<span>Additional content</span></div>
+   <div>{% raw %} {{ 'key.with.html' | translate }} {% endraw %}<span>Additional content</span></div>
    
    // Correct
    <div [innerHTML]="'key.with.html' | translate"></div>

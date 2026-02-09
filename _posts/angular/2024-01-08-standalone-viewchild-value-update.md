@@ -18,7 +18,7 @@ When dealing with asynchronous operations like RxJS, attempting to subscribe to 
 
 ```tsx
 @Component({
-  template: `{{ key }}`
+  template: `{% raw %} {{ key }} {% endraw %}`
 })
 export class DemoComponent {
   key!: string;
@@ -41,7 +41,7 @@ Injecting values within a `setTimeout` callback can lead to updates occurring in
 
 ```tsx
 @Component({
-  template: `{{ key }}`
+  template: `{% raw %} {{ key }} {% endraw %}`
 })
 export class DemoComponent {
   key!: string;
@@ -65,7 +65,7 @@ Attempting to reflect values from a child component obtained using `ViewChild` i
 @Component({
   template: `
     <app-child #child></app-child>
-    {{ key }}
+    {% raw %} {{ key }} {% endraw %}
   `
 })
 export class ParentComponent {
@@ -93,7 +93,7 @@ To resolve delayed template updates, you can leverage `ChangeDetectorRef.markFor
 
 ```tsx
 @Component({
-  template: `{{ key }}`
+  template: `{% raw %} {{ key }} {% endraw %}`
 })
 export class DemoComponent {
   cdr = inject(ChangeDetectorRef);

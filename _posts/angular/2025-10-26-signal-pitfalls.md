@@ -33,7 +33,7 @@ To solve this, we must understand that a Signal is not just a 'value' but a tool
 
 One of the biggest misconceptions is the belief that "if I just change a Signal's value, Angular will magically update everything." In reality, Signals **do not replace** Angular's existing change detection system; they are a tool to make it **more efficient**.
 
-- **Template Binding:** When a Signal is bound directly in a template (e.g., {{ mySignal() }}), Angular is smart enough to optimize rendering, re-running change detection only for the specific component or view that needs it.
+- **Template Binding:** When a Signal is bound directly in a template (e.g., {% raw %} {{ mySignal() }} {% endraw %}), Angular is smart enough to optimize rendering, re-running change detection only for the specific component or view that needs it.
 - **Unconnected Logic:** If you change a Signal's value inside a regular function or logic that isn't connected to the template, Angular is under no obligation to detect that change and update the view.
 
 ### 2. computed is 'Derived State', effect is a 'Side Effect'
@@ -90,7 +90,7 @@ effect(() => {
 // ✅ RIGHT: Use computed for derived state
 const fullNameSignal = computed(() => `${firstName()} ${lastName()}`);
 
-// Now you can use {{ fullNameSignal() }} in your template
+// Now you can use {% raw %} {{ fullNameSignal() }} {% endraw %} in your template
 ```
 
 **Why?** computed creates a new reactive value, fullNameSignal, which can be reused in templates or other Signals. An effect is a dead-end; it simply performs an action and does not produce a usable state.

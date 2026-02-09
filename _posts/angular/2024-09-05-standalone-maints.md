@@ -103,7 +103,7 @@ In the Zoneless approach, most components that use the existing `ChangeDetection
 @Component({
   standalone: true,
   template: `
-    <h1>Hello from {{ name() }}!</h1>
+    <h1>Hello from {% raw %} {{ name() }} {% endraw %}!</h1>
     <button (click)="handleClick()">Go Zoneless</button>
   `,
 })

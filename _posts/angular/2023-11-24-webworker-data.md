@@ -113,11 +113,11 @@ import { WorkerService } from './worker.service';
     }
 
     @if (worker.result(); as result) {
-      <p class="result">Result: {{ result }}</p>
+      <p class="result">Result: {% raw %} {{ result }} {% endraw %}</p>
     }
 
     @if (worker.error(); as error) {
-      <p class="error">Error: {{ error.message }}</p>
+      <p class="error">Error: {% raw %} {{ error.message }} {% endraw %}</p>
     }
   `,
   styles: [`

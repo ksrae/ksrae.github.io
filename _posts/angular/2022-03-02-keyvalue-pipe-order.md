@@ -45,7 +45,7 @@ import { CommonModule } from '@angular/common';
     <h2>Basic KeyValue</h2>
     <div>
       @for (item of data | keyvalue; track item.key) {
-        <p>{{ item.key }} => {{ item.value }}</p>
+        <p>{% raw %} {{ item.key }} => {{ item.value }} {% endraw %}</p>
       }
     </div>
   `,
@@ -134,7 +134,7 @@ descending = (a: KeyValue<K, V>, b: KeyValue<K, V>) => {
 
 ```html
   @for (item of data | keyvalue: originalOrder; track item.key) {
-    <p>{{ item.key }} => {{ item.value }}</p>
+    <p>{% raw %} {{ item.key }} => {{ item.value }} {% endraw %}</p>
   }
 
 <!-- result:

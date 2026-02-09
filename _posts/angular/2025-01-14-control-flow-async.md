@@ -14,16 +14,18 @@ When working with Observable variables directly within HTML templates, the async
 
 ```html
 <div>
-    {{ observable$ | async }}
+    {% raw %} {{ observable$ | async }} {% endraw %}
 </div>
 ```
 
 However, repeatedly applying the async pipe to the same Observable variable can lead to verbose and repetitive code, reducing maintainability.
 
 ```html
+{% raw %} 
 <div>{{ observable$ | async }}</div>
 <div>{{ observable$ | async }}</div>
 <div>{{ observable$ | async }}</div>
+{% endraw %}
 ```
 
 # Leveraging Async with Aliases in CommonModule
@@ -31,19 +33,23 @@ However, repeatedly applying the async pipe to the same Observable variable can 
 A superior approach to minimize repetition involves employing the `ngIf` directive in conjunction with the async pipe and alias assignment.
 
 ```html
+{% raw %} 
 <ng-container *ngIf="observable$ | async as data">
     <div>{{ data }}</div>
     <div>{{ data }}</div>
     <div>{{ data }}</div>
 </ng-container>
+{% endraw %}
 ```
 
 Similarly, the `ngFor` directive can benefit from async pipe usage and alias declarations for iterating over asynchronous collections.
 
 ```html
+{% raw %} 
 <ng-container *ngFor="let item of observable$ | async as data">
     <div>{{ item }}</div>
 </ng-container>
+{% endraw %}
 ```
 
 By connecting Observable variables through the async pipe and defining aliases within the CommonModule's directives, we gain the ability to treat the emitted values as regular variables within the component's scope, thereby reducing redundant code.
@@ -53,11 +59,13 @@ By connecting Observable variables through the async pipe and defining aliases w
 Angular's Control Flow offers an alternative to CommonModule directives. Control Flow also supports alias declarations for async pipes.  A key distinction is the syntax: Control Flow employs parentheses and semicolon separators.
 
 ```html
+{% raw %} 
 @if (observable$ | async; as data) {
     <div>{{ data }}</div>
     <div>{{ data }}</div>
     <div>{{ data }}</div>
 }
+{% endraw %}
 ```
 
 # Reference

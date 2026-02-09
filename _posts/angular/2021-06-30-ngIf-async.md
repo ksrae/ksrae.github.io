@@ -19,7 +19,7 @@ To utilize the `async` pipe, append it to the variable name and define a variabl
 <!-- control flow -->
 @if (user$ | async; as user) {
   <div>
-    <p>{{ user.name }}</p>
+    <p>{% raw %} {{ user.name }} {% endraw %}</p>
   </div>
 }
 ```
@@ -61,11 +61,11 @@ To work with multiple Observables effectively, transform them into an object. Th
 @if ({ user: user$ | async, item: item$ | async }; as data) {
   <div>
     @if (data.user; as user) {
-      <p>User Name: {{ user.name }}</p>
+      <p>User Name: {% raw %} {{ user.name }} {% endraw %}</p>
     }
 
     @if (data.item; as item) {
-      <p>Item Name: {{ item.name }}</p>
+      <p>Item Name: {% raw %} {{ item.name }} {% endraw %}</p>
     }
   </div>
 }

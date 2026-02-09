@@ -9,8 +9,8 @@ tags: [routing, resolve, component]
 When a component attempts to apply a value fetched from a service within its `onInit` lifecycle hook to its template, an error can arise if the template tries to access the variable before the value has been assigned. This is a common issue in asynchronous data binding. A simple workaround involves using the safe navigation operator (`?.`) to allow for nullable values, preventing errors when the template initially renders.
 
 ```html
-<div> {{item?.key}} </div>
-<div> {{item?.value}} </div>
+<div> {% raw %} {{item?.key}} {% endraw %}</div>
+<div> {% raw %} {{item?.value}} {% endraw %}</div>
 ```
 
 However, a more robust solution is to ensure that the component receives the necessary data *before* it is fully initialized and rendered. This can be achieved by leveraging the `resolve` feature within Angular's routing mechanism. Resolvers pre-fetch data before a route is activated, ensuring that the component has the required data available upon initialization.
@@ -63,7 +63,7 @@ import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-page',
-  template: `<div>  {{ page }} </div>`
+  template: `<div>  {% raw %} {{ page }} {% endraw %}</div>`
 })
 
 export class PageComponent implements OnInit {

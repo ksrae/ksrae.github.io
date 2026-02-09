@@ -125,7 +125,7 @@ export class RegistrationComponent {
 
 We use `@switch` to physically render the correct component. The `(formReady)` event binds them together.
 
-```jsx
+```html
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
   
   <div class="section">
@@ -157,7 +157,7 @@ We use `@switch` to physically render the correct component. The `(formReady)` e
   <button type="submit" [disabled]="form.invalid">Register</button>
 </form>
 
-<pre>{{ form.getRawValue() | json }}</pre>
+<pre>{% raw %} {{ form.getRawValue() | json }} {% endraw %}</pre>
 ```
 
 ## Conclusion

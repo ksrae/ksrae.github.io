@@ -95,7 +95,7 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
     <button (click)="changeLanguage('ko')">KO</button>
     <button (click)="changeLanguage('en')">EN</button>
     
-    <p>{{ 'lang' | translate }}</p>
+    <p>{% raw %} {{ 'lang' | translate }} {% endraw %}</p>
 
     <router-outlet></router-outlet>
   `,

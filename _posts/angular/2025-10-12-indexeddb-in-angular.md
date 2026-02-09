@@ -190,7 +190,7 @@ export class AppComponent implements OnInit {
 
 We use @for to iterate over the users Signal and render the UI.
 
-```jsx
+```html
 <!-- src/app/app.component.html -->
 <h1>Angular IndexedDB Simple Example</h1>
 <div>
@@ -203,7 +203,7 @@ We use @for to iterate over the users Signal and render the UI.
 </div>
 
 <hr>
-
+{% raw %} 
 <ul>
   @for (user of users(); track user.id) {
     <li>
@@ -219,6 +219,7 @@ We use @for to iterate over the users Signal and render the UI.
     <p>No users found.</p>
   }
 </ul>
+{% endraw %}
 ```
 
 ### Conclusion

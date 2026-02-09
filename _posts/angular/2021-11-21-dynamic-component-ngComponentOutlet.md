@@ -97,7 +97,7 @@ import { TITLE } from './title.token';
 
 @Component({
   standalone: true,
-  template: `Complete: {{ titleInjected }}`
+  template: `Complete: {% raw %} {{ titleInjected }} {% endraw %}`
 })
 export class ChildComponent {
   titleInjected = inject(TITLE);

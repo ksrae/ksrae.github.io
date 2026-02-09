@@ -12,10 +12,13 @@ Angular 18.1 introduces the `@let` syntax, which provides a formal way to declar
 
 To store expression results in a template, developers often relied on the `as` syntax within `*ngIf` or `*ngFor`.
 
-```tsx
+```html
+{% raw %} 
 <div *ngIf="user$ | async as user">
   {{ user.name }}
 </div>
+{% endraw %}
+
 ```
 
 This required unnecessary DOM elements and could cause issues if the value was `falsy`, preventing the content from rendering at all.
@@ -39,11 +42,11 @@ import { of } from 'rxjs';
 
     @if (user) {
       <section>
-        <h1>Welcome, {{ user.name }}</h1>
-        <p>Role: {{ isAdmin ? 'Administrator' : 'User' }}</p>
+        <h1>Welcome, {% raw %} {{ user.name }} {% endraw %}</h1>
+        <p>Role: {% raw %} {{ isAdmin ? 'Administrator' : 'User' }} {% endraw %}</p>
         
         @let statusText = user.active ? 'Online' : 'Offline';
-        <span>Status: {{ statusText }}</span>
+        <span>Status: {% raw %} {{ statusText }} {% endraw %}</span>
       </section>
     }
   `

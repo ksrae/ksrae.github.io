@@ -128,7 +128,7 @@ Angular provides lifecycle hooks like `ngAfterViewInit` and `ngAfterViewChecked`
 @Component({
   standalone: true,
   selector: 'my-chart-cmp',
-  template: `<div #chart>{{ ... }}</div>`,
+  template: `<div #chart>{% raw %} {{ ... }} {% endraw %}</div>`,
 })
 export class MyChartCmp {
   @ViewChild('chart') chartRef: ElementRef;
@@ -150,7 +150,7 @@ export class MyChartCmp {
 @Component({
   standalone: true,
   selector: 'my-cmp',
-  template: `<span #content>{{ ... }}</span>`,
+  template: `<span #content>{% raw %} {{ ... }} {% endraw %}</span>`,
 })
 export class MyComponent {
   resizeObserver: ResizeObserver|null = null;

@@ -15,7 +15,7 @@ Starting from Angular v17, the new Control Flow syntax, @for, solves this proble
 <!-- app.component.html -->
 <ul>
   @for (item of data(); track item.id) {
-    <li>{{ item.name }}</li>
+    <li>{% raw %} {{ item.name }} {% endraw %}</li>
   }
 </ul>
 ```
@@ -136,7 +136,7 @@ import { NgForTrackByFieldDirective } from './ng-for-track-by-field.directive';
   template: `
     <h3>*ngFor with Custom trackBy Directive</h3>
     <div *ngFor="let item of data(); ngForTrackByField: 'id'">
-      {{ item.name }}
+      {% raw %} {{ item.name }} {% endraw %}
     </div>
   `,
 })

@@ -178,9 +178,11 @@ export class AppComponent {
   <hr>
 
   <h4>Form Control State:</h4>
+  {% raw %} 
   <pre>Value: {{ colorForm.get('favoriteColor')?.value | json }}</pre>
   <pre>Touched: {{ colorForm.get('favoriteColor')?.touched | json }}</pre>
   <pre>Dirty: {{ colorForm.get('favoriteColor')?.dirty | json }}</pre>
+  {% endraw %}
 </form>
 ```
 

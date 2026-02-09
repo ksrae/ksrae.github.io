@@ -139,11 +139,11 @@ import { TransferableWorkerService } from './transferable-worker.service';
     }
 
     @if (worker.result(); as result) {
-      <p>Result: {{ result }}</p>
+      <p>Result: {% raw %} {{ result }} {% endraw %}</p>
     }
 
     @if (worker.error(); as error) {
-      <p>An error occurred: {{ error.message }}</p>
+      <p>An error occurred: {% raw %} {{ error.message }} {% endraw %}</p>
     }
   `,
 })

@@ -115,7 +115,7 @@ export class SignupFormComponent implements OnInit, OnDestroy {
 
 We use Angular's `@switch` or `@if` to render the correct UI for the controls currently inside the `FormArray`. Since the `FormArray` is the source of truth, we iterate through it.
 
-```jsx
+```html
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
   
   <div class="section">
@@ -173,7 +173,7 @@ We use Angular's `@switch` or `@if` to render the correct UI for the controls cu
   <button type="submit" [disabled]="form.invalid">Submit Registration</button>
 </form>
 
-<pre>{{ form.getRawValue() | json }}</pre>
+<pre>{% raw %} {{ form.getRawValue() | json }} {% endraw %}</pre>
 ```
 
 ### Step 3: Why this is safer?

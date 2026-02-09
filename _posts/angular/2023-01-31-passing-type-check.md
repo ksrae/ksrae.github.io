@@ -44,7 +44,7 @@ Attempting to cast directly in a template (e.g., within an Angular component's t
 
 ```html
 <p>
-{{ (person as any).firstname }}
+{% raw %} {{ (person as any).firstname }} {% endraw %}
 </p>
 
 <!-- not working -->
@@ -56,7 +56,7 @@ Within templates, you must use the `$any` helper function for casting:
 
 ```html
 <p>
-{{ $any(person).firstname }}
+{% raw %} {{ $any(person).firstname }} {% endraw %}
 </p>
 
 <!-- working, but empty value -->
