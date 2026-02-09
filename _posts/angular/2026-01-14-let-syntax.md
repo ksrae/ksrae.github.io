@@ -1,9 +1,9 @@
 ---
-title: Introducing @let syntax in Angular
+title: Introducing let syntax in Angular
 date: 2026-01-14 12:00:00 +0900
 comments: true
 categories: angular
-tags: [@let]
+tags: [let]
 ---
 
 Angular 18.1 introduces the `@let` syntax, which provides a formal way to declare and reuse variables directly within templates. This feature addresses the long-standing friction of using workarounds for local variable assignment.
